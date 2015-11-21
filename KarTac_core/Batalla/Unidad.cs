@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace KarTac.Batalla
+﻿namespace KarTac.Batalla
 {
 	public class Unidad
 	{
@@ -10,5 +8,7 @@ namespace KarTac.Batalla
 		{
 			PersonajeBase = personaje;
 		}
+
+		public Equipo Equipo { get; set; }
 	}
 }
