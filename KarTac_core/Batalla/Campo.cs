@@ -18,7 +18,9 @@ namespace KarTac.Batalla
 		public Campo ()
 		{
 			Unidades = new List<Unidad> ();
+			ExpDict = new Dictionary<Unidad, KarTac.Batalla.Exp.TotalExp> ();
 		}
+
+		public Dictionary<Unidad, Exp.TotalExp> ExpDict { get; }
 	}
 }
-

@@ -58,6 +58,7 @@
     <Compile Include="Batalla\ISelectorTarget.cs" />
     <Compile Include="Batalla\Shape\IShape.cs" />
     <Compile Include="Batalla\Shape\Círculo.cs" />
+    <Compile Include="Batalla\Exp\TotalExp.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
@@ -78,6 +79,7 @@
     <Folder Include="Test\" />
     <Folder Include="Skills\" />
     <Folder Include="Batalla\Shape\" />
+    <Folder Include="Batalla\Exp\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OpenTK.dll.config" />
