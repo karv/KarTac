@@ -28,6 +28,11 @@ namespace KarTac.Recursos
 			}
 			set
 			{
+				if (value < 0)
+					throw new ArgumentOutOfRangeException (
+						"value",
+						Max,
+						"Max no puede ser negativo.");
 				_max = value;
 				Valor = Math.Min (_actual, value);
 			}
@@ -41,7 +46,7 @@ namespace KarTac.Recursos
 			}
 			set
 			{
-				_actual = Math.Min (value, Max);
+				_actual = Math.Max (Math.Min (value, Max), 0);
 
 				if (_actual <= 0)
 					AlValorCero?.Invoke ();
