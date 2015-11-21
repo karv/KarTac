@@ -18,6 +18,11 @@ namespace KarTac.Recursos
 		/// Ejecuta un tick de longitud dada
 		/// </summary>
 		void Tick (DateTime delta);
+
+		/// <summary>
+		/// Ocurre cuando cambia el valor actual
+		/// </summary>
+		event Action AlCambiarValor;
 	}
 }
 

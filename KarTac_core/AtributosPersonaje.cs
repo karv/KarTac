@@ -1,6 +1,9 @@
-﻿namespace KarTac
+﻿using System.Collections.Generic;
+using KarTac.Recursos;
+
+namespace KarTac
 {
-	public struct AtributosPersonaje
+	public class AtributosPersonaje
 	{
 		public int Ataque { get; set; }
 
@@ -9,6 +12,17 @@
 		/// <summary>
 		/// Max HP
 		/// </summary>
-		public int HP { get; set; }
+		public HP HP { get; set; }
+
+		/// <summary>
+		/// Lista de recursos
+		/// </summary>
+		/// <value>The recursos.</value>
+		SortedSet<IRecurso> Recursos { get; }
+
+		public AtributosPersonaje ()
+		{
+			Recursos = new SortedSet<IRecurso> ();
+		}
 	}
 }

@@ -39,6 +39,7 @@
     <Compile Include="Batalla\IEquipoSelector.cs" />
     <Compile Include="Batalla\Equipo.cs" />
     <Compile Include="Recursos\IRecurso.cs" />
+    <Compile Include="Recursos\HP.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

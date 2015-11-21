@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace KarTac
+﻿namespace KarTac
 {
 	public class Personaje
 	{

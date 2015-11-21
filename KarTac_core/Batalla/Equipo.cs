@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace KarTac.Batalla
+﻿namespace KarTac.Batalla
 {
 	public struct Equipo : IEquipoSelector
 	{
