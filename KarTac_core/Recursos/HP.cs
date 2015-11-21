@@ -58,5 +58,10 @@ namespace KarTac.Recursos
 		/// Ocurre cuando cambia el valor actual
 		/// </summary>
 		public event Action AlCambiarValor;
+
+		public override string ToString ()
+		{
+			return string.Format ("HP:\t{0}/{1}", Valor, Max);
+		}
 	}
 }
