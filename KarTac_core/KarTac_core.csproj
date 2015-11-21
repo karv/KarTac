@@ -29,6 +29,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="nunit.framework">
+      <Package>nunit</Package>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -40,6 +43,7 @@
     <Compile Include="Batalla\Equipo.cs" />
     <Compile Include="Recursos\IRecurso.cs" />
     <Compile Include="Recursos\HP.cs" />
+    <Compile Include="Test\Pruebas.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
@@ -57,5 +61,6 @@
   <ItemGroup>
     <Folder Include="Batalla\" />
     <Folder Include="Recursos\" />
+    <Folder Include="Test\" />
   </ItemGroup>
 </Project>
