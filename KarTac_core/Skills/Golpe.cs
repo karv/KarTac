@@ -17,4 +17,3 @@ namespace KarTac.Skills
 		}
 	}
 }
-
