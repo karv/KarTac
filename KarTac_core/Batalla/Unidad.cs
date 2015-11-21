@@ -1,7 +1,12 @@
-﻿namespace KarTac.Batalla
+﻿using Microsoft.Xna.Framework;
+
+
+namespace KarTac.Batalla
 {
 	public class Unidad
 	{
+		public Point Pos { get; set; }
+
 		public Personaje PersonajeBase { get; }
 
 		public Unidad (Personaje personaje)

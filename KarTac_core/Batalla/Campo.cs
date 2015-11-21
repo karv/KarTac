@@ -7,6 +7,8 @@ namespace KarTac.Batalla
 	/// </summary>
 	public class Campo
 	{
+		public ISelectorTarget SelectorTarget { get; }
+
 		/// <summary>
 		/// Unidades en el campo
 		/// </summary>
