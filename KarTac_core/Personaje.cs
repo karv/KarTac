@@ -1,4 +1,6 @@
-﻿namespace KarTac
+﻿using System;
+
+namespace KarTac
 {
 	public class Personaje
 	{
@@ -17,6 +19,18 @@
 		public Personaje ()
 		{
 			Atributos = new AtributosPersonaje ();
+		}
+
+		public event Action AlMorir
+		{
+			add
+			{
+				Atributos.HP.AlValorCero += value;
+			}
+			remove
+			{
+				Atributos.HP.AlValorCero -= value;
+			}
 		}
 	}
 }
