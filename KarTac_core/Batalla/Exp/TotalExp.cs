@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace KarTac.Batalla.Exp
+﻿namespace KarTac.Batalla.Exp
 {
 	public struct TotalExp
 	{
