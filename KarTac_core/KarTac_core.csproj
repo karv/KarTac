@@ -44,6 +44,10 @@
     <Compile Include="Recursos\IRecurso.cs" />
     <Compile Include="Recursos\HP.cs" />
     <Compile Include="Test\Pruebas.cs" />
+    <Compile Include="Skills\ISkill.cs" />
+    <Compile Include="Skills\Golpe.cs" />
+    <Compile Include="Batalla\InstanciaSkill.cs" />
+    <Compile Include="Batalla\ISelectorTarget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
@@ -62,5 +66,6 @@
     <Folder Include="Batalla\" />
     <Folder Include="Recursos\" />
     <Folder Include="Test\" />
+    <Folder Include="Skills\" />
   </ItemGroup>
 </Project>
