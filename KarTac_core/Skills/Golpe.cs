@@ -34,7 +34,7 @@ namespace KarTac.Skills
 				                    0);
 			var daño = dañoBloqueado * 2;
 
-			selección.PersonajeBase.Atributos.HP -= daño;
+			selección.PersonajeBase.Atributos.HP.Valor -= daño;
 		}
 
 		public bool Usable (Unidad usuario, Campo campo)
