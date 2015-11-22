@@ -18,11 +18,11 @@ namespace KarTac
 		/// Lista de recursos
 		/// </summary>
 		/// <value>The recursos.</value>
-		SortedSet<IRecurso> Recursos { get; }
+		SortedSet<IRecurso> Recs { get; }
 
 		public AtributosPersonaje ()
 		{
-			Recursos = new SortedSet<IRecurso> ();
+			Recs = new SortedSet<IRecurso> ();
 		}
 	}
 }
