@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
-using System;
 
 namespace KarTac.Cliente.Controls
 {
@@ -10,7 +9,6 @@ namespace KarTac.Cliente.Controls
 		public Unidad (KarTac.Batalla.Unidad unid)
 		{
 			UnidadBase = unid;
-			FlagColor = Color.Aqua;
 		}
 
 		public KarTac.Batalla.Unidad UnidadBase { get; }
@@ -51,7 +49,13 @@ namespace KarTac.Cliente.Controls
 		Texture2D texturaClase;
 		Texture2D rectText;
 
-		Color FlagColor { get; set; }
+		Color FlagColor
+		{
+			get
+			{
+				return UnidadBase.Equipo.FlagColor;
+			}
+		}
 
 		public void LoadContent (ContentManager content)
 		{

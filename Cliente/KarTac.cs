@@ -27,6 +27,7 @@ namespace KarTac.Cliente
 			var unidad = new KarTac.Batalla.Unidad (pj);
 			unidad.Pos = new Point (100, 100);
 			var unidSpr = new Unidad (unidad);
+			unidad.Equipo = new KarTac.Batalla.Equipo (1, Color.Red);
 			Unidades.Add (unidSpr);
 
 		}
