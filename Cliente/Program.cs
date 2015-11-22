@@ -7,18 +7,20 @@ using System.Linq;
 using MonoMac.AppKit;
 using MonoMac.Foundation;
 
+
 #elif __IOS__
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 #endif
 #endregion
 
-namespace Cliente
+namespace KarTac.Cliente
 {
 	#if __IOS__
 	[Register("AppDelegate")]
 	class Program : UIApplicationDelegate
 	
+
 #else
 	static class Program
 	#endif
@@ -37,7 +39,7 @@ namespace Cliente
 		#if !MONOMAC && !__IOS__		 
         [STAThread]
 		#endif
-		static void Main (string [] args)
+		static void Main (string[] args)
 		{
 			#if MONOMAC
 			NSApplication.Init ();

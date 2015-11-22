@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using KarTac.Cliente.Controls;
 using KarTac;
 
-namespace Cliente
+namespace KarTac.Cliente
 {
 	/// <summary>
 	/// This is the main type for your game.
@@ -15,7 +15,7 @@ namespace Cliente
 		readonly GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 
-		List<Unidad> Unidades = new List<Unidad> ();
+		readonly List<Unidad> Unidades = new List<Unidad> ();
 
 		public KarTacGame ()
 		{
@@ -96,7 +96,7 @@ namespace Cliente
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw (GameTime gameTime)
 		{
-			graphics.GraphicsDevice.Clear (Color.CornflowerBlue);
+			graphics.GraphicsDevice.Clear (Color.Green);
 		
 			//TODO: Add your drawing code here
             

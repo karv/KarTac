@@ -10,6 +10,7 @@ namespace KarTac.Cliente.Controls
 		public Unidad (KarTac.Batalla.Unidad unid)
 		{
 			UnidadBase = unid;
+			FlagColor = Color.Aqua;
 		}
 
 		public KarTac.Batalla.Unidad UnidadBase { get; }
@@ -43,7 +44,7 @@ namespace KarTac.Cliente.Controls
 		public void Dibujar (SpriteBatch bat, GraphicsDevice dev)
 		{
 			bat.Draw (texturaClase, area, Color.Black);
-			bat.Draw (CreateCircle (5, dev), area, Color.Red);
+			bat.Draw (CreateCircle (5, dev), area, FlagColor);
 		}
 
 		public Texture2D CreateCircle (int radius, GraphicsDevice dev)
@@ -64,7 +65,7 @@ namespace KarTac.Cliente.Controls
 				int x = (int)Math.Round (radius + radius * Math.Cos (angle));
 				int y = (int)Math.Round (radius + radius * Math.Sin (angle));
 
-				data [y * outerRadius + x + 1] = Color.Pink;
+				data [y * outerRadius + x + 1] = Color.White;
 			}
 
 			texture.SetData (data);
