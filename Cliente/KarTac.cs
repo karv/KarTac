@@ -1,6 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
+using KarTac.Cliente.Controls;
+using KarTac;
 
 namespace Cliente
 {
@@ -12,11 +15,20 @@ namespace Cliente
 		readonly GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 
+		List<Unidad> Unidades = new List<Unidad> ();
+
 		public KarTacGame ()
 		{
 			graphics = new GraphicsDeviceManager (this);
 			Content.RootDirectory = "Content";	            
 			graphics.IsFullScreen = true;		
+
+			var pj = new Personaje ();
+			var unidad = new KarTac.Batalla.Unidad (pj);
+			unidad.Pos = new Point (100, 100);
+			var unidSpr = new Unidad (unidad);
+			Unidades.Add (unidSpr);
+
 		}
 
 		/// <summary>
@@ -29,7 +41,10 @@ namespace Cliente
 		{
 			// TODO: Add your initialization logic here
 			base.Initialize ();
+
 				
+
+
 		}
 
 		/// <summary>
@@ -42,6 +57,10 @@ namespace Cliente
 			spriteBatch = new SpriteBatch (GraphicsDevice);
 
 			//TODO: use this.Content to load your game content here 
+			foreach (var x in Unidades)
+			{
+				x.LoadContent (Content);
+			}
 		}
 
 		/// <summary>
@@ -62,6 +81,13 @@ namespace Cliente
 			#endif
 			// TODO: Add your update logic here			
 			base.Update (gameTime);
+
+			var delta = gameTime.ElapsedGameTime;
+			foreach (var x in Unidades)
+			{
+				var oldPos = x.UnidadBase.Pos;
+				x.UnidadBase.Pos = new Point (oldPos.X, oldPos.Y + (int)(delta.TotalSeconds * 100));
+			}
 		}
 
 		/// <summary>
@@ -75,7 +101,17 @@ namespace Cliente
 			//TODO: Add your drawing code here
             
 			base.Draw (gameTime);
+
+			spriteBatch.Begin ();
+			foreach (var x in Unidades)
+			{
+				x.Dibujar (spriteBatch, graphics.GraphicsDevice);
+			}
+			spriteBatch.End ();
 		}
+
+
 	}
+
 }
 

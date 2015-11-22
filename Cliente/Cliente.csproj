@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{48B06E79-A028-4708-96BC-9B0D34933873}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Cliente</RootNamespace>
+    <RootNamespace>KarTac.Cliente</RootNamespace>
     <AssemblyName>Cliente</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
@@ -45,6 +45,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="KarTac.cs" />
+    <Compile Include="Controls\Unidad.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.png" />
@@ -62,8 +63,23 @@
           <TextStylePolicy FileWidth="120" TabsToSpaces="False" inheritsSet="VisualStudio" inheritsScope="text/plain" scope="text/x-csharp" />
           <CSharpFormattingPolicy SimplePropertyFormatting="ForceNewLine" AutoPropertyFormatting="ForceOneLine" AnonymousMethodBraceStyle="NextLine" PropertyBraceStyle="NextLine" PropertyGetBraceStyle="NextLine" PropertySetBraceStyle="NextLine" EventBraceStyle="NextLine" EventAddBraceStyle="NextLine" StatementBraceStyle="NextLine" ElseNewLinePlacement="NewLine" ElseIfNewLinePlacement="NewLine" CatchNewLinePlacement="NewLine" FinallyNewLinePlacement="NewLine" NewLineBeforeConstructorInitializerColon="NewLine" AfterDelegateDeclarationParameterComma="True" SpaceAroundUnsafeArrowOperator="True" BeforeSizeOfParentheses="True" BeforeTypeOfParentheses="True" MethodCallArgumentWrapping="WrapIfTooLong" AlignToFirstMethodCallArgument="True" MethodDeclarationParameterWrapping="WrapIfTooLong" IndexerDeclarationParameterWrapping="WrapIfTooLong" IndexerArgumentWrapping="WrapIfTooLong" AlignToFirstIndexerArgument="True" inheritsSet="Mono" inheritsScope="text/x-csharp" scope="text/x-csharp" />
           <TextStylePolicy FileWidth="120" TabsToSpaces="False" inheritsSet="VisualStudio" inheritsScope="text/plain" scope="text/plain" />
+          <DotNetNamingPolicy DirectoryNamespaceAssociation="PrefixedHierarchical" ResourceNamePolicy="FileFormatDefault" />
         </Policies>
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
+  <ItemGroup>
+    <Folder Include="Controls\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KarTac_core\KarTac_core.csproj">
+      <Project>{7C3501FD-3912-4B74-9A43-552962281096}</Project>
+      <Name>KarTac_core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Unidad.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>
