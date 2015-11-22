@@ -20,8 +20,8 @@ namespace KarTac.Cliente
 		public KarTacGame ()
 		{
 			graphics = new GraphicsDeviceManager (this);
-			Content.RootDirectory = "Content";	            
-			graphics.IsFullScreen = true;		
+			Content.RootDirectory = "Content";
+			graphics.IsFullScreen = true;
 
 			var pj = new Personaje ();
 			var unidad = new KarTac.Batalla.Unidad (pj);

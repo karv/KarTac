@@ -23,6 +23,22 @@ namespace KarTac.Cliente.Controls
 			}
 		}
 
+		static Point flagSize
+		{
+			get
+			{
+				return new Point (6, 4);
+			}
+		}
+
+		Rectangle FlagRect
+		{
+			get
+			{
+				return new Rectangle (area.Left, area.Bottom - flagSize.Y, flagSize.X, flagSize.Y);
+			}
+		}
+
 		Rectangle area
 		{
 			get
@@ -33,43 +49,21 @@ namespace KarTac.Cliente.Controls
 
 
 		Texture2D texturaClase;
+		Texture2D rectText;
 
 		Color FlagColor { get; set; }
 
 		public void LoadContent (ContentManager content)
 		{
 			texturaClase = content.Load<Texture2D> ("Unidad");
+			rectText = content.Load<Texture2D> ("Rect");
 		}
 
 		public void Dibujar (SpriteBatch bat, GraphicsDevice dev)
 		{
 			bat.Draw (texturaClase, area, Color.Black);
-			bat.Draw (CreateCircle (5, dev), area, FlagColor);
+			bat.Draw (rectText, FlagRect, FlagColor);
 		}
 
-		public Texture2D CreateCircle (int radius, GraphicsDevice dev)
-		{
-			int outerRadius = radius * 2 + 2; // So circle doesn't go out of bounds
-			var texture = new Texture2D (dev, outerRadius, outerRadius);
-
-			var data = new Color[outerRadius * outerRadius];
-
-			// Colour the entire texture transparent first.
-			for (int i = 0; i < data.Length; i++)
-				data [i] = Color.Transparent;
-
-			double angleStep = 1f / radius;
-
-			for (double angle = 0; angle < Math.PI * 2; angle += angleStep)
-			{
-				int x = (int)Math.Round (radius + radius * Math.Cos (angle));
-				int y = (int)Math.Round (radius + radius * Math.Sin (angle));
-
-				data [y * outerRadius + x + 1] = Color.White;
-			}
-
-			texture.SetData (data);
-			return texture;
-		}
 	}
 }
