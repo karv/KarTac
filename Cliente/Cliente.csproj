@@ -54,6 +54,7 @@
     <None Include="Tao.Sdl.dll.config" />
     <None Include="packages.config" />
     <None Include="Builder.mgcb" />
+    <None Include="Content\Rect.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
