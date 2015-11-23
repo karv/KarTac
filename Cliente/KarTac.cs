@@ -26,9 +26,13 @@ namespace KarTac.Cliente
 			var pj = new Personaje ();
 			var unidad = new KarTac.Batalla.Unidad (pj);
 			unidad.Pos = new Point (100, 100);
+			unidad.PersonajeBase.Atributos.HP.Max = 100;
+			unidad.PersonajeBase.Atributos.HP.Valor = 80;
 			var unidSpr = new Unidad (unidad);
 			unidad.Equipo = new KarTac.Batalla.Equipo (1, Color.Red);
 			Unidades.Add (unidSpr);
+
+			Components.Add (new GameComponent (this));
 
 		}
 
@@ -88,6 +92,7 @@ namespace KarTac.Cliente
 			{
 				var oldPos = x.UnidadBase.Pos;
 				x.UnidadBase.Pos = new Point (oldPos.X, oldPos.Y + (int)(delta.TotalSeconds * 100));
+				x.UnidadBase.PersonajeBase.Atributos.HP.Valor -= (int)(delta.TotalMilliseconds / 10);
 			}
 		}
 
@@ -110,9 +115,5 @@ namespace KarTac.Cliente
 			}
 			spriteBatch.End ();
 		}
-
-
 	}
-
 }
-

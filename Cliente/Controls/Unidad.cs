@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using OpenTK.Graphics.ES20;
 
 namespace KarTac.Cliente.Controls
 {
@@ -29,7 +30,23 @@ namespace KarTac.Cliente.Controls
 			}
 		}
 
-		Rectangle FlagRect
+		static int grosorHpBar
+		{
+			get
+			{
+				return 3;
+			}
+		}
+
+		static Point tamaño
+		{
+			get
+			{
+				return new Point (20, 20);
+			}
+		}
+
+		Rectangle flagRect
 		{
 			get
 			{
@@ -41,10 +58,29 @@ namespace KarTac.Cliente.Controls
 		{
 			get
 			{
-				return new Rectangle (topleft, new Point (20, 20));
+				return new Rectangle (topleft, tamaño);
 			}
 		}
 
+		Rectangle hpBar
+		{
+			get
+			{
+				return new Rectangle (area.Right - grosorHpBar, area.Top, grosorHpBar, tamaño.Y);
+			}
+		}
+
+		Rectangle currHpBar
+		{
+			get
+			{
+				var hp = UnidadBase.PersonajeBase.Atributos.HP;
+				var hpPct = hp.Valor / hp.Max;
+				var tam = (int)(tamaño.Y * hpPct);
+
+				return new Rectangle (area.Right - grosorHpBar, area.Bottom - tam, grosorHpBar, tam);
+			}
+		}
 
 		Texture2D texturaClase;
 		Texture2D rectText;
@@ -65,8 +101,10 @@ namespace KarTac.Cliente.Controls
 
 		public void Dibujar (SpriteBatch bat, GraphicsDevice dev)
 		{
-			bat.Draw (texturaClase, area, Color.Black);
-			bat.Draw (rectText, FlagRect, FlagColor);
+			bat.Draw (texturaClase, area, Color.Black);  // Icono
+			bat.Draw (rectText, flagRect, FlagColor);    // Bandera
+			bat.Draw (rectText, hpBar, Color.White);     // HP background
+			bat.Draw (rectText, currHpBar, Color.Red);   // HP actual
 		}
 
 	}
