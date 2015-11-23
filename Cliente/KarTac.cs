@@ -15,7 +15,6 @@ namespace KarTac.Cliente
 	{
 		readonly GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
-		public BitmapFont Font;
 
 		readonly List<Unidad> Unidades = new List<Unidad> ();
 
@@ -41,6 +40,7 @@ namespace KarTac.Cliente
 			unidad.PersonajeBase.Atributos.HP.Valor = 80;
 			var unidSpr = new Unidad (unidad);
 			unidad.PersonajeBase.AlMorir += Exit;
+			unidad.PersonajeBase.Nombre = "Juanito";
 			unidad.Equipo = new KarTac.Batalla.Equipo (1, Color.Red);
 			Unidades.Add (unidSpr);
 			base.Initialize ();
@@ -57,7 +57,7 @@ namespace KarTac.Cliente
 			//spriteBatch.DrawString(new SpriteFont)
 
 			Content.Load<Texture> ("Unidad");
-			Font = Content.Load<BitmapFont> ("fonts");
+			Content.Load<BitmapFont> (@"Fonts/fonts");
 
 
 			foreach (var x in Unidades)
@@ -102,8 +102,6 @@ namespace KarTac.Cliente
 		{
 			graphics.GraphicsDevice.Clear (Color.Green);
 		
-			//TODO: Add your drawing code here
-            
 			base.Draw (gameTime);
 
 			spriteBatch.Begin ();

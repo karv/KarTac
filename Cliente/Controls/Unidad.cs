@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using MonoGame.Extended.BitmapFonts;
+using System.Reflection;
 
 namespace KarTac.Cliente.Controls
 {
@@ -82,7 +84,8 @@ namespace KarTac.Cliente.Controls
 		}
 
 		Texture2D texturaClase;
-		Texture2D rectText;
+		Texture2D texturaRect;
+		BitmapFont font;
 
 		Color FlagColor
 		{
@@ -95,15 +98,28 @@ namespace KarTac.Cliente.Controls
 		public void LoadContent (ContentManager content)
 		{
 			texturaClase = content.Load<Texture2D> ("Unidad");
-			rectText = content.Load<Texture2D> ("Rect");
+			texturaRect = content.Load<Texture2D> ("Rect");
+			font = content.Load<BitmapFont> (@"UnitNameFont");
 		}
 
 		public void Dibujar (SpriteBatch bat)
 		{
 			bat.Draw (texturaClase, area, Color.Black);  // Icono
-			bat.Draw (rectText, flagRect, FlagColor);    // Bandera
-			bat.Draw (rectText, hpBar, Color.White);     // HP background
-			bat.Draw (rectText, currHpBar, Color.Red);   // HP actual
+			bat.Draw (texturaRect, flagRect, FlagColor);    // Bandera
+			bat.Draw (texturaRect, hpBar, Color.White);     // HP background
+			bat.Draw (texturaRect, currHpBar, Color.Red);   // HP actual
+
+			// Nombre
+			var nombre = UnidadBase.PersonajeBase.Nombre;
+			var rect = font.GetStringRectangle (nombre, Vector2.Zero);
+			var hSize = rect.Width;
+			var ySize = rect.Height;
+
+			bat.DrawString (font,
+			                UnidadBase.PersonajeBase.Nombre,
+			                new Vector2 (area.Center.X - hSize / 2, area.Top - ySize - 2),
+			                Color.White);
+			//font.GetStringRectangle ("Huehue", Vector2.Zero);
 		}
 
 	}
