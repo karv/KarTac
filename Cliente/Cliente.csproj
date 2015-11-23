@@ -31,6 +31,9 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
+    <Reference Include="MonoGame.Extended">
+      <HintPath>..\packages\MonoGame.Extended.0.3.44-alpha\lib\MonoGame.Extended.dll</HintPath>
+    </Reference>
     <Reference Include="MonoGame.Framework">
       <HintPath>..\packages\MonoGame.Framework.Linux.3.4.0.459\lib\net40\MonoGame.Framework.dll</HintPath>
     </Reference>
@@ -40,9 +43,6 @@
     <Reference Include="Tao.Sdl">
       <HintPath>..\packages\MonoGame.Framework.Linux.3.4.0.459\lib\net40\Tao.Sdl.dll</HintPath>
     </Reference>
-    <Reference Include="MonoGame.Extended">
-      <HintPath>..\packages\MonoGame.Extended.0.3.44-alpha\lib\MonoGame.Extended.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -51,10 +51,9 @@
     <Compile Include="Controls\Unidad.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Icon.png" />
+    <None Include="packages.config" />
     <None Include="OpenTK.dll.config" />
     <None Include="Tao.Sdl.dll.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
@@ -71,16 +70,19 @@
   </ProjectExtensions>
   <ItemGroup>
     <Folder Include="Controls\" />
+    <Folder Include="Content\" />
+    <Folder Include="Content\bin\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KarTac_core\KarTac_core.csproj">
       <Project>{7C3501FD-3912-4B74-9A43-552962281096}</Project>
       <Name>KarTac_core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\Content.mgcb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 </Project>

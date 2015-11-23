@@ -1,20 +1,20 @@
 
 #----------------------------- Global Properties ----------------------------#
 
-/outputDir:bin/$(Platform)
-/intermediateDir:obj/$(Platform)
-/platform:DesktopGL
+/outputDir:../Cliente
+/intermediateDir:obj/Debug
+/platform:Windows
 /config:
 /profile:Reach
 /compress:False
 
 #-------------------------------- References --------------------------------#
 
-/reference:../../MonoGame.Extended.0.3.44-alpha/lib/MonoGame.Extended.Content.Pipeline.dll
+/reference:../MonoGame.Extended.0.3.44-alpha/lib/MonoGame.Extended.Content.Pipeline.dll
 
 #---------------------------------- Content ---------------------------------#
 
-#begin fonts_0.png
+#begin Content/Unidad.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -24,9 +24,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:fonts_0.png
+/build:Content/Unidad.png
 
-#begin fonts_1.png
+#begin Content/fonts_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -36,9 +36,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:fonts_1.png
+/build:Content/fonts_1.png
 
-#begin Unidad.png
+#begin Content/fonts_0.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -48,14 +48,14 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Unidad.png
+/build:Content/fonts_0.png
 
-#begin fonts.fnt
+#begin Content/fonts.fnt
 /importer:BitmapFontImporter
 /processor:BitmapFontProcessor
-/build:fonts.fnt
+/build:Content/fonts.fnt
 
-#begin Rect2.png
+#begin Content/Rect.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -65,5 +65,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Rect2.png
+/build:Content/Rect.png
 

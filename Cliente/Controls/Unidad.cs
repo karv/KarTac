@@ -98,7 +98,7 @@ namespace KarTac.Cliente.Controls
 			rectText = content.Load<Texture2D> ("Rect");
 		}
 
-		public void Dibujar (SpriteBatch bat, GraphicsDevice dev)
+		public void Dibujar (SpriteBatch bat)
 		{
 			bat.Draw (texturaClase, area, Color.Black);  // Icono
 			bat.Draw (rectText, flagRect, FlagColor);    // Bandera

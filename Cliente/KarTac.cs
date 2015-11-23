@@ -15,7 +15,7 @@ namespace KarTac.Cliente
 	{
 		readonly GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
-		public MonoGame.Extended.BitmapFonts.BitmapFont Font;
+		public BitmapFont Font;
 
 		readonly List<Unidad> Unidades = new List<Unidad> ();
 
@@ -24,19 +24,6 @@ namespace KarTac.Cliente
 			graphics = new GraphicsDeviceManager (this);
 			Content.RootDirectory = "Content";
 			graphics.IsFullScreen = true;
-
-			var pj = new Personaje ();
-			var unidad = new KarTac.Batalla.Unidad (pj);
-			unidad.Pos = new Point (100, 100);
-			unidad.PersonajeBase.Atributos.HP.Max = 100;
-			unidad.PersonajeBase.Atributos.HP.Valor = 80;
-			var unidSpr = new Unidad (unidad);
-			unidad.PersonajeBase.AlMorir += Exit;
-			unidad.Equipo = new KarTac.Batalla.Equipo (1, Color.Red);
-			Unidades.Add (unidSpr);
-
-			Components.Add (new GameComponent (this));
-
 		}
 
 		/// <summary>
@@ -47,12 +34,16 @@ namespace KarTac.Cliente
 		/// </summary>
 		protected override void Initialize ()
 		{
-			// TODO: Add your initialization logic here
+			var pj = new Personaje ();
+			var unidad = new KarTac.Batalla.Unidad (pj);
+			unidad.Pos = new Point (100, 100);
+			unidad.PersonajeBase.Atributos.HP.Max = 100;
+			unidad.PersonajeBase.Atributos.HP.Valor = 80;
+			var unidSpr = new Unidad (unidad);
+			unidad.PersonajeBase.AlMorir += Exit;
+			unidad.Equipo = new KarTac.Batalla.Equipo (1, Color.Red);
+			Unidades.Add (unidSpr);
 			base.Initialize ();
-
-				
-
-
 		}
 
 		/// <summary>
@@ -65,8 +56,9 @@ namespace KarTac.Cliente
 			spriteBatch = new SpriteBatch (GraphicsDevice);
 			//spriteBatch.DrawString(new SpriteFont)
 
+			Content.Load<Texture> ("Unidad");
 			Font = Content.Load<BitmapFont> ("fonts");
-			//Content.Load<Texture2D> ("fonts");
+
 
 			foreach (var x in Unidades)
 			{
@@ -98,7 +90,7 @@ namespace KarTac.Cliente
 			{
 				var oldPos = x.UnidadBase.Pos;
 				x.UnidadBase.Pos = new Point (oldPos.X, oldPos.Y + (int)(delta.TotalSeconds * 100));
-				x.UnidadBase.PersonajeBase.Atributos.HP.Valor -= (int)(delta.TotalMilliseconds / 10);
+				x.UnidadBase.PersonajeBase.Atributos.HP.Valor -= (int)(delta.TotalSeconds * 100);
 			}
 		}
 
@@ -117,7 +109,7 @@ namespace KarTac.Cliente
 			spriteBatch.Begin ();
 			foreach (var x in Unidades)
 			{
-				x.Dibujar (spriteBatch, graphics.GraphicsDevice);
+				x.Dibujar (spriteBatch);
 			}
 			spriteBatch.End ();
 		}
