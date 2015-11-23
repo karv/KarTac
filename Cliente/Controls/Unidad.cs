@@ -1,7 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
-using System;
+using MonoGame.Extended.BitmapFonts;
+using System.Reflection;
 
 namespace KarTac.Cliente.Controls
 {
@@ -10,7 +11,6 @@ namespace KarTac.Cliente.Controls
 		public Unidad (KarTac.Batalla.Unidad unid)
 		{
 			UnidadBase = unid;
-			FlagColor = Color.Aqua;
 		}
 
 		public KarTac.Batalla.Unidad UnidadBase { get; }
@@ -23,53 +23,104 @@ namespace KarTac.Cliente.Controls
 			}
 		}
 
+		static Point flagSize
+		{
+			get
+			{
+				return new Point (6, 4);
+			}
+		}
+
+		static int grosorHpBar
+		{
+			get
+			{
+				return 3;
+			}
+		}
+
+		static Point tamaño
+		{
+			get
+			{
+				return new Point (20, 20);
+			}
+		}
+
+		Rectangle flagRect
+		{
+			get
+			{
+				return new Rectangle (area.Left, area.Bottom - flagSize.Y, flagSize.X, flagSize.Y);
+			}
+		}
+
 		Rectangle area
 		{
 			get
 			{
-				return new Rectangle (topleft, new Point (20, 20));
+				return new Rectangle (topleft, tamaño);
 			}
 		}
 
+		Rectangle hpBar
+		{
+			get
+			{
+				return new Rectangle (area.Right - grosorHpBar, area.Top, grosorHpBar, tamaño.Y);
+			}
+		}
+
+		Rectangle currHpBar
+		{
+			get
+			{
+				var hp = UnidadBase.PersonajeBase.Atributos.HP;
+				var hpPct = hp.Valor / hp.Max;
+				var tam = (int)(tamaño.Y * hpPct);
+
+				return new Rectangle (area.Right - grosorHpBar, area.Bottom - tam, grosorHpBar, tam);
+			}
+		}
 
 		Texture2D texturaClase;
+		Texture2D texturaRect;
+		BitmapFont font;
 
-		Color FlagColor { get; set; }
+		Color FlagColor
+		{
+			get
+			{
+				return UnidadBase.Equipo.FlagColor;
+			}
+		}
 
 		public void LoadContent (ContentManager content)
 		{
 			texturaClase = content.Load<Texture2D> ("Unidad");
+			texturaRect = content.Load<Texture2D> ("Rect");
+			font = content.Load<BitmapFont> (@"UnitNameFont");
 		}
 
-		public void Dibujar (SpriteBatch bat, GraphicsDevice dev)
+		public void Dibujar (SpriteBatch bat)
 		{
-			bat.Draw (texturaClase, area, Color.Black);
-			bat.Draw (CreateCircle (5, dev), area, FlagColor);
+			bat.Draw (texturaClase, area, Color.Black);  // Icono
+			bat.Draw (texturaRect, flagRect, FlagColor);    // Bandera
+			bat.Draw (texturaRect, hpBar, Color.White);     // HP background
+			bat.Draw (texturaRect, currHpBar, Color.Red);   // HP actual
+
+			// Nombre
+			var nombre = UnidadBase.PersonajeBase.Nombre;
+			var rect = font.GetStringRectangle (nombre, Vector2.Zero);
+			var hSize = rect.Width;
+			var ySize = rect.Height;
+
+			bat.DrawString (font,
+			                UnidadBase.PersonajeBase.Nombre,
+			                new Vector2 (area.Center.X - hSize / 2, area.Top - ySize - 2),
+			                Color.White);
+			//font.GetStringRectangle ("Huehue", Vector2.Zero);
 		}
 
-		public Texture2D CreateCircle (int radius, GraphicsDevice dev)
-		{
-			int outerRadius = radius * 2 + 2; // So circle doesn't go out of bounds
-			var texture = new Texture2D (dev, outerRadius, outerRadius);
-
-			var data = new Color[outerRadius * outerRadius];
-
-			// Colour the entire texture transparent first.
-			for (int i = 0; i < data.Length; i++)
-				data [i] = Color.Transparent;
-
-			double angleStep = 1f / radius;
-
-			for (double angle = 0; angle < Math.PI * 2; angle += angleStep)
-			{
-				int x = (int)Math.Round (radius + radius * Math.Cos (angle));
-				int y = (int)Math.Round (radius + radius * Math.Sin (angle));
-
-				data [y * outerRadius + x + 1] = Color.White;
-			}
-
-			texture.SetData (data);
-			return texture;
-		}
 	}
 }

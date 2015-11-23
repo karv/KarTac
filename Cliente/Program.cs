@@ -8,6 +8,21 @@ using MonoMac.AppKit;
 using MonoMac.Foundation;
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #elif __IOS__
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
@@ -19,13 +34,12 @@ namespace KarTac.Cliente
 	#if __IOS__
 	[Register("AppDelegate")]
 	class Program : UIApplicationDelegate
-	
 
 #else
 	static class Program
 	#endif
     {
-		private static KarTacGame game;
+		static KarTacGame game;
 
 		internal static void RunGame ()
 		{

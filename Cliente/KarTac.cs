@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using KarTac.Cliente.Controls;
 using KarTac;
+using MonoGame.Extended.BitmapFonts;
 
 namespace KarTac.Cliente
 {
@@ -20,15 +21,8 @@ namespace KarTac.Cliente
 		public KarTacGame ()
 		{
 			graphics = new GraphicsDeviceManager (this);
-			Content.RootDirectory = "Content";	            
-			graphics.IsFullScreen = true;		
-
-			var pj = new Personaje ();
-			var unidad = new KarTac.Batalla.Unidad (pj);
-			unidad.Pos = new Point (100, 100);
-			var unidSpr = new Unidad (unidad);
-			Unidades.Add (unidSpr);
-
+			Content.RootDirectory = "Content";
+			graphics.IsFullScreen = true;
 		}
 
 		/// <summary>
@@ -39,12 +33,17 @@ namespace KarTac.Cliente
 		/// </summary>
 		protected override void Initialize ()
 		{
-			// TODO: Add your initialization logic here
+			var pj = new Personaje ();
+			var unidad = new KarTac.Batalla.Unidad (pj);
+			unidad.Pos = new Point (100, 100);
+			unidad.PersonajeBase.Atributos.HP.Max = 100;
+			unidad.PersonajeBase.Atributos.HP.Valor = 80;
+			var unidSpr = new Unidad (unidad);
+			unidad.PersonajeBase.AlMorir += Exit;
+			unidad.PersonajeBase.Nombre = "Juanito";
+			unidad.Equipo = new KarTac.Batalla.Equipo (1, Color.Red);
+			Unidades.Add (unidSpr);
 			base.Initialize ();
-
-				
-
-
 		}
 
 		/// <summary>
@@ -55,8 +54,12 @@ namespace KarTac.Cliente
 		{
 			// Create a new SpriteBatch, which can be used to draw textures.
 			spriteBatch = new SpriteBatch (GraphicsDevice);
+			//spriteBatch.DrawString(new SpriteFont)
 
-			//TODO: use this.Content to load your game content here 
+			Content.Load<Texture> ("Unidad");
+			Content.Load<BitmapFont> (@"Fonts/fonts");
+
+
 			foreach (var x in Unidades)
 			{
 				x.LoadContent (Content);
@@ -87,6 +90,7 @@ namespace KarTac.Cliente
 			{
 				var oldPos = x.UnidadBase.Pos;
 				x.UnidadBase.Pos = new Point (oldPos.X, oldPos.Y + (int)(delta.TotalSeconds * 100));
+				x.UnidadBase.PersonajeBase.Atributos.HP.Valor -= (int)(delta.TotalSeconds * 100);
 			}
 		}
 
@@ -98,20 +102,14 @@ namespace KarTac.Cliente
 		{
 			graphics.GraphicsDevice.Clear (Color.Green);
 		
-			//TODO: Add your drawing code here
-            
 			base.Draw (gameTime);
 
 			spriteBatch.Begin ();
 			foreach (var x in Unidades)
 			{
-				x.Dibujar (spriteBatch, graphics.GraphicsDevice);
+				x.Dibujar (spriteBatch);
 			}
 			spriteBatch.End ();
 		}
-
-
 	}
-
-}
-
+} 
