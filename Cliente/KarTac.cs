@@ -29,6 +29,7 @@ namespace KarTac.Cliente
 			unidad.PersonajeBase.Atributos.HP.Max = 100;
 			unidad.PersonajeBase.Atributos.HP.Valor = 80;
 			var unidSpr = new Unidad (unidad);
+			unidad.PersonajeBase.AlMorir += Exit;
 			unidad.Equipo = new KarTac.Batalla.Equipo (1, Color.Red);
 			Unidades.Add (unidSpr);
 
@@ -116,4 +117,4 @@ namespace KarTac.Cliente
 			spriteBatch.End ();
 		}
 	}
-}
+} 

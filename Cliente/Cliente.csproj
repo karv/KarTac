@@ -50,10 +50,13 @@
   <ItemGroup>
     <None Include="Icon.png" />
     <None Include="Content\Content.mgcb" />
+    <None Include="Builder.mgcb" />
+    <None Include="Content\fonts.fnt" />
+    <None Include="Content\fonts_0.tga" />
+    <None Include="Content\fonts_1.tga" />
     <None Include="OpenTK.dll.config" />
     <None Include="Tao.Sdl.dll.config" />
     <None Include="packages.config" />
-    <None Include="Builder.mgcb" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
