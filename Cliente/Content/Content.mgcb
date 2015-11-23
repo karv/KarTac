@@ -9,5 +9,6 @@
 
 #-------------------------------- References --------------------------------#
 
+/reference: ..\packages\MonoGame.Extended.0.2.0.0\lib\MonoGame.Extended.Content.Pipeline.dll
 
 #---------------------------------- Content ---------------------------------#

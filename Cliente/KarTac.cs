@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using KarTac.Cliente.Controls;
 using KarTac;
+using MonoGame.Extended.BitmapFonts;
 
 namespace KarTac.Cliente
 {
@@ -14,6 +15,7 @@ namespace KarTac.Cliente
 	{
 		readonly GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
+		public MonoGame.Extended.BitmapFonts.BitmapFont Font;
 
 		readonly List<Unidad> Unidades = new List<Unidad> ();
 
@@ -61,6 +63,9 @@ namespace KarTac.Cliente
 		{
 			// Create a new SpriteBatch, which can be used to draw textures.
 			spriteBatch = new SpriteBatch (GraphicsDevice);
+			//spriteBatch.DrawString(new SpriteFont)
+
+			Font = Content.Load<BitmapFont> ("fonts");
 
 			//TODO: use this.Content to load your game content here 
 			foreach (var x in Unidades)
