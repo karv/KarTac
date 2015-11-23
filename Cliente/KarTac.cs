@@ -66,8 +66,8 @@ namespace KarTac.Cliente
 			//spriteBatch.DrawString(new SpriteFont)
 
 			Font = Content.Load<BitmapFont> ("fonts");
+			//Content.Load<Texture2D> ("fonts");
 
-			//TODO: use this.Content to load your game content here 
 			foreach (var x in Unidades)
 			{
 				x.LoadContent (Content);
