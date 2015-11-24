@@ -51,7 +51,7 @@ namespace KarTac.Cliente
 			unidad.PersonajeBase.Atributos.HP.Max = 100;
 			unidad.PersonajeBase.Atributos.HP.Valor = 80;
 			var unidSpr = new Unidad (this, unidad);
-			unidad.PersonajeBase.AlMorir += Exit;
+			//unidad.PersonajeBase.AlMorir += Exit;
 			unidad.PersonajeBase.Nombre = "Juanito";
 			unidad.Equipo = new KarTac.Batalla.Equipo (1, Color.Red);
 			unidSpr.Include ();
@@ -67,6 +67,25 @@ namespace KarTac.Cliente
 				}
 			};
 
+			var listaSkills = new ContenedorBotón (this);
+			listaSkills.Posición = new Point (0, 0);
+			listaSkills.BgColor = Color.Yellow;
+			listaSkills.Filas = 1;
+			listaSkills.Add ().Color = Color.Red;
+			listaSkills.Add ().Color = Color.Green;
+			listaSkills.Add ().Color = Color.Blue;
+			listaSkills.Include ();
+			listaSkills.TipoOrden = ContenedorBotón.TipoOrdenEnum.FilaPrimero;
+			listaSkills.BotónEnÍndice (0).AlClick += Exit;
+			listaSkills.BotónEnÍndice (1).AlClick += delegate
+			{
+				listaSkills.Filas = (listaSkills.Filas % 2) + 1;
+				System.Console.WriteLine (listaSkills.Filas);
+			};
+			listaSkills.BotónEnÍndice (2).AlClick += 
+				() => listaSkills.TipoOrden = listaSkills.TipoOrden == ContenedorBotón.TipoOrdenEnum.ColumnaPrimero ? 
+				ContenedorBotón.TipoOrdenEnum.FilaPrimero : 
+				ContenedorBotón.TipoOrdenEnum.ColumnaPrimero;
 
 			base.Initialize ();
 		}

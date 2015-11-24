@@ -11,16 +11,28 @@ namespace KarTac.Cliente.Controls
 			Bounds = bounds;
 		}
 
-		public Texture2D Textura { get; set; }
+		public Rectangle Bounds { get; set; }
+
+		public override Rectangle GetBounds ()
+		{
+			return Bounds;
+		}
+
+		public Texture2D TexturaInstancia { get; protected set; }
+
+		public Color Color { get; set; }
+
+		public string Textura { set; get; }
 
 		public override void Dibujar (GameTime gameTime)
 		{
-			GameBase.Batch.Draw (Textura, Bounds, Color.Gray);
+			GameBase.Batch.Draw (TexturaInstancia, Bounds, Color);
 		}
 
 		public override void LoadContent ()
 		{
-			Textura = GameBase.Content.Load<Texture2D> ("Rect"); //TODO "Unidad" = temporal
+			Textura = Textura ?? "Rect";
+			TexturaInstancia = GameBase.Content.Load<Texture2D> (Textura); //TODO "Unidad" = temporal
 		}
 	}
 }

@@ -8,6 +8,8 @@ namespace KarTac.Cliente.Controls
 		{
 			public override int Compare (IControl x, IControl y)
 			{
+				if (x.Equals (y))
+					return 0;
 				return x.Prioridad < y.Prioridad ? -1 : 1;
 			}
 		}
@@ -15,6 +17,19 @@ namespace KarTac.Cliente.Controls
 		public ListaControl ()
 			: base (new Comparador ())
 		{
+		}
+
+		public new bool Add (IControl control)
+		{
+			foreach (var x in this)
+			{
+				if (ReferenceEquals (x, control))
+				{
+					System.Console.WriteLine ();
+				}
+			}
+			var ad = base.Add (control);
+			return ad;
 		}
 	}
 }
