@@ -201,7 +201,7 @@ namespace KarTac.Cliente.Controls
 			int orden = index;
 			locGrid = TipoOrden == TipoOrdenEnum.ColumnaPrimero ? 
 				new Point (orden / Filas, orden % Filas) : 
-				new Point (orden / Columnas, orden % Columnas);
+				new Point (orden % Columnas, orden / Columnas);
 			bounds = new Rectangle (bb.Left + Márgenes.Left + TamañoBotón.X * locGrid.X,
 			                        bb.Top + Márgenes.Top + TamañoBotón.Y * locGrid.Y,
 			                        TamañoBotón.X, TamañoBotón.Y);

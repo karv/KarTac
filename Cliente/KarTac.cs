@@ -75,9 +75,13 @@ namespace KarTac.Cliente
 			listaSkills.Add ().Color = Color.Green;
 			listaSkills.Add ().Color = Color.Blue;
 			listaSkills.Include ();
-
+			listaSkills.TipoOrden = ContenedorBotón.TipoOrdenEnum.FilaPrimero;
 			listaSkills.BotónEnÍndice (0).AlClick += Exit;
-			listaSkills.BotónEnÍndice (1).AlClick += () => listaSkills.Filas = (listaSkills.Filas % 2) + 1;
+			listaSkills.BotónEnÍndice (1).AlClick += delegate
+			{
+				listaSkills.Filas = (listaSkills.Filas % 2) + 1;
+				System.Console.WriteLine (listaSkills.Filas);
+			};
 			listaSkills.BotónEnÍndice (2).AlClick += 
 				() => listaSkills.TipoOrden = listaSkills.TipoOrden == ContenedorBotón.TipoOrdenEnum.ColumnaPrimero ? 
 				ContenedorBotón.TipoOrdenEnum.FilaPrimero : 
