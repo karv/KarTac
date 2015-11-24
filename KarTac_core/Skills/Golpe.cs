@@ -24,7 +24,6 @@ namespace KarTac.Skills
 			}
 		}
 
-
 		public void Ejecutar (Unidad usuario, Campo campo)
 		{
 			var selector = campo.SelectorTarget;

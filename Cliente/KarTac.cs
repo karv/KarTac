@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using KarTac.Cliente.Controls;
 using KarTac;
 using MonoGame.Extended.BitmapFonts;
+using OpenTK;
 
 namespace KarTac.Cliente
 {
@@ -13,17 +14,26 @@ namespace KarTac.Cliente
 	/// </summary>
 	public class KarTacGame : Game
 	{
-		readonly GraphicsDeviceManager graphics;
-		SpriteBatch spriteBatch;
+		public List<IControl> Controles { get; }
 
-		readonly List<Unidad> Unidades = new List<Unidad> ();
+		readonly GraphicsDeviceManager graphics;
+
+		public SpriteBatch Batch { get; private set; }
+
+		public readonly List<Unidad> Unidades = new List<Unidad> ();
 
 		public KarTacGame ()
 		{
+			Controles = new List<IControl> ();
 			graphics = new GraphicsDeviceManager (this);
 			Content.RootDirectory = "Content";
 			graphics.IsFullScreen = true;
+			IsMouseVisible = true;
 		}
+
+		public KeyboardState LastKeyboardState { get; protected set; }
+
+		public MouseState LastMouseState { get; protected set; }
 
 		/// <summary>
 		/// Allows the game to perform any initialization it needs to before starting to run.
@@ -38,11 +48,24 @@ namespace KarTac.Cliente
 			unidad.Pos = new Point (100, 100);
 			unidad.PersonajeBase.Atributos.HP.Max = 100;
 			unidad.PersonajeBase.Atributos.HP.Valor = 80;
-			var unidSpr = new Unidad (unidad);
+			var unidSpr = new Unidad (this, unidad);
 			unidad.PersonajeBase.AlMorir += Exit;
 			unidad.PersonajeBase.Nombre = "Juanito";
 			unidad.Equipo = new KarTac.Batalla.Equipo (1, Color.Red);
-			Unidades.Add (unidSpr);
+			unidSpr.Include ();
+
+			var bt = new Botón (this, new Rectangle (200, 200, 300, 300));
+			bt.Include ();
+
+			bt.AlClick += delegate()
+			{
+				foreach (var u in Unidades)
+				{
+					u.UnidadBase.PersonajeBase.Nombre = "Noname0525";
+				}
+			};
+
+
 			base.Initialize ();
 		}
 
@@ -53,16 +76,16 @@ namespace KarTac.Cliente
 		protected override void LoadContent ()
 		{
 			// Create a new SpriteBatch, which can be used to draw textures.
-			spriteBatch = new SpriteBatch (GraphicsDevice);
+			Batch = new SpriteBatch (GraphicsDevice);
 			//spriteBatch.DrawString(new SpriteFont)
 
 			Content.Load<Texture> ("Unidad");
 			Content.Load<BitmapFont> (@"Fonts/fonts");
 
 
-			foreach (var x in Unidades)
+			foreach (var x in Controles)
 			{
-				x.LoadContent (Content);
+				x.LoadContent ();
 			}
 		}
 
@@ -82,16 +105,19 @@ namespace KarTac.Cliente
 				Exit ();
 			}
 			#endif
-			// TODO: Add your update logic here			
-			base.Update (gameTime);
 
+			base.Update (gameTime);
 			var delta = gameTime.ElapsedGameTime;
-			foreach (var x in Unidades)
+			foreach (var x in Controles)
 			{
-				var oldPos = x.UnidadBase.Pos;
+				x.Update (gameTime);
+				/* var oldPos = x.UnidadBase.Pos;
 				x.UnidadBase.Pos = new Point (oldPos.X, oldPos.Y + (int)(delta.TotalSeconds * 100));
-				x.UnidadBase.PersonajeBase.Atributos.HP.Valor -= (int)(delta.TotalSeconds * 100);
+				x.UnidadBase.PersonajeBase.Atributos.HP.Valor -= (int)(delta.TotalSeconds * 100); */
 			}
+
+			LastKeyboardState = Keyboard.GetState ();
+			LastMouseState = Mouse.GetState ();
 		}
 
 		/// <summary>
@@ -102,14 +128,15 @@ namespace KarTac.Cliente
 		{
 			graphics.GraphicsDevice.Clear (Color.Green);
 		
-			base.Draw (gameTime);
+			//base.Draw (gameTime);
 
-			spriteBatch.Begin ();
-			foreach (var x in Unidades)
+
+			Batch.Begin ();
+			foreach (var x in Controles)
 			{
-				x.Dibujar (spriteBatch);
+				x.Dibujar (gameTime);
 			}
-			spriteBatch.End ();
+			Batch.End ();
 		}
 	}
 } 
