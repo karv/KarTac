@@ -7,7 +7,7 @@ namespace KarTac.Cliente.Controls
 	/// <summary>
 	/// El cursor del mouse
 	/// </summary>
-	public class Ratón:SBC
+	public class Ratón : SBC
 	{
 		public Ratón (KarTacGame juego)
 			: base (juego)
@@ -30,14 +30,12 @@ namespace KarTac.Cliente.Controls
 			}
 		}
 
+
 		public readonly Point Tamaño;
 
-		public override Rectangle Bounds
+		public override Rectangle GetBounds ()
 		{
-			get
-			{
-				return new Rectangle (Pos, Tamaño);
-			}
+			return new Rectangle (Pos, Tamaño);
 		}
 
 
@@ -48,7 +46,7 @@ namespace KarTac.Cliente.Controls
 
 		public override void Dibujar (GameTime gameTime)
 		{
-			GameBase.Batch.Draw (Textura, Bounds, Color.White);
+			GameBase.Batch.Draw (Textura, GetBounds (), Color.White);
 		}
 	}
 }

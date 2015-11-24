@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using MonoGame.Extended.BitmapFonts;
+using System;
 
 namespace KarTac.Cliente.Controls
 {
@@ -51,11 +52,11 @@ namespace KarTac.Cliente.Controls
 		{
 			get
 			{
-				return new Rectangle (area.Left, area.Bottom - flagSize.Y, flagSize.X, flagSize.Y);
+				return new Rectangle (área.Left, área.Bottom - flagSize.Y, flagSize.X, flagSize.Y);
 			}
 		}
 
-		Rectangle area
+		Rectangle área
 		{
 			get
 			{
@@ -67,7 +68,7 @@ namespace KarTac.Cliente.Controls
 		{
 			get
 			{
-				return new Rectangle (area.Right - grosorHpBar, area.Top, grosorHpBar, tamaño.Y);
+				return new Rectangle (área.Right - grosorHpBar, área.Top, grosorHpBar, tamaño.Y);
 			}
 		}
 
@@ -79,13 +80,18 @@ namespace KarTac.Cliente.Controls
 				var hpPct = hp.Valor / hp.Max;
 				var tam = (int)(tamaño.Y * hpPct);
 
-				return new Rectangle (area.Right - grosorHpBar, area.Bottom - tam, grosorHpBar, tam);
+				return new Rectangle (área.Right - grosorHpBar, área.Bottom - tam, grosorHpBar, tam);
 			}
 		}
 
 		Texture2D texturaClase;
 		Texture2D texturaRect;
 		BitmapFont font;
+
+		public override Rectangle GetBounds ()
+		{
+			return área;
+		}
 
 		Color FlagColor
 		{
@@ -106,7 +112,7 @@ namespace KarTac.Cliente.Controls
 		public override void Dibujar (GameTime gameTime)
 		{
 			var bat = GameBase.Batch;
-			bat.Draw (texturaClase, area, Color.Black);  // Icono
+			bat.Draw (texturaClase, área, Color.Black);  // Icono
 			bat.Draw (texturaRect, flagRect, FlagColor);    // Bandera
 			bat.Draw (texturaRect, hpBar, Color.White);     // HP background
 			bat.Draw (texturaRect, currHpBar, Color.Red);   // HP actual
@@ -119,7 +125,7 @@ namespace KarTac.Cliente.Controls
 
 			bat.DrawString (font,
 			                UnidadBase.PersonajeBase.Nombre,
-			                new Vector2 (area.Center.X - hSize / 2, area.Top - ySize - 2),
+			                new Vector2 (área.Center.X - hSize / 2, área.Top - ySize - 2),
 			                Color.White);
 			//font.GetStringRectangle ("Huehue", Vector2.Zero);
 		}

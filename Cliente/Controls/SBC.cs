@@ -56,7 +56,7 @@ namespace KarTac.Cliente.Controls
 			CheckMouseState ();
 		}
 
-		public virtual Rectangle Bounds { get; protected set; }
+		public abstract Rectangle GetBounds ();
 
 		/// <summary>
 		/// Se ejecuta cada llamada a game.Update 
@@ -79,7 +79,7 @@ namespace KarTac.Cliente.Controls
 			get
 			{
 				var state = Mouse.GetState ();
-				return Bounds.Contains (state.Position);
+				return GetBounds ().Contains (state.Position);
 			}
 		}
 
