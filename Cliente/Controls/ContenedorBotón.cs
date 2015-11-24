@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using System.Diagnostics;
 using Microsoft.Xna.Framework.Graphics;
-using System.IO;
 
 namespace KarTac.Cliente.Controls
 {
@@ -25,16 +23,8 @@ namespace KarTac.Cliente.Controls
 		public ContenedorBotón (KarTacGame juego)
 			: base (juego)
 		{
-			TamañoBotón = new Point (30, 30);
-			Filas = 3;
-			Columnas = 10;
 			Prioridad = -5;
 			controles = new List<Botón> (Filas * Columnas);
-		}
-
-		public Botón BotónEnÍndice (int index)
-		{
-			return controles [index];
 		}
 
 		List<Botón> controles { get; }
@@ -42,34 +32,106 @@ namespace KarTac.Cliente.Controls
 		Texture2D texturafondo;
 		public Color BgColor = Color.DarkBlue;
 
-		public int Filas { get; set; }
+		int filas = 3;
+		int columnas = 10;
+		MargenType márgenes;
+		Point tamañobotón = new Point (30, 30);
+		Point posición;
+		TipoOrdenEnum tipoOrden;
 
-		public int Columnas { get; set; }
+		public TipoOrdenEnum TipoOrden
+		{
+			get
+			{
+				return tipoOrden;
+			}
+			set
+			{
+				tipoOrden = value;
+				OnRedimensionar ();
+			}
+		}
 
-		public MargenType Márgenes { get; set; }
+		public Point Posición
+		{
+			get
+			{
+				return posición;
+			}
+			set
+			{
+				posición = value;
+				OnRedimensionar ();
+			}
+		}
 
-		public Point TamañoBotón { get; set; }
+		public Point TamañoBotón
+		{
+			get
+			{
+				return tamañobotón;
+			}
+			set
+			{
+				tamañobotón = value;
+				OnRedimensionar ();
+			}
+		}
 
-		public Point Posición { get; set; }
+		public MargenType Márgenes
+		{
+			get
+			{
+				return márgenes;
+			}
+			set
+			{
+				márgenes = value;
+				OnRedimensionar ();
+			}
+		}
 
-		public TipoOrdenEnum TipoOrden { get; set; }
+		public int Columnas
+		{
+			get
+			{
+				return columnas;
+			}
+			set
+			{
+				columnas = value;
+				OnRedimensionar ();
+			}
+		}
+
+		public int Filas
+		{
+			get
+			{
+				return filas;
+			}
+			set
+			{
+				filas = value;
+				OnRedimensionar ();
+			}
+		}
 
 		public Botón Add ()
 		{
-			Rectangle bounds;
-			var bb = GetBounds (); // Coda del contenedor
-			Point locGrid;
-			int orden = Count;
-			locGrid = TipoOrden == TipoOrdenEnum.ColumnaPrimero ? 
-				new Point (orden / Filas, orden % Filas) : 
-				new Point (orden / Columnas, orden % Columnas);
-			bounds = new Rectangle (bb.Left + Márgenes.Left + TamañoBotón.X * locGrid.X,
-			                        bb.Top + Márgenes.Top + TamañoBotón.Y * locGrid.Y,
-			                        TamañoBotón.X, TamañoBotón.Y);
-			var ret = new Botón (Game, bounds);
+			var ret = new Botón (Game, CalcularPosición (Count));
 			controles.Add (ret);
 			ret.Include ();
 			return ret;
+		}
+
+		protected void OnRedimensionar ()
+		{
+			for (int i = 0; i < Count; i++)
+			{
+				var bot = BotónEnÍndice (i);
+				bot.Bounds = CalcularPosición (i);
+			}
 		}
 
 		public void Remove (Botón control)
@@ -125,5 +187,26 @@ namespace KarTac.Cliente.Controls
 				                      Márgenes.Left + Márgenes.Right + Columnas * TamañoBotón.X,
 				                      Márgenes.Top + Márgenes.Bot + Filas * TamañoBotón.Y));
 		}
+
+		public Botón BotónEnÍndice (int index)
+		{
+			return controles [index];
+		}
+
+		protected Rectangle CalcularPosición (int index)
+		{
+			Rectangle bounds;
+			var bb = GetBounds (); // Coda del contenedor
+			Point locGrid;
+			int orden = index;
+			locGrid = TipoOrden == TipoOrdenEnum.ColumnaPrimero ? 
+				new Point (orden / Filas, orden % Filas) : 
+				new Point (orden / Columnas, orden % Columnas);
+			bounds = new Rectangle (bb.Left + Márgenes.Left + TamañoBotón.X * locGrid.X,
+			                        bb.Top + Márgenes.Top + TamañoBotón.Y * locGrid.Y,
+			                        TamañoBotón.X, TamañoBotón.Y);
+			return bounds;
+		}
 	}
+
 }

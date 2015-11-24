@@ -77,7 +77,11 @@ namespace KarTac.Cliente
 			listaSkills.Include ();
 
 			listaSkills.BotónEnÍndice (0).AlClick += Exit;
-			listaSkills.BotónEnÍndice (1).AlClick += () => listaSkills.Filas = 2;
+			listaSkills.BotónEnÍndice (1).AlClick += () => listaSkills.Filas = (listaSkills.Filas % 2) + 1;
+			listaSkills.BotónEnÍndice (2).AlClick += 
+				() => listaSkills.TipoOrden = listaSkills.TipoOrden == ContenedorBotón.TipoOrdenEnum.ColumnaPrimero ? 
+				ContenedorBotón.TipoOrdenEnum.FilaPrimero : 
+				ContenedorBotón.TipoOrdenEnum.ColumnaPrimero;
 
 			base.Initialize ();
 		}
