@@ -13,6 +13,7 @@ namespace KarTac.Cliente.Controls
 			: base (juego)
 		{
 			Tamaño = new Point (15, 15);
+			Prioridad = 1000;
 		}
 
 		public Texture2D Textura { get; protected set; }

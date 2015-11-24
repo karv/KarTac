@@ -53,6 +53,7 @@
     <Compile Include="Controls\SBC.cs" />
     <Compile Include="Controls\Botón.cs" />
     <Compile Include="Controls\Ratón.cs" />
+    <Compile Include="Controls\ListaControl.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

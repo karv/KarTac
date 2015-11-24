@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using KarTac.Cliente.Controls;
 using KarTac;
 using MonoGame.Extended.BitmapFonts;
-using OpenTK;
 
 namespace KarTac.Cliente
 {
@@ -16,7 +15,7 @@ namespace KarTac.Cliente
 	{
 		Ratón mouse;
 
-		public List<IControl> Controles { get; }
+		public ListaControl Controles { get; }
 
 		readonly GraphicsDeviceManager graphics;
 
@@ -26,7 +25,7 @@ namespace KarTac.Cliente
 
 		public KarTacGame ()
 		{
-			Controles = new List<IControl> ();
+			Controles = new ListaControl ();
 			graphics = new GraphicsDeviceManager (this);
 			Content.RootDirectory = "Content";
 			graphics.IsFullScreen = true;

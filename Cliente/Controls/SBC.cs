@@ -13,8 +13,9 @@ namespace KarTac.Cliente.Controls
 		protected SBC (KarTacGame juego)
 		{
 			GameBase = juego;
-
 		}
+
+		public int Prioridad { get; set; }
 
 		public virtual void Include ()
 		{

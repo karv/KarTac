@@ -16,5 +16,6 @@ namespace KarTac.Cliente.Controls
 
 		void Exclude ();
 
+		int Prioridad { get; }
 	}
 }
