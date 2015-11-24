@@ -20,8 +20,7 @@ namespace KarTac.Cliente.Controls
 
 		public override void LoadContent ()
 		{
-			Textura = GameBase.Content.Load<Texture2D> ("Unidad"); //TODO "Unidad" = temporal
+			Textura = GameBase.Content.Load<Texture2D> ("Rect"); //TODO "Unidad" = temporal
 		}
 	}
 }
-

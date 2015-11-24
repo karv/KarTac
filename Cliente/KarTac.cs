@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using KarTac.Cliente.Controls;
 using KarTac;
 using MonoGame.Extended.BitmapFonts;
+using OpenTK;
 
 namespace KarTac.Cliente
 {
@@ -27,6 +28,7 @@ namespace KarTac.Cliente
 			graphics = new GraphicsDeviceManager (this);
 			Content.RootDirectory = "Content";
 			graphics.IsFullScreen = true;
+			IsMouseVisible = true;
 		}
 
 		public KeyboardState LastKeyboardState { get; protected set; }
@@ -52,7 +54,16 @@ namespace KarTac.Cliente
 			unidad.Equipo = new KarTac.Batalla.Equipo (1, Color.Red);
 			unidSpr.Include ();
 
-			new Botón (this, new Rectangle (200, 200, 300, 300)).Include ();
+			var bt = new Botón (this, new Rectangle (200, 200, 300, 300));
+			bt.Include ();
+
+			bt.AlClick += delegate()
+			{
+				foreach (var u in Unidades)
+				{
+					u.UnidadBase.PersonajeBase.Nombre = "Noname0525";
+				}
+			};
 
 
 			base.Initialize ();
