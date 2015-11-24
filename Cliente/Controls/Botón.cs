@@ -13,7 +13,7 @@ namespace KarTac.Cliente.Controls
 
 		public Texture2D Textura { get; set; }
 
-		public override void Dibujar ()
+		public override void Dibujar (GameTime gameTime)
 		{
 			GameBase.Batch.Draw (Textura, Bounds, Color.Gray);
 		}

@@ -103,7 +103,7 @@ namespace KarTac.Cliente.Controls
 			font = content.Load<BitmapFont> (@"UnitNameFont");
 		}
 
-		public override void Dibujar ()
+		public override void Dibujar (GameTime gameTime)
 		{
 			var bat = GameBase.Batch;
 			bat.Draw (texturaClase, area, Color.Black);  // Icono
@@ -134,6 +134,13 @@ namespace KarTac.Cliente.Controls
 		{
 			base.Exclude ();
 			GameBase.Unidades.Remove (this);
+		}
+
+		public override void Update (GameTime gameTime)
+		{
+			base.Update (gameTime);
+			var delta = gameTime.ElapsedGameTime;
+			UnidadBase.PersonajeBase.Atributos.HP.Valor -= (int)(delta.TotalSeconds * 100);
 		}
 	}
 }

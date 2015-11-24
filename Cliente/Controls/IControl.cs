@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
 namespace KarTac.Cliente.Controls
 {
@@ -8,11 +6,11 @@ namespace KarTac.Cliente.Controls
 	{
 		KarTacGame Game { get; }
 
-		void Dibujar ();
+		void Dibujar (GameTime gameTime);
 
 		void LoadContent ();
 
-		void Update ();
+		void Update (GameTime gameTime);
 
 		void Include ();
 

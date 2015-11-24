@@ -44,14 +44,14 @@ namespace KarTac.Cliente.Controls
 		/// <summary>
 		/// Dibuja el control
 		/// </summary>
-		public abstract void Dibujar ();
+		public abstract void Dibujar (GameTime gameTime);
 
 		/// <summary>
 		/// Loads the content.
 		/// </summary>
 		public abstract void LoadContent ();
 
-		public virtual void Update ()
+		public virtual void Update (GameTime gameTime)
 		{
 			CheckMouseState ();
 		}

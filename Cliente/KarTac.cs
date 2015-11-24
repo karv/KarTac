@@ -99,7 +99,7 @@ namespace KarTac.Cliente
 			var delta = gameTime.ElapsedGameTime;
 			foreach (var x in Controles)
 			{
-				x.Update ();
+				x.Update (gameTime);
 				/* var oldPos = x.UnidadBase.Pos;
 				x.UnidadBase.Pos = new Point (oldPos.X, oldPos.Y + (int)(delta.TotalSeconds * 100));
 				x.UnidadBase.PersonajeBase.Atributos.HP.Valor -= (int)(delta.TotalSeconds * 100); */
@@ -123,7 +123,7 @@ namespace KarTac.Cliente
 			Batch.Begin ();
 			foreach (var x in Controles)
 			{
-				x.Dibujar ();
+				x.Dibujar (gameTime);
 			}
 			Batch.End ();
 		}
