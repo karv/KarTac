@@ -2,13 +2,13 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using MonoGame.Extended.BitmapFonts;
-using System.Reflection;
 
 namespace KarTac.Cliente.Controls
 {
-	public class Unidad
+	public class Unidad: SBC
 	{
-		public Unidad (KarTac.Batalla.Unidad unid)
+		public Unidad (KarTacGame juego, KarTac.Batalla.Unidad unid)
+			: base (juego)
 		{
 			UnidadBase = unid;
 		}
@@ -95,15 +95,17 @@ namespace KarTac.Cliente.Controls
 			}
 		}
 
-		public void LoadContent (ContentManager content)
+		public override void LoadContent ()
 		{
+			var content = GameBase.Content;
 			texturaClase = content.Load<Texture2D> ("Unidad");
 			texturaRect = content.Load<Texture2D> ("Rect");
 			font = content.Load<BitmapFont> (@"UnitNameFont");
 		}
 
-		public void Dibujar (SpriteBatch bat)
+		public override void Dibujar ()
 		{
+			var bat = GameBase.Batch;
 			bat.Draw (texturaClase, area, Color.Black);  // Icono
 			bat.Draw (texturaRect, flagRect, FlagColor);    // Bandera
 			bat.Draw (texturaRect, hpBar, Color.White);     // HP background
@@ -122,5 +124,16 @@ namespace KarTac.Cliente.Controls
 			//font.GetStringRectangle ("Huehue", Vector2.Zero);
 		}
 
+		public override void Include ()
+		{
+			base.Include ();
+			GameBase.Unidades.Add (this);
+		}
+
+		public override void Exclude ()
+		{
+			base.Exclude ();
+			GameBase.Unidades.Remove (this);
+		}
 	}
 }

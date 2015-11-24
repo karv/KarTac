@@ -49,6 +49,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="KarTac.cs" />
     <Compile Include="Controls\Unidad.cs" />
+    <Compile Include="Controls\IControl.cs" />
+    <Compile Include="Controls\SBC.cs" />
+    <Compile Include="Controls\Botón.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
