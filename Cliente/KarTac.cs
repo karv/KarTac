@@ -15,7 +15,7 @@ namespace KarTac.Cliente
 	public class KarTacGame : Game
 	,IScreen // Para poder tener controles globales (cursor)
 	{
-		Ratón mouse;
+		readonly Ratón mouse;
 
 		public ListaControl ControlesUniversales { get; }
 
@@ -69,6 +69,9 @@ namespace KarTac.Cliente
 
 			var bt = new Botón (BattleScreen, new Rectangle (200, 200, 300, 300));
 			bt.Include ();
+
+			var menu = new BottomMenu (BattleScreen);
+			menu.Include ();
 
 			bt.AlClick += delegate
 			{
@@ -173,6 +176,8 @@ namespace KarTac.Cliente
 			{
 				x.Dibujar (gameTime);
 			}
+
+			mouse.Dibujar (gameTime);
 			Batch.End ();
 		}
 

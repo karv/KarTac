@@ -57,6 +57,7 @@
     <Compile Include="Controls\IContenedor.cs" />
     <Compile Include="Controls\ContenedorBotón.cs" />
     <Compile Include="Controls\Screens\Screen.cs" />
+    <Compile Include="Controls\BottomMenu.cs" />
     <Compile Include="Controls\Screens\IScreen.cs" />
   </ItemGroup>
   <ItemGroup>
