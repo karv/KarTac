@@ -52,6 +52,7 @@
     <Compile Include="Controls\IControl.cs" />
     <Compile Include="Controls\SBC.cs" />
     <Compile Include="Controls\Botón.cs" />
+    <Compile Include="Controls\Ratón.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

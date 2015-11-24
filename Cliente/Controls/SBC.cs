@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using System.Collections.Generic;
 
 namespace KarTac.Cliente.Controls
 {
@@ -56,7 +55,7 @@ namespace KarTac.Cliente.Controls
 			CheckMouseState ();
 		}
 
-		public Rectangle Bounds { get; protected set; }
+		public virtual Rectangle Bounds { get; protected set; }
 
 		/// <summary>
 		/// Se ejecuta cada llamada a game.Update 

@@ -14,6 +14,8 @@ namespace KarTac.Cliente
 	/// </summary>
 	public class KarTacGame : Game
 	{
+		Ratón mouse;
+
 		public List<IControl> Controles { get; }
 
 		readonly GraphicsDeviceManager graphics;
@@ -28,7 +30,8 @@ namespace KarTac.Cliente
 			graphics = new GraphicsDeviceManager (this);
 			Content.RootDirectory = "Content";
 			graphics.IsFullScreen = true;
-			IsMouseVisible = true;
+			mouse = new Ratón (this);
+			mouse.Include ();
 		}
 
 		public KeyboardState LastKeyboardState { get; protected set; }
