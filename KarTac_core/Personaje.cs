@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using KarTac.Skills;
 
 namespace KarTac
 {
@@ -19,7 +21,13 @@ namespace KarTac
 		public Personaje ()
 		{
 			Atributos = new AtributosPersonaje ();
+			Skills = new HashSet<ISkill> ();
+
+			// Agregar defaults
+			Skills.Add (new Golpe ());
 		}
+
+		public ICollection<ISkill> Skills { get; }
 
 		public event Action AlMorir
 		{
