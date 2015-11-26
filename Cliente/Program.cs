@@ -24,26 +24,4 @@ namespace KarTac.Cliente
 			RunGame ();
 		}
 	}
-
-	#if MONOMAC
-	class AppDelegate : NSApplicationDelegate
-	{
-		public override void FinishedLaunching (MonoMac.Foundation.NSObject notification)
-		{
-			AppDomain.CurrentDomain.AssemblyResolve += (object sender, ResolveEventArgs a) =>  {
-				if (a.Name.StartsWith("MonoMac")) {
-					return typeof(MonoMac.AppKit.AppKitFramework).Assembly;
-				}
-				return null;
-			};
-			Program.RunGame();
-		}
-
-		public override bool ApplicationShouldTerminateAfterLastWindowClosed (NSApplication sender)
-		{
-			return true;
-		}
-	}  
-	#endif
 }
-
