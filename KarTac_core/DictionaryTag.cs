@@ -2,14 +2,14 @@
 
 namespace KarTac
 {
-	public class DictionaryTag: Dictionary<IExperimentable, float>, ITagging
+	public class DictionaryTag: Dictionary<IExp, float>, ITagging
 	{
-		public float TagValue (IExperimentable tag)
+		public float TagValue (IExp tag)
 		{
 			return this [tag];
 		}
 
-		public IEnumerable<IExperimentable> Tags
+		public IEnumerable<IExp> Tags
 		{
 			get
 			{

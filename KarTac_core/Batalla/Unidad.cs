@@ -3,7 +3,7 @@
 
 namespace KarTac.Batalla
 {
-	public class Unidad : IObjetivo
+	public class Unidad : IObjetivo, IExp
 	{
 		public Point Pos { get; set; }
 
@@ -38,6 +38,26 @@ namespace KarTac.Batalla
 
 		public Equipo Equipo { get; set; }
 
+		/// <summary>
+		/// Mete la experiencia en su bolsa
+		/// </summary>
+		public void RecibirExp (float exp)
+		{
+			if (PuedeRecibirExp)
+			{
+				BolsaExp += exp;
+			}
+		}
+
+		/// <summary>
+		/// Convierte la bolsa de exp en experiencia real para sus IExp
+		/// </summary>
+		void commitExp ()
+		{
+			//TODO
+		}
+
+		public float BolsaExp { get; private set; }
 
 	}
 }
