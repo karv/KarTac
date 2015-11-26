@@ -11,6 +11,20 @@ namespace KarTac.Buff
 			Restante = TiempoInicial;
 		}
 
+		/// <summary>
+		/// Tags de experiencia, típicamente un DictionaryTag
+		/// </summary>
+		/// <value>The exp tags.</value>
+		protected abstract ITagging ExpTags { get; }
+
+		ITagging IBuff.ExpTags
+		{
+			get
+			{
+				return ExpTags;
+			}
+		}
+
 		public abstract string Nombre { get; }
 
 		public IObjetivo Portador { get; }

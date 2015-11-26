@@ -8,6 +8,11 @@ namespace KarTac.Skills
 {
 	public class Golpe:ISkill
 	{
+		public Golpe ()
+		{
+			ExpTags = new DictionaryTag ();
+		}
+
 		public string Nombre
 		{
 			get
@@ -15,6 +20,8 @@ namespace KarTac.Skills
 				return "Golpe";
 			}
 		}
+
+		public ITagging ExpTags { get; }
 
 		public string IconTextureName
 		{
@@ -48,5 +55,6 @@ namespace KarTac.Skills
 		{
 			return true; //Siempre me puedo golpear solo :3
 		}
+
 	}
 }

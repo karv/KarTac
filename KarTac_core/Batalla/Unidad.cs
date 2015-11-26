@@ -37,5 +37,7 @@ namespace KarTac.Batalla
 		}
 
 		public Equipo Equipo { get; set; }
+
+
 	}
 }

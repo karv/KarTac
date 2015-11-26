@@ -1,4 +1,6 @@
 ﻿using KarTac.Batalla;
+using System.Collections.Generic;
+using KarTac;
 
 
 namespace KarTac.Skills
@@ -17,5 +19,10 @@ namespace KarTac.Skills
 		bool Usable (Unidad usuario, Campo campo);
 
 		string IconTextureName { get; }
+
+		/// <summary>
+		/// Tags de experiencia
+		/// </summary>
+		ITagging ExpTags { get; }
 	}
 }
