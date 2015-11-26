@@ -64,6 +64,7 @@
     <Compile Include="Buff\BuffCronometrado.cs" />
     <Compile Include="ITagging.cs" />
     <Compile Include="DictionaryTag.cs" />
+    <Compile Include="IExperimentable.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

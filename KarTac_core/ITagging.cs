@@ -7,8 +7,8 @@ namespace KarTac
 	/// </summary>
 	public interface ITagging
 	{
-		IEnumerable<string> Tags { get; }
+		IEnumerable<IExperimentable> Tags { get; }
 
-		float TagValue (string tag);
+		float TagValue (IExperimentable tag);
 	}
 }
