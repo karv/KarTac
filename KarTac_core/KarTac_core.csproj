@@ -61,6 +61,7 @@
     <Compile Include="Batalla\Exp\TotalExp.cs" />
     <Compile Include="Buff\IBuff.cs" />
     <Compile Include="IObjetivo.cs" />
+    <Compile Include="Buff\BuffCronometrado.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
