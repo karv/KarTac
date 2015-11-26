@@ -111,11 +111,12 @@ namespace KarTac.Cliente
 			Batch = new SpriteBatch (GraphicsDevice);
 			//spriteBatch.DrawString(new SpriteFont)
 
-			Content.Load<Texture> ("Unidad");
-			Content.Load<BitmapFont> (@"Fonts/fonts");
-
-
 			foreach (var x in Screens)
+			{
+				x.LoadContent ();
+			}
+
+			foreach (var x in ControlesUniversales)
 			{
 				x.LoadContent ();
 			}
@@ -162,9 +163,13 @@ namespace KarTac.Cliente
 		
 			//base.Draw (gameTime);
 
+			foreach (var x in Screens)
+			{
+				x.Dibujar (gameTime);
+			}
 
 			Batch.Begin ();
-			foreach (var x in Screens)
+			foreach (var x in ControlesUniversales)
 			{
 				x.Dibujar (gameTime);
 			}
