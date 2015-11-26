@@ -81,7 +81,7 @@ namespace KarTac.Cliente
 				}
 			};
 
-			var listaSkills = new ContenedorBotón (this);
+			var listaSkills = new ContenedorBotón (CurrentScreen);
 			listaSkills.Posición = new Point (0, 0);
 			listaSkills.BgColor = Color.Yellow;
 			listaSkills.Filas = 1;

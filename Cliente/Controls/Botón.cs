@@ -23,7 +23,7 @@ namespace KarTac.Cliente.Controls
 
 		public Color Color { get; set; }
 
-		public string Textura { set; get; }
+		public string Textura { get; set; }
 
 		public override void Dibujar (GameTime gameTime)
 		{
@@ -33,7 +33,8 @@ namespace KarTac.Cliente.Controls
 		public override void LoadContent ()
 		{
 			Textura = Textura ?? "Rect";
-			TexturaInstancia = Screen.Content.Load<Texture2D> (Textura); //TODO "Unidad" = temporal
+			TexturaInstancia = Screen.Content.Load<Texture2D> (Textura);
 		}
+
 	}
 }
