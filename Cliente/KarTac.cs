@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using KarTac.Cliente.Controls;
 using KarTac;
 using MonoGame.Extended.BitmapFonts;
+using KarTac.Cliente.Controls.Screens;
+using System;
 
 namespace KarTac.Cliente
 {
@@ -12,10 +14,15 @@ namespace KarTac.Cliente
 	/// This is the main type for your game.
 	/// </summary>
 	public class KarTacGame : Game
+	,IScreen // Para poder tener controles globales (cursor)
 	{
 		Ratón mouse;
 
-		public ListaControl Controles { get; }
+		public ListaControl ControlesUniversales { get; }
+
+		public IScreen BattleScreen;
+
+		public List<IScreen> Screens { get; }
 
 		readonly GraphicsDeviceManager graphics;
 
@@ -25,12 +32,16 @@ namespace KarTac.Cliente
 
 		public KarTacGame ()
 		{
-			Controles = new ListaControl ();
+			ControlesUniversales = new ListaControl ();
+			Screens = new List<IScreen> ();
 			graphics = new GraphicsDeviceManager (this);
 			Content.RootDirectory = "Content";
 			graphics.IsFullScreen = true;
 			mouse = new Ratón (this);
 			mouse.Include ();
+
+			BattleScreen = new Screen (this);
+			Screens.Add (BattleScreen);
 		}
 
 		public KeyboardState LastKeyboardState { get; protected set; }
@@ -51,13 +62,13 @@ namespace KarTac.Cliente
 			unidad.Pos = new Point (100, 100);
 			unidad.PersonajeBase.Atributos.HP.Max = 100;
 			unidad.PersonajeBase.Atributos.HP.Valor = 80;
-			var unidSpr = new Unidad (this, unidad);
+			var unidSpr = new Unidad (BattleScreen, unidad);
 			//unidad.PersonajeBase.AlMorir += Exit;
 			unidad.PersonajeBase.Nombre = "Juanito";
 			unidad.Equipo = new KarTac.Batalla.Equipo (1, Color.Red);
 			unidSpr.Include ();
 
-			var bt = new Botón (this, new Rectangle (200, 200, 300, 300));
+			var bt = new Botón (BattleScreen, new Rectangle (200, 200, 300, 300));
 			bt.Include ();
 
 			bt.AlClick += delegate
@@ -101,11 +112,12 @@ namespace KarTac.Cliente
 			Batch = new SpriteBatch (GraphicsDevice);
 			//spriteBatch.DrawString(new SpriteFont)
 
-			Content.Load<Texture> ("Unidad");
-			Content.Load<BitmapFont> (@"Fonts/fonts");
+			foreach (var x in Screens)
+			{
+				x.LoadContent ();
+			}
 
-
-			foreach (var x in Controles)
+			foreach (var x in ControlesUniversales)
 			{
 				x.LoadContent ();
 			}
@@ -130,7 +142,7 @@ namespace KarTac.Cliente
 
 			base.Update (gameTime);
 			var delta = gameTime.ElapsedGameTime;
-			foreach (var x in Controles)
+			foreach (var x in Screens)
 			{
 				x.Update (gameTime);
 				/* var oldPos = x.UnidadBase.Pos;
@@ -152,13 +164,58 @@ namespace KarTac.Cliente
 		
 			//base.Draw (gameTime);
 
+			foreach (var x in Screens)
+			{
+				x.Dibujar (gameTime);
+			}
 
 			Batch.Begin ();
-			foreach (var x in Controles)
+			foreach (var x in ControlesUniversales)
 			{
 				x.Dibujar (gameTime);
 			}
 			Batch.End ();
 		}
+
+		#region IScreen
+
+		void IScreen.Dibujar (GameTime gameTime)
+		{
+			Draw (gameTime);
+		}
+
+		ListaControl IScreen.Controles
+		{
+			get
+			{
+				return ControlesUniversales;
+			}
+		}
+
+		/// <summary>
+		/// Carga contenido de controles universales
+		/// </summary>
+		void IScreen.LoadContent ()
+		{
+			foreach (var cu in ControlesUniversales)
+			{
+				cu.LoadContent ();
+			}
+		}
+
+		void IScreen.Update (GameTime gametime)
+		{
+			foreach (var cu in ControlesUniversales)
+			{
+				cu.Update (gametime);
+			}
+		}
+
+		void IScreen.UnloadContent ()
+		{
+			throw new NotImplementedException ();
+		}
+
+		#endregion
 	}
 } 

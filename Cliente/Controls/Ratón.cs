@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using KarTac.Cliente.Controls.Screens;
 
 namespace KarTac.Cliente.Controls
 {
@@ -9,8 +10,15 @@ namespace KarTac.Cliente.Controls
 	/// </summary>
 	public class Ratón : SBC
 	{
-		public Ratón (KarTacGame juego)
-			: base (juego)
+		public Ratón (IScreen screen)
+			: base (screen)
+		{
+			Tamaño = new Point (15, 15);
+			Prioridad = 1000;
+		}
+
+		public Ratón ()
+			: base (null)
 		{
 			Tamaño = new Point (15, 15);
 			Prioridad = 1000;
@@ -41,12 +49,12 @@ namespace KarTac.Cliente.Controls
 
 		public override void LoadContent ()
 		{
-			Textura = GameBase.Content.Load<Texture2D> ("Rect");
+			Textura = Screen.Content.Load<Texture2D> ("Rect");
 		}
 
 		public override void Dibujar (GameTime gameTime)
 		{
-			GameBase.Batch.Draw (Textura, GetBounds (), Color.White);
+			Screen.Batch.Draw (Textura, GetBounds (), Color.White);
 		}
 	}
 }

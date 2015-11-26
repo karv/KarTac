@@ -1,12 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using KarTac.Cliente.Controls.Screens;
 
 namespace KarTac.Cliente.Controls
 {
 	public class Botón : SBC
 	{
-		public Botón (KarTacGame game, Rectangle bounds)
-			: base (game)
+		public Botón (IScreen screen, Rectangle bounds)
+			: base (screen)
 		{
 			Bounds = bounds;
 		}
@@ -26,13 +27,13 @@ namespace KarTac.Cliente.Controls
 
 		public override void Dibujar (GameTime gameTime)
 		{
-			GameBase.Batch.Draw (TexturaInstancia, Bounds, Color);
+			Screen.Batch.Draw (TexturaInstancia, Bounds, Color);
 		}
 
 		public override void LoadContent ()
 		{
 			Textura = Textura ?? "Rect";
-			TexturaInstancia = GameBase.Content.Load<Texture2D> (Textura); //TODO "Unidad" = temporal
+			TexturaInstancia = Screen.Content.Load<Texture2D> (Textura); //TODO "Unidad" = temporal
 		}
 	}
 }
