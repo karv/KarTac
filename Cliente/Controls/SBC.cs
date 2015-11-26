@@ -75,8 +75,6 @@ namespace KarTac.Cliente.Controls
 			}
 		}
 
-
-
 		public event Action<MouseState> AlPresionalMouse;
 		public event Action AlClick;
 	}

@@ -48,6 +48,11 @@ namespace KarTac.Cliente.Controls.Screens
 			}
 		}
 
+		public SpriteBatch GetNewBatch ()
+		{
+			return Game.GetNewBatch ();
+		}
+
 		public void Update (GameTime gameTime)
 		{
 			foreach (var x in Controles)

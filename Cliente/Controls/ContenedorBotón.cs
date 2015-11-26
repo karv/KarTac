@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using KarTac.Cliente.Controls.Screens;
 
 namespace KarTac.Cliente.Controls
 {
@@ -20,8 +21,8 @@ namespace KarTac.Cliente.Controls
 			public int Right;
 		}
 
-		public ContenedorBotón (KarTacGame juego)
-			: base (juego)
+		public ContenedorBotón (IScreen screen)
+			: base (screen)
 		{
 			Prioridad = -5;
 			controles = new List<Botón> (Filas * Columnas);

@@ -19,7 +19,7 @@ namespace KarTac.Cliente
 
 		public ListaControl ControlesUniversales { get; }
 
-		public IScreen BattleScreen;
+		public IScreen CurrentScreen;
 
 		public List<IScreen> Screens { get; }
 
@@ -39,8 +39,8 @@ namespace KarTac.Cliente
 			mouse = new Ratón (this);
 			mouse.Include ();
 
-			BattleScreen = new Screen (this);
-			Screens.Add (BattleScreen);
+			CurrentScreen = new BattleScreen (this);
+			Screens.Add (CurrentScreen);
 		}
 
 		public KeyboardState LastKeyboardState { get; protected set; }
@@ -55,33 +55,26 @@ namespace KarTac.Cliente
 		/// </summary>
 		protected override void Initialize ()
 		{
+			var sc = CurrentScreen as BattleScreen;
 			var pj = new Personaje ();
 			var c = new KarTac.Batalla.Campo ();
 			var unidad = new KarTac.Batalla.Unidad (pj, c);
 			unidad.Pos = new Point (100, 100);
 			unidad.PersonajeBase.Atributos.HP.Max = 100;
 			unidad.PersonajeBase.Atributos.HP.Valor = 80;
-			var unidSpr = new Unidad (BattleScreen, unidad);
+			var unidSpr = new Unidad (CurrentScreen, unidad);
 			//unidad.PersonajeBase.AlMorir += Exit;
 			unidad.PersonajeBase.Nombre = "Juanito";
 			unidad.Equipo = new KarTac.Batalla.Equipo (1, Color.Red);
 			unidSpr.Include ();
+			sc.UnidadActual = unidad;
 
-			var bt = new Botón (BattleScreen, new Rectangle (200, 200, 300, 300));
-			bt.Include ();
-
-			var menu = new BottomMenu (BattleScreen);
-			menu.Include ();
-
-			bt.AlClick += delegate
+			unidSpr.AlClick += delegate
 			{
-				foreach (var u in Unidades)
-				{
-					u.UnidadBase.PersonajeBase.Nombre = "Noname0525";
-				}
+				unidad.PersonajeBase.Nombre = "Non";
 			};
 
-			var listaSkills = new ContenedorBotón (this);
+			var listaSkills = new ContenedorBotón (CurrentScreen);
 			listaSkills.Posición = new Point (0, 0);
 			listaSkills.BgColor = Color.Yellow;
 			listaSkills.Filas = 1;
@@ -94,7 +87,7 @@ namespace KarTac.Cliente
 			listaSkills.BotónEnÍndice (1).AlClick += delegate
 			{
 				listaSkills.Filas = (listaSkills.Filas % 2) + 1;
-				System.Console.WriteLine (listaSkills.Filas);
+				Console.WriteLine (listaSkills.Filas);
 			};
 			listaSkills.BotónEnÍndice (2).AlClick += 
 				() => listaSkills.TipoOrden = listaSkills.TipoOrden == ContenedorBotón.TipoOrdenEnum.ColumnaPrimero ? 
@@ -132,25 +125,14 @@ namespace KarTac.Cliente
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Update (GameTime gameTime)
 		{
-			// For Mobile devices, this logic will close the Game when the Back button is pressed
-			// Exit() is obsolete on iOS
-			#if !__IOS__
 			if (GamePad.GetState (PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
 			    Keyboard.GetState ().IsKeyDown (Keys.Escape))
 			{
 				Exit ();
 			}
-			#endif
 
 			base.Update (gameTime);
-			var delta = gameTime.ElapsedGameTime;
-			foreach (var x in Screens)
-			{
-				x.Update (gameTime);
-				/* var oldPos = x.UnidadBase.Pos;
-				x.UnidadBase.Pos = new Point (oldPos.X, oldPos.Y + (int)(delta.TotalSeconds * 100));
-				x.UnidadBase.PersonajeBase.Atributos.HP.Valor -= (int)(delta.TotalSeconds * 100); */
-			}
+			CurrentScreen.Update (gameTime);
 
 			LastKeyboardState = Keyboard.GetState ();
 			LastMouseState = Mouse.GetState ();
@@ -163,13 +145,7 @@ namespace KarTac.Cliente
 		protected override void Draw (GameTime gameTime)
 		{
 			graphics.GraphicsDevice.Clear (Color.Green);
-		
-			//base.Draw (gameTime);
-
-			foreach (var x in Screens)
-			{
-				x.Dibujar (gameTime);
-			}
+			CurrentScreen.Dibujar (gameTime);
 
 			Batch.Begin ();
 			foreach (var x in ControlesUniversales)
@@ -182,6 +158,11 @@ namespace KarTac.Cliente
 		}
 
 		#region IScreen
+
+		public SpriteBatch GetNewBatch ()
+		{
+			return new SpriteBatch (GraphicsDevice);
+		}
 
 		void IScreen.Dibujar (GameTime gameTime)
 		{

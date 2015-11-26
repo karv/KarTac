@@ -114,9 +114,9 @@ namespace KarTac.Cliente.Controls
 		{
 			var bat = Screen.Batch;
 			bat.Draw (texturaClase, área, Color.Black);  // Icono
-			bat.Draw (texturaRect, flagRect, FlagColor);    // Bandera
-			bat.Draw (texturaRect, hpBar, Color.White);     // HP background
-			bat.Draw (texturaRect, currHpBar, Color.Red);   // HP actual
+			bat.Draw (texturaRect, flagRect, FlagColor); // Bandera
+			bat.Draw (texturaRect, hpBar, Color.White);  // HP background
+			bat.Draw (texturaRect, currHpBar, Color.Red);// HP actual
 
 			// Nombre
 			var nombre = UnidadBase.PersonajeBase.Nombre;
@@ -129,18 +129,6 @@ namespace KarTac.Cliente.Controls
 			                new Vector2 (área.Center.X - hSize / 2, área.Top - ySize - 2),
 			                Color.White);
 			//font.GetStringRectangle ("Huehue", Vector2.Zero);
-		}
-
-		public override void Include ()
-		{
-			base.Include ();
-			//GameBase.Unidades.Add (this);
-		}
-
-		public override void Exclude ()
-		{
-			base.Exclude ();
-			//GameBase.Unidades.Remove (this);
 		}
 
 		public override void Update (GameTime gameTime)
