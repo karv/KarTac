@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using KarTac.Recursos;
+using NUnit.Framework;
 
 namespace KarTac
 {
@@ -18,11 +19,11 @@ namespace KarTac
 		/// Lista de recursos
 		/// </summary>
 		/// <value>The recursos.</value>
-		SortedSet<IRecurso> Recs { get; }
+		public List<IRecurso> Recs { get; }
 
 		public AtributosPersonaje ()
 		{
-			Recs = new SortedSet<IRecurso> ();
+			Recs = new List<IRecurso> ();
 			HP = new HP ();
 		}
 	}

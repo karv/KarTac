@@ -23,5 +23,7 @@ namespace KarTac.Buff
 		/// Si es visible este Buff
 		/// </summary>
 		bool Visible { get; }
+
+		ITagging ExpTags { get; }
 	}
 }

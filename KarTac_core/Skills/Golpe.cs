@@ -6,8 +6,15 @@ using System;
 
 namespace KarTac.Skills
 {
-	public class Golpe:ISkill
+	public class Golpe : ISkill
 	{
+		public Golpe ()
+		{
+			ExpTags = new DictionaryTag ();
+		}
+
+		public double TotalExp { get; private set; }
+
 		public string Nombre
 		{
 			get
@@ -16,6 +23,8 @@ namespace KarTac.Skills
 			}
 		}
 
+		public ITagging ExpTags { get; }
+
 		public string IconTextureName
 		{
 			get
@@ -23,6 +32,8 @@ namespace KarTac.Skills
 				return @"Icons/Skills/Golpe";
 			}
 		}
+
+		public double PeticiónExpAcumulada { get; private set; }
 
 		public void Ejecutar (Unidad usuario, Campo campo)
 		{
@@ -42,11 +53,19 @@ namespace KarTac.Skills
 			var daño = dañoBloqueado * 2;
 
 			selección.PersonajeBase.Atributos.HP.Valor -= daño;
+
+			PeticiónExpAcumulada += 1;
 		}
 
 		public bool Usable (Unidad usuario, Campo campo)
 		{
 			return true; //Siempre me puedo golpear solo :3
+		}
+
+		public void RecibirExp (double exp)
+		{
+			TotalExp += exp;
+			PeticiónExpAcumulada = 0;
 		}
 	}
 }
