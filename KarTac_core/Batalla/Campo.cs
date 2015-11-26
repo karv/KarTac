@@ -32,6 +32,10 @@ namespace KarTac.Batalla
 		public void Tick (TimeSpan delta)
 		{
 			RecibirExp (delta);
+			foreach (var x in Unidades)
+			{
+				x.AcumularPetición (delta);
+			}
 		}
 
 		/// <summary>

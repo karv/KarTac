@@ -1,8 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
-using NUnit.Framework;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using KarTac.Recursos;
+using System;
 
 
 namespace KarTac.Batalla
@@ -11,11 +10,14 @@ namespace KarTac.Batalla
 	{
 		public Point Pos { get; set; }
 
+		public Campo CampoBatalla { get; }
+
 		public Personaje PersonajeBase { get; }
 
-		public Unidad (Personaje personaje)
+		public Unidad (Personaje personaje, Campo campo)
 		{
 			PersonajeBase = personaje;
+			CampoBatalla = campo;
 		}
 
 		/// <summary>
@@ -92,13 +94,13 @@ namespace KarTac.Batalla
 			}
 		}
 
-		void AcumularPetición (GameTime time, Campo campo)
+		public void AcumularPetición (TimeSpan time)
 		{
 			foreach (var x in PersonajeBase.Atributos.Recs)
 			{
-				x.PedirExp (time, campo);
+				x.PedirExp (time, CampoBatalla);
 			}
-			(PersonajeBase.Atributos.HP as IRecurso).PedirExp (time, campo);
+			(PersonajeBase.Atributos.HP as IRecurso).PedirExp (time, CampoBatalla);
 		}
 
 		/// <summary>

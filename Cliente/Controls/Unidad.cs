@@ -147,6 +147,7 @@ namespace KarTac.Cliente.Controls
 			base.Update (gameTime);
 			var delta = gameTime.ElapsedGameTime;
 			UnidadBase.PersonajeBase.Atributos.HP.Valor -= (int)(delta.TotalSeconds * 100);
+			//UnidadBase.AcumularPetición (gameTime);
 		}
 	}
 }

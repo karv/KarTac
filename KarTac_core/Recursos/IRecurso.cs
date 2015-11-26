@@ -25,7 +25,7 @@ namespace KarTac.Recursos
 		/// Se ejecuta junto con Update,
 		/// Debe usarse para actualizar la experiencia pedida
 		/// </summary>
-		void PedirExp (GameTime time, Campo campo);
+		void PedirExp (TimeSpan time, Campo campo);
 
 		/// <summary>
 		/// Ocurre cuando cambia el valor actual

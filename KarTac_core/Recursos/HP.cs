@@ -64,11 +64,11 @@ namespace KarTac.Recursos
 
 		public double PeticiónExpAcumulada { get; private set; }
 
-		void IRecurso.PedirExp (GameTime time, Campo campo)
+		void IRecurso.PedirExp (TimeSpan time, Campo campo)
 		{
 			var pct = Valor / Max;
 
-			PeticiónExpAcumulada += (1 - pct) * time.ElapsedGameTime.Minutes;
+			PeticiónExpAcumulada += (1 - pct) * time.Minutes;
 		}
 
 		/// <summary>

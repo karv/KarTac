@@ -46,7 +46,8 @@ namespace KarTac.Cliente
 		protected override void Initialize ()
 		{
 			var pj = new Personaje ();
-			var unidad = new KarTac.Batalla.Unidad (pj);
+			var c = new KarTac.Batalla.Campo ();
+			var unidad = new KarTac.Batalla.Unidad (pj, c);
 			unidad.Pos = new Point (100, 100);
 			unidad.PersonajeBase.Atributos.HP.Max = 100;
 			unidad.PersonajeBase.Atributos.HP.Valor = 80;
