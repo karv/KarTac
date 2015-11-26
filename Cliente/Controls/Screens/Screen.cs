@@ -14,6 +14,7 @@ namespace KarTac.Cliente.Controls.Screens
 		public ListaControl Controles { get; }
 
 		public Screen (KarTacGame game)
+			: this ()
 		{
 			Game = game;
 		}
