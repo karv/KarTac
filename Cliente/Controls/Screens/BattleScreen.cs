@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -7,9 +6,13 @@ namespace KarTac.Cliente.Controls.Screens
 	{
 		public List<Unidad> Unidades { get; }
 
+		public BottomMenu Menú { get; }
+
 		public BattleScreen (KarTacGame juego)
 			: base (juego)
 		{
+			Menú = new BottomMenu (this);
+			Menú.Include ();
 		}
 
 		/// <summary>
