@@ -25,4 +25,3 @@ namespace KarTac.Recursos
 		event Action AlCambiarValor;
 	}
 }
-
