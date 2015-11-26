@@ -32,6 +32,7 @@ namespace KarTac.Cliente
 
 		public KarTacGame ()
 		{
+			ControlesUniversales = new ListaControl ();
 			Screens = new List<IScreen> ();
 			graphics = new GraphicsDeviceManager (this);
 			Content.RootDirectory = "Content";
@@ -181,7 +182,7 @@ namespace KarTac.Cliente
 		{
 			get
 			{
-				throw new System.NotImplementedException ();
+				return ControlesUniversales;
 			}
 		}
 
