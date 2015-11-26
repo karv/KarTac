@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using KarTac.Cliente.Controls;
 using KarTac;
-using MonoGame.Extended.BitmapFonts;
 using KarTac.Cliente.Controls.Screens;
 using System;
 
@@ -214,6 +213,14 @@ namespace KarTac.Cliente
 		void IScreen.UnloadContent ()
 		{
 			throw new NotImplementedException ();
+		}
+
+		public DisplayMode GetDisplayMode
+		{
+			get
+			{
+				return GraphicsDevice.Adapter.CurrentDisplayMode;
+			}
 		}
 
 		#endregion
