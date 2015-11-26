@@ -5,7 +5,7 @@ namespace KarTac
 	/// <summary>
 	/// Un objeto que puede recibir experiencia
 	/// </summary>
-	public interface IExperimentable
+	public interface IExp
 	{
 		void RecibirExp (float exp);
 	}

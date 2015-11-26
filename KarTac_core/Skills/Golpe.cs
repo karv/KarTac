@@ -6,12 +6,14 @@ using System;
 
 namespace KarTac.Skills
 {
-	public class Golpe:ISkill
+	public class Golpe : ISkill
 	{
 		public Golpe ()
 		{
 			ExpTags = new DictionaryTag ();
 		}
+
+		public float TotalExp { get; private set; }
 
 		public string Nombre
 		{
@@ -56,5 +58,9 @@ namespace KarTac.Skills
 			return true; //Siempre me puedo golpear solo :3
 		}
 
+		public void RecibirExp (float exp)
+		{
+			TotalExp += exp;
+		}
 	}
 }

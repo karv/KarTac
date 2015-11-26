@@ -1,11 +1,10 @@
 ﻿using KarTac.Batalla;
-using System.Collections.Generic;
 using KarTac;
 
 
 namespace KarTac.Skills
 {
-	public interface ISkill
+	public interface ISkill: IExp
 	{
 		string Nombre { get; }
 
