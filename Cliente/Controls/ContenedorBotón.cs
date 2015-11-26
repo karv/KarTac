@@ -196,7 +196,7 @@ namespace KarTac.Cliente.Controls
 		protected Rectangle CalcularPosición (int index)
 		{
 			Rectangle bounds;
-			var bb = GetBounds (); // Coda del contenedor
+			var bb = GetBounds (); // Cota del contenedor
 			Point locGrid;
 			int orden = index;
 			locGrid = TipoOrden == TipoOrdenEnum.ColumnaPrimero ? 
