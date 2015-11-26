@@ -59,6 +59,9 @@
     <Compile Include="Batalla\Shape\IShape.cs" />
     <Compile Include="Batalla\Shape\Círculo.cs" />
     <Compile Include="Batalla\Exp\TotalExp.cs" />
+    <Compile Include="Buff\IBuff.cs" />
+    <Compile Include="IObjetivo.cs" />
+    <Compile Include="Buff\BuffCronometrado.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
@@ -80,6 +83,7 @@
     <Folder Include="Skills\" />
     <Folder Include="Batalla\Shape\" />
     <Folder Include="Batalla\Exp\" />
+    <Folder Include="Buff\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OpenTK.dll.config" />

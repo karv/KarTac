@@ -3,7 +3,7 @@
 
 namespace KarTac.Batalla
 {
-	public class Unidad
+	public class Unidad : IObjetivo
 	{
 		public Point Pos { get; set; }
 
