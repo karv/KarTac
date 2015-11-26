@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace KarTac
+﻿namespace KarTac
 {
 	/// <summary>
 	/// Un objeto que puede recibir experiencia

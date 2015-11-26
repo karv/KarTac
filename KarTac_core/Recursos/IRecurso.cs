@@ -2,7 +2,7 @@
 
 namespace KarTac.Recursos
 {
-	public interface IRecurso
+	public interface IRecurso : IExp
 	{
 		/// <summary>
 		/// Nombre del recurso

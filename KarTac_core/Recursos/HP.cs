@@ -54,6 +54,11 @@ namespace KarTac.Recursos
 			}
 		}
 
+		public void RecibirExp (float exp)
+		{
+			Max += exp; //TODO Aquí no creo que termine siendo así de simple.
+		}
+
 		/// <summary>
 		/// Ocurre cuando HP no es positivo
 		/// </summary>
