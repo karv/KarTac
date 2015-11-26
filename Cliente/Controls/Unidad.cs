@@ -3,13 +3,14 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using MonoGame.Extended.BitmapFonts;
 using System;
+using KarTac.Cliente.Controls.Screens;
 
 namespace KarTac.Cliente.Controls
 {
 	public class Unidad: SBC
 	{
-		public Unidad (KarTacGame juego, KarTac.Batalla.Unidad unid)
-			: base (juego)
+		public Unidad (IScreen screen, KarTac.Batalla.Unidad unid)
+			: base (screen)
 		{
 			UnidadBase = unid;
 		}
@@ -103,7 +104,7 @@ namespace KarTac.Cliente.Controls
 
 		public override void LoadContent ()
 		{
-			var content = GameBase.Content;
+			var content = Screen.Content;
 			texturaClase = content.Load<Texture2D> ("Unidad");
 			texturaRect = content.Load<Texture2D> ("Rect");
 			font = content.Load<BitmapFont> (@"UnitNameFont");
@@ -111,7 +112,7 @@ namespace KarTac.Cliente.Controls
 
 		public override void Dibujar (GameTime gameTime)
 		{
-			var bat = GameBase.Batch;
+			var bat = Screen.Batch;
 			bat.Draw (texturaClase, área, Color.Black);  // Icono
 			bat.Draw (texturaRect, flagRect, FlagColor);    // Bandera
 			bat.Draw (texturaRect, hpBar, Color.White);     // HP background
@@ -133,13 +134,13 @@ namespace KarTac.Cliente.Controls
 		public override void Include ()
 		{
 			base.Include ();
-			GameBase.Unidades.Add (this);
+			//GameBase.Unidades.Add (this);
 		}
 
 		public override void Exclude ()
 		{
 			base.Exclude ();
-			GameBase.Unidades.Remove (this);
+			//GameBase.Unidades.Remove (this);
 		}
 
 		public override void Update (GameTime gameTime)

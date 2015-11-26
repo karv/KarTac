@@ -1,21 +1,43 @@
-﻿using Microsoft.Xna.Framework;
+﻿using KarTac.Cliente.Controls.Screens;
+using Microsoft.Xna.Framework;
 
 namespace KarTac.Cliente.Controls
 {
 	public interface IControl
 	{
-		KarTacGame Game { get; }
+		IScreen Screen { get; }
 
-		void Dibujar (GameTime gameTime);
-
-		void LoadContent ();
-
-		void Update (GameTime gameTime);
-
+		/// <summary>
+		/// Incluir este control en su pantalla
+		/// </summary>
 		void Include ();
 
+		/// <summary>
+		/// Excluir este control de su pantalla
+		/// </summary>
 		void Exclude ();
 
+		/// <summary>
+		/// Prioridad de dibujo;
+		/// Mayor prioridad se dibuja en la cima
+		/// </summary>
 		int Prioridad { get; }
+
+		/// <summary>
+		/// Dibuja el control
+		/// </summary>
+		void Dibujar (GameTime gameTime);
+
+		/// <summary>
+		/// Ciclo de la lógica
+		/// </summary>
+		void Update (GameTime gameTime);
+
+		/// <summary>
+		/// Cargar contenido
+		/// </summary>
+		void LoadContent ();
+
+
 	}
 }

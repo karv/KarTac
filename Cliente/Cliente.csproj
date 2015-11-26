@@ -56,6 +56,8 @@
     <Compile Include="Controls\ListaControl.cs" />
     <Compile Include="Controls\IContenedor.cs" />
     <Compile Include="Controls\ContenedorBotón.cs" />
+    <Compile Include="Controls\Screens\Screen.cs" />
+    <Compile Include="Controls\Screens\IScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -79,6 +81,7 @@
     <Folder Include="Controls\" />
     <Folder Include="Content\" />
     <Folder Include="Content\bin\" />
+    <Folder Include="Controls\Screens\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\**\*.*">

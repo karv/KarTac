@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using KarTac.Cliente.Controls.Screens;
 
 namespace KarTac.Cliente.Controls
 {
@@ -9,37 +10,28 @@ namespace KarTac.Cliente.Controls
 	/// </summary>
 	public abstract class SBC : IControl
 	{
-		
-		protected SBC (KarTacGame juego)
+		public IScreen Screen { get; }
+
+		protected SBC (IScreen screen)
 		{
-			GameBase = juego;
+			Screen = screen;
 		}
 
 		public int Prioridad { get; set; }
 
 		public virtual void Include ()
 		{
-			GameBase.Controles.Add (this);
+			Screen.Controles.Add (this);
 		}
 
 		public virtual void Exclude ()
 		{
-			GameBase.Controles.Remove (this);
-		}
-
-		public KarTacGame Game
-		{
-			get
-			{
-				return GameBase;
-			}
+			Screen.Controles.Remove (this);
 		}
 
 		public virtual void Initialize ()
 		{
 		}
-
-		protected KarTacGame GameBase { get; }
 
 		/// <summary>
 		/// Dibuja el control
@@ -69,7 +61,7 @@ namespace KarTac.Cliente.Controls
 				if (state.LeftButton == ButtonState.Pressed)
 					AlPresionalMouse?.Invoke (state);
 
-				if (GameBase.LastMouseState.LeftButton == ButtonState.Released && state.LeftButton == ButtonState.Pressed)
+				if (Screen.LastMouseState.LeftButton == ButtonState.Released && state.LeftButton == ButtonState.Pressed)
 					AlClick?.Invoke ();
 			}
 		}
@@ -84,8 +76,8 @@ namespace KarTac.Cliente.Controls
 		}
 
 
+
 		public event Action<MouseState> AlPresionalMouse;
 		public event Action AlClick;
 	}
 }
-

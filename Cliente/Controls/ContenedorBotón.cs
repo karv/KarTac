@@ -119,7 +119,7 @@ namespace KarTac.Cliente.Controls
 
 		public Botón Add ()
 		{
-			var ret = new Botón (Game, CalcularPosición (Count));
+			var ret = new Botón (Screen, CalcularPosición (Count));
 			controles.Add (ret);
 			ret.Include ();
 			return ret;
@@ -172,12 +172,12 @@ namespace KarTac.Cliente.Controls
 
 		public override void Dibujar (GameTime gameTime)
 		{
-			Game.Batch.Draw (texturafondo, GetBounds (), BgColor);
+			Screen.Batch.Draw (texturafondo, GetBounds (), BgColor);
 		}
 
 		public override void LoadContent ()
 		{
-			texturafondo = Game.Content.Load<Texture2D> ("Rect");
+			texturafondo = Screen.Content.Load<Texture2D> ("Rect");
 		}
 
 		public override Rectangle GetBounds ()
@@ -208,5 +208,4 @@ namespace KarTac.Cliente.Controls
 			return bounds;
 		}
 	}
-
 }
