@@ -2,9 +2,9 @@
 
 namespace KarTac
 {
-	public class DictionaryTag: Dictionary<IExp, float>, ITagging
+	public class DictionaryTag: Dictionary<IExp, double>, ITagging
 	{
-		public float TagValue (IExp tag)
+		public double TagValue (IExp tag)
 		{
 			return this [tag];
 		}
