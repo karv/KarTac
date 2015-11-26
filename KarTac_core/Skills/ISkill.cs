@@ -15,5 +15,7 @@ namespace KarTac.Skills
 		/// <param name="campo">Campo.</param>
 		/// <param name="usuario">Usuario</param>
 		bool Usable (Unidad usuario, Campo campo);
+
+		string IconTextureName { get; }
 	}
 }

@@ -1,23 +1,41 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
+using KarTac.Cliente.Controls;
+using KarTac;
+using MonoGame.Extended.BitmapFonts;
 
-namespace Cliente
+namespace KarTac.Cliente
 {
 	/// <summary>
 	/// This is the main type for your game.
 	/// </summary>
 	public class KarTacGame : Game
 	{
+		Ratón mouse;
+
+		public ListaControl Controles { get; }
+
 		readonly GraphicsDeviceManager graphics;
-		SpriteBatch spriteBatch;
+
+		public SpriteBatch Batch { get; private set; }
+
+		public readonly List<Unidad> Unidades = new List<Unidad> ();
 
 		public KarTacGame ()
 		{
+			Controles = new ListaControl ();
 			graphics = new GraphicsDeviceManager (this);
-			Content.RootDirectory = "Content";	            
-			graphics.IsFullScreen = true;		
+			Content.RootDirectory = "Content";
+			graphics.IsFullScreen = true;
+			mouse = new Ratón (this);
+			mouse.Include ();
 		}
+
+		public KeyboardState LastKeyboardState { get; protected set; }
+
+		public MouseState LastMouseState { get; protected set; }
 
 		/// <summary>
 		/// Allows the game to perform any initialization it needs to before starting to run.
@@ -27,9 +45,49 @@ namespace Cliente
 		/// </summary>
 		protected override void Initialize ()
 		{
-			// TODO: Add your initialization logic here
+			var pj = new Personaje ();
+			var unidad = new KarTac.Batalla.Unidad (pj);
+			unidad.Pos = new Point (100, 100);
+			unidad.PersonajeBase.Atributos.HP.Max = 100;
+			unidad.PersonajeBase.Atributos.HP.Valor = 80;
+			var unidSpr = new Unidad (this, unidad);
+			//unidad.PersonajeBase.AlMorir += Exit;
+			unidad.PersonajeBase.Nombre = "Juanito";
+			unidad.Equipo = new KarTac.Batalla.Equipo (1, Color.Red);
+			unidSpr.Include ();
+
+			var bt = new Botón (this, new Rectangle (200, 200, 300, 300));
+			bt.Include ();
+
+			bt.AlClick += delegate
+			{
+				foreach (var u in Unidades)
+				{
+					u.UnidadBase.PersonajeBase.Nombre = "Noname0525";
+				}
+			};
+
+			var listaSkills = new ContenedorBotón (this);
+			listaSkills.Posición = new Point (0, 0);
+			listaSkills.BgColor = Color.Yellow;
+			listaSkills.Filas = 1;
+			listaSkills.Add ().Color = Color.Red;
+			listaSkills.Add ().Color = Color.Green;
+			listaSkills.Add ().Color = Color.Blue;
+			listaSkills.Include ();
+			listaSkills.TipoOrden = ContenedorBotón.TipoOrdenEnum.FilaPrimero;
+			listaSkills.BotónEnÍndice (0).AlClick += Exit;
+			listaSkills.BotónEnÍndice (1).AlClick += delegate
+			{
+				listaSkills.Filas = (listaSkills.Filas % 2) + 1;
+				System.Console.WriteLine (listaSkills.Filas);
+			};
+			listaSkills.BotónEnÍndice (2).AlClick += 
+				() => listaSkills.TipoOrden = listaSkills.TipoOrden == ContenedorBotón.TipoOrdenEnum.ColumnaPrimero ? 
+				ContenedorBotón.TipoOrdenEnum.FilaPrimero : 
+				ContenedorBotón.TipoOrdenEnum.ColumnaPrimero;
+
 			base.Initialize ();
-				
 		}
 
 		/// <summary>
@@ -39,9 +97,17 @@ namespace Cliente
 		protected override void LoadContent ()
 		{
 			// Create a new SpriteBatch, which can be used to draw textures.
-			spriteBatch = new SpriteBatch (GraphicsDevice);
+			Batch = new SpriteBatch (GraphicsDevice);
+			//spriteBatch.DrawString(new SpriteFont)
 
-			//TODO: use this.Content to load your game content here 
+			Content.Load<Texture> ("Unidad");
+			Content.Load<BitmapFont> (@"Fonts/fonts");
+
+
+			foreach (var x in Controles)
+			{
+				x.LoadContent ();
+			}
 		}
 
 		/// <summary>
@@ -60,8 +126,19 @@ namespace Cliente
 				Exit ();
 			}
 			#endif
-			// TODO: Add your update logic here			
+
 			base.Update (gameTime);
+			var delta = gameTime.ElapsedGameTime;
+			foreach (var x in Controles)
+			{
+				x.Update (gameTime);
+				/* var oldPos = x.UnidadBase.Pos;
+				x.UnidadBase.Pos = new Point (oldPos.X, oldPos.Y + (int)(delta.TotalSeconds * 100));
+				x.UnidadBase.PersonajeBase.Atributos.HP.Valor -= (int)(delta.TotalSeconds * 100); */
+			}
+
+			LastKeyboardState = Keyboard.GetState ();
+			LastMouseState = Mouse.GetState ();
 		}
 
 		/// <summary>
@@ -70,12 +147,17 @@ namespace Cliente
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw (GameTime gameTime)
 		{
-			graphics.GraphicsDevice.Clear (Color.CornflowerBlue);
+			graphics.GraphicsDevice.Clear (Color.Green);
 		
-			//TODO: Add your drawing code here
-            
-			base.Draw (gameTime);
+			//base.Draw (gameTime);
+
+
+			Batch.Begin ();
+			foreach (var x in Controles)
+			{
+				x.Dibujar (gameTime);
+			}
+			Batch.End ();
 		}
 	}
-}
-
+} 

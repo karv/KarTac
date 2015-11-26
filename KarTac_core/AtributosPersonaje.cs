@@ -23,6 +23,7 @@ namespace KarTac
 		public AtributosPersonaje ()
 		{
 			Recs = new SortedSet<IRecurso> ();
+			HP = new HP ();
 		}
 	}
 }

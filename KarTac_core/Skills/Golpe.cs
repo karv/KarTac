@@ -16,6 +16,13 @@ namespace KarTac.Skills
 			}
 		}
 
+		public string IconTextureName
+		{
+			get
+			{
+				return @"Icons/Skills/Golpe";
+			}
+		}
 
 		public void Ejecutar (Unidad usuario, Campo campo)
 		{

@@ -1,29 +1,13 @@
 ﻿#region Using Statements
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
-#if MONOMAC
-using MonoMac.AppKit;
-using MonoMac.Foundation;
-
-#elif __IOS__
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-#endif
 #endregion
 
-namespace Cliente
+namespace KarTac.Cliente
 {
-	#if __IOS__
-	[Register("AppDelegate")]
-	class Program : UIApplicationDelegate
-	
-#else
 	static class Program
-	#endif
-    {
-		private static KarTacGame game;
+	{
+		static KarTacGame game;
 
 		internal static void RunGame ()
 		{
@@ -34,31 +18,11 @@ namespace Cliente
 		/// <summary>
 		/// The main entry point for the application.
 		/// </summary>
-		#if !MONOMAC && !__IOS__		 
-        [STAThread]
-		#endif
-		static void Main (string [] args)
+		[STAThread]
+		static void Main (string[] args)
 		{
-			#if MONOMAC
-			NSApplication.Init ();
-
-			using (var p = new NSAutoreleasePool ()) {
-				NSApplication.SharedApplication.Delegate = new AppDelegate();
-				NSApplication.Main(args);
-			}
-			#elif __IOS__
-			UIApplication.Main(args, null, "AppDelegate");
-			#else
 			RunGame ();
-			#endif
 		}
-
-		#if __IOS__
-		public override void FinishedLaunching(UIApplication app)
-		{
-			RunGame();
-		}
-		#endif
 	}
 
 	#if MONOMAC

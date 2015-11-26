@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{48B06E79-A028-4708-96BC-9B0D34933873}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Cliente</RootNamespace>
+    <RootNamespace>KarTac.Cliente</RootNamespace>
     <AssemblyName>Cliente</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
@@ -31,6 +31,9 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
+    <Reference Include="MonoGame.Extended">
+      <HintPath>..\packages\MonoGame.Extended.0.3.44-alpha\lib\MonoGame.Extended.dll</HintPath>
+    </Reference>
     <Reference Include="MonoGame.Framework">
       <HintPath>..\packages\MonoGame.Framework.Linux.3.4.0.459\lib\net40\MonoGame.Framework.dll</HintPath>
     </Reference>
@@ -45,13 +48,19 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="KarTac.cs" />
+    <Compile Include="Controls\Unidad.cs" />
+    <Compile Include="Controls\IControl.cs" />
+    <Compile Include="Controls\SBC.cs" />
+    <Compile Include="Controls\Botón.cs" />
+    <Compile Include="Controls\Ratón.cs" />
+    <Compile Include="Controls\ListaControl.cs" />
+    <Compile Include="Controls\IContenedor.cs" />
+    <Compile Include="Controls\ContenedorBotón.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Icon.png" />
-    <None Include="Content\Content.mgcb" />
+    <None Include="packages.config" />
     <None Include="OpenTK.dll.config" />
     <None Include="Tao.Sdl.dll.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
@@ -61,8 +70,26 @@
           <TextStylePolicy FileWidth="120" TabsToSpaces="False" inheritsSet="VisualStudio" inheritsScope="text/plain" scope="text/x-csharp" />
           <CSharpFormattingPolicy SimplePropertyFormatting="ForceNewLine" AutoPropertyFormatting="ForceOneLine" AnonymousMethodBraceStyle="NextLine" PropertyBraceStyle="NextLine" PropertyGetBraceStyle="NextLine" PropertySetBraceStyle="NextLine" EventBraceStyle="NextLine" EventAddBraceStyle="NextLine" StatementBraceStyle="NextLine" ElseNewLinePlacement="NewLine" ElseIfNewLinePlacement="NewLine" CatchNewLinePlacement="NewLine" FinallyNewLinePlacement="NewLine" NewLineBeforeConstructorInitializerColon="NewLine" AfterDelegateDeclarationParameterComma="True" SpaceAroundUnsafeArrowOperator="True" BeforeSizeOfParentheses="True" BeforeTypeOfParentheses="True" MethodCallArgumentWrapping="WrapIfTooLong" AlignToFirstMethodCallArgument="True" MethodDeclarationParameterWrapping="WrapIfTooLong" IndexerDeclarationParameterWrapping="WrapIfTooLong" IndexerArgumentWrapping="WrapIfTooLong" AlignToFirstIndexerArgument="True" inheritsSet="Mono" inheritsScope="text/x-csharp" scope="text/x-csharp" />
           <TextStylePolicy FileWidth="120" TabsToSpaces="False" inheritsSet="VisualStudio" inheritsScope="text/plain" scope="text/plain" />
+          <DotNetNamingPolicy DirectoryNamespaceAssociation="PrefixedHierarchical" ResourceNamePolicy="FileFormatDefault" />
         </Policies>
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
+  <ItemGroup>
+    <Folder Include="Controls\" />
+    <Folder Include="Content\" />
+    <Folder Include="Content\bin\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content.mgcb" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KarTac_core\KarTac_core.csproj">
+      <Project>{7C3501FD-3912-4B74-9A43-552962281096}</Project>
+      <Name>KarTac_core</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
