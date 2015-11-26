@@ -6,7 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace KarTac.Batalla
 {
-	public class Unidad : IObjetivo, IExp
+	public class Unidad : IObjetivo
 	{
 		public Point Pos { get; set; }
 
@@ -72,7 +72,7 @@ namespace KarTac.Batalla
 		DictionaryTag PeticiónExpNormalizado ()
 		{
 			var ret = new DictionaryTag ();
-			double suma;
+			double suma = 0;
 			foreach (var x in Experienciables ())
 			{
 				var s = x.PedirExp ();
@@ -86,9 +86,9 @@ namespace KarTac.Batalla
 			// Normalizar
 			if (suma > 0)
 			{
-				foreach (var x in ret)
+				foreach (var x in ret.Keys)
 				{
-					x.Value /= suma;
+					ret [x] /= suma;
 				}
 			}
 
