@@ -5,6 +5,6 @@
 	/// </summary>
 	public interface IExp
 	{
-		void RecibirExp (float exp);
+		void RecibirExp (double exp);
 	}
 }

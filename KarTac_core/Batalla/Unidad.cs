@@ -41,7 +41,7 @@ namespace KarTac.Batalla
 		/// <summary>
 		/// Mete la experiencia en su bolsa
 		/// </summary>
-		public void RecibirExp (float exp)
+		public void RecibirExp (double exp)
 		{
 			if (PuedeRecibirExp)
 			{
@@ -57,7 +57,7 @@ namespace KarTac.Batalla
 			//TODO
 		}
 
-		public float BolsaExp { get; private set; }
+		public double BolsaExp { get; private set; }
 
 	}
 }

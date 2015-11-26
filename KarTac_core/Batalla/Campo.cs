@@ -26,10 +26,7 @@ namespace KarTac.Batalla
 		public Campo ()
 		{
 			Unidades = new List<Unidad> ();
-			ExpDict = new Dictionary<Unidad, KarTac.Batalla.Exp.TotalExp> ();
 		}
-
-		public Dictionary<Unidad, Exp.TotalExp> ExpDict { get; }
 
 
 		public void Tick (TimeSpan delta)
@@ -42,12 +39,10 @@ namespace KarTac.Batalla
 		/// </summary>
 		void RecibirExp (TimeSpan delta)
 		{
-			var mins = (float)delta.TotalMinutes;
+			var mins = delta.TotalMinutes;
 			foreach (var uni in Unidades.Where (x => x.PuedeRecibirExp))
 			{
-				TotalExp exp;
-				ExpDict.TryGetValue (uni, out exp);
-				exp.ExpVivo += mins * ExpPorMinuto;
+				uni.RecibirExp (mins * ExpPorMinuto);
 			}
 		}
 	}

@@ -13,7 +13,7 @@ namespace KarTac.Skills
 			ExpTags = new DictionaryTag ();
 		}
 
-		public float TotalExp { get; private set; }
+		public double TotalExp { get; private set; }
 
 		public string Nombre
 		{
@@ -58,7 +58,7 @@ namespace KarTac.Skills
 			return true; //Siempre me puedo golpear solo :3
 		}
 
-		public void RecibirExp (float exp)
+		public void RecibirExp (double exp)
 		{
 			TotalExp += exp;
 		}

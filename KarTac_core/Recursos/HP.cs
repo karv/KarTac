@@ -54,9 +54,9 @@ namespace KarTac.Recursos
 			}
 		}
 
-		public void RecibirExp (float exp)
+		public void RecibirExp (double exp)
 		{
-			Max += exp; //TODO Aquí no creo que termine siendo así de simple.
+			Max += (float)exp; //TODO Aquí no creo que termine siendo así de simple.
 		}
 
 		/// <summary>
