@@ -59,6 +59,7 @@ namespace KarTac.Recursos
 		void IExp.RecibirExp (double exp)
 		{
 			Max += (float)exp; //TODO Aquí no creo que termine siendo así de simple.
+			PeticiónExpAcumulada = 0;
 		}
 
 		public double PeticiónExpAcumulada { get; private set; }

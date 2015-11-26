@@ -65,7 +65,7 @@ namespace KarTac.Skills
 		public void RecibirExp (double exp)
 		{
 			TotalExp += exp;
+			PeticiónExpAcumulada = 0;
 		}
-
 	}
 }
