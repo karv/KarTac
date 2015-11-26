@@ -1,4 +1,6 @@
 ﻿using System;
+using Microsoft.Xna.Framework;
+using KarTac.Batalla;
 
 namespace KarTac.Recursos
 {
@@ -18,6 +20,12 @@ namespace KarTac.Recursos
 		/// Ejecuta un tick de longitud dada
 		/// </summary>
 		void Tick (DateTime delta);
+
+		/// <summary>
+		/// Se ejecuta junto con Update,
+		/// Debe usarse para actualizar la experiencia pedida
+		/// </summary>
+		void PedirExp (GameTime time, Campo campo);
 
 		/// <summary>
 		/// Ocurre cuando cambia el valor actual

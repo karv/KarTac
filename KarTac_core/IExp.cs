@@ -1,4 +1,5 @@
-﻿namespace KarTac
+﻿
+namespace KarTac
 {
 	/// <summary>
 	/// Un objeto que puede recibir experiencia
@@ -10,6 +11,7 @@
 		/// <summary>
 		/// Devuelve número no negativo especificando cuánto peso de lo que recibe en exp
 		/// </summary>
-		double PedirExp ();
+		double PeticiónExpAcumulada { get; }
+
 	}
 }

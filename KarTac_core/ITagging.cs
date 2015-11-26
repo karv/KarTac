@@ -9,6 +9,6 @@ namespace KarTac
 	{
 		IEnumerable<IExp> Tags { get; }
 
-		float TagValue (IExp tag);
+		double TagValue (IExp tag);
 	}
 }

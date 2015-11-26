@@ -33,6 +33,8 @@ namespace KarTac.Skills
 			}
 		}
 
+		public double PeticiónExpAcumulada { get; private set; }
+
 		public void Ejecutar (Unidad usuario, Campo campo)
 		{
 			var selector = campo.SelectorTarget;
@@ -51,6 +53,8 @@ namespace KarTac.Skills
 			var daño = dañoBloqueado * 2;
 
 			selección.PersonajeBase.Atributos.HP.Valor -= daño;
+
+			PeticiónExpAcumulada += 1;
 		}
 
 		public bool Usable (Unidad usuario, Campo campo)
@@ -62,5 +66,6 @@ namespace KarTac.Skills
 		{
 			TotalExp += exp;
 		}
+
 	}
 }

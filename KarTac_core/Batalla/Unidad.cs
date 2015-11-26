@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using KarTac.Recursos;
 
 
 namespace KarTac.Batalla
@@ -58,7 +59,7 @@ namespace KarTac.Batalla
 		void commitExp ()
 		{
 			// Hacer diccionario de IExp s con sus pesos y normalizarlo
-			foreach (var petit in PeticiónExpNormalizado())
+			foreach (var petit in PeticiónExpNormalizado)
 			{
 				petit.Key.RecibirExp (petit.Value * BolsaExp);
 			}
@@ -66,33 +67,38 @@ namespace KarTac.Batalla
 			BolsaExp = 0;
 		}
 
+
+
 		/// <summary>
 		/// Devuelve un diccionario de las peticiones de experiencia ya normalizadas
 		/// </summary>
-		DictionaryTag PeticiónExpNormalizado ()
+		DictionaryTag PeticiónExpNormalizado = new DictionaryTag ();
+
+		void NormalizarPetición ()
 		{
-			var ret = new DictionaryTag ();
 			double suma = 0;
-			foreach (var x in Experienciables ())
+			foreach (var x in PeticiónExpNormalizado.Values)
 			{
-				var s = x.PedirExp ();
-				if (s > 0) // Sólo agrega los que sí piden
-				{
-					ret.Add (x, x.PedirExp ());
-					suma += s;
-				}
+				suma += x;
 			}
 
 			// Normalizar
 			if (suma > 0)
 			{
-				foreach (var x in ret.Keys)
+				foreach (var x in PeticiónExpNormalizado.Keys)
 				{
-					ret [x] /= suma;
+					PeticiónExpNormalizado [x] /= suma;
 				}
 			}
+		}
 
-			return ret;
+		void AcumularPetición (GameTime time, Campo campo)
+		{
+			foreach (var x in PersonajeBase.Atributos.Recs)
+			{
+				x.PedirExp (time, campo);
+			}
+			(PersonajeBase.Atributos.HP as IRecurso).PedirExp (time, campo);
 		}
 
 		/// <summary>

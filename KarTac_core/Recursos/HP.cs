@@ -1,4 +1,6 @@
 ﻿using System;
+using Microsoft.Xna.Framework;
+using KarTac.Batalla;
 
 namespace KarTac.Recursos
 {
@@ -54,9 +56,18 @@ namespace KarTac.Recursos
 			}
 		}
 
-		public void RecibirExp (double exp)
+		void IExp.RecibirExp (double exp)
 		{
 			Max += (float)exp; //TODO Aquí no creo que termine siendo así de simple.
+		}
+
+		public double PeticiónExpAcumulada { get; private set; }
+
+		void IRecurso.PedirExp (GameTime time, Campo campo)
+		{
+			var pct = Valor / Max;
+
+			PeticiónExpAcumulada += (1 - pct) * time.ElapsedGameTime.Minutes;
 		}
 
 		/// <summary>
