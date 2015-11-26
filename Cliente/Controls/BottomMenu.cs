@@ -14,6 +14,7 @@ namespace KarTac.Cliente.Controls
 		public BottomMenu (IScreen screen)
 			: base (screen)
 		{
+			Prioridad = -20;
 		}
 
 		public KarTac.Batalla.Unidad UnidadActual { get; set; }
@@ -32,14 +33,20 @@ namespace KarTac.Cliente.Controls
 
 		public override void Dibujar (GameTime gameTime)
 		{
-			Screen.Batch.Draw (textura, GetBounds (), BgColor);
+			var bat = Screen.GetNewBatch ();
+			bat.Begin ();
+			bat.Draw (textura, GetBounds (), BgColor);
 
 			if (UnidadActual != null)
 			{
 				string infoStr = string.Format ("Nombre: {0}",
 				                                UnidadActual.PersonajeBase.Nombre);
-				Screen.Batch.DrawString (InfoFont, infoStr, new Vector2 (20, GetBounds ().Top + 50), Color.White);
+				bat.DrawString (InfoFont,
+				                infoStr,
+				                new Vector2 (20, GetBounds ().Top + 20),
+				                Color.Red * 0.8f);
 			}
+			bat.End ();
 		}
 
 		public override Rectangle GetBounds ()

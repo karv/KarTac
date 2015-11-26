@@ -55,6 +55,7 @@ namespace KarTac.Cliente
 		/// </summary>
 		protected override void Initialize ()
 		{
+			var sc = CurrentScreen as BattleScreen;
 			var pj = new Personaje ();
 			var c = new KarTac.Batalla.Campo ();
 			var unidad = new KarTac.Batalla.Unidad (pj, c);
@@ -66,19 +67,11 @@ namespace KarTac.Cliente
 			unidad.PersonajeBase.Nombre = "Juanito";
 			unidad.Equipo = new KarTac.Batalla.Equipo (1, Color.Red);
 			unidSpr.Include ();
+			sc.UnidadActual = unidad;
 
-			var bt = new Botón (CurrentScreen, new Rectangle (200, 200, 300, 300));
-			bt.Include ();
-
-			var menu = new BottomMenu (CurrentScreen);
-			menu.Include ();
-
-			bt.AlClick += delegate
+			unidSpr.AlClick += delegate
 			{
-				foreach (var u in Unidades)
-				{
-					u.UnidadBase.PersonajeBase.Nombre = "Noname0525";
-				}
+				unidad.PersonajeBase.Nombre = "Non";
 			};
 
 			var listaSkills = new ContenedorBotón (CurrentScreen);
@@ -165,6 +158,11 @@ namespace KarTac.Cliente
 		}
 
 		#region IScreen
+
+		public SpriteBatch GetNewBatch ()
+		{
+			return new SpriteBatch (GraphicsDevice);
+		}
 
 		void IScreen.Dibujar (GameTime gameTime)
 		{

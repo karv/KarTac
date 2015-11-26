@@ -8,6 +8,18 @@ namespace KarTac.Cliente.Controls.Screens
 
 		public BottomMenu Menú { get; }
 
+		public KarTac.Batalla.Unidad UnidadActual
+		{
+			get
+			{
+				return Menú.UnidadActual;
+			}
+			set
+			{
+				Menú.UnidadActual = value;
+			}
+		}
+
 		public BattleScreen (KarTacGame juego)
 			: base (juego)
 		{
