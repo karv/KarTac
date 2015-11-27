@@ -15,9 +15,43 @@ namespace KarTac.Cliente.Controls
 			: base (screen)
 		{
 			Prioridad = -20;
+			SkillsList = new ContenedorBotón (screen);
 		}
 
-		public KarTac.Batalla.Unidad UnidadActual { get; set; }
+		public override void Inicializar ()
+		{
+			SkillsList.Posición = new Point (
+				GetBounds ().Right - SkillsList.GetBounds ().Right - 50,
+				GetBounds ().Bottom - SkillsList.GetBounds ().Bottom - 50
+			);
+
+			base.Inicializar ();
+		}
+
+		KarTac.Batalla.Unidad unidadActual;
+
+		public KarTac.Batalla.Unidad UnidadActual
+		{
+			get
+			{
+				return unidadActual;
+			}
+			set
+			{
+				unidadActual = value;
+
+				// Actualizar skills
+				SkillsList.Clear ();
+
+				foreach (var sk in UnidadActual.PersonajeBase.Skills)
+				{
+					
+					var bt = SkillsList.Add ();
+					bt.Textura = sk.IconTextureName;
+				}
+
+			}
+		}
 
 		public int TamañoY = 200;
 
@@ -25,10 +59,13 @@ namespace KarTac.Cliente.Controls
 		BitmapFont InfoFont;
 		public Color BgColor = Color.Blue;
 
+		ContenedorBotón SkillsList { get; }
+
 		public override void LoadContent ()
 		{
 			textura = Screen.Content.Load<Texture2D> ("Rect");
 			InfoFont = Screen.Content.Load<BitmapFont> ("fonts");
+			SkillsList.LoadContent ();
 		}
 
 		public override void Dibujar (GameTime gameTime)
@@ -45,6 +82,8 @@ namespace KarTac.Cliente.Controls
 				                infoStr,
 				                new Vector2 (20, GetBounds ().Top + 20),
 				                Color.Red * 0.8f);
+
+				SkillsList.Dibujar (gameTime);
 			}
 			bat.End ();
 		}

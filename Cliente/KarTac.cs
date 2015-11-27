@@ -94,6 +94,8 @@ namespace KarTac.Cliente
 				ContenedorBotón.TipoOrdenEnum.FilaPrimero : 
 				ContenedorBotón.TipoOrdenEnum.ColumnaPrimero;
 
+			CurrentScreen.Inicializar ();
+
 			base.Initialize ();
 		}
 
@@ -207,6 +209,11 @@ namespace KarTac.Cliente
 			{
 				return GraphicsDevice.Adapter.CurrentDisplayMode;
 			}
+		}
+
+		void IScreen.Inicializar ()
+		{
+			Initialize ();
 		}
 
 		#endregion

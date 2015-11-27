@@ -29,7 +29,7 @@ namespace KarTac.Cliente.Controls
 			Screen.Controles.Remove (this);
 		}
 
-		public virtual void Initialize ()
+		public virtual void Inicializar ()
 		{
 		}
 

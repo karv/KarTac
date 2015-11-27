@@ -24,6 +24,14 @@ namespace KarTac.Cliente.Controls.Screens
 			Controles = new ListaControl ();
 		}
 
+		public virtual void Inicializar ()
+		{
+			foreach (var x in Controles)
+			{
+				x.Inicializar ();
+			}
+		}
+
 		public void Dibujar (GameTime gameTime)
 		{
 			Game.GraphicsDevice.Clear (Color.Green);

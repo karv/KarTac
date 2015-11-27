@@ -34,7 +34,7 @@ namespace KarTac.Cliente.Controls.Screens
 		public Unidad AgregaUnidad (KarTac.Batalla.Unidad unit)
 		{
 			var ret = new Unidad (this, unit);
-			ret.Initialize ();
+			ret.Inicializar ();
 			ret.Include ();
 			return ret;
 		}

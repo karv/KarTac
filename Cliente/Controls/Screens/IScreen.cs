@@ -56,5 +56,7 @@ namespace KarTac.Cliente.Controls.Screens
 		SpriteBatch GetNewBatch ();
 
 		DisplayMode GetDisplayMode { get; }
+
+		void Inicializar ();
 	}
 }

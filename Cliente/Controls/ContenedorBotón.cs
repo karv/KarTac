@@ -126,6 +126,11 @@ namespace KarTac.Cliente.Controls
 			return ret;
 		}
 
+		public void Clear ()
+		{
+			controles.Clear ();
+		}
+
 		protected void OnRedimensionar ()
 		{
 			for (int i = 0; i < Count; i++)
