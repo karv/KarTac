@@ -22,7 +22,7 @@ namespace KarTac.Cliente.Controls.Screens
 		/// </summary>
 		public System.Collections.Generic.IList<KarTac.Batalla.Unidad> Selecciona ()
 		{
-			throw new System.NotImplementedException ();
+			return PosiblesBlancos;
 		}
 
 		/// <summary>
