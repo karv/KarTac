@@ -2,8 +2,13 @@
 
 namespace KarTac.Cliente.Controls.Screens
 {
-	public class Selector: ISelectorTarget
+	public class Selector: Screen, ISelectorTarget
 	{
+		public Selector (KarTacGame game)
+			: base (game)
+		{
+		}
+
 		/// <summary>
 		/// Revisa si es posible dar una salida con la función Selecciona
 		/// </summary>
@@ -35,5 +40,9 @@ namespace KarTac.Cliente.Controls.Screens
 		/// Establece los posibles blancos
 		/// </summary>
 		public System.Collections.Generic.IList<KarTac.Batalla.Unidad> PosiblesBlancos { get; set; }
+
+		#region IScreen
+
+		#endregion
 	}
 }
