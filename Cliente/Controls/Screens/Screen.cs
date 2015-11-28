@@ -61,7 +61,7 @@ namespace KarTac.Cliente.Controls.Screens
 			return Game.GetNewBatch ();
 		}
 
-		public void Update (GameTime gameTime)
+		public virtual void Update (GameTime gameTime)
 		{
 			foreach (var x in Controles)
 			{
