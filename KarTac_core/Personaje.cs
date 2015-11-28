@@ -21,13 +21,13 @@ namespace KarTac
 		public Personaje ()
 		{
 			Atributos = new AtributosPersonaje ();
-			Skills = new HashSet<ISkill> ();
+			Skills = new List<ISkill> ();
 
 			// Agregar defaults
 			Skills.Add (new Golpe ());
 		}
 
-		public ICollection<ISkill> Skills { get; }
+		public IList<ISkill> Skills { get; }
 
 		public event Action AlMorir
 		{

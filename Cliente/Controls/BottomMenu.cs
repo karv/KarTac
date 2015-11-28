@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using KarTac.Cliente.Controls.Screens;
 using MonoGame.Extended.BitmapFonts;
 using System;
+using KarTac.Skills;
 
 namespace KarTac.Cliente.Controls
 {
@@ -30,6 +31,14 @@ namespace KarTac.Cliente.Controls
 				SkillsList.BotónEnÍndice (ÍndiceSkillSel).Color = skillNoSelColor;
 				índiceSkillSel = nuevoInd;
 				SkillsList.BotónEnÍndice (ÍndiceSkillSel).Color = skillSelColor;
+			}
+		}
+
+		public ISkill SkillSeleccionado
+		{
+			get
+			{
+				return UnidadActual.PersonajeBase.Skills [ÍndiceSkillSel];
 			}
 		}
 

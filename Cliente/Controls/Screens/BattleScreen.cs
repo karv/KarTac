@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
+using KarTac.Batalla;
 using KarTac.Cliente.Controls;
+
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -9,6 +11,8 @@ namespace KarTac.Cliente.Controls.Screens
 		public List<UnidadSprite> Unidades { get; }
 
 		public BottomMenu Menú { get; }
+
+		public Campo CampoBatalla { get; }
 
 		public KarTac.Batalla.Unidad UnidadActual
 		{
@@ -27,6 +31,7 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 			Menú = new BottomMenu (this);
 			Menú.Include ();
+			CampoBatalla = new Campo ();
 		}
 
 		/// <summary>
@@ -52,6 +57,10 @@ namespace KarTac.Cliente.Controls.Screens
 			if (keyb.IsKeyDown (Keys.Up))
 			{
 				Menú.ÍndiceSkillSel--;
+			}
+			if (keyb.IsKeyDown (Keys.Enter))
+			{
+				Menú.SkillSeleccionado.Ejecutar (UnidadActual, CampoBatalla);
 			}
 		}
 	}
