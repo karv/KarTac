@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework.Input;
 using KarTac.Cliente.Controls;
 
 namespace KarTac.Cliente.Controls.Screens
@@ -38,6 +39,20 @@ namespace KarTac.Cliente.Controls.Screens
 			ret.Inicializar ();
 			ret.Include ();
 			return ret;
+		}
+
+		public override void Update (Microsoft.Xna.Framework.GameTime gameTime)
+		{
+			base.Update (gameTime);
+			var keyb = Keyboard.GetState ();
+			if (keyb.IsKeyDown (Keys.Down))
+			{
+				Menú.ÍndiceSkillSel++;
+			}
+			if (keyb.IsKeyDown (Keys.Up))
+			{
+				Menú.ÍndiceSkillSel--;
+			}
 		}
 	}
 }

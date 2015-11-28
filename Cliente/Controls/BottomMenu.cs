@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using KarTac.Cliente.Controls.Screens;
 using MonoGame.Extended.BitmapFonts;
-using System.Text;
+using System;
 
 namespace KarTac.Cliente.Controls
 {
@@ -16,6 +16,31 @@ namespace KarTac.Cliente.Controls
 		{
 			Prioridad = -20;
 			SkillsList = new ContenedorBotón (screen);
+			SkillsList.TipoOrden = ContenedorBotón.TipoOrdenEnum.ColumnaPrimero;
+		}
+
+		int índiceSkillSel;
+
+		public int ÍndiceSkillSel
+		{
+			get{ return índiceSkillSel; }
+			set
+			{
+				var nuevoInd = Math.Min (Math.Max (value, 0), SkillsList.Count - 1);
+				SkillsList.BotónEnÍndice (ÍndiceSkillSel).Color = skillNoSelColor;
+				índiceSkillSel = nuevoInd;
+				SkillsList.BotónEnÍndice (ÍndiceSkillSel).Color = skillSelColor;
+			}
+		}
+
+		static Color skillNoSelColor
+		{
+			get{ return Color.Red; }
+		}
+
+		static Color skillSelColor
+		{
+			get{ return Color.Green; }
 		}
 
 		public override void Inicializar ()
