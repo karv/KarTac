@@ -41,4 +41,3 @@ namespace KarTac.Cliente.Controls.Screens
 		}
 	}
 }
-
