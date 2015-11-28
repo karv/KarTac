@@ -14,7 +14,7 @@ namespace KarTac.Cliente.Controls.Screens
 		/// </summary>
 		public bool Validar ()
 		{
-			return true;
+			return PosiblesBlancos.Count > 0;
 		}
 
 		/// <summary>

@@ -43,6 +43,8 @@ namespace KarTac.Skills
 			selector.MaxSelect = 1;
 			selector.PosiblesBlancos = new List<Unidad> (campo.Unidades.Where (x => área.Contiene (x.Pos)));
 			selector.IgualdadEstricta = true;
+			if (!selector.Validar ())
+				throw new Exception ();
 			var selección = selector.Selecciona () [0];
 
 			// usuario ataca a selección
