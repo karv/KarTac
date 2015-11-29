@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using OpenTK.Platform.Windows;
-using MonoGame.Extended.BitmapFonts;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -18,23 +18,29 @@ namespace KarTac.Cliente.Controls.Screens
 			: base (anterior)
 		{
 			Juego = game;
+			Controles = new ListaControl ();
 			Lista = new List<TObj> ();
+			listaComponente = new Lista (this);
+			listaComponente.Bounds = new Rectangle (0, 0, GetDisplayMode.Width, GetDisplayMode.Height);
+			Controles.Add (listaComponente);
 		}
 
 		public List<TObj> Lista { get; }
 
-		BitmapFont Fuente { get; set; }
+		Lista listaComponente { get; }
 
 		public Func<TObj, string> Stringificación { get; set; }
 
 		public void Ejecutar ()
 		{
+			LoadContent ();
 			Juego.CurrentScreen = this;
 		}
 
 		public void Salir ()
 		{
 			Juego.CurrentScreen = ScreenBase;
+			UnloadContent ();
 		}
 
 		public override ListaControl Controles { get; }
@@ -43,10 +49,12 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 		}
 
-		public override void LoadContent ()
+		public override void Update (GameTime gameTime)
 		{
-			base.LoadContent ();
-			Fuente = Content.Load<BitmapFont> (fontTexture);
+			if (Keyboard.GetState ().IsKeyDown (Keys.Escape))
+				Salir ();
+
+			base.Update (gameTime);
 		}
 	}
 }

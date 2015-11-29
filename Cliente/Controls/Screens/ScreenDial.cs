@@ -19,6 +19,13 @@ namespace KarTac.Cliente.Controls.Screens
 		public void Dibujar (Microsoft.Xna.Framework.GameTime gameTime)
 		{
 			ScreenBase.Dibujar (gameTime);
+			Batch = GetNewBatch ();
+			Batch.Begin ();
+			foreach (var x in Controles)
+			{
+				x.Dibujar (gameTime);
+			}
+			Batch.End ();
 		}
 
 		public virtual void LoadContent ()
@@ -29,8 +36,12 @@ namespace KarTac.Cliente.Controls.Screens
 			}
 		}
 
-		public void Update (Microsoft.Xna.Framework.GameTime gameTime)
+		public virtual void Update (Microsoft.Xna.Framework.GameTime gameTime)
 		{
+			foreach (var x in Controles)
+			{
+				x.Update (gameTime);
+			}
 			LastKeyboardState = Keyboard.GetState ();
 			LastMouseState = Mouse.GetState ();
 		}
@@ -60,13 +71,7 @@ namespace KarTac.Cliente.Controls.Screens
 
 		public KeyboardState LastKeyboardState { get; private set; }
 
-		public SpriteBatch Batch
-		{
-			get
-			{
-				return ScreenBase.Batch;
-			}
-		}
+		public SpriteBatch Batch { get; private set; }
 
 		public DisplayMode GetDisplayMode
 		{
