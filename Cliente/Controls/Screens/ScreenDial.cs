@@ -8,19 +8,25 @@ namespace KarTac.Cliente.Controls.Screens
 	/// </summary>
 	public abstract class ScreenDial : IScreen
 	{
-		IScreen screenBase { get; }
+		protected IScreen ScreenBase { get; }
 
 		protected ScreenDial (IScreen anterior)
 		{
-			screenBase = anterior;
+			ScreenBase = anterior;
 		}
 
 		public void Dibujar (Microsoft.Xna.Framework.GameTime gameTime)
 		{
-			screenBase.Dibujar (gameTime);
+			ScreenBase.Dibujar (gameTime);
 		}
 
-		public abstract void LoadContent ();
+		public virtual void LoadContent ()
+		{
+			foreach (var x in Controles)
+			{
+				x.LoadContent ();
+			}
+		}
 
 		public void Update (Microsoft.Xna.Framework.GameTime gameTime)
 		{
@@ -28,11 +34,13 @@ namespace KarTac.Cliente.Controls.Screens
 			LastMouseState = Mouse.GetState ();
 		}
 
-		public abstract void UnloadContent ();
+		public virtual void UnloadContent ()
+		{
+		}
 
 		public Microsoft.Xna.Framework.Graphics.SpriteBatch GetNewBatch ()
 		{
-			return screenBase.GetNewBatch ();
+			return ScreenBase.GetNewBatch ();
 		}
 
 		public abstract void Inicializar ();
@@ -43,7 +51,7 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 			get
 			{
-				return screenBase.Content;
+				return ScreenBase.Content;
 			}
 		}
 
@@ -55,7 +63,7 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 			get
 			{
-				return screenBase.Batch;
+				return ScreenBase.Batch;
 			}
 		}
 
@@ -63,7 +71,7 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 			get
 			{
-				return screenBase.GetDisplayMode;
+				return ScreenBase.GetDisplayMode;
 			}
 		}
 	}

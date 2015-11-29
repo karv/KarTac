@@ -63,6 +63,7 @@
     <Compile Include="Controls\Lista.cs" />
     <Compile Include="Controls\Primitivos\Formas.cs" />
     <Compile Include="Controls\Screens\ScreenDial.cs" />
+    <Compile Include="Controls\Screens\ScreenPedirDeLista.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
