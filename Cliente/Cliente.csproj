@@ -62,6 +62,7 @@
     <Compile Include="Controls\Screens\BattleScreen.cs" />
     <Compile Include="Controls\Lista.cs" />
     <Compile Include="Controls\Primitivos\Formas.cs" />
+    <Compile Include="Controls\Screens\ScreenDial.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
