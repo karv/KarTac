@@ -166,6 +166,14 @@ namespace KarTac.Cliente
 			return new SpriteBatch (GraphicsDevice);
 		}
 
+		public GraphicsDevice Device
+		{
+			get
+			{
+				return GraphicsDevice;
+			}
+		}
+
 		void IScreen.Dibujar (GameTime gameTime)
 		{
 			Draw (gameTime);

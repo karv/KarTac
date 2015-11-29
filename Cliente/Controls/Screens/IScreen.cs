@@ -48,6 +48,8 @@ namespace KarTac.Cliente.Controls.Screens
 		/// </summary>
 		KeyboardState LastKeyboardState { get; }
 
+		#region HW
+
 		/// <summary>
 		/// Batch de dibujo
 		/// </summary>
@@ -56,6 +58,10 @@ namespace KarTac.Cliente.Controls.Screens
 		SpriteBatch GetNewBatch ();
 
 		DisplayMode GetDisplayMode { get; }
+
+		GraphicsDevice Device { get; }
+
+		#endregion
 
 		void Inicializar ();
 	}
