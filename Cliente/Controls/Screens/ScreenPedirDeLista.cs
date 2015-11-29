@@ -22,10 +22,17 @@ namespace KarTac.Cliente.Controls.Screens
 			Lista = new List<TObj> ();
 			listaComponente = new Lista (this);
 			listaComponente.Bounds = new Rectangle (0, 0, GetDisplayMode.Width, GetDisplayMode.Height);
+			listaComponente.ColorBG = Color.Blue * 0.4f;
 			Controles.Add (listaComponente);
+			Stringificación = x => x.ToString ();
 		}
 
-		public List<TObj> Lista { get; }
+		List<TObj> Lista { get; }
+
+		public void Add (TObj t)
+		{
+			listaComponente.Objetos.Add (Stringificación (t));
+		}
 
 		Lista listaComponente { get; }
 
