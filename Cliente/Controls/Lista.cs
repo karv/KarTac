@@ -15,6 +15,7 @@ namespace KarTac.Cliente.Controls
 			: base (screen)
 		{
 			Objetos = new List<string> ();
+			ColorBG = Color.Blue * 0.3f;
 		}
 
 		public override void Dibujar (GameTime gameTime)
@@ -30,6 +31,9 @@ namespace KarTac.Cliente.Controls
 			Formas.DrawLine (bat, br, bl, Color.White, Screen.Device);
 			Formas.DrawLine (bat, bl, tl, Color.White, Screen.Device);
 
+			// Background
+			bat.Draw (noTexture, Bounds, ColorBG);
+
 			// TODO: Que no se me salga el texto.
 			var currY = tl;
 			for (int i = 0; i < Objetos.Count; i++)
@@ -38,7 +42,7 @@ namespace KarTac.Cliente.Controls
 				if (i == cursorIndex)
 				{
 					var rect = Fuente.GetStringRectangle (x, currY);
-					bat.Draw (bgCursor, rect, Color.White * 0.5f);
+					bat.Draw (noTexture, rect, Color.White * 0.5f);
 				}
 				bat.DrawString (Fuente, x, currY, Color.White);
 				currY.Y += Fuente.LineHeight;
@@ -68,7 +72,9 @@ namespace KarTac.Cliente.Controls
 
 		public BitmapFont Fuente { get; set; }
 
-		Texture2D bgCursor { get; set; }
+		Texture2D noTexture { get; set; }
+
+		public Color ColorBG { get; set; }
 
 		public Rectangle Bounds { get; set; }
 
@@ -77,12 +83,15 @@ namespace KarTac.Cliente.Controls
 			return Bounds;
 		}
 
+		/// <summary>
+		/// Devuelve o establece si este control puede interactuar por sí mismo con el teclado
+		/// </summary>
 		public bool InterceptarTeclado = true;
 
 		public override void LoadContent ()
 		{
 			Fuente = Screen.Content.Load<BitmapFont> ("fonts");
-			bgCursor = Screen.Content.Load<Texture2D> ("Rect");
+			noTexture = Screen.Content.Load<Texture2D> ("Rect");
 		}
 
 		public Keys AbajoKey = Keys.Down;
