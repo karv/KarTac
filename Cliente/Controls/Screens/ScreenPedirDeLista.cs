@@ -23,7 +23,7 @@ namespace KarTac.Cliente.Controls.Screens
 
 		public List<TObj> Lista { get; }
 
-		BitmapFont Fuente { get; }
+		BitmapFont Fuente { get; set; }
 
 		public Func<TObj, string> Stringificación { get; set; }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -38,7 +39,7 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 		}
 
-		public Microsoft.Xna.Framework.Graphics.SpriteBatch GetNewBatch ()
+		public SpriteBatch GetNewBatch ()
 		{
 			return ScreenBase.GetNewBatch ();
 		}
@@ -59,7 +60,7 @@ namespace KarTac.Cliente.Controls.Screens
 
 		public KeyboardState LastKeyboardState { get; private set; }
 
-		public Microsoft.Xna.Framework.Graphics.SpriteBatch Batch
+		public SpriteBatch Batch
 		{
 			get
 			{
@@ -67,11 +68,19 @@ namespace KarTac.Cliente.Controls.Screens
 			}
 		}
 
-		public Microsoft.Xna.Framework.Graphics.DisplayMode GetDisplayMode
+		public DisplayMode GetDisplayMode
 		{
 			get
 			{
 				return ScreenBase.GetDisplayMode;
+			}
+		}
+
+		public GraphicsDevice Device
+		{
+			get
+			{
+				return ScreenBase.Device;
 			}
 		}
 	}
