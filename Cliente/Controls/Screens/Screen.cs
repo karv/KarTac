@@ -98,5 +98,13 @@ namespace KarTac.Cliente.Controls.Screens
 				return Game.GetDisplayMode;
 			}
 		}
+
+		public GraphicsDevice Device
+		{
+			get
+			{
+				return Game.GraphicsDevice;
+			}
+		}
 	}
 }

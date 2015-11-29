@@ -60,6 +60,8 @@
     <Compile Include="Controls\BottomMenu.cs" />
     <Compile Include="Controls\Screens\IScreen.cs" />
     <Compile Include="Controls\Screens\BattleScreen.cs" />
+    <Compile Include="Controls\Lista.cs" />
+    <Compile Include="Controls\Primitivos\Formas.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -84,6 +86,7 @@
     <Folder Include="Content\" />
     <Folder Include="Content\bin\" />
     <Folder Include="Controls\Screens\" />
+    <Folder Include="Controls\Primitivos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\**\*.*">
