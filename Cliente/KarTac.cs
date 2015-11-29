@@ -94,6 +94,13 @@ namespace KarTac.Cliente
 				ContenedorBotón.TipoOrdenEnum.FilaPrimero : 
 				ContenedorBotón.TipoOrdenEnum.ColumnaPrimero;
 
+			var lst = new Lista (CurrentScreen);
+			lst.Bounds = new Rectangle (100, 100, 400, 300);
+			lst.Objetos.Add ("Hue");
+			lst.Objetos.Add ("Hue2");
+			lst.Include ();
+
+
 			CurrentScreen.Inicializar ();
 
 			base.Initialize ();
