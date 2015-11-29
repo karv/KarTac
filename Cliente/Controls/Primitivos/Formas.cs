@@ -7,7 +7,7 @@ using System;
 
 namespace KarTac.Cliente.Controls.Primitivos
 {
-	public static class Primitivos
+	public static class Formas
 	{
 		/// <summary>
 		/// Devuelve una textura 1x1 blanco
