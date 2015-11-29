@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using KarTac.Cliente.Controls;
 
 namespace KarTac.Cliente.Controls.Screens
 {

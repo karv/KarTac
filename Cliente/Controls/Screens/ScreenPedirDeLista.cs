@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using OpenTK.Platform.Windows;
+using MonoGame.Extended.BitmapFonts;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -8,6 +10,8 @@ namespace KarTac.Cliente.Controls.Screens
 	/// </summary>
 	public class ScreenPedirDeLista<TObj> : ScreenDial
 	{
+		const string fontTexture = "UnitNameFont";
+
 		KarTacGame Juego { get; }
 
 		public ScreenPedirDeLista (IScreen anterior, KarTacGame game)
@@ -18,6 +22,8 @@ namespace KarTac.Cliente.Controls.Screens
 		}
 
 		public List<TObj> Lista { get; }
+
+		BitmapFont Fuente { get; }
 
 		public Func<TObj, string> Stringificación { get; set; }
 
@@ -36,6 +42,11 @@ namespace KarTac.Cliente.Controls.Screens
 		public override void Inicializar ()
 		{
 		}
+
+		public override void LoadContent ()
+		{
+			base.LoadContent ();
+			Fuente = Content.Load<BitmapFont> (fontTexture);
+		}
 	}
 }
-
