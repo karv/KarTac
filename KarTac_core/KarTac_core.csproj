@@ -65,6 +65,7 @@
     <Compile Include="ITagging.cs" />
     <Compile Include="DictionaryTag.cs" />
     <Compile Include="IExp.cs" />
+    <Compile Include="Batalla\Shape\Rectángulo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
