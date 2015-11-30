@@ -27,8 +27,6 @@ namespace KarTac.Cliente
 
 		public SpriteBatch Batch { get; private set; }
 
-		public readonly List<UnidadSprite> Unidades = new List<UnidadSprite> ();
-
 		public KarTacGame ()
 		{
 			ControlesUniversales = new ListaControl ();
@@ -39,7 +37,7 @@ namespace KarTac.Cliente
 			mouse = new Ratón (this);
 			mouse.Include ();
 
-			CurrentScreen = new BattleScreen (this);
+			CurrentScreen = new BattleScreen (this, new KarTac.Batalla.Campo ());
 			Screens.Add (CurrentScreen);
 		}
 
@@ -57,22 +55,27 @@ namespace KarTac.Cliente
 		{
 			var sc = CurrentScreen as BattleScreen;
 			var pj = new Personaje ();
-			var c = new KarTac.Batalla.Campo ();
+			var c = sc.CampoBatalla;
+
 			var unidad = new KarTac.Batalla.Unidad (pj, c);
 			unidad.Pos = new Point (100, 100);
 			unidad.PersonajeBase.Atributos.HP.Max = 100;
 			unidad.PersonajeBase.Atributos.HP.Valor = 80;
-			var unidSpr = new UnidadSprite (CurrentScreen, unidad);
-			//unidad.PersonajeBase.AlMorir += Exit;
 			unidad.PersonajeBase.Nombre = "Juanito";
 			unidad.Equipo = new KarTac.Batalla.Equipo (1, Color.Red);
-			unidSpr.Include ();
 			sc.UnidadActual = unidad;
 
-			unidSpr.AlClick += delegate
-			{
-				unidSpr.Marcado = !unidSpr.Marcado;
-			};
+			// Otra unidad
+			var unidad2 = new KarTac.Batalla.Unidad (new Personaje (), c);
+			unidad2.Pos = new Point (101, 101);
+			unidad2.PersonajeBase.Atributos.HP.Max = 100;
+			unidad2.PersonajeBase.Atributos.HP.Valor = 80;
+			unidad2.PersonajeBase.Nombre = "Pedrito";
+			unidad2.Equipo = new KarTac.Batalla.Equipo (2, Color.Green);
+
+			c.Unidades.Add (unidad);
+			c.Unidades.Add (unidad2);
+			c.SelectorTarget = new Selector (this);
 
 
 			CurrentScreen.Inicializar ();

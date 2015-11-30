@@ -9,7 +9,7 @@ namespace KarTac.Cliente.Controls.Screens
 {
 	public class Screen : IScreen
 	{
-		KarTacGame Game { get; }
+		public KarTacGame Game { get; }
 
 		public ListaControl Controles { get; }
 

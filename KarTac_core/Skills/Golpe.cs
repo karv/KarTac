@@ -52,7 +52,7 @@ namespace KarTac.Skills
 			var dañoBloqueado = Math.Max (
 				                    usuario.PersonajeBase.Atributos.Ataque - selección.PersonajeBase.Atributos.Defensa,
 				                    0);
-			var daño = dañoBloqueado * 2;
+			var daño = dañoBloqueado * 2 + 1;
 
 			selección.PersonajeBase.Atributos.HP.Valor -= daño;
 

@@ -60,6 +60,7 @@
     <Compile Include="Controls\Screens\IScreen.cs" />
     <Compile Include="Controls\Screens\BattleScreen.cs" />
     <Compile Include="Controls\Screens\Selector.cs" />
+    <Compile Include="Controls\UnidadSprite.cs" />
     <Compile Include="Controls\Lista.cs" />
     <Compile Include="Controls\Primitivos\Formas.cs" />
     <Compile Include="Controls\Screens\ScreenDial.cs" />
