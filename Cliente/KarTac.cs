@@ -71,7 +71,7 @@ namespace KarTac.Cliente
 
 			unidSpr.AlClick += delegate
 			{
-				unidad.PersonajeBase.Nombre = "Non";
+				unidSpr.Marcado = !unidSpr.Marcado;
 			};
 
 
