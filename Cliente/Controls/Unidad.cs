@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Content;
 using MonoGame.Extended.BitmapFonts;
 using System;
 using KarTac.Cliente.Controls.Screens;
+using KarTac.Cliente.Controls.Primitivos;
 
 namespace KarTac.Cliente.Controls
 {
@@ -93,6 +94,24 @@ namespace KarTac.Cliente.Controls
 		Texture2D texturaRect;
 		BitmapFont font;
 
+		bool marcado;
+
+		/// <summary>
+		/// Devuelve o establece si esta unidad debe aparecer como 'marcada' para algún tipo de selección
+		/// </summary>
+		public bool Marcado
+		{
+			get
+			{
+				return marcado;
+			}
+			set
+			{
+				marcado = value;
+				AlCambiarMarcado?.Invoke ();
+			}
+		}
+
 		public override Rectangle GetBounds ()
 		{
 			return área;
@@ -123,6 +142,12 @@ namespace KarTac.Cliente.Controls
 			bat.Draw (texturaRect, hpBar, Color.White);  // HP background
 			bat.Draw (texturaRect, currHpBar, Color.Red);// HP actual
 
+			if (Marcado)
+			{
+				// Dibujar un rectángulo alrededor
+				Formas.DrawRectangle (bat, GetBounds (), Color.Yellow * 0.8f, Screen.Device);
+			}
+
 			// Nombre
 			var nombre = UnidadBase.PersonajeBase.Nombre;
 			var rect = font.GetStringRectangle (nombre, Vector2.Zero);
@@ -133,7 +158,6 @@ namespace KarTac.Cliente.Controls
 			                UnidadBase.PersonajeBase.Nombre,
 			                new Vector2 (área.Center.X - hSize / 2, área.Top - ySize - 2),
 			                Color.White);
-			//font.GetStringRectangle ("Huehue", Vector2.Zero);
 		}
 
 		public override void Update (GameTime gameTime)
@@ -143,5 +167,7 @@ namespace KarTac.Cliente.Controls
 			UnidadBase.PersonajeBase.Atributos.HP.Valor -= (int)(delta.TotalSeconds * 100);
 			//UnidadBase.AcumularPetición (gameTime);
 		}
+
+		public event Action AlCambiarMarcado;
 	}
 }
