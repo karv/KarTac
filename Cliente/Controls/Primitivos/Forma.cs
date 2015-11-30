@@ -14,6 +14,7 @@ namespace KarTac.Cliente.Controls.Primitivos
 		{
 			this.shape = shape;
 			Prioridad = 1;
+			Color = Color.White;
 		}
 
 		Texture2D texture;
@@ -30,6 +31,14 @@ namespace KarTac.Cliente.Controls.Primitivos
 			{
 				textureString = @"Shapes/Círculo"; // TODO: agregar este Content
 				bounds = círculo.MínimoRectángulo ();
+				return;
+			}
+			var rect = shape as Rectángulo;
+			if (rect != null)
+			{
+				textureString = "Rect"; // TODO: cambiar este Content
+				bounds = rect;
+				return;
 			}
 		}
 
