@@ -89,6 +89,8 @@
     <Folder Include="Content\bin\" />
     <Folder Include="Controls\Screens\" />
     <Folder Include="Controls\Primitivos\" />
+    <Folder Include="Content\icons\" />
+    <Folder Include="Content\icons\skills\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\**\*.*">

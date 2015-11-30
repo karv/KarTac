@@ -13,6 +13,10 @@ namespace KarTac.Cliente.Controls
 			: base (screen)
 		{
 			UnidadBase = unid;
+			unid.PersonajeBase.AlMorir += delegate
+			{
+				texturaClase = screen.Content.Load<Texture2D> (@"Icons/Unidades/dead-head");
+			};
 		}
 
 		public KarTac.Batalla.Unidad UnidadBase { get; }
@@ -21,7 +25,7 @@ namespace KarTac.Cliente.Controls
 		{
 			get
 			{
-				return new Point (UnidadBase.Pos.X - texturaClase.Width / 2, UnidadBase.Pos.Y - texturaClase.Height / 2);
+				return new Point (UnidadBase.Pos.X - tamaño.X / 2, UnidadBase.Pos.Y - tamaño.Y / 2);
 			}
 		}
 
@@ -105,7 +109,8 @@ namespace KarTac.Cliente.Controls
 		public override void LoadContent ()
 		{
 			var content = Screen.Content;
-			texturaClase = content.Load<Texture2D> ("Unidad");
+			texturaClase = content.Load<Texture2D> (@"Icons/Unidades/cowled");
+			//texturaClase = content.Load<Texture2D> ("Unidad");
 			texturaRect = content.Load<Texture2D> ("Rect");
 			font = content.Load<BitmapFont> (@"UnitNameFont");
 		}

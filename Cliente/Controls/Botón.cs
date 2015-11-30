@@ -10,6 +10,7 @@ namespace KarTac.Cliente.Controls
 			: base (screen)
 		{
 			Bounds = bounds;
+			Color = Color.White;
 		}
 
 		public Rectangle Bounds { get; set; }

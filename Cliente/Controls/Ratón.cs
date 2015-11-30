@@ -13,7 +13,7 @@ namespace KarTac.Cliente.Controls
 		public Ratón (IScreen screen)
 			: base (screen)
 		{
-			Tamaño = new Point (15, 15);
+			Tamaño = new Point (20, 20);
 			Prioridad = 1000;
 		}
 
@@ -46,15 +46,15 @@ namespace KarTac.Cliente.Controls
 			return new Rectangle (Pos, Tamaño);
 		}
 
-
 		public override void LoadContent ()
 		{
-			Textura = Screen.Content.Load<Texture2D> ("Rect");
+			Textura = Screen.Content.Load<Texture2D> (@"Icons/arrow-cursor");
 		}
 
 		public override void Dibujar (GameTime gameTime)
 		{
-			Screen.Batch.Draw (Textura, GetBounds (), Color.White);
+			var bat = Screen.Batch;
+			bat.Draw (Textura, GetBounds (), Color.WhiteSmoke);
 		}
 	}
 }

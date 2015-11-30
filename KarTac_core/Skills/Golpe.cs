@@ -29,7 +29,7 @@ namespace KarTac.Skills
 		{
 			get
 			{
-				return @"Icons/Skills/Golpe";
+				return @"Icons/Skills/punch";
 			}
 		}
 

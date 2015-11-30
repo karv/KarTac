@@ -74,32 +74,6 @@ namespace KarTac.Cliente
 				unidad.PersonajeBase.Nombre = "Non";
 			};
 
-			var listaSkills = new ContenedorBotón (CurrentScreen);
-			listaSkills.Posición = new Point (0, 0);
-			listaSkills.BgColor = Color.Yellow;
-			listaSkills.Filas = 1;
-			listaSkills.Add ().Color = Color.Red;
-			listaSkills.Add ().Color = Color.Green;
-			listaSkills.Add ().Color = Color.Blue;
-			listaSkills.Include ();
-			listaSkills.TipoOrden = ContenedorBotón.TipoOrdenEnum.FilaPrimero;
-			listaSkills.BotónEnÍndice (0).AlClick += Exit;
-			listaSkills.BotónEnÍndice (1).AlClick += delegate
-			{
-				listaSkills.Filas = (listaSkills.Filas % 2) + 1;
-				Console.WriteLine (listaSkills.Filas);
-			};
-			listaSkills.BotónEnÍndice (2).AlClick += 
-				() => listaSkills.TipoOrden = listaSkills.TipoOrden == ContenedorBotón.TipoOrdenEnum.ColumnaPrimero ? 
-				ContenedorBotón.TipoOrdenEnum.FilaPrimero : 
-				ContenedorBotón.TipoOrdenEnum.ColumnaPrimero;
-
-			var lst = new Lista (CurrentScreen);
-			lst.Bounds = new Rectangle (100, 100, 400, 300);
-			lst.Objetos.Add ("Hue");
-			lst.Objetos.Add ("Hue2");
-			lst.Include ();
-
 
 			CurrentScreen.Inicializar ();
 
@@ -162,7 +136,7 @@ namespace KarTac.Cliente
 				x.Dibujar (gameTime);
 			}
 
-			mouse.Dibujar (gameTime);
+			//mouse.Dibujar (gameTime);
 			Batch.End ();
 		}
 
