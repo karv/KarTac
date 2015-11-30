@@ -11,12 +11,12 @@ namespace KarTac.Batalla.Shape
 			coords = rect;
 		}
 
-		public implicit operator Rectangle (Rectángulo rect)
+		public static implicit operator Rectangle (Rectángulo rect)
 		{
-			return coords;
+			return rect.coords;
 		}
 
-		public implicit operator Rectángulo (Rectangle rect)
+		public static implicit operator Rectángulo (Rectangle rect)
 		{
 			return new Rectángulo (rect);
 		}
