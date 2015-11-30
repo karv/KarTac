@@ -20,5 +20,14 @@ namespace KarTac.Batalla.Shape
 			var vect = new Vector2 (r.X, r.Y);
 			return vect.LengthSquared () < Radio * Radio;
 		}
+
+		public Rectangle MínimoRectángulo ()
+		{
+			return new Rectangle (
+				Centro.X - (int)Radio,
+				Centro.Y - (int)Radio,
+				2 * (int)Radio,
+				2 * (int)Radio);
+		}
 	}
 }
