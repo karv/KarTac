@@ -64,6 +64,7 @@
     <Compile Include="Controls\Primitivos\Formas.cs" />
     <Compile Include="Controls\Screens\ScreenDial.cs" />
     <Compile Include="Controls\Screens\ScreenPedirDeLista.cs" />
+    <Compile Include="Controls\Primitivos\Forma.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -89,8 +90,8 @@
     <Folder Include="Content\bin\" />
     <Folder Include="Controls\Screens\" />
     <Folder Include="Controls\Primitivos\" />
-    <Folder Include="Content\icons\" />
-    <Folder Include="Content\icons\skills\" />
+    <Folder Include="Content\Icons\" />
+    <Folder Include="Content\Icons\Skills\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\**\*.*">
