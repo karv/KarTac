@@ -40,5 +40,21 @@ namespace KarTac.Cliente.Controls.Primitivos
 			         SpriteEffects.None,
 			         0);
 		}
+
+		/// <summary>
+		/// Dibuja un rectángulo en un SpriteBatch
+		/// </summary>
+		public static void DrawRectangle (SpriteBatch bat, Rectangle rect, Color color, GraphicsDevice dev)
+		{
+			var tl = new Vector2 (rect.Left, rect.Top);
+			var tr = new Vector2 (rect.Right, rect.Top);
+			var bl = new Vector2 (rect.Left, rect.Bottom);
+			var br = new Vector2 (rect.Right, rect.Bottom);
+
+			DrawLine (bat, tl, tr, color, dev);
+			DrawLine (bat, tr, br, color, dev);
+			DrawLine (bat, br, bl, color, dev);
+			DrawLine (bat, bl, tl, color, dev);
+		}
 	}
 }
