@@ -5,7 +5,7 @@ namespace KarTac.Cliente.Controls.Screens
 {
 	public class BattleScreen: Screen
 	{
-		public List<Unidad> Unidades { get; }
+		public List<UnidadSprite> Unidades { get; }
 
 		public BottomMenu Menú { get; }
 
@@ -32,9 +32,9 @@ namespace KarTac.Cliente.Controls.Screens
 		/// Agrega una unidad
 		/// </summary>
 		/// <returns>Devuelve el control (recién creado) asociado a la unidad</returns>
-		public Unidad AgregaUnidad (KarTac.Batalla.Unidad unit)
+		public UnidadSprite AgregaUnidad (KarTac.Batalla.Unidad unit)
 		{
-			var ret = new Unidad (this, unit);
+			var ret = new UnidadSprite (this, unit);
 			ret.Inicializar ();
 			ret.Include ();
 			return ret;

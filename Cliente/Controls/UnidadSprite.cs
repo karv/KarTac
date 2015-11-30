@@ -8,9 +8,9 @@ using KarTac.Cliente.Controls.Primitivos;
 
 namespace KarTac.Cliente.Controls
 {
-	public class Unidad: SBC
+	public class UnidadSprite: SBC
 	{
-		public Unidad (IScreen screen, KarTac.Batalla.Unidad unid)
+		public UnidadSprite (IScreen screen, KarTac.Batalla.Unidad unid)
 			: base (screen)
 		{
 			UnidadBase = unid;
@@ -163,9 +163,6 @@ namespace KarTac.Cliente.Controls
 		public override void Update (GameTime gameTime)
 		{
 			base.Update (gameTime);
-			var delta = gameTime.ElapsedGameTime;
-			UnidadBase.PersonajeBase.Atributos.HP.Valor -= (int)(delta.TotalSeconds * 100);
-			//UnidadBase.AcumularPetición (gameTime);
 		}
 
 		public event Action AlCambiarMarcado;

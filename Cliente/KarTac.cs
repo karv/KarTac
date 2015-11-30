@@ -27,7 +27,7 @@ namespace KarTac.Cliente
 
 		public SpriteBatch Batch { get; private set; }
 
-		public readonly List<Unidad> Unidades = new List<Unidad> ();
+		public readonly List<UnidadSprite> Unidades = new List<UnidadSprite> ();
 
 		public KarTacGame ()
 		{
@@ -62,7 +62,7 @@ namespace KarTac.Cliente
 			unidad.Pos = new Point (100, 100);
 			unidad.PersonajeBase.Atributos.HP.Max = 100;
 			unidad.PersonajeBase.Atributos.HP.Valor = 80;
-			var unidSpr = new Unidad (CurrentScreen, unidad);
+			var unidSpr = new UnidadSprite (CurrentScreen, unidad);
 			//unidad.PersonajeBase.AlMorir += Exit;
 			unidad.PersonajeBase.Nombre = "Juanito";
 			unidad.Equipo = new KarTac.Batalla.Equipo (1, Color.Red);

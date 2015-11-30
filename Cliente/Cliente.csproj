@@ -48,7 +48,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="KarTac.cs" />
-    <Compile Include="Controls\Unidad.cs" />
     <Compile Include="Controls\IControl.cs" />
     <Compile Include="Controls\SBC.cs" />
     <Compile Include="Controls\Botón.cs" />
@@ -65,6 +64,7 @@
     <Compile Include="Controls\Screens\ScreenDial.cs" />
     <Compile Include="Controls\Screens\ScreenPedirDeLista.cs" />
     <Compile Include="Controls\Primitivos\Forma.cs" />
+    <Compile Include="Controls\UnidadSprite.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
