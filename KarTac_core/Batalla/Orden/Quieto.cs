@@ -1,12 +1,34 @@
 ﻿using System;
+using Microsoft.Xna.Framework;
 
 namespace KarTac.Batalla.Orden
 {
-	public class Quieto
+	public class Quieto : IOrden
 	{
-		public Quieto ()
+		public Unidad Unidad { get; }
+
+		public TimeSpan Duración { get; set; }
+
+		public Quieto (Unidad unidad)
 		{
+			Unidad = unidad;
+		}
+
+		public bool Update (GameTime time)
+		{
+			Duración -= time.ElapsedGameTime;
+			if (Duración.TotalMilliseconds < 0)
+			{
+				OnTerminar ();
+				return true;
+			}
+			return false;
+		}
+
+		public virtual void OnTerminar ()
+		{
+			if (Unidad.OrdenActual == this)
+				Unidad.OrdenActual = null;
 		}
 	}
 }
-

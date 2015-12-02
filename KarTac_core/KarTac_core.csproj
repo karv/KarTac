@@ -67,6 +67,7 @@
     <Compile Include="IExp.cs" />
     <Compile Include="Batalla\Shape\Rectángulo.cs" />
     <Compile Include="Batalla\Orden\IOrden.cs" />
+    <Compile Include="Batalla\Orden\Quieto.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
