@@ -9,9 +9,10 @@ namespace KarTac.Batalla.Orden
 
 		public TimeSpan Duración { get; set; }
 
-		public Quieto (Unidad unidad)
+		public Quieto (Unidad unidad, TimeSpan time = TimeSpan.Zero)
 		{
 			Unidad = unidad;
+			Duración = time;
 		}
 
 		public bool Update (GameTime time)
