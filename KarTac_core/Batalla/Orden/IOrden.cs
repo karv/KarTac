@@ -1,4 +1,6 @@
-﻿namespace KarTac.Batalla
+﻿using Microsoft.Xna.Framework;
+
+namespace KarTac.Batalla
 {
 	/// <summary>
 	/// Da la orden de qué hacer en cada Update de Unidad,
@@ -12,6 +14,6 @@
 		/// Realiza la orden a la unidad,
 		/// devuelve true si terminó la orden
 		/// </summary>
-		bool Update ();
+		bool Update (GameTime time);
 	}
 }
