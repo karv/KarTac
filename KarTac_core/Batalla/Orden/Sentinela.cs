@@ -11,7 +11,7 @@ namespace KarTac.Batalla.Orden
 		public float RangoAlerta { get; set; }
 
 		public Sentinela (Unidad unidad,
-		                  TimeSpan tiempo = TimeSpan.Zero,
+		                  TimeSpan tiempo,
 		                  float rangoAlerta = 0)
 			: base (unidad, tiempo)
 		{

@@ -69,6 +69,7 @@
     <Compile Include="Batalla\Orden\IOrden.cs" />
     <Compile Include="Batalla\Orden\Quieto.cs" />
     <Compile Include="Batalla\Orden\Sentinela.cs" />
+    <Compile Include="Batalla\Orden\Movimiento.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

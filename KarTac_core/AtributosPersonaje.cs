@@ -11,6 +11,12 @@ namespace KarTac
 		public int Defensa { get; set; }
 
 		/// <summary>
+		/// Que tan rápido recorre terreno.
+		/// Pixeles por segundo.
+		/// </summary>
+		public int Velocidad { get; set; }
+
+		/// <summary>
 		/// Max HP
 		/// </summary>
 		public HP HP { get; set; }
