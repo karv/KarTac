@@ -14,6 +14,8 @@ namespace KarTac.Batalla
 
 		public Personaje PersonajeBase { get; }
 
+		public IOrden OrdenActual { get; set; }
+
 		public Unidad (Personaje personaje, Campo campo)
 		{
 			PersonajeBase = personaje;
