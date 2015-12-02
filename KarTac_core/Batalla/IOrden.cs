@@ -8,6 +8,10 @@
 	{
 		Unidad Unidad { get; }
 
-		void Update ();
+		/// <summary>
+		/// Realiza la orden a la unidad,
+		/// devuelve true si terminó la orden
+		/// </summary>
+		bool Update ();
 	}
 }
