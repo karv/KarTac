@@ -64,6 +64,18 @@ namespace KarTac.Cliente.Controls.Screens
 			{
 				Menú.SkillSeleccionado.Ejecutar (UnidadActual, CampoBatalla);
 			}
+
+			// Ejecutar órdenes
+			foreach (var x in CampoBatalla.Unidades)
+			{
+				var ord = x.OrdenActual;
+				if (ord != null)
+					ord.Update (gameTime);
+				else
+				{
+					
+				}
+			}
 		}
 
 		public override void Inicializar ()
