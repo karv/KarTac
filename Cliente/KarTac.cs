@@ -57,13 +57,14 @@ namespace KarTac.Cliente
 			var pj = new Personaje ();
 			var c = sc.CampoBatalla;
 
+			pj.Atributos.HP.Max = 100;
+			pj.Atributos.HP.Valor = 80;
+			pj.Atributos.Velocidad = 100;
+			pj.Nombre = "Juanito";
+
 			var unidad = new KarTac.Batalla.Unidad (pj, c);
 			unidad.Interactor = new InteracciónHumano (unidad, this);
 			unidad.PosPrecisa = new Vector2 (100, 100);
-			unidad.PersonajeBase.Atributos.HP.Max = 100;
-			unidad.PersonajeBase.Atributos.HP.Valor = 80;
-			unidad.PersonajeBase.Atributos.Velocidad = 100;
-			unidad.PersonajeBase.Nombre = "Juanito";
 			unidad.Equipo = new KarTac.Batalla.Equipo (1, Color.Red);
 			//sc.UnidadActual = unidad;
 
