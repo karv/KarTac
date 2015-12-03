@@ -6,6 +6,7 @@ using KarTac.Cliente.Controls;
 using KarTac;
 using KarTac.Cliente.Controls.Screens;
 using System;
+using KarTac.Recursos;
 
 namespace KarTac.Cliente
 {
@@ -60,6 +61,7 @@ namespace KarTac.Cliente
 			pj.Atributos.HP.Max = 100;
 			pj.Atributos.HP.Valor = 80;
 			pj.Atributos.HP.Regen = 60;
+			pj.Atributos.Recs.Add (new HP ());
 			pj.Atributos.Velocidad = 100;
 			pj.Nombre = "Juanito";
 
