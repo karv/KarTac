@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.Linq;
-using KarTac.Batalla.Exp;
 
 namespace KarTac.Batalla
 {
@@ -15,7 +14,7 @@ namespace KarTac.Batalla
 		/// </summary>
 		public float ExpPorMinuto = 1;
 
-		public ISelectorTarget SelectorTarget { get; }
+		public ISelectorTarget SelectorTarget { get; set; }
 
 		/// <summary>
 		/// Unidades en el campo

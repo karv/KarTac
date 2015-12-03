@@ -9,7 +9,7 @@ namespace KarTac.Cliente.Controls.Screens
 {
 	public class Screen : IScreen
 	{
-		KarTacGame Game { get; }
+		public KarTacGame Game { get; }
 
 		public ListaControl Controles { get; }
 
@@ -61,7 +61,7 @@ namespace KarTac.Cliente.Controls.Screens
 			return Game.GetNewBatch ();
 		}
 
-		public void Update (GameTime gameTime)
+		public virtual void Update (GameTime gameTime)
 		{
 			foreach (var x in Controles)
 			{

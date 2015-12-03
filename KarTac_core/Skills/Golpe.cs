@@ -43,6 +43,8 @@ namespace KarTac.Skills
 			selector.MaxSelect = 1;
 			selector.PosiblesBlancos = new List<Unidad> (campo.Unidades.Where (x => área.Contiene (x.Pos)));
 			selector.IgualdadEstricta = true;
+			if (!selector.Validar ())
+				throw new Exception ();
 			var selección = selector.Selecciona () [0];
 
 			// usuario ataca a selección
@@ -50,7 +52,7 @@ namespace KarTac.Skills
 			var dañoBloqueado = Math.Max (
 				                    usuario.PersonajeBase.Atributos.Ataque - selección.PersonajeBase.Atributos.Defensa,
 				                    0);
-			var daño = dañoBloqueado * 2;
+			var daño = dañoBloqueado * 2 + 1;
 
 			selección.PersonajeBase.Atributos.HP.Valor -= daño;
 
