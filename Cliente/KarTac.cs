@@ -57,8 +57,8 @@ namespace KarTac.Cliente
 			var pj = new Personaje ();
 			var c = sc.CampoBatalla;
 
-			pj.Interactor = new Interactor ();
 			var unidad = new KarTac.Batalla.Unidad (pj, c);
+			unidad.Interactor = new InteracciónHumano (unidad, this);
 			unidad.Pos = new Point (100, 100);
 			unidad.PersonajeBase.Atributos.HP.Max = 100;
 			unidad.PersonajeBase.Atributos.HP.Valor = 80;

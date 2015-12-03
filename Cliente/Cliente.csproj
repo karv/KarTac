@@ -67,7 +67,6 @@
     <Compile Include="Controls\Screens\ScreenPedirDeLista.cs" />
     <Compile Include="Controls\Primitivos\Forma.cs" />
     <Compile Include="Controls\Screens\InteracciónHumano.cs" />
-    <Compile Include="Interactor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

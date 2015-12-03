@@ -48,7 +48,7 @@ namespace KarTac.Cliente.Controls.Screens
 				else
 				{
 					// Pedir orden al usuario o a la IA
-
+					x.Interactor.Ejecutar ();
 				}
 			}
 		}

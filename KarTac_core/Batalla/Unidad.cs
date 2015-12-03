@@ -14,6 +14,8 @@ namespace KarTac.Batalla
 
 		public Personaje PersonajeBase { get; }
 
+		public IInteractor Interactor { get; set; }
+
 		public IOrden OrdenActual { get; set; }
 
 		public AtributosPersonaje AtributosActuales { get; private set; }
