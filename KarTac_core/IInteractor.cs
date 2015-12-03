@@ -1,4 +1,5 @@
 ﻿using KarTac.Batalla;
+using System;
 
 
 namespace KarTac
@@ -8,5 +9,7 @@ namespace KarTac
 		Unidad Unidad { get; }
 
 		void Ejecutar ();
+
+		event Action AlTerminar;
 	}
 }
