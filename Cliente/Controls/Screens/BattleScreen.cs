@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework.Input;
 using KarTac.Batalla;
 using KarTac.Cliente.Controls;
 using System;
@@ -9,7 +8,7 @@ namespace KarTac.Cliente.Controls.Screens
 {
 	public class BattleScreen: Screen
 	{
-		public List<UnidadSprite> Unidades { get; }
+		public List<UnidadSprite> Unidades { get; private set; }
 
 		public Campo CampoBatalla { get; }
 
@@ -47,7 +46,7 @@ namespace KarTac.Cliente.Controls.Screens
 					var y = Unidades.Find (z => z.UnidadBase == x);
 					y.Marcado = true;
 					x.Interactor.Ejecutar ();
-					y.Marcado = false;
+					x.Interactor.AlTerminar += () => y.Marcado = false;
 				}
 			}
 		}
