@@ -7,7 +7,13 @@ namespace KarTac.Cliente.Controls.Screens
 	{
 		BottomMenu menú { get; }
 
-		public Unidad UnidadActual { get; }
+		public Unidad UnidadActual
+		{
+			get
+			{
+				return menú.UnidadActual;
+			}
+		}
 
 		public Campo CampoBatalla
 		{
@@ -22,9 +28,12 @@ namespace KarTac.Cliente.Controls.Screens
 		public InteracciónHumano (Unidad unid, KarTacGame game)
 			: base (game.CurrentScreen, game)
 		{
+			Controles = new ListaControl ();
 			menú = new BottomMenu (this);
+			menú.UnidadActual = unid;
 			menú.Include ();
-			UnidadActual = unid;
+
+
 		}
 
 		public override void Update (Microsoft.Xna.Framework.GameTime gameTime)
@@ -44,11 +53,11 @@ namespace KarTac.Cliente.Controls.Screens
 			{
 				menú.SkillSeleccionado.Ejecutar (UnidadActual, CampoBatalla);
 			}
-
 		}
 
 		public override void Inicializar ()
 		{
+			menú.Inicializar ();
 		}
 
 		#region IInteractor

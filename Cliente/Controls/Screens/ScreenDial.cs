@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace KarTac.Cliente.Controls.Screens
@@ -55,6 +54,7 @@ namespace KarTac.Cliente.Controls.Screens
 
 		public void Ejecutar ()
 		{
+			Inicializar ();
 			LoadContent ();
 			Juego.CurrentScreen = this;
 		}
