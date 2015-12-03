@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using KarTac.Recursos;
 using NUnit.Framework;
+using Microsoft.Xna.Framework;
 
 namespace KarTac
 {
@@ -31,6 +32,7 @@ namespace KarTac
 		{
 			Recs = new List<IRecurso> ();
 			HP = new HP ();
+			Recs.Add (HP);
 		}
 
 		public AtributosPersonaje Clonar ()
