@@ -10,7 +10,7 @@ namespace KarTac.Batalla.Orden
 		/// <summary>
 		/// Distancia al destino para considerar que llegó
 		/// </summary>
-		const float _distanciaCercano = 10;
+		const float _distanciaCercano = 3;
 
 		public Point Destino;
 
