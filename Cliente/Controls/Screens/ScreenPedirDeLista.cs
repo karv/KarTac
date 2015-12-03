@@ -12,12 +12,9 @@ namespace KarTac.Cliente.Controls.Screens
 	{
 		const string fontTexture = "UnitNameFont";
 
-		KarTacGame Juego { get; }
-
 		public ScreenPedirDeLista (IScreen anterior, KarTacGame game)
-			: base (anterior)
+			: base (anterior, game)
 		{
-			Juego = game;
 			Controles = new ListaControl ();
 			Lista = new List<TObj> ();
 			listaComponente = new Lista (this);
@@ -37,18 +34,6 @@ namespace KarTac.Cliente.Controls.Screens
 		Lista listaComponente { get; }
 
 		public Func<TObj, string> Stringificación { get; set; }
-
-		public void Ejecutar ()
-		{
-			LoadContent ();
-			Juego.CurrentScreen = this;
-		}
-
-		public void Salir ()
-		{
-			Juego.CurrentScreen = ScreenBase;
-			UnloadContent ();
-		}
 
 		public override ListaControl Controles { get; }
 

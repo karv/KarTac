@@ -18,6 +18,8 @@ namespace KarTac
 		/// <value>The atributos.</value>
 		public AtributosPersonaje Atributos { get; }
 
+		public IInteractor Interactor { get; set; }
+
 		public Personaje ()
 		{
 			Atributos = new AtributosPersonaje ();
@@ -40,5 +42,7 @@ namespace KarTac
 				Atributos.HP.AlValorCero -= value;
 			}
 		}
+
+		//	public InteracciónHumano
 	}
 }
