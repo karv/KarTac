@@ -32,7 +32,7 @@ namespace KarTac.Batalla.Orden
 			}
 			movDir.Normalize ();
 			movDir *= Unidad.AtributosActuales.Velocidad * (float)time.ElapsedGameTime.TotalSeconds;
-			Unidad.PosPrecisa = Unidad.PosPrecisa + movDir;//TODO: ¿Será mejor hacer que Unidad.Pos sea vector, con un getter obtener su Point?; //
+			Unidad.PosPrecisa = Unidad.PosPrecisa + movDir;
 			return false;
 		}
 
