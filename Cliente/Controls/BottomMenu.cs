@@ -4,7 +4,6 @@ using KarTac.Cliente.Controls.Screens;
 using MonoGame.Extended.BitmapFonts;
 using System;
 using KarTac.Skills;
-using System.ComponentModel;
 
 namespace KarTac.Cliente.Controls
 {
