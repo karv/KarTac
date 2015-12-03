@@ -11,7 +11,6 @@ namespace KarTac.Cliente.Controls
 		protected SBCC (IScreen screen)
 			: base (screen)
 		{
-			TiempoEntreCambios = TimeSpan.FromSeconds (2);
 		}
 
 		public TimeSpan TiempoEntreCambios { get; set; }
@@ -37,7 +36,7 @@ namespace KarTac.Cliente.Controls
 		/// <summary>
 		/// Se llama cuando ocurre el tick cronometrizado
 		/// </summary>
-		protected void OnChrono ()
+		protected virtual void OnChrono ()
 		{
 			AlTick?.Invoke ();
 		}

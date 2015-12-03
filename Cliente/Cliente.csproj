@@ -68,6 +68,7 @@
     <Compile Include="Controls\Primitivos\Forma.cs" />
     <Compile Include="Controls\Screens\InteracciónHumano.cs" />
     <Compile Include="Controls\SBCC.cs" />
+    <Compile Include="Controls\RandomStringDisplay.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
