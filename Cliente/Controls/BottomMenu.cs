@@ -4,6 +4,7 @@ using KarTac.Cliente.Controls.Screens;
 using MonoGame.Extended.BitmapFonts;
 using System;
 using KarTac.Skills;
+using System.ComponentModel;
 
 namespace KarTac.Cliente.Controls
 {
@@ -16,8 +17,9 @@ namespace KarTac.Cliente.Controls
 			: base (screen)
 		{
 			Prioridad = -20;
-			SkillsList = new ContenedorBotón (screen);
-			SkillsList.TipoOrden = ContenedorBotón.TipoOrdenEnum.ColumnaPrimero;
+			skillsList = new ContenedorBotón (screen);
+			skillsList.TipoOrden = ContenedorBotón.TipoOrdenEnum.ColumnaPrimero;
+			display = new RandomStringDisplay (screen);
 		}
 
 		int índiceSkillSel;
@@ -27,10 +29,10 @@ namespace KarTac.Cliente.Controls
 			get{ return índiceSkillSel; }
 			set
 			{
-				var nuevoInd = Math.Min (Math.Max (value, 0), SkillsList.Count - 1);
-				SkillsList.BotónEnÍndice (ÍndiceSkillSel).Color = skillNoSelColor;
+				var nuevoInd = Math.Min (Math.Max (value, 0), skillsList.Count - 1);
+				skillsList.BotónEnÍndice (ÍndiceSkillSel).Color = skillNoSelColor;
 				índiceSkillSel = nuevoInd;
-				SkillsList.BotónEnÍndice (ÍndiceSkillSel).Color = skillSelColor;
+				skillsList.BotónEnÍndice (ÍndiceSkillSel).Color = skillSelColor;
 			}
 		}
 
@@ -54,10 +56,17 @@ namespace KarTac.Cliente.Controls
 
 		public override void Inicializar ()
 		{
-			SkillsList.Posición = new Point (
-				GetBounds ().Right - SkillsList.GetBounds ().Width - 50,
-				GetBounds ().Bottom - SkillsList.GetBounds ().Height - 50
+			skillsList.Posición = new Point (
+				GetBounds ().Right - skillsList.GetBounds ().Width - 50,
+				GetBounds ().Bottom - skillsList.GetBounds ().Height - 50
 			);
+
+			display.Inicializar ();
+
+			foreach (var x in UnidadActual.AtributosActuales.Recs)
+			{
+				display.Mostrables.Add (x.ToString ());
+			}
 
 			base.Inicializar ();
 		}
@@ -75,12 +84,12 @@ namespace KarTac.Cliente.Controls
 				unidadActual = value;
 
 				// Actualizar skills
-				SkillsList.Clear ();
+				skillsList.Clear ();
 
 				foreach (var sk in UnidadActual.PersonajeBase.Skills)
 				{
 					
-					var bt = SkillsList.Add ();
+					var bt = skillsList.Add ();
 					bt.Textura = sk.IconTextureName;
 				}
 
@@ -93,13 +102,16 @@ namespace KarTac.Cliente.Controls
 		BitmapFont InfoFont;
 		public Color BgColor = Color.Blue;
 
-		ContenedorBotón SkillsList { get; }
+		ContenedorBotón skillsList { get; }
+
+		RandomStringDisplay display { get; }
 
 		public override void LoadContent ()
 		{
 			textura = Screen.Content.Load<Texture2D> ("Rect");
 			InfoFont = Screen.Content.Load<BitmapFont> ("fonts");
-			SkillsList.LoadContent ();
+			skillsList.LoadContent ();
+			display.LoadContent ();
 		}
 
 		public override void Dibujar (GameTime gameTime)
@@ -119,9 +131,17 @@ namespace KarTac.Cliente.Controls
 				                new Vector2 (20, GetBounds ().Top + 20),
 				                Color.Red * 0.8f);
 
-				SkillsList.Dibujar (gameTime);
+				skillsList.Dibujar (gameTime);
+
+				display.Dibujar (gameTime);
 			}
 			bat.End ();
+		}
+
+		public override void Update (GameTime gameTime)
+		{
+			base.Update (gameTime);
+			display.Update (gameTime);
 		}
 
 		public override Rectangle GetBounds ()

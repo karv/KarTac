@@ -22,7 +22,7 @@ namespace KarTac.Cliente.Controls
 		}
 
 		BitmapFont Font;
-		public Color Color = Color.White * 0.8;
+		public Color Color = Color.White * 0.8f;
 
 		public Vector2 Pos;
 
