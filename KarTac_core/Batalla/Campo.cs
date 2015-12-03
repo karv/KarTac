@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.Linq;
+using Microsoft.Xna.Framework;
 
 namespace KarTac.Batalla
 {
@@ -28,12 +29,33 @@ namespace KarTac.Batalla
 		}
 
 
-		public void Tick (TimeSpan delta)
+		public void Tick (GameTime delta)
 		{
-			RecibirExp (delta);
 			foreach (var x in Unidades)
 			{
-				x.AcumularPetición (delta);
+				var ord = x.OrdenActual;
+				if (ord != null)
+					ord.Update (delta);
+				else
+				{
+					// Pedir orden al usuario o a la IA
+					AlRequerirOrdenAntes?.Invoke (x);
+					x.Interactor.Ejecutar ();
+					x.Interactor.AlTerminar += () => AlRequerirOrdenDespués?.Invoke (x);
+				}
+			}
+
+
+			RecibirExp (delta.ElapsedGameTime);
+
+			foreach (var x in Unidades)
+			{
+				x.AcumularPetición (delta.ElapsedGameTime);
+				// Sus recursos
+				foreach (var y in x.AtributosActuales.Recs)
+				{
+					y.Tick (delta);
+				}
 			}
 		}
 
@@ -48,5 +70,8 @@ namespace KarTac.Batalla
 				uni.RecibirExp (mins * ExpPorMinuto);
 			}
 		}
+
+		public event Action<Unidad> AlRequerirOrdenAntes;
+		public event Action<Unidad> AlRequerirOrdenDespués;
 	}
 }
