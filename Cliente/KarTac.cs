@@ -59,7 +59,7 @@ namespace KarTac.Cliente
 
 			var unidad = new KarTac.Batalla.Unidad (pj, c);
 			unidad.Interactor = new InteracciónHumano (unidad, this);
-			unidad.Pos = new Point (100, 100);
+			unidad.PosPrecisa = new Vector2 (100, 100);
 			unidad.PersonajeBase.Atributos.HP.Max = 100;
 			unidad.PersonajeBase.Atributos.HP.Valor = 80;
 			unidad.PersonajeBase.Atributos.Velocidad = 100;

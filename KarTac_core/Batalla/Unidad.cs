@@ -8,7 +8,15 @@ namespace KarTac.Batalla
 {
 	public class Unidad : IObjetivo
 	{
-		public Point Pos { get; set; }
+		public Point Pos
+		{
+			get
+			{
+				return PosPrecisa.ToPoint ();
+			}
+		}
+
+		public Vector2 PosPrecisa { get; set; }
 
 		public Campo CampoBatalla { get; }
 

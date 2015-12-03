@@ -26,13 +26,13 @@ namespace KarTac.Batalla.Orden
 			var movDir = (Destino - Unidad.Pos).ToVector2 ();
 			if (movDir.Length () < _distanciaCercano)
 			{
-				Unidad.Pos = Destino;
+				Unidad.PosPrecisa = Destino.ToVector2 ();
 				OnTerminar ();
 				return true;
 			}
 			movDir.Normalize ();
 			movDir *= Unidad.AtributosActuales.Velocidad * (float)time.ElapsedGameTime.TotalSeconds;
-			Unidad.Pos = Unidad.Pos + movDir.ToPoint (); //TODO: ¿Será mejor hacer que Unidad.Pos sea vector, con un getter obtener su Point?
+			Unidad.PosPrecisa = Unidad.PosPrecisa + movDir;//TODO: ¿Será mejor hacer que Unidad.Pos sea vector, con un getter obtener su Point?; //
 			return false;
 		}
 
