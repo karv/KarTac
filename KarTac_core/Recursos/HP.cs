@@ -6,7 +6,7 @@ namespace KarTac.Recursos
 {
 	public class HP : IRecurso
 	{
-		public void Tick (DateTime delta)
+		public void Tick (GameTime delta)
 		{
 			throw new NotImplementedException ();
 		}

@@ -19,7 +19,7 @@ namespace KarTac.Recursos
 		/// <summary>
 		/// Ejecuta un tick de longitud dada
 		/// </summary>
-		void Tick (DateTime delta);
+		void Tick (GameTime delta);
 
 		/// <summary>
 		/// Se ejecuta junto con Update,
