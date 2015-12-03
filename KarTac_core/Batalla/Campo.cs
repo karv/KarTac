@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.Linq;
+using Microsoft.Xna.Framework;
 
 namespace KarTac.Batalla
 {
@@ -28,12 +29,17 @@ namespace KarTac.Batalla
 		}
 
 
-		public void Tick (TimeSpan delta)
+		public void Tick (GameTime delta)
 		{
-			RecibirExp (delta);
+			RecibirExp (delta.ElapsedGameTime);
 			foreach (var x in Unidades)
 			{
-				x.AcumularPetición (delta);
+				x.AcumularPetición (delta.ElapsedGameTime);
+				// Sus recursos
+				foreach (var y in x.AtributosActuales.Recs)
+				{
+					y.Tick (delta);
+				}
 			}
 		}
 
