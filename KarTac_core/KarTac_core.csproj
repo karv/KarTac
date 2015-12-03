@@ -66,6 +66,11 @@
     <Compile Include="DictionaryTag.cs" />
     <Compile Include="IExp.cs" />
     <Compile Include="Batalla\Shape\Rectángulo.cs" />
+    <Compile Include="Batalla\Orden\IOrden.cs" />
+    <Compile Include="Batalla\Orden\Quieto.cs" />
+    <Compile Include="Batalla\Orden\Sentinela.cs" />
+    <Compile Include="Batalla\Orden\Movimiento.cs" />
+    <Compile Include="IInteractor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
@@ -88,6 +93,7 @@
     <Folder Include="Batalla\Shape\" />
     <Folder Include="Batalla\Exp\" />
     <Folder Include="Buff\" />
+    <Folder Include="Batalla\Orden\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OpenTK.dll.config" />

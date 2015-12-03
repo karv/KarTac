@@ -66,7 +66,7 @@
     <Compile Include="Controls\Screens\ScreenDial.cs" />
     <Compile Include="Controls\Screens\ScreenPedirDeLista.cs" />
     <Compile Include="Controls\Primitivos\Forma.cs" />
-    <Compile Include="Controls\UnidadSprite.cs" />
+    <Compile Include="Controls\Screens\InteracciónHumano.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

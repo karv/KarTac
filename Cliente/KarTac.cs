@@ -58,25 +58,18 @@ namespace KarTac.Cliente
 			var c = sc.CampoBatalla;
 
 			var unidad = new KarTac.Batalla.Unidad (pj, c);
+			unidad.Interactor = new InteracciónHumano (unidad, this);
 			unidad.Pos = new Point (100, 100);
 			unidad.PersonajeBase.Atributos.HP.Max = 100;
 			unidad.PersonajeBase.Atributos.HP.Valor = 80;
+			unidad.PersonajeBase.Atributos.Velocidad = 100;
 			unidad.PersonajeBase.Nombre = "Juanito";
 			unidad.Equipo = new KarTac.Batalla.Equipo (1, Color.Red);
-			sc.UnidadActual = unidad;
-
-			// Otra unidad
-			var unidad2 = new KarTac.Batalla.Unidad (new Personaje (), c);
-			unidad2.Pos = new Point (101, 101);
-			unidad2.PersonajeBase.Atributos.HP.Max = 100;
-			unidad2.PersonajeBase.Atributos.HP.Valor = 80;
-			unidad2.PersonajeBase.Nombre = "Pedrito";
-			unidad2.Equipo = new KarTac.Batalla.Equipo (2, Color.Green);
+			//sc.UnidadActual = unidad;
 
 			c.Unidades.Add (unidad);
-			c.Unidades.Add (unidad2);
-			c.SelectorTarget = new Selector (this);
 
+			c.SelectorTarget = new Selector (this);
 
 			CurrentScreen.Inicializar ();
 

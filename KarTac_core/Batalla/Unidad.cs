@@ -14,10 +14,17 @@ namespace KarTac.Batalla
 
 		public Personaje PersonajeBase { get; }
 
+		public IInteractor Interactor { get; set; }
+
+		public IOrden OrdenActual { get; set; }
+
+		public AtributosPersonaje AtributosActuales { get; private set; }
+
 		public Unidad (Personaje personaje, Campo campo)
 		{
 			PersonajeBase = personaje;
 			CampoBatalla = campo;
+			AtributosActuales = PersonajeBase.Atributos; //TODO: Realizar clonación
 		}
 
 		/// <summary>

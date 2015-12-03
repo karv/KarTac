@@ -11,27 +11,11 @@ namespace KarTac.Cliente.Controls.Screens
 	{
 		public List<UnidadSprite> Unidades { get; }
 
-		public BottomMenu Menú { get; }
-
 		public Campo CampoBatalla { get; }
-
-		public Unidad UnidadActual
-		{
-			get
-			{
-				return Menú.UnidadActual;
-			}
-			set
-			{
-				Menú.UnidadActual = value;
-			}
-		}
 
 		public BattleScreen (KarTacGame juego, Campo campo)
 			: base (juego)
 		{
-			Menú = new BottomMenu (this);
-			Menú.Include ();
 			CampoBatalla = campo;
 		}
 
@@ -51,18 +35,17 @@ namespace KarTac.Cliente.Controls.Screens
 		public override void Update (Microsoft.Xna.Framework.GameTime gameTime)
 		{
 			base.Update (gameTime);
-			var keyb = Keyboard.GetState ();
-			if (keyb.IsKeyDown (Keys.Down))
+			// Ejecutar órdenes
+			foreach (var x in CampoBatalla.Unidades)
 			{
-				Menú.ÍndiceSkillSel++;
-			}
-			if (keyb.IsKeyDown (Keys.Up))
-			{
-				Menú.ÍndiceSkillSel--;
-			}
-			if (keyb.IsKeyDown (Keys.Enter))
-			{
-				Menú.SkillSeleccionado.Ejecutar (UnidadActual, CampoBatalla);
+				var ord = x.OrdenActual;
+				if (ord != null)
+					ord.Update (gameTime);
+				else
+				{
+					// Pedir orden al usuario o a la IA
+					x.Interactor.Ejecutar ();
+				}
 			}
 		}
 

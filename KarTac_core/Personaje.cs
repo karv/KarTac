@@ -40,5 +40,7 @@ namespace KarTac
 				Atributos.HP.AlValorCero -= value;
 			}
 		}
+
+		//	public InteracciónHumano
 	}
 }
