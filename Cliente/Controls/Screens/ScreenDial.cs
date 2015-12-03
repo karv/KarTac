@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -62,6 +63,7 @@ namespace KarTac.Cliente.Controls.Screens
 		public void Salir ()
 		{
 			Juego.CurrentScreen = ScreenBase;
+			AlTerminar?.Invoke ();
 			UnloadContent ();
 		}
 
@@ -104,6 +106,7 @@ namespace KarTac.Cliente.Controls.Screens
 				return ScreenBase.Device;
 			}
 		}
+
+		public event Action AlTerminar;
 	}
 }
-
