@@ -60,6 +60,8 @@ namespace KarTac.Cliente.Controls
 				GetBounds ().Right - skillsList.GetBounds ().Width - 50,
 				GetBounds ().Bottom - skillsList.GetBounds ().Height - 50
 			);
+			display.Pos = new Vector2 (20, GetBounds ().Top + 50);
+			display.Color = Color.Green * 0.8f;
 
 			display.Inicializar ();
 
@@ -122,10 +124,9 @@ namespace KarTac.Cliente.Controls
 
 			if (UnidadActual != null)
 			{
-				string infoStr = string.Format ("Nombre: {0}\nHP: {1}/{2}",
-				                                UnidadActual.PersonajeBase.Nombre,
-				                                UnidadActual.AtributosActuales.HP.Valor,
-				                                UnidadActual.AtributosActuales.HP.Max);
+				
+				string infoStr = string.Format ("Nombre: {0}",
+				                                UnidadActual.PersonajeBase.Nombre);
 				bat.DrawString (InfoFont,
 				                infoStr,
 				                new Vector2 (20, GetBounds ().Top + 20),
