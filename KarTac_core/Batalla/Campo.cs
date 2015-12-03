@@ -47,6 +47,7 @@ namespace KarTac.Batalla
 
 
 			RecibirExp (delta.ElapsedGameTime);
+
 			foreach (var x in Unidades)
 			{
 				x.AcumularPetición (delta.ElapsedGameTime);

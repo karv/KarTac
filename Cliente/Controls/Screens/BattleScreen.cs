@@ -47,6 +47,7 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 			base.Update (gameTime);
 			// Ejecutar órdenes
+			CampoBatalla.Tick (gameTime);
 		}
 
 		public override void Inicializar ()
