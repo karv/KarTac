@@ -11,15 +11,11 @@ namespace KarTac.Cliente.Controls.Screens
 	{
 		public List<UnidadSprite> Unidades { get; }
 
-		// public BottomMenu Menú { get; }
-
 		public Campo CampoBatalla { get; }
 
 		public BattleScreen (KarTacGame juego, Campo campo)
 			: base (juego)
 		{
-			//Menú = new BottomMenu (this);
-			//Menú.Include ();
 			CampoBatalla = campo;
 		}
 
