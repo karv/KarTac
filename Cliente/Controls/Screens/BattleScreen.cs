@@ -16,6 +16,18 @@ namespace KarTac.Cliente.Controls.Screens
 			: base (juego)
 		{
 			CampoBatalla = campo;
+
+			CampoBatalla.AlRequerirOrdenAntes += delegate(Unidad x)
+			{
+				var y = Unidades.Find (z => z.UnidadBase == x);
+				y.Marcado = true;
+			};
+
+			CampoBatalla.AlRequerirOrdenDespués += delegate(Unidad x)
+			{
+				var y = Unidades.Find (z => z.UnidadBase == x);
+				y.Marcado = false;
+			};
 		}
 
 		/// <summary>
@@ -35,20 +47,6 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 			base.Update (gameTime);
 			// Ejecutar órdenes
-			foreach (var x in CampoBatalla.Unidades)
-			{
-				var ord = x.OrdenActual;
-				if (ord != null)
-					ord.Update (gameTime);
-				else
-				{
-					// Pedir orden al usuario o a la IA
-					var y = Unidades.Find (z => z.UnidadBase == x);
-					y.Marcado = true;
-					x.Interactor.Ejecutar ();
-					x.Interactor.AlTerminar += () => y.Marcado = false;
-				}
-			}
 		}
 
 		public override void Inicializar ()
