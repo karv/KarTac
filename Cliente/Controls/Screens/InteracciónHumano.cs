@@ -1,5 +1,7 @@
 ﻿using KarTac.Batalla;
 using Microsoft.Xna.Framework.Input;
+using System.Threading;
+using KarTac.Batalla.Orden;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -53,6 +55,16 @@ namespace KarTac.Cliente.Controls.Screens
 			{
 				menú.SkillSeleccionado.Ejecutar (UnidadActual, CampoBatalla);
 			}
+
+			var mouse = Mouse.GetState ();
+			if (mouse.LeftButton == ButtonState.Pressed)
+			{
+				var ord = new Movimiento (UnidadActual);
+				ord.Destino = new Microsoft.Xna.Framework.Point (mouse.X, mouse.Y);
+				UnidadActual.OrdenActual = ord;
+				Salir (); // Devuelve el control a la pantalla anterior
+			}
+		
 		}
 
 		public override void Inicializar ()
