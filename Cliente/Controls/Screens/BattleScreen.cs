@@ -44,7 +44,10 @@ namespace KarTac.Cliente.Controls.Screens
 				else
 				{
 					// Pedir orden al usuario o a la IA
+					var y = Unidades.Find (z => z.UnidadBase == x);
+					y.Marcado = true;
 					x.Interactor.Ejecutar ();
+					y.Marcado = false;
 				}
 			}
 		}
@@ -52,9 +55,11 @@ namespace KarTac.Cliente.Controls.Screens
 		public override void Inicializar ()
 		{
 			// Crear sprites de unidades
+			Unidades = new List<UnidadSprite> (CampoBatalla.Unidades.Count);
 			foreach (var u in CampoBatalla.Unidades)
 			{
 				var sprite = new UnidadSprite (this, u);
+				Unidades.Add (sprite);
 				sprite.Include ();
 			}
 			base.Inicializar ();
