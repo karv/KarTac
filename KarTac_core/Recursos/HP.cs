@@ -8,7 +8,7 @@ namespace KarTac.Recursos
 	{
 		public void Tick (GameTime delta)
 		{
-			throw new NotImplementedException ();
+			Valor += (float)delta.ElapsedGameTime.TotalMinutes * Regen; // Regeneración natural
 		}
 
 		public string Nombre
@@ -21,6 +21,11 @@ namespace KarTac.Recursos
 
 		float _max;
 		float _actual;
+
+		/// <summary>
+		/// HP regenerada por minuto
+		/// </summary>
+		public float Regen { get; set; }
 
 		public float Max
 		{
