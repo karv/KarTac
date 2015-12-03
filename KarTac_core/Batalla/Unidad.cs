@@ -32,7 +32,7 @@ namespace KarTac.Batalla
 		{
 			PersonajeBase = personaje;
 			CampoBatalla = campo;
-			AtributosActuales = PersonajeBase.Atributos; //TODO: Realizar clonación
+			AtributosActuales = PersonajeBase.Atributos.Clonar ();
 		}
 
 		/// <summary>

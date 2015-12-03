@@ -32,5 +32,10 @@ namespace KarTac
 			Recs = new List<IRecurso> ();
 			HP = new HP ();
 		}
+
+		public AtributosPersonaje Clonar ()
+		{
+			return MemberwiseClone () as AtributosPersonaje;
+		}
 	}
 }
