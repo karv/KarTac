@@ -55,6 +55,9 @@ namespace KarTac.Cliente.Controls.Screens
 
 		public void Ejecutar ()
 		{
+			#if DEBUG
+			System.Diagnostics.Debug.WriteLine ("\n\nEntrando a " + this + "\nDesde " + Juego.CurrentScreen);
+			#endif
 			Inicializar ();
 			LoadContent ();
 			Juego.CurrentScreen = this;
@@ -62,6 +65,9 @@ namespace KarTac.Cliente.Controls.Screens
 
 		public void Salir ()
 		{
+			#if DEBUG
+			System.Diagnostics.Debug.WriteLine ("\n\nSaliendo a " + ScreenBase + "\nDesde " + this);
+			#endif
 			Juego.CurrentScreen = ScreenBase;
 			AlTerminar?.Invoke ();
 			UnloadContent ();
@@ -105,6 +111,11 @@ namespace KarTac.Cliente.Controls.Screens
 			{
 				return ScreenBase.Device;
 			}
+		}
+
+		public override string ToString ()
+		{
+			return string.Format ("[{0}]\nAnterior: {1}\nGame: {2}", GetType (), ScreenBase, Juego);
 		}
 
 		public event Action AlTerminar;

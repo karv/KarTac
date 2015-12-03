@@ -106,5 +106,10 @@ namespace KarTac.Cliente.Controls.Screens
 				return Game.GraphicsDevice;
 			}
 		}
+
+		public override string ToString ()
+		{
+			return string.Format ("[{0}]\nGame: {1}", GetType (), Game);
+		}
 	}
 }
