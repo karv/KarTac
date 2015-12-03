@@ -55,8 +55,8 @@ namespace KarTac.Cliente.Controls
 		public override void Inicializar ()
 		{
 			SkillsList.Posición = new Point (
-				GetBounds ().Right - SkillsList.GetBounds ().Right - 50,
-				GetBounds ().Bottom - SkillsList.GetBounds ().Bottom - 50
+				GetBounds ().Right - SkillsList.GetBounds ().Width - 50,
+				GetBounds ().Bottom - SkillsList.GetBounds ().Height - 50
 			);
 
 			base.Inicializar ();
