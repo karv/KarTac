@@ -49,13 +49,8 @@ namespace KarTac.Skills
 			
 			selector.AlResponder += obj => estado_Seleccionado (
 				obj,
-				usuario,
-				campo);
-			//var selección = selector.Selecciona () [0];
+				usuario);
 			selector.Selecciona ();
-
-
-
 		}
 
 		public bool Usable (Unidad usuario, Campo campo)
@@ -70,8 +65,7 @@ namespace KarTac.Skills
 		}
 
 		void estado_Seleccionado (SelecciónRespuesta resp,
-		                          Unidad usuario,
-		                          Campo campo)
+		                          Unidad usuario)
 		{
 			var selección = resp.Selección [0];
 			// usuario ataca a selección
@@ -84,7 +78,6 @@ namespace KarTac.Skills
 			selección.AtributosActuales.HP.Valor -= daño;
 
 			PeticiónExpAcumulada += 1;
-
 		}
 	}
 }
