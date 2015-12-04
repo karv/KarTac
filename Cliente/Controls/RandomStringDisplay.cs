@@ -66,6 +66,11 @@ namespace KarTac.Cliente.Controls
 			StringSiguiente ();
 			base.OnChrono ();
 		}
+
+		public override void Inicializar ()
+		{
+			base.Inicializar ();
+			Mostrables.Clear ();
+		}
 	}
 }
-
