@@ -33,7 +33,9 @@ namespace KarTac.Cliente.Controls.Screens
 
 			diálogo.AlTerminar += delegate
 			{
-				var sel = diálogo.Selección ();
+				var sel = diálogo.SelecciónActual;
+				if (sel.Count == 0 && !PuedeSerVacío)
+					sel.Add (diálogo.ObjetoEnCursor);
 				AlResponder?.Invoke (new SelecciónRespuesta (sel));
 			};
 
@@ -51,6 +53,8 @@ namespace KarTac.Cliente.Controls.Screens
 		/// Establece si el número máximo de blancos es el realidad el número exacto de blancos.
 		/// </summary>
 		public bool IgualdadEstricta { get; set; }
+
+		public bool PuedeSerVacío { set; private get; }
 
 		/// <summary>
 		/// Establece los posibles blancos
