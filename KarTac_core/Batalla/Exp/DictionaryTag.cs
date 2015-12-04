@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace KarTac
+namespace KarTac.Batalla.Exp
 {
 	public class DictionaryTag: Dictionary<IExp, double>, ITagging
 	{

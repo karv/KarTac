@@ -65,13 +65,13 @@
     <Compile Include="Batalla\Orden\Quieto.cs" />
     <Compile Include="Batalla\Orden\Sentinela.cs" />
     <Compile Include="Batalla\Orden\Movimiento.cs" />
-    <Compile Include="IInteractor.cs" />
     <Compile Include="Recursos\ListaRecursos.cs" />
     <Compile Include="Personaje\AtributosPersonaje.cs" />
     <Compile Include="Personaje\Personaje.cs" />
     <Compile Include="Batalla\Exp\DictionaryTag.cs" />
     <Compile Include="Batalla\Exp\IExp.cs" />
     <Compile Include="Batalla\Exp\ITagging.cs" />
+    <Compile Include="Batalla\IInteractor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

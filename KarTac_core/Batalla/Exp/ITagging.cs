@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace KarTac
+namespace KarTac.Batalla.Exp
 {
 	/// <summary>
 	/// Representa un objeto que tiene tags
