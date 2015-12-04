@@ -66,12 +66,12 @@
     <Compile Include="Batalla\Orden\Sentinela.cs" />
     <Compile Include="Batalla\Orden\Movimiento.cs" />
     <Compile Include="Recursos\ListaRecursos.cs" />
-    <Compile Include="Personaje\AtributosPersonaje.cs" />
-    <Compile Include="Personaje\Personaje.cs" />
     <Compile Include="Batalla\Exp\DictionaryTag.cs" />
     <Compile Include="Batalla\Exp\IExp.cs" />
     <Compile Include="Batalla\Exp\ITagging.cs" />
     <Compile Include="Batalla\IInteractor.cs" />
+    <Compile Include="Personajes\AtributosPersonaje.cs" />
+    <Compile Include="Personajes\Personaje.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
@@ -95,7 +95,7 @@
     <Folder Include="Batalla\Exp\" />
     <Folder Include="Buff\" />
     <Folder Include="Batalla\Orden\" />
-    <Folder Include="Personaje\" />
+    <Folder Include="Personajes\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OpenTK.dll.config" />

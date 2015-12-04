@@ -3,10 +3,10 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using KarTac.Cliente.Controls;
-using KarTac;
 using KarTac.Cliente.Controls.Screens;
 using System;
 using MonoGame.Extended;
+using KarTac.Personajes;
 
 namespace KarTac.Cliente
 {

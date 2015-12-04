@@ -3,6 +3,7 @@ using System.Linq;
 using KarTac.Batalla.Shape;
 using System.Collections.Generic;
 using System;
+using KarTac.Batalla.Exp;
 
 namespace KarTac.Skills
 {

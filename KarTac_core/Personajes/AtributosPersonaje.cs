@@ -1,6 +1,6 @@
 ﻿using KarTac.Recursos;
 
-namespace KarTac.Personaje
+namespace KarTac.Personajes
 {
 	public class AtributosPersonaje
 	{

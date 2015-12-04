@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using KarTac.Recursos;
 using System;
 using KarTac.Batalla.Orden;
+using KarTac.Personajes;
+using KarTac.Batalla.Exp;
 
 namespace KarTac.Batalla
 {

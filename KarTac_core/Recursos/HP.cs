@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using KarTac.Batalla;
+using KarTac.Batalla.Exp;
 
 namespace KarTac.Recursos
 {
@@ -61,7 +62,7 @@ namespace KarTac.Recursos
 			}
 		}
 
-		void IExp.RecibirExp (double exp)
+		void  IExp.RecibirExp (double exp)
 		{
 			Max += (float)exp; //TODO Aquí no creo que termine siendo así de simple.
 			PeticiónExpAcumulada = 0;
