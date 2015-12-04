@@ -2,6 +2,10 @@
 
 namespace KarTac.Cliente.Controls.Utils
 {
+	/// <summary>
+	/// Permite obtener FPS de un proceso cíclico
+	/// Se debe invocar a Update en cada ciclo
+	/// </summary>
 	public class ContadorFps
 	{
 		readonly double[] muestreo;
@@ -31,11 +35,17 @@ namespace KarTac.Cliente.Controls.Utils
 			}
 		}
 
+		/// <summary>
+		/// Agrega una muestra para aproximar a Fps
+		/// </summary>
 		public void Update (TimeSpan time)
 		{
 			agregaMuestra (time.TotalSeconds);
 		}
 
+		/// <summary>
+		/// Devuelve los cuadros por segundo según la muestra
+		/// </summary>
 		public double Fps
 		{
 			get
