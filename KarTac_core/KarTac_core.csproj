@@ -44,8 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AtributosPersonaje.cs" />
-    <Compile Include="Personaje.cs" />
     <Compile Include="Batalla\Campo.cs" />
     <Compile Include="Batalla\Unidad.cs" />
     <Compile Include="Batalla\IEquipoSelector.cs" />
@@ -62,9 +60,6 @@
     <Compile Include="Buff\IBuff.cs" />
     <Compile Include="IObjetivo.cs" />
     <Compile Include="Buff\BuffCronometrado.cs" />
-    <Compile Include="ITagging.cs" />
-    <Compile Include="DictionaryTag.cs" />
-    <Compile Include="IExp.cs" />
     <Compile Include="Batalla\Shape\Rectángulo.cs" />
     <Compile Include="Batalla\Orden\IOrden.cs" />
     <Compile Include="Batalla\Orden\Quieto.cs" />
@@ -72,6 +67,11 @@
     <Compile Include="Batalla\Orden\Movimiento.cs" />
     <Compile Include="IInteractor.cs" />
     <Compile Include="Recursos\ListaRecursos.cs" />
+    <Compile Include="Personaje\AtributosPersonaje.cs" />
+    <Compile Include="Personaje\Personaje.cs" />
+    <Compile Include="Batalla\Exp\DictionaryTag.cs" />
+    <Compile Include="Batalla\Exp\IExp.cs" />
+    <Compile Include="Batalla\Exp\ITagging.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
@@ -95,6 +95,7 @@
     <Folder Include="Batalla\Exp\" />
     <Folder Include="Buff\" />
     <Folder Include="Batalla\Orden\" />
+    <Folder Include="Personaje\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OpenTK.dll.config" />
