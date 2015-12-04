@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using KarTac.Recursos;
 using System;
-
+using KarTac.Batalla.Orden;
 
 namespace KarTac.Batalla
 {

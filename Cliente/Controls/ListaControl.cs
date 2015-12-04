@@ -33,4 +33,3 @@ namespace KarTac.Cliente.Controls
 		}
 	}
 }
-

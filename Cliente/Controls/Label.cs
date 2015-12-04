@@ -18,7 +18,7 @@ namespace KarTac.Cliente.Controls
 
 		public Func<string> Texto;
 
-		public override void Dibujar (Microsoft.Xna.Framework.GameTime gameTime)
+		public override void Dibujar (GameTime gameTime)
 		{
 			var bat = Screen.Batch;
 			bat.DrawString (font, Texto (), Posición.ToVector2 (), Color);
@@ -29,7 +29,7 @@ namespace KarTac.Cliente.Controls
 
 		public Color Color { get; set; }
 
-		public override Microsoft.Xna.Framework.Rectangle GetBounds ()
+		public override Rectangle GetBounds ()
 		{
 			return font.GetStringRectangle (Texto (), Posición.ToVector2 ());
 		}

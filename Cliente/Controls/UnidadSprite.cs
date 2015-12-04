@@ -160,11 +160,6 @@ namespace KarTac.Cliente.Controls
 			                Color.White);
 		}
 
-		public override void Update (GameTime gameTime)
-		{
-			base.Update (gameTime);
-		}
-
 		public event Action AlCambiarMarcado;
 	}
 }

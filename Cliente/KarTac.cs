@@ -6,7 +6,6 @@ using KarTac.Cliente.Controls;
 using KarTac;
 using KarTac.Cliente.Controls.Screens;
 using System;
-using KarTac.Recursos;
 using MonoGame.Extended;
 
 namespace KarTac.Cliente
@@ -212,4 +211,4 @@ namespace KarTac.Cliente
 
 		#endregion
 	}
-} 
+}

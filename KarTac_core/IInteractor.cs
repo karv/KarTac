@@ -1,7 +1,6 @@
 ﻿using KarTac.Batalla;
 using System;
 
-
 namespace KarTac
 {
 	public interface IInteractor

@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using KarTac.Recursos;
-using NUnit.Framework;
-using Microsoft.Xna.Framework;
+﻿using KarTac.Recursos;
 
 namespace KarTac
 {
