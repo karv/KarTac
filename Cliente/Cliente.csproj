@@ -70,6 +70,7 @@
     <Compile Include="Controls\SBCC.cs" />
     <Compile Include="Controls\RandomStringDisplay.cs" />
     <Compile Include="Controls\Utils\ContadorFps.cs" />
+    <Compile Include="Controls\Label.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

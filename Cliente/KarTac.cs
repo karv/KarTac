@@ -123,7 +123,6 @@ namespace KarTac.Cliente
 
 			Fps.Update (gameTime);
 
-
 			LastKeyboardState = Keyboard.GetState ();
 			LastMouseState = Mouse.GetState ();
 		}

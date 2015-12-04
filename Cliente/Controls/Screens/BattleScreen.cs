@@ -2,6 +2,7 @@
 using KarTac.Batalla;
 using KarTac.Cliente.Controls;
 using System;
+using MonoGame.Extended.BitmapFonts;
 
 
 namespace KarTac.Cliente.Controls.Screens
@@ -11,6 +12,10 @@ namespace KarTac.Cliente.Controls.Screens
 		public List<UnidadSprite> Unidades { get; private set; }
 
 		public Campo CampoBatalla { get; }
+
+		public bool MostrarFps = true;
+
+		BitmapFont FpsFont;
 
 		public BattleScreen (KarTacGame juego, Campo campo)
 			: base (juego)
@@ -28,6 +33,7 @@ namespace KarTac.Cliente.Controls.Screens
 				var y = Unidades.Find (z => z.UnidadBase == x);
 				y.Marcado = false;
 			};
+
 		}
 
 		/// <summary>
@@ -61,6 +67,16 @@ namespace KarTac.Cliente.Controls.Screens
 				sprite.Include ();
 			}
 			base.Inicializar ();
+		}
+
+		public override void Dibujar (Microsoft.Xna.Framework.GameTime gameTime)
+		{
+			base.Dibujar (gameTime);
+
+			if (MostrarFps)
+			{
+				
+			}
 		}
 	}
 }

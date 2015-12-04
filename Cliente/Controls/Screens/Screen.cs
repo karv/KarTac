@@ -32,7 +32,7 @@ namespace KarTac.Cliente.Controls.Screens
 			}
 		}
 
-		public void Dibujar (GameTime gameTime)
+		public virtual void Dibujar (GameTime gameTime)
 		{
 			Game.GraphicsDevice.Clear (Color.Green);
 
