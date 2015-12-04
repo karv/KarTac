@@ -20,7 +20,7 @@ namespace KarTac.Cliente.Controls.Screens
 		/// <summary>
 		/// Ejecuta el selector y devuelve los seleccionados
 		/// </summary>
-		public System.Collections.Generic.IList<KarTac.Batalla.Unidad> Selecciona ()
+		public System.Collections.Generic.IList<Unidad> Selecciona ()
 		{
 			return PosiblesBlancos;
 		}
@@ -39,7 +39,7 @@ namespace KarTac.Cliente.Controls.Screens
 		/// <summary>
 		/// Establece los posibles blancos
 		/// </summary>
-		public System.Collections.Generic.IList<KarTac.Batalla.Unidad> PosiblesBlancos { get; set; }
+		public System.Collections.Generic.IList<Unidad> PosiblesBlancos { get; set; }
 
 		#region IScreen
 

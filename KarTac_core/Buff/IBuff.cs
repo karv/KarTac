@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using KarTac.Batalla.Exp;
 
 namespace KarTac.Buff
 {

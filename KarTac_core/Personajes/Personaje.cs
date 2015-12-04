@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using KarTac.Skills;
 
-namespace KarTac
+namespace KarTac.Personajes
 {
 	public class Personaje
 	{

@@ -1,5 +1,5 @@
 ﻿
-namespace KarTac
+namespace KarTac.Batalla.Exp
 {
 	/// <summary>
 	/// Un objeto que puede recibir experiencia

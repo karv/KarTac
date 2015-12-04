@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace KarTac.Batalla
+namespace KarTac.Batalla.Orden
 {
 	/// <summary>
 	/// Da la orden de qué hacer en cada Update de Unidad,

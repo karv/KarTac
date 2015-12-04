@@ -26,7 +26,7 @@ namespace KarTac.Cliente.Controls
 
 		public Texture2D Textura { get; protected set; }
 
-		public Point Pos
+		public static Point Pos
 		{
 			get
 			{
@@ -58,4 +58,3 @@ namespace KarTac.Cliente.Controls
 		}
 	}
 }
-

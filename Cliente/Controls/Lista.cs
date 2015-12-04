@@ -51,8 +51,7 @@ namespace KarTac.Cliente.Controls
 
 		public List<string> Objetos { get; }
 
-		//public int LíneasVisibles = 3;
-		int cursorIndex = 0;
+		int cursorIndex;
 
 		/// <summary>
 		/// El índice del cursor

@@ -47,7 +47,7 @@ namespace KarTac.Cliente.Controls.Screens
 		/// </summary>
 		/// <returns>Devuelve el control (recién creado) asociado a la unidad</returns>
 		[Obsolete ("Usar Campo.Unidades")]
-		public UnidadSprite AgregaUnidad (KarTac.Batalla.Unidad unit)
+		public UnidadSprite AgregaUnidad (Unidad unit)
 		{
 			var ret = new UnidadSprite (this, unit);
 			ret.Inicializar ();
@@ -55,7 +55,7 @@ namespace KarTac.Cliente.Controls.Screens
 			return ret;
 		}
 
-		public override void Update (Microsoft.Xna.Framework.GameTime gameTime)
+		public override void Update (GameTime gameTime)
 		{
 			base.Update (gameTime);
 			// Ejecutar órdenes

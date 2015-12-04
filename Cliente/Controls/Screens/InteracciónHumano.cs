@@ -1,6 +1,5 @@
 ﻿using KarTac.Batalla;
 using Microsoft.Xna.Framework.Input;
-using System.Threading;
 using KarTac.Batalla.Orden;
 
 namespace KarTac.Cliente.Controls.Screens

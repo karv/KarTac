@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using KarTac.Batalla;
+using KarTac.Batalla.Exp;
 
 namespace KarTac.Recursos
 {

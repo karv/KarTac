@@ -1,6 +1,5 @@
 ﻿using KarTac.Batalla;
-using KarTac;
-
+using KarTac.Batalla.Exp;
 
 namespace KarTac.Skills
 {
