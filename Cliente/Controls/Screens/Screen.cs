@@ -37,7 +37,7 @@ namespace KarTac.Cliente.Controls.Screens
 
 			//base.Draw (gameTime);
 
-
+			Batch = Batch ?? GetNewBatch ();
 			Batch.Begin ();
 			foreach (var x in Controles)
 			{

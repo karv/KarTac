@@ -1,4 +1,6 @@
 ﻿using KarTac.Batalla;
+using System;
+using System.Collections.Generic;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -20,10 +22,24 @@ namespace KarTac.Cliente.Controls.Screens
 		/// <summary>
 		/// Ejecuta el selector y devuelve los seleccionados
 		/// </summary>
-		public System.Collections.Generic.IList<Unidad> Selecciona ()
+		public void Selecciona ()
 		{
-			return PosiblesBlancos;
+			var diálogo = new ScreenPedirDeLista<Unidad> (this, Game);
+
+			foreach (var x in PosiblesBlancos)
+			{
+				diálogo.Add (x);
+			}
+
+			diálogo.AlTerminar += delegate
+			{
+				var sel = diálogo.Selección ();
+				AlResponder?.Invoke (new SelecciónRespuesta (sel));
+			};
+
+			diálogo.Ejecutar ();
 		}
+
 
 		/// <summary>
 		/// Espablece el máximo número
@@ -39,10 +55,12 @@ namespace KarTac.Cliente.Controls.Screens
 		/// <summary>
 		/// Establece los posibles blancos
 		/// </summary>
-		public System.Collections.Generic.IList<Unidad> PosiblesBlancos { get; set; }
+		public IList<Unidad> PosiblesBlancos { get; set; }
 
 		#region IScreen
 
 		#endregion
+
+		public event Action<SelecciónRespuesta> AlResponder;
 	}
 }

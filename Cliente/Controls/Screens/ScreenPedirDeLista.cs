@@ -33,6 +33,14 @@ namespace KarTac.Cliente.Controls.Screens
 
 		Lista listaComponente { get; }
 
+		/// <summary>
+		/// Devuelve una lista de los objetos seleccionados hasta el momento
+		/// </summary>
+		public List<TObj> Selección ()
+		{
+			throw new NotImplementedException ();
+		}
+
 		public Func<TObj, string> Stringificación { get; set; }
 
 		public override ListaControl Controles { get; }
