@@ -38,15 +38,15 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 			base.Update (gameTime);
 
-			if (InputManager.EstáPresionado (Key.Down))
+			if (InputManager.FuePresionado (Key.Down))
 			{
 				menú.ÍndiceSkillSel++;
 			}
-			if (InputManager.EstáPresionado (Key.Up))
+			if (InputManager.FuePresionado (Key.Up))
 			{
 				menú.ÍndiceSkillSel--;
 			}
-			if (InputManager.EstáPresionado (Key.Enter))
+			if (InputManager.FuePresionado (Key.Enter))
 			{
 				menú.SkillSeleccionado.Ejecutar (UnidadActual, CampoBatalla);
 			}

@@ -42,8 +42,6 @@ namespace KarTac.Cliente.Controls.Screens
 
 		Lista listaComponente { get; }
 
-		bool PuedeEntrar;
-
 		/// <summary>
 		/// Devuelve la lista de los objetos seleccionados hasta el momento
 		/// </summary>
@@ -71,8 +69,9 @@ namespace KarTac.Cliente.Controls.Screens
 					SelecciónActual.Add (curObj);
 			}
 
-			if (!PuedeEntrar && InputManager.FuePresionado (Key.Enter))
-				PuedeEntrar = true;
+			if (InputManager.FuePresionado (Key.Enter))
+				Salir ();
+				
 			base.Update (gameTime);
 		}
 	}
