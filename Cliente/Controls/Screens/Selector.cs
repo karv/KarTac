@@ -4,12 +4,14 @@ using System.Collections.Generic;
 
 namespace KarTac.Cliente.Controls.Screens
 {
-	public class Selector: Screen, ISelectorTarget
+	public class Selector: ScreenDial, ISelectorTarget
 	{
 		public Selector (KarTacGame game)
 			: base (game)
 		{
 		}
+
+		//public override ListaControl Controles { get; }
 
 		/// <summary>
 		/// Revisa si es posible dar una salida con la función Selecciona
@@ -24,7 +26,7 @@ namespace KarTac.Cliente.Controls.Screens
 		/// </summary>
 		public void Selecciona ()
 		{
-			var diálogo = new ScreenPedirDeLista<Unidad> (this, Game);
+			var diálogo = new ScreenPedirDeLista<Unidad> (Juego);
 
 			foreach (var x in PosiblesBlancos)
 			{
@@ -37,6 +39,7 @@ namespace KarTac.Cliente.Controls.Screens
 				if (sel.Count == 0 && !PuedeSerVacío)
 					sel.Add (diálogo.ObjetoEnCursor);
 				AlResponder?.Invoke (new SelecciónRespuesta (sel));
+				Salir ();
 			};
 
 			diálogo.Ejecutar ();
@@ -64,6 +67,14 @@ namespace KarTac.Cliente.Controls.Screens
 		#region IScreen
 
 		#endregion
+
+		public override void Inicializar ()
+		{
+			foreach (var x in Controles)
+			{
+				x.Inicializar ();
+			}
+		}
 
 		public event Action<SelecciónRespuesta> AlResponder;
 	}

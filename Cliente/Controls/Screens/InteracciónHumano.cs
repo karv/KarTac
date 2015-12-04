@@ -24,17 +24,14 @@ namespace KarTac.Cliente.Controls.Screens
 			}
 		}
 
-		public override ListaControl Controles { get; }
+		//public override ListaControl Controles { get; }
 
 		public InteracciónHumano (Unidad unid, KarTacGame game)
-			: base (game.CurrentScreen, game)
+			: base (game)
 		{
-			Controles = new ListaControl ();
 			menú = new BottomMenu (this);
 			menú.UnidadActual = unid;
 			menú.Include ();
-
-
 		}
 
 		public override void Update (Microsoft.Xna.Framework.GameTime gameTime)

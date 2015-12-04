@@ -12,10 +12,17 @@ namespace KarTac.Cliente.Controls.Screens
 
 		protected KarTacGame Juego { get; }
 
-		protected ScreenDial (IScreen anterior, KarTacGame juego)
+		protected ScreenDial (KarTacGame juego)
+			: this (juego, juego.CurrentScreen)
 		{
-			ScreenBase = anterior;
+		}
+
+		protected ScreenDial (KarTacGame juego, IScreen baseScreen)
+		{
+			ScreenBase = baseScreen;
 			Juego = juego;
+			Controles = new ListaControl ();
+
 		}
 
 		public void Dibujar (Microsoft.Xna.Framework.GameTime gameTime)
@@ -70,7 +77,6 @@ namespace KarTac.Cliente.Controls.Screens
 			UnloadContent ();
 		}
 
-
 		public SpriteBatch GetNewBatch ()
 		{
 			return ScreenBase.GetNewBatch ();
@@ -78,7 +84,7 @@ namespace KarTac.Cliente.Controls.Screens
 
 		public abstract void Inicializar ();
 
-		public abstract ListaControl Controles { get; }
+		public ListaControl Controles { get; }
 
 		public Microsoft.Xna.Framework.Content.ContentManager Content
 		{
