@@ -61,7 +61,7 @@ namespace KarTac.Cliente.Controls
 				if (state.LeftButton == ButtonState.Pressed)
 					AlPresionalMouse?.Invoke (state);
 
-				if (Screen.LastMouseState.LeftButton == ButtonState.Released && state.LeftButton == ButtonState.Pressed)
+				if (InputManager.FuePresionado (OpenTK.Input.MouseButton.Left))
 					AlClick?.Invoke ();
 			}
 		}

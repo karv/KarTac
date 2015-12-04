@@ -25,7 +25,7 @@ namespace KarTac.Cliente
 		/// </summary>
 		public static bool EstáPresionado (Key tecla)
 		{
-			return EstadoActualTeclado.IsKeyUp (tecla);
+			return EstadoActualTeclado.IsKeyDown (tecla);
 		}
 
 		/// <summary>

@@ -1,6 +1,6 @@
 ﻿using KarTac.Batalla;
-using Microsoft.Xna.Framework.Input;
 using KarTac.Batalla.Orden;
+using OpenTK.Input;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -41,16 +41,15 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 			base.Update (gameTime);
 
-			var keyb = Keyboard.GetState ();
-			if (keyb.IsKeyDown (Keys.Down))
+			if (InputManager.EstáPresionado (Key.Down))
 			{
 				menú.ÍndiceSkillSel++;
 			}
-			if (keyb.IsKeyDown (Keys.Up))
+			if (InputManager.EstáPresionado (Key.Up))
 			{
 				menú.ÍndiceSkillSel--;
 			}
-			if (keyb.IsKeyDown (Keys.Enter))
+			if (InputManager.EstáPresionado (Key.Enter))
 			{
 				menú.SkillSeleccionado.Ejecutar (UnidadActual, CampoBatalla);
 			}

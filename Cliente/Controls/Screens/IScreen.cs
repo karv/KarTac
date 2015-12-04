@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace KarTac.Cliente.Controls.Screens
@@ -37,16 +36,6 @@ namespace KarTac.Cliente.Controls.Screens
 		/// </summary>
 		/// <value>The content.</value>
 		ContentManager Content { get; }
-
-		/// <summary>
-		/// El estado del ratón del último ciclo
-		/// </summary>
-		MouseState LastMouseState { get; }
-
-		/// <summary>
-		/// El estado del teclado del último ciclo.
-		/// </summary>
-		KeyboardState LastKeyboardState { get; }
 
 		#region HW
 
