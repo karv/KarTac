@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using System;
 
 namespace KarTac.Cliente.Controls.Screens
@@ -45,8 +44,6 @@ namespace KarTac.Cliente.Controls.Screens
 			{
 				x.Update (gameTime);
 			}
-			LastKeyboardState = Keyboard.GetState ();
-			LastMouseState = Mouse.GetState ();
 		}
 
 		public virtual void UnloadContent ()
@@ -90,10 +87,6 @@ namespace KarTac.Cliente.Controls.Screens
 				return ScreenBase.Content;
 			}
 		}
-
-		public MouseState LastMouseState { get; private set; }
-
-		public KeyboardState LastKeyboardState { get; private set; }
 
 		public SpriteBatch Batch { get; private set; }
 

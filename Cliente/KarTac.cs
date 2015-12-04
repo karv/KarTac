@@ -1,12 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using KarTac.Cliente.Controls;
 using KarTac.Cliente.Controls.Screens;
 using System;
 using MonoGame.Extended;
 using KarTac.Personajes;
+using OpenTK.Input;
 
 namespace KarTac.Cliente
 {
@@ -44,10 +44,6 @@ namespace KarTac.Cliente
 			CurrentScreen = new BattleScreen (this, new KarTac.Batalla.Campo ());
 			Screens.Add (CurrentScreen);
 		}
-
-		public KeyboardState LastKeyboardState { get; protected set; }
-
-		public MouseState LastMouseState { get; protected set; }
 
 		/// <summary>
 		/// Allows the game to perform any initialization it needs to before starting to run.
@@ -110,8 +106,7 @@ namespace KarTac.Cliente
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Update (GameTime gameTime)
 		{
-			if (GamePad.GetState (PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
-			    Keyboard.GetState ().IsKeyDown (Keys.Escape))
+			if (InputManager.EstáPresionado (Key.Escape))
 			{
 				Exit ();
 			}
@@ -121,8 +116,7 @@ namespace KarTac.Cliente
 
 			Fps.Update (gameTime);
 
-			LastKeyboardState = Keyboard.GetState ();
-			LastMouseState = Mouse.GetState ();
+			InputManager.Update ();
 		}
 
 		/// <summary>

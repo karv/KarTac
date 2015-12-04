@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
+using OpenTK.Input;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -43,7 +43,7 @@ namespace KarTac.Cliente.Controls.Screens
 
 		public override void Update (GameTime gameTime)
 		{
-			if (Keyboard.GetState ().IsKeyDown (Keys.Escape))
+			if (InputManager.FuePresionado (Key.Escape))
 				Salir ();
 
 			base.Update (gameTime);

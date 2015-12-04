@@ -4,8 +4,8 @@ using KarTac.Cliente.Controls.Primitivos;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.BitmapFonts;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework.Input;
 using System;
+using OpenTK.Input;
 
 namespace KarTac.Cliente.Controls
 {
@@ -93,20 +93,18 @@ namespace KarTac.Cliente.Controls
 			noTexture = Screen.Content.Load<Texture2D> ("Rect");
 		}
 
-		public Keys AbajoKey = Keys.Down;
-		public Keys ArribaKey = Keys.Up;
+		public Key AbajoKey = Key.Down;
+		public Key ArribaKey = Key.Up;
 
 		public override void Update (GameTime gameTime)
 		{
 			base.Update (gameTime);
 			if (InterceptarTeclado)
 			{
-				var kb = Keyboard.GetState ();
-				var lastkb = Screen.LastKeyboardState;
 
-				if (kb.IsKeyDown (AbajoKey) && lastkb.IsKeyUp (AbajoKey))
+				if (InputManager.FuePresionado (AbajoKey))
 					CursorIndex++;
-				if (kb.IsKeyDown (ArribaKey) && lastkb.IsKeyUp (ArribaKey))
+				if (InputManager.FuePresionado (ArribaKey))
 					CursorIndex--;
 			}
 		}
