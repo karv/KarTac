@@ -144,5 +144,9 @@ namespace KarTac.Batalla
 
 		public double BolsaExp { get; private set; }
 
+		public override string ToString ()
+		{
+			return PersonajeBase.Nombre;
+		}
 	}
 }
