@@ -14,13 +14,12 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
+    <DefineConstants>DEBUG;FPS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
@@ -69,6 +68,8 @@
     <Compile Include="Controls\Screens\InteracciónHumano.cs" />
     <Compile Include="Controls\SBCC.cs" />
     <Compile Include="Controls\RandomStringDisplay.cs" />
+    <Compile Include="Controls\Utils\ContadorFps.cs" />
+    <Compile Include="Controls\Label.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -96,6 +97,7 @@
     <Folder Include="Controls\Primitivos\" />
     <Folder Include="Content\Icons\" />
     <Folder Include="Content\Icons\Skills\" />
+    <Folder Include="Controls\Utils\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\**\*.*">

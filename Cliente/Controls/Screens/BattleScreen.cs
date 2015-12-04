@@ -2,12 +2,17 @@
 using KarTac.Batalla;
 using KarTac.Cliente.Controls;
 using System;
+using Microsoft.Xna.Framework;
 
 
 namespace KarTac.Cliente.Controls.Screens
 {
 	public class BattleScreen: Screen
 	{
+		#if FPS
+		readonly Label fpsLabel;
+		#endif
+
 		public List<UnidadSprite> Unidades { get; private set; }
 
 		public Campo CampoBatalla { get; }
@@ -28,6 +33,13 @@ namespace KarTac.Cliente.Controls.Screens
 				var y = Unidades.Find (z => z.UnidadBase == x);
 				y.Marcado = false;
 			};
+
+			#if FPS
+			fpsLabel = new Label (this);
+			fpsLabel.Texto = () => string.Format ("fps: {0}", juego.Fps.AverageFramesPerSecond);
+			fpsLabel.UseFont = @"UnitNameFont";
+			fpsLabel.Color = Color.White;
+			#endif
 		}
 
 		/// <summary>
@@ -60,6 +72,11 @@ namespace KarTac.Cliente.Controls.Screens
 				Unidades.Add (sprite);
 				sprite.Include ();
 			}
+
+			#if FPS
+			fpsLabel.Include ();
+			#endif
+
 			base.Inicializar ();
 		}
 	}

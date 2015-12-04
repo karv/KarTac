@@ -30,7 +30,7 @@ namespace KarTac.Cliente.Controls
 		{
 			get
 			{
-				return Mostrables [índiceActualString];
+				return índiceActualString < Mostrables.Count ? Mostrables [índiceActualString] : "";
 			}
 		}
 

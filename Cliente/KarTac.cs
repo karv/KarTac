@@ -7,6 +7,7 @@ using KarTac;
 using KarTac.Cliente.Controls.Screens;
 using System;
 using KarTac.Recursos;
+using MonoGame.Extended;
 
 namespace KarTac.Cliente
 {
@@ -28,6 +29,8 @@ namespace KarTac.Cliente
 
 		public SpriteBatch Batch { get; private set; }
 
+		public FramesPerSecondCounter Fps;
+
 		public KarTacGame ()
 		{
 			ControlesUniversales = new ListaControl ();
@@ -37,6 +40,7 @@ namespace KarTac.Cliente
 			graphics.IsFullScreen = true;
 			mouse = new Ratón (this);
 			mouse.Include ();
+			Fps = new FramesPerSecondCounter ();
 
 			CurrentScreen = new BattleScreen (this, new KarTac.Batalla.Campo ());
 			Screens.Add (CurrentScreen);
@@ -116,6 +120,8 @@ namespace KarTac.Cliente
 
 			base.Update (gameTime);
 			CurrentScreen.Update (gameTime);
+
+			Fps.Update (gameTime);
 
 			LastKeyboardState = Keyboard.GetState ();
 			LastMouseState = Mouse.GetState ();
