@@ -20,19 +20,24 @@ namespace KarTac
 		/// <summary>
 		/// Max HP
 		/// </summary>
-		public HP HP { get; set; }
+		public HP HP
+		{
+			get
+			{
+				return Recs ["HP"] as HP;
+			}
+		}
 
 		/// <summary>
 		/// Lista de recursos
 		/// </summary>
 		/// <value>The recursos.</value>
-		public List<IRecurso> Recs { get; }
+		public ListaRecursos Recs { get; }
 
 		public AtributosPersonaje ()
 		{
-			Recs = new List<IRecurso> ();
-			HP = new HP ();
-			Recs.Add (HP);
+			Recs = new ListaRecursos ();
+			Recs.Add (new HP ());
 		}
 
 		public AtributosPersonaje Clonar ()
