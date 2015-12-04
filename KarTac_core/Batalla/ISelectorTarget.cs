@@ -51,5 +51,4 @@ namespace KarTac.Batalla
 
 		public readonly IList<Unidad> Selección;
 	}
-
 }
