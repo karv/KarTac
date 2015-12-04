@@ -46,18 +46,11 @@ namespace KarTac.Skills
 			selector.IgualdadEstricta = true;
 			if (!selector.Validar ())
 				throw new Exception ();
-			var selección = selector.Selecciona () [0];
-
-			// usuario ataca a selección
-
-			var dañoBloqueado = Math.Max (
-				                    usuario.PersonajeBase.Atributos.Ataque - selección.PersonajeBase.Atributos.Defensa,
-				                    0);
-			var daño = dañoBloqueado * 2 + 1;
-
-			selección.PersonajeBase.Atributos.HP.Valor -= daño;
-
-			PeticiónExpAcumulada += 1;
+			
+			selector.AlResponder += obj => estado_Seleccionado (
+				obj,
+				usuario);
+			selector.Selecciona ();
 		}
 
 		public bool Usable (Unidad usuario, Campo campo)
@@ -69,6 +62,22 @@ namespace KarTac.Skills
 		{
 			TotalExp += exp;
 			PeticiónExpAcumulada = 0;
+		}
+
+		void estado_Seleccionado (SelecciónRespuesta resp,
+		                          Unidad usuario)
+		{
+			var selección = resp.Selección [0];
+			// usuario ataca a selección
+
+			var dañoBloqueado = Math.Max (
+				                    usuario.AtributosActuales.Ataque - selección.AtributosActuales.Defensa,
+				                    0);
+			var daño = dañoBloqueado * 2 + 1;
+
+			selección.AtributosActuales.HP.Valor -= daño;
+
+			PeticiónExpAcumulada += 1;
 		}
 	}
 }

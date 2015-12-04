@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 
 namespace KarTac.Batalla
 {
@@ -32,6 +33,22 @@ namespace KarTac.Batalla
 		/// <summary>
 		/// Ejecuta el selector y devuelve los seleccionados
 		/// </summary>
-		IList<Unidad> Selecciona ();
+		void Selecciona ();
+
+		event Action<SelecciónRespuesta> AlResponder;
+	}
+
+	public interface IResponseSelector
+	{
+	}
+
+	public struct SelecciónRespuesta : IResponseSelector
+	{
+		public SelecciónRespuesta (IList<Unidad> unidades)
+		{
+			Selección = unidades;
+		}
+
+		public readonly IList<Unidad> Selección;
 	}
 }

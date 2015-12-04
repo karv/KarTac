@@ -24,32 +24,29 @@ namespace KarTac.Cliente.Controls.Screens
 			}
 		}
 
-		public override ListaControl Controles { get; }
+		//public override ListaControl Controles { get; }
 
 		public InteracciónHumano (Unidad unid, KarTacGame game)
-			: base (game.CurrentScreen, game)
+			: base (game)
 		{
-			Controles = new ListaControl ();
 			menú = new BottomMenu (this);
 			menú.UnidadActual = unid;
 			menú.Include ();
-
-
 		}
 
 		public override void Update (Microsoft.Xna.Framework.GameTime gameTime)
 		{
 			base.Update (gameTime);
 
-			if (InputManager.EstáPresionado (Key.Down))
+			if (InputManager.FuePresionado (Key.Down))
 			{
 				menú.ÍndiceSkillSel++;
 			}
-			if (InputManager.EstáPresionado (Key.Up))
+			if (InputManager.FuePresionado (Key.Up))
 			{
 				menú.ÍndiceSkillSel--;
 			}
-			if (InputManager.EstáPresionado (Key.Enter))
+			if (InputManager.FuePresionado (Key.Enter))
 			{
 				menú.SkillSeleccionado.Ejecutar (UnidadActual, CampoBatalla);
 			}
