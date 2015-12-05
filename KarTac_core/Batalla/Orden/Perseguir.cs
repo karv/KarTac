@@ -21,4 +21,3 @@ namespace KarTac.Batalla.Orden
 
 	}
 }
-
