@@ -16,6 +16,10 @@ namespace KarTac.Cliente
 		{
 			EstadoAnteriorTeclado = EstadoActualTeclado;
 			EstadoActualTeclado = Keyboard.GetState ();
+
+			EstadoAnteriorMouse = EstadoActualMouse;
+			EstadoActualMouse = Mouse.GetState ();
+		
 		}
 
 		#region Teclado
