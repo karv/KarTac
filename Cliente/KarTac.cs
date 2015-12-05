@@ -7,6 +7,7 @@ using System;
 using MonoGame.Extended;
 using KarTac.Personajes;
 using OpenTK.Input;
+using KarTac.Batalla.Orden;
 
 namespace KarTac.Cliente
 {
@@ -29,6 +30,7 @@ namespace KarTac.Cliente
 		public SpriteBatch Batch { get; private set; }
 
 		public FramesPerSecondCounter Fps;
+		//TODO GetDisplayMode.GetRefreshRate
 
 		public KarTacGame ()
 		{
@@ -55,6 +57,7 @@ namespace KarTac.Cliente
 		{
 			var sc = CurrentScreen as BattleScreen;
 			var pj = new Personaje ();
+			var pj2 = new Personaje ();
 			var c = sc.CampoBatalla;
 
 			pj.Atributos.HP.Max = 100;
@@ -63,13 +66,29 @@ namespace KarTac.Cliente
 			pj.Atributos.Velocidad = 100;
 			pj.Nombre = "Juanito";
 
+			pj2.Atributos.HP.Max = 120;
+			pj2.Atributos.HP.Valor = 80;
+			pj2.Atributos.HP.Regen = 50;
+			pj2.Atributos.Velocidad = 90;
+			pj2.Nombre = "Gordo";
+
 			var unidad = new KarTac.Batalla.Unidad (pj, c);
 			unidad.Interactor = new InteracciónHumano (unidad, this);
 			unidad.PosPrecisa = new Vector2 (100, 100);
 			unidad.Equipo = new KarTac.Batalla.Equipo (1, Color.Red);
+			var pers = new Perseguir (unidad);
+			unidad.OrdenActual = pers;
+
+			var unidad2 = new KarTac.Batalla.Unidad (pj2, c);
+			unidad2.Interactor = new InteracciónHumano (unidad2, this);
+			unidad2.PosPrecisa = new Vector2 (400, 100);
+			unidad2.Equipo = new KarTac.Batalla.Equipo (2, Color.Yellow);
+			pers.UnidadDestino = unidad2;
+
 			//sc.UnidadActual = unidad;
 
 			c.Unidades.Add (unidad);
+			c.Unidades.Add (unidad2);
 
 			c.SelectorTarget = new Selector (this);
 

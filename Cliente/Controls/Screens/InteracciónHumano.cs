@@ -1,11 +1,15 @@
 ﻿using KarTac.Batalla;
 using KarTac.Batalla.Orden;
 using OpenTK.Input;
+using Microsoft.Xna.Framework;
 
 namespace KarTac.Cliente.Controls.Screens
 {
 	public class InteracciónHumano : ScreenDial, IInteractor
 	{
+		const double _distCercaUnidadClickCuadrada = 400;
+		// dist = 20
+
 		BottomMenu menú { get; }
 
 		public Unidad UnidadActual
@@ -24,8 +28,6 @@ namespace KarTac.Cliente.Controls.Screens
 			}
 		}
 
-		//public override ListaControl Controles { get; }
-
 		public InteracciónHumano (Unidad unid, KarTacGame game)
 			: base (game)
 		{
@@ -34,7 +36,7 @@ namespace KarTac.Cliente.Controls.Screens
 			menú.Include ();
 		}
 
-		public override void Update (Microsoft.Xna.Framework.GameTime gameTime)
+		public override void Update (GameTime gameTime)
 		{
 			base.Update (gameTime);
 
@@ -51,15 +53,31 @@ namespace KarTac.Cliente.Controls.Screens
 				menú.SkillSeleccionado.Ejecutar (UnidadActual, CampoBatalla);
 			}
 
-			var mouse = Mouse.GetState ();
-			if (mouse.LeftButton == ButtonState.Pressed)
+			if (InputManager.FuePresionado (MouseButton.Left))
 			{
-				var ord = new Movimiento (UnidadActual);
-				ord.Destino = new Microsoft.Xna.Framework.Point (mouse.X, mouse.Y);
-				UnidadActual.OrdenActual = ord;
+				var clickLoc = new Vector2 (InputManager.EstadoActualMouse.X,
+				                            InputManager.EstadoActualMouse.Y);
+
+				// Ver si una unidad está cerca
+				foreach (var x in CampoBatalla.Unidades)
+				{
+					var vectorDist = x.PosPrecisa - clickLoc;
+					if (vectorDist.LengthSquared () < _distCercaUnidadClickCuadrada && x != UnidadActual)
+					{
+						var ord = new Perseguir (UnidadActual);
+						ord.UnidadDestino = x;
+						UnidadActual.OrdenActual = ord;
+						Salir ();
+						return;
+					}
+				}
+
+				var ordMov = new Movimiento (UnidadActual);
+				ordMov.Destino = new Point (InputManager.EstadoActualMouse.X,
+				                            InputManager.EstadoActualMouse.Y);
+				UnidadActual.OrdenActual = ordMov;
 				Salir (); // Devuelve el control a la pantalla anterior
 			}
-		
 		}
 
 		public override void Inicializar ()
