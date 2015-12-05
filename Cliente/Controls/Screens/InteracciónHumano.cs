@@ -51,11 +51,11 @@ namespace KarTac.Cliente.Controls.Screens
 				menú.SkillSeleccionado.Ejecutar (UnidadActual, CampoBatalla);
 			}
 
-			var mouse = Mouse.GetState ();
-			if (mouse.LeftButton == ButtonState.Pressed)
+			if (InputManager.FuePresionado (MouseButton.Left))
 			{
 				var ord = new Movimiento (UnidadActual);
-				ord.Destino = new Microsoft.Xna.Framework.Point (mouse.X, mouse.Y);
+				ord.Destino = new Microsoft.Xna.Framework.Point (InputManager.EstadoActualMouse.X,
+				                                                 InputManager.EstadoActualMouse.Y);
 				UnidadActual.OrdenActual = ord;
 				Salir (); // Devuelve el control a la pantalla anterior
 			}

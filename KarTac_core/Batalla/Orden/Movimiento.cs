@@ -12,7 +12,7 @@ namespace KarTac.Batalla.Orden
 		/// </summary>
 		const float _distanciaCercano = 3;
 
-		public Point Destino;
+		public Point Destino { get; set; }
 
 		public Unidad Unidad { get; }
 

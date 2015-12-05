@@ -72,6 +72,7 @@
     <Compile Include="Batalla\IInteractor.cs" />
     <Compile Include="Personajes\AtributosPersonaje.cs" />
     <Compile Include="Personajes\Personaje.cs" />
+    <Compile Include="Batalla\Orden\Perseguir.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
