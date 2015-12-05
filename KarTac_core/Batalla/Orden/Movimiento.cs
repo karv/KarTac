@@ -21,7 +21,7 @@ namespace KarTac.Batalla.Orden
 			Unidad = unidad;
 		}
 
-		public bool Update (GameTime time)
+		public virtual bool Update (GameTime time)
 		{
 			var movDir = (Destino - Unidad.Pos).ToVector2 ();
 			if (movDir.Length () < _distanciaCercano)

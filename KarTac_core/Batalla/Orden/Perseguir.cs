@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
 namespace KarTac.Batalla.Orden
 {
@@ -14,7 +13,7 @@ namespace KarTac.Batalla.Orden
 		{
 		}
 
-		public bool Update (GameTime time)
+		public override bool Update (GameTime time)
 		{
 			Destino = UnidadDestino.Pos;
 			return base.Update (time);
