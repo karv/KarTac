@@ -29,6 +29,7 @@ namespace KarTac.Cliente
 		public SpriteBatch Batch { get; private set; }
 
 		public FramesPerSecondCounter Fps;
+		//TODO GetDisplayMode.GetRefreshRate
 
 		public KarTacGame ()
 		{
