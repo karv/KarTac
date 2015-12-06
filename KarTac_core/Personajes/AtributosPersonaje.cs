@@ -19,6 +19,8 @@ namespace KarTac.Personajes
 		/// </summary>
 		public int Agilidad { get; set; }
 
+		public Empuje Empuje { get; set; }
+
 		/// <summary>
 		/// Max HP
 		/// </summary>
