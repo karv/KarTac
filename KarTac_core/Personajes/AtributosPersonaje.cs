@@ -15,6 +15,11 @@ namespace KarTac.Personajes
 		public int Velocidad { get; set; }
 
 		/// <summary>
+		/// Qué tan rápido y agil es para usar algunas habilidades
+		/// </summary>
+		public int Agilidad { get; set; }
+
+		/// <summary>
 		/// Max HP
 		/// </summary>
 		public HP HP

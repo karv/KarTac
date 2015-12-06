@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System;
 using KarTac.Batalla.Exp;
 using KarTac.Batalla.Orden;
-using System.Configuration;
 
 namespace KarTac.Skills
 {
@@ -58,8 +57,13 @@ namespace KarTac.Skills
 			selector.Selecciona ();
 		}
 
-
-
+		/// <summary>
+		/// Calcula el tiempo de uso (post) de esta habilidad.
+		/// </summary>
+		static TimeSpan CalcularTiempoUso (Unidad unidad)
+		{
+			return TimeSpan.FromSeconds (3.0 / unidad.AtributosActuales.Agilidad);
+		}
 
 		public bool Usable (Unidad usuario, Campo campo)
 		{
@@ -97,7 +101,7 @@ namespace KarTac.Skills
 
 		static void OnTerminar (Unidad usuario)
 		{
-			var ordQuieto = new Quieto (usuario, TimeSpan.FromSeconds (3));
+			var ordQuieto = new Quieto (usuario, CalcularTiempoUso (usuario));
 			usuario.OrdenActual = ordQuieto;
 		}
 	}
