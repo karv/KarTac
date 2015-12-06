@@ -5,7 +5,6 @@ using System;
 using KarTac.Batalla.Orden;
 using KarTac.Personajes;
 using KarTac.Batalla.Exp;
-using System.IO;
 
 namespace KarTac.Batalla
 {
