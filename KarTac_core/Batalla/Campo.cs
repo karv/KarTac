@@ -111,11 +111,12 @@ namespace KarTac.Batalla
 			var vect = destino.PosPrecisa - origen.PosPrecisa;
 			var dist = vect.LengthSquared ();
 			vect.Normalize ();
-			var usarCoef = (origen.Equipo.EsAliado (destino) ? origen.AtributosActuales.Empuje.HaciaAliado : origen.AtributosActuales.Empuje.HaciaEnemigo) / destino.AtributosActuales.Empuje.Masa;
+			var usarCoef = (origen.Equipo.EsAliado (destino) ? origen.AtributosActuales.Empuje.HaciaAliado : origen.AtributosActuales.Empuje.HaciaEnemigo) * 1000 / destino.AtributosActuales.Empuje.Masa;
 
 			var Fuerza = usarCoef / dist;
 			vect = vect * (Fuerza * (float)delta.TotalSeconds);
 			destino.PosPrecisa += vect;
+
 		}
 
 		public event Action<Unidad> AlRequerirOrdenAntes;

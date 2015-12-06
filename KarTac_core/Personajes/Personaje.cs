@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using KarTac.Skills;
+using System.Runtime.InteropServices;
 
 namespace KarTac.Personajes
 {
@@ -21,6 +22,7 @@ namespace KarTac.Personajes
 		public Personaje ()
 		{
 			Atributos = new AtributosPersonaje ();
+			Atributos.Empuje = new Empuje (300, 100, 30);
 			Skills = new List<ISkill> ();
 
 			// Agregar defaults
