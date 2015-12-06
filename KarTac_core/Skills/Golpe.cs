@@ -85,7 +85,7 @@ namespace KarTac.Skills
 			var dañoBloqueado = Math.Max (
 				                    usuario.AtributosActuales.Ataque - selección.AtributosActuales.Defensa,
 				                    0);
-			var daño = dañoBloqueado * 2 + 1;
+			var daño = Math.Max (20 - dañoBloqueado, 1);
 
 			selección.AtributosActuales.HP.Valor -= daño;
 			System.Diagnostics.Debug.WriteLine (string.Format (

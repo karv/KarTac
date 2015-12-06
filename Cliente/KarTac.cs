@@ -78,8 +78,8 @@ namespace KarTac.Cliente
 			unidad.Interactor = new InteracciónHumano (unidad, this);
 			unidad.PosPrecisa = new Vector2 (200, 150);
 			unidad.Equipo = new KarTac.Batalla.Equipo (1, Color.Red);
-			var ord = new Huir (unidad, TimeSpan.FromSeconds (60));
-			unidad.OrdenActual = ord;
+			//var ord = new Huir (unidad, TimeSpan.FromSeconds (60));
+			//unidad.OrdenActual = ord;
 
 			var unidad2 = new KarTac.Batalla.Unidad (pj2, c);
 			unidad2.Interactor = new InteracciónHumano (unidad2, this);
