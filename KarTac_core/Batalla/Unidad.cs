@@ -18,7 +18,21 @@ namespace KarTac.Batalla
 			}
 		}
 
-		public Vector2 PosPrecisa { get; set; }
+		Vector2 _posPrecisa;
+
+		public Vector2 PosPrecisa
+		{
+			get
+			{
+				return _posPrecisa;
+			}
+			set
+			{
+				float x = Math.Min (Math.Max (value.X, 0), CampoBatalla.Área.Width);
+				float y = Math.Min (Math.Max (value.Y, 0), CampoBatalla.Área.Height);
+				_posPrecisa = new Vector2 (x, y);
+			}
+		}
 
 		public Campo CampoBatalla { get; }
 

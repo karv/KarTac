@@ -38,11 +38,13 @@ namespace KarTac.Batalla
 			}
 		}
 
-		public Campo ()
+		public Campo (Point tamaño)
 		{
 			Unidades = new List<Unidad> ();
+			Área = new Rectangle (Point.Zero, tamaño);
 		}
 
+		public Rectangle Área { get; private set; }
 
 		public void Tick (GameTime delta)
 		{
