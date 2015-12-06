@@ -6,6 +6,8 @@ using KarTac.Cliente.Controls.Screens;
 using System;
 using KarTac.Personajes;
 using OpenTK.Input;
+using System.Threading;
+using KarTac.Batalla;
 
 namespace KarTac.Cliente
 {
@@ -37,8 +39,6 @@ namespace KarTac.Cliente
 			mouse = new Ratón (this);
 			mouse.Include ();
 
-			CurrentScreen = new BattleScreen (this, new KarTac.Batalla.Campo ());
-			Screens.Add (CurrentScreen);
 		}
 
 		/// <summary>
@@ -49,10 +49,12 @@ namespace KarTac.Cliente
 		/// </summary>
 		protected override void Initialize ()
 		{
-			var sc = CurrentScreen as BattleScreen;
+			var c = new Campo (new Point (GetDisplayMode.Width, GetDisplayMode.Height));
+
 			var pj = new Personaje ();
 			var pj2 = new Personaje ();
-			var c = sc.CampoBatalla;
+			CurrentScreen = new BattleScreen (this, c);
+			Screens.Add (CurrentScreen);
 
 			pj.Atributos.HP.Max = 100;
 			pj.Atributos.HP.Valor = 80;
