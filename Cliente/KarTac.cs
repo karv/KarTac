@@ -6,8 +6,8 @@ using KarTac.Cliente.Controls.Screens;
 using System;
 using KarTac.Personajes;
 using OpenTK.Input;
-using System.Threading;
 using KarTac.Batalla;
+using KarTac.Batalla.Orden;
 
 namespace KarTac.Cliente
 {
@@ -70,17 +70,17 @@ namespace KarTac.Cliente
 			pj2.Atributos.Agilidad = 24;
 			pj2.Nombre = "Gordo";
 
-			var unidad = new KarTac.Batalla.Unidad (pj, c);
+			var unidad = new Unidad (pj, c);
 			unidad.Interactor = new InteracciónHumano (unidad, this);
 			unidad.PosPrecisa = new Vector2 (200, 150);
-			unidad.Equipo = new KarTac.Batalla.Equipo (1, Color.Red);
-			//var ord = new Huir (unidad, TimeSpan.FromSeconds (60));
-			//unidad.OrdenActual = ord;
+			unidad.Equipo = new Equipo (1, Color.Red);
+			var ord = new Huir (unidad, TimeSpan.FromSeconds (60));
+			unidad.OrdenActual = ord;
 
-			var unidad2 = new KarTac.Batalla.Unidad (pj2, c);
+			var unidad2 = new Unidad (pj2, c);
 			unidad2.Interactor = new InteracciónHumano (unidad2, this);
 			unidad2.PosPrecisa = new Vector2 (100, 100);
-			unidad2.Equipo = new KarTac.Batalla.Equipo (2, Color.Yellow);
+			unidad2.Equipo = new Equipo (2, Color.Yellow);
 
 			//sc.UnidadActual = unidad;
 
