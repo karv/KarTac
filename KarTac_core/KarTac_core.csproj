@@ -73,6 +73,7 @@
     <Compile Include="Personajes\AtributosPersonaje.cs" />
     <Compile Include="Personajes\Personaje.cs" />
     <Compile Include="Batalla\Orden\Perseguir.cs" />
+    <Compile Include="Personajes\Empuje.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

@@ -23,6 +23,21 @@ namespace KarTac.Batalla
 		/// <value>The unidades.</value>
 		public ICollection<Unidad> Unidades { get; }
 
+		/// <summary>
+		/// Devuelve una copia enumerable de las unidades vivas
+		/// </summary>
+		public IEnumerable<Unidad> UnidadesVivas
+		{
+			get
+			{
+				foreach (var u in new List<Unidad> (Unidades))
+				{
+					if (u.EstáVivo)
+						yield return u;
+				}
+			}
+		}
+
 		public Campo ()
 		{
 			Unidades = new List<Unidad> ();
@@ -57,6 +72,9 @@ namespace KarTac.Batalla
 					y.Tick (delta);
 				}
 			}
+
+			// Empuje
+			Empujes (delta.ElapsedGameTime);
 		}
 
 		/// <summary>
@@ -69,6 +87,36 @@ namespace KarTac.Batalla
 			{
 				uni.RecibirExp (mins * ExpPorMinuto);
 			}
+		}
+
+		/// <summary>
+		/// Realiza los empujes de unidades
+		/// </summary>
+		public void Empujes (TimeSpan delta)
+		{
+			foreach (var u in UnidadesVivas)
+			{
+				foreach (var v in UnidadesVivas)
+				{
+					if (u != v)
+					{
+						Empujar (u, v, delta);
+					}
+				}
+			}
+		}
+
+		static void Empujar (Unidad origen, Unidad destino, TimeSpan delta)
+		{
+			var vect = destino.PosPrecisa - origen.PosPrecisa;
+			var dist = vect.LengthSquared ();
+			vect.Normalize ();
+			var usarCoef = (origen.Equipo.EsAliado (destino) ? origen.AtributosActuales.Empuje.HaciaAliado : origen.AtributosActuales.Empuje.HaciaEnemigo) * 1000 / destino.AtributosActuales.Empuje.Masa;
+
+			var Fuerza = usarCoef / dist;
+			vect = vect * (Fuerza * (float)delta.TotalSeconds);
+			destino.PosPrecisa += vect;
+
 		}
 
 		public event Action<Unidad> AlRequerirOrdenAntes;

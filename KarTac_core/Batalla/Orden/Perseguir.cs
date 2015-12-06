@@ -4,7 +4,7 @@ namespace KarTac.Batalla.Orden
 {
 	public class Perseguir: Movimiento
 	{
-		const float _distanciaCercano = 3;
+		const float _distanciaCercano = 30;
 
 		public Unidad UnidadDestino;
 
@@ -21,6 +21,12 @@ namespace KarTac.Batalla.Orden
 
 		public override bool Update (GameTime time)
 		{
+			var dist = UnidadDestino.PosPrecisa - Unidad.PosPrecisa;
+			if (dist.Length () < _distanciaCercano)
+			{
+				Unidad.OrdenActual = null;
+				return true;
+			}
 			Destino = UnidadDestino.Pos;
 			return base.Update (time);
 		}
