@@ -29,14 +29,14 @@ namespace KarTac.Cliente.Controls.Primitivos
 			var círculo = shape as Círculo;
 			if (círculo != null)
 			{
-				textureString = @"Shapes/Círculo"; // TODO: agregar este Content
+				textureString = @"Shapes/Círculo";
 				bounds = círculo.MínimoRectángulo ();
 				return;
 			}
 			var rect = shape as Rectángulo;
 			if (rect != null)
 			{
-				textureString = "Rect"; // TODO: cambiar este Content
+				textureString = "Rect"; 
 				bounds = rect;
 				return;
 			}
