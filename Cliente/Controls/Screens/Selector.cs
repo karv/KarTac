@@ -11,8 +11,6 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 		}
 
-		//public override ListaControl Controles { get; }
-
 		/// <summary>
 		/// Revisa si es posible dar una salida con la función Selecciona
 		/// </summary>
