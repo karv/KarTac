@@ -36,7 +36,7 @@ namespace KarTac.Cliente.Controls.Screens
 
 			#if FPS
 			fpsLabel = new Label (this);
-			fpsLabel.Texto = () => string.Format ("fps: {0}", juego.Fps.AverageFramesPerSecond);
+			fpsLabel.Texto = () => string.Format ("fps: {0}", juego.GetDisplayMode.RefreshRate);
 			fpsLabel.UseFont = @"UnitNameFont";
 			fpsLabel.Color = Color.White;
 			#endif
