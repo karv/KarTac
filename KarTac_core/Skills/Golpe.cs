@@ -4,6 +4,8 @@ using KarTac.Batalla.Shape;
 using System.Collections.Generic;
 using System;
 using KarTac.Batalla.Exp;
+using KarTac.Batalla.Orden;
+using System.Configuration;
 
 namespace KarTac.Skills
 {
@@ -46,12 +48,18 @@ namespace KarTac.Skills
 			selector.IgualdadEstricta = true;
 			if (!selector.Validar ())
 				throw new Exception ();
-			
-			selector.AlResponder += obj => estado_Seleccionado (
-				obj,
-				usuario);
+
+			selector.AlResponder += delegate (SelecciónRespuesta obj)
+			{
+				estado_Seleccionado (obj, usuario);	
+				selector.ClearStatus (); // Limpia el cache temporal
+			};
+
 			selector.Selecciona ();
 		}
+
+
+
 
 		public bool Usable (Unidad usuario, Campo campo)
 		{
@@ -76,8 +84,21 @@ namespace KarTac.Skills
 			var daño = dañoBloqueado * 2 + 1;
 
 			selección.AtributosActuales.HP.Valor -= daño;
+			System.Diagnostics.Debug.WriteLine (string.Format (
+				"{0} causa {1} daño HP a {2}",
+				usuario,
+				daño,
+				selección));
 
 			PeticiónExpAcumulada += 1;
+			OnTerminar (usuario);
+
+		}
+
+		static void OnTerminar (Unidad usuario)
+		{
+			var ordQuieto = new Quieto (usuario, TimeSpan.FromSeconds (3));
+			usuario.OrdenActual = ordQuieto;
 		}
 	}
 }
