@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace KarTac.Batalla.Orden
 {
-	public class Huir :IOrden
+	public class Huir : IOrden
 	{
 		public Unidad Unidad { get; }
 
@@ -41,4 +41,3 @@ namespace KarTac.Batalla.Orden
 		}
 	}
 }
-
