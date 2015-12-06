@@ -77,5 +77,10 @@ namespace KarTac.Cliente.Controls.Screens
 		}
 
 		public event Action<SelecciónRespuesta> AlResponder;
+
+		public void ClearStatus ()
+		{
+			AlResponder = null;
+		}
 	}
 }

@@ -36,6 +36,11 @@ namespace KarTac.Batalla
 		void Selecciona ();
 
 		event Action<SelecciónRespuesta> AlResponder;
+
+		/// <summary>
+		/// Limpia el caché temporal, se DEBE ejecutar cuando ya no se necesite esta instancia
+		/// </summary>
+		void ClearStatus ();
 	}
 
 	public interface IResponseSelector
