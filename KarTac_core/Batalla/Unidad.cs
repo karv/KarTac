@@ -86,6 +86,18 @@ namespace KarTac.Batalla
 			BolsaExp = 0;
 		}
 
+		/// <summary>
+		/// Mueve la unidad una dirección específica
+		/// </summary>
+		/// <param name="movDir">Dirección</param>
+		/// <param name="time">durante el tiempo</param>
+		public void Mover (Vector2 movDir, TimeSpan time)
+		{
+			movDir.Normalize ();
+			movDir *= AtributosActuales.Velocidad * (float)time.TotalSeconds;
+			PosPrecisa += movDir;
+
+		}
 
 
 		/// <summary>
