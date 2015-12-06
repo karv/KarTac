@@ -13,6 +13,12 @@ namespace KarTac.Batalla.Orden
 		{
 		}
 
+		public Perseguir (Unidad yo, Unidad destino)
+			: this (yo)
+		{
+			UnidadDestino = destino;
+		}
+
 		public override bool Update (GameTime time)
 		{
 			Destino = UnidadDestino.Pos;
