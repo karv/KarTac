@@ -30,9 +30,7 @@ namespace KarTac.Batalla.Orden
 				OnTerminar ();
 				return true;
 			}
-			movDir.Normalize ();
-			movDir *= Unidad.AtributosActuales.Velocidad * (float)time.ElapsedGameTime.TotalSeconds;
-			Unidad.PosPrecisa = Unidad.PosPrecisa + movDir;
+			Unidad.Mover (movDir, time.ElapsedGameTime);
 			return false;
 		}
 
