@@ -9,18 +9,6 @@ namespace KarTac.Cliente.Controls.Primitivos
 {
 	public static class Formas
 	{
-		/// <summary>
-		/// Devuelve una textura 1x1 blanco
-		/// </summary>
-		public static Texture2D PixelTexture (GraphicsDevice dev)
-		{
-			var ret = new Texture2D (dev, 1, 1);
-			ret.SetData<Color> (
-				new [] { Color.White });
-			return ret;
-		}
-
-
 		public static void DrawLine (SpriteBatch sb, Vector2 start, Vector2 end, Color color, Texture2D text)
 		{
 			Vector2 edge = end - start;
