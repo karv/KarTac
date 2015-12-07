@@ -2,6 +2,7 @@
 using KarTac.Batalla.Orden;
 using OpenTK.Input;
 using Microsoft.Xna.Framework;
+using System;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -52,6 +53,14 @@ namespace KarTac.Cliente.Controls.Screens
 			{
 				menú.SkillSeleccionado.Ejecutar (UnidadActual, CampoBatalla);
 			}
+
+			if (InputManager.FuePresionado (Key.Tab)) // Huir
+			{
+				var orden = new Huir (UnidadActual, TimeSpan.FromSeconds (2));
+				UnidadActual.OrdenActual = orden;
+				Salir ();
+			}
+
 
 			if (InputManager.FuePresionado (MouseButton.Left))
 			{
