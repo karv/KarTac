@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System;
 using KarTac.Batalla.Exp;
 using KarTac.Batalla.Orden;
+using KarTac.Personajes;
 
 namespace KarTac.Skills
 {
@@ -36,6 +37,17 @@ namespace KarTac.Skills
 		}
 
 		public double PeticiónExpAcumulada { get; private set; }
+
+		public IEnumerable<ISkill> DesbloquearSkills (Personaje persona)
+		{
+			return new ISkill[0]; // Regresa vacío, por ahora.
+
+		}
+
+		public bool PuedeAprender (Personaje unidad)
+		{
+			return true; // Skill básico, siempre se puede aprender
+		}
 
 		public void Ejecutar (Unidad usuario, Campo campo)
 		{

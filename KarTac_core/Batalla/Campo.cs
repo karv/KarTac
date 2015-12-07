@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using Microsoft.Xna.Framework;
+using KarTac.Skills;
 
 namespace KarTac.Batalla
 {
@@ -119,6 +120,34 @@ namespace KarTac.Batalla
 			vect = vect * (Fuerza * (float)delta.TotalSeconds);
 			destino.PosPrecisa += vect;
 
+		}
+
+		public void AlTerminar ()
+		{
+			foreach (var u in Unidades)
+			{
+				u.CommitExp ();
+			}
+
+			// Los skills
+			// Añadir nuevos desbloqueados
+			foreach (var x in Unidades)
+			{
+				foreach (var s in x.PersonajeBase.Skills)
+				{
+					x.PersonajeBase.Desbloqueables.UnionWith (s.DesbloquearSkills (x.PersonajeBase));
+				}
+
+				// Agregar los skills que ya se deben aprender.
+				foreach (var sk in new List<ISkill> (x.PersonajeBase.Desbloqueables))
+				{
+					if (sk.PuedeAprender (x.PersonajeBase))
+					{
+						x.PersonajeBase.Desbloqueables.Remove (sk);
+						x.PersonajeBase.Skills.Add (sk);
+					}
+				}
+			}
 		}
 
 		public event Action<Unidad> AlRequerirOrdenAntes;

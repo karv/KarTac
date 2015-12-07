@@ -31,6 +31,8 @@ namespace KarTac.Personajes
 
 		public IList<ISkill> Skills { get; }
 
+		public HashSet<ISkill> Desbloqueables { get; }
+
 		public event Action AlMorir
 		{
 			add

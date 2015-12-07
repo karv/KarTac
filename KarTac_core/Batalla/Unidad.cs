@@ -89,7 +89,7 @@ namespace KarTac.Batalla
 		/// <summary>
 		/// Convierte la bolsa de exp en experiencia real para sus IExp
 		/// </summary>
-		void commitExp ()
+		public void CommitExp ()
 		{
 			// Hacer diccionario de IExp s con sus pesos y normalizarlo
 			foreach (var petit in PeticiónExpNormalizado)

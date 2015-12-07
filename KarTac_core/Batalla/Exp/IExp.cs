@@ -6,6 +6,9 @@ namespace KarTac.Batalla.Exp
 	/// </summary>
 	public interface IExp
 	{
+		/// <summary>
+		/// Recive la experiencia ya procesada y neta.
+		/// </summary>
 		void RecibirExp (double exp);
 
 		/// <summary>
