@@ -1,6 +1,7 @@
 ﻿using KarTac.Batalla;
 using System;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -22,17 +23,19 @@ namespace KarTac.Cliente.Controls.Screens
 		/// <summary>
 		/// Ejecuta el selector y devuelve los seleccionados
 		/// </summary>
-		public void Selecciona ()
+		public void Selecciona (Unidad unid)
 		{
 			var diálogo = new ScreenPedirDeLista<Unidad> (Juego);
 
-			diálogo.Stringificación = new Func<Unidad, string> ((Unidad unidad) => string.Format ("{0}: {1}",
-			                                                                                      unidad.PersonajeBase.Nombre,
-			                                                                                      unidad.AtributosActuales.HP));
+			var lista = diálogo.ListaComponente;
+
+			lista.Stringificación = new Func<Unidad, string> ((Unidad unidad) => string.Format ("{0}: {1}",
+			                                                                                    unidad.PersonajeBase.Nombre,
+			                                                                                    unidad.AtributosActuales.HP));
 
 			foreach (var x in PosiblesBlancos)
 			{
-				diálogo.Add (x);
+				lista.Add (x, unid.Equipo.EsAliado (x) ? Color.White : Color.Red);
 			}
 
 			diálogo.AlTerminar += delegate

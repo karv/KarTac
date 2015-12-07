@@ -54,7 +54,7 @@ namespace KarTac.Skills
 				selector.ClearStatus (); // Limpia el cache temporal
 			};
 
-			selector.Selecciona ();
+			selector.Selecciona (usuario);
 		}
 
 		/// <summary>

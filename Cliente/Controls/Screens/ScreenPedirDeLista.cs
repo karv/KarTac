@@ -10,46 +10,39 @@ namespace KarTac.Cliente.Controls.Screens
 	/// </summary>
 	public class ScreenPedirDeLista<TObj> : ScreenDial
 	{
+
 		const string fontTexture = "UnitNameFont";
 
 		public ScreenPedirDeLista (KarTacGame game)
 			: base (game)
 		{
-			Lista = new List<TObj> ();
-			listaComponente = new Lista (this);
-			listaComponente.Bounds = new Rectangle (0, 0, GetDisplayMode.Width, GetDisplayMode.Height);
-			listaComponente.ColorBG = Color.Blue * 0.4f;
-			Controles.Add (listaComponente);
-			Stringificación = x => x.ToString ();
+			ListaComponente = new Lista<TObj> (this);
+			ListaComponente.Bounds = new Rectangle (0, 0, GetDisplayMode.Width, GetDisplayMode.Height);
+			ListaComponente.ColorBG = Color.Blue * 0.4f;
+			Controles.Add (ListaComponente);
+			ListaComponente.Stringificación = x => x.ToString ();
 			SelecciónActual = new List<TObj> ();
 		}
-
-		List<TObj> Lista { get; }
 
 		public TObj ObjetoEnCursor
 		{
 			get
 			{
-				return Lista [listaComponente.CursorIndex];
+				return ListaComponente.Objetos [ListaComponente.CursorIndex].Objeto;
 			}
 		}
 
-		public void Add (TObj t)
-		{
-			Lista.Add (t);
-			listaComponente.Objetos.Add (Stringificación (t));
+		public void Add (TObj t, Color color)
+		{			
+			ListaComponente.Objetos.Add (new Lista<TObj>.Entrada (t, color));
 		}
 
-		Lista listaComponente { get; }
+		public Lista<TObj> ListaComponente { get; }
 
 		/// <summary>
 		/// Devuelve la lista de los objetos seleccionados hasta el momento
 		/// </summary>
 		public List<TObj> SelecciónActual { get; }
-
-		public Func<TObj, string> Stringificación { get; set; }
-
-		//public override ListaControl Controles { get; }
 
 		public override void Inicializar ()
 		{

@@ -33,7 +33,7 @@ namespace KarTac.Batalla
 		/// <summary>
 		/// Ejecuta el selector y devuelve los seleccionados
 		/// </summary>
-		void Selecciona ();
+		void Selecciona (Unidad unidad);
 
 		event Action<SelecciónRespuesta> AlResponder;
 
