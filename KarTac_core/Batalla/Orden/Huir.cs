@@ -7,12 +7,15 @@ namespace KarTac.Batalla.Orden
 	{
 		public Unidad Unidad { get; }
 
+		public static Rectangle Tamaño { get; set; }
+
 		public TimeSpan DuraciónRestante { get; set; }
 
 		public Huir (Unidad unidad, TimeSpan duración)
 		{
 			DuraciónRestante = duración;
 			Unidad = unidad;
+
 		}
 
 		public bool Update (GameTime time)
@@ -29,6 +32,12 @@ namespace KarTac.Batalla.Orden
 					vectorMov += sumando;
 				}
 			}
+
+			// Sumar las paredes
+			vectorMov += new Vector2 (1 / (Unidad.PosPrecisa.X - Tamaño.Left), 0);
+			vectorMov += new Vector2 (1 / (Unidad.PosPrecisa.X - Tamaño.Right), 0);
+			vectorMov += new Vector2 (0, 1 / (Unidad.PosPrecisa.Y - Tamaño.Top));
+			vectorMov += new Vector2 (0, 1 / (Unidad.PosPrecisa.Y - Tamaño.Bottom));
 
 			Unidad.Mover (vectorMov, time.ElapsedGameTime);
 			DuraciónRestante -= time.ElapsedGameTime;
