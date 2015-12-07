@@ -26,6 +26,10 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 			var diálogo = new ScreenPedirDeLista<Unidad> (Juego);
 
+			diálogo.Stringificación = new Func<Unidad, string> ((Unidad unidad) => string.Format ("{0}: {1}",
+			                                                                                      unidad.PersonajeBase.Nombre,
+			                                                                                      unidad.AtributosActuales.HP));
+
 			foreach (var x in PosiblesBlancos)
 			{
 				diálogo.Add (x);
