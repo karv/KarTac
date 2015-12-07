@@ -9,12 +9,30 @@ using OpenTK.Input;
 
 namespace KarTac.Cliente.Controls
 {
-	public class Lista : SBC
+	
+	public class Lista<TObj> : SBC, IList<TObj>
 	{
+		public struct Entrada
+		{
+			public TObj Objeto;
+			public Color Color;
+
+			public Entrada (TObj obj)
+				: this (obj, Color.White)
+			{
+			}
+
+			public Entrada (TObj obj, Color color)
+			{
+				Objeto = obj;
+				Color = color;
+			}
+		}
+
 		public Lista (IScreen screen)
 			: base (screen)
 		{
-			Objetos = new List<string> ();
+			Objetos = new List<Entrada> ();
 			ColorBG = Color.Blue * 0.3f;
 		}
 
@@ -33,17 +51,20 @@ namespace KarTac.Cliente.Controls
 			for (int i = 0; i < Objetos.Count; i++)
 			{
 				var x = Objetos [i];
+				var strTxt = Stringificación (x.Objeto);
 				if (i == cursorIndex)
 				{
-					var rect = Fuente.GetStringRectangle (x, currY);
+					var rect = Fuente.GetStringRectangle (strTxt, currY);
 					bat.Draw (noTexture, rect, Color.White * 0.5f);
 				}
-				bat.DrawString (Fuente, x, currY, Color.White);
+				bat.DrawString (Fuente, strTxt, currY, x.Color);
 				currY.Y += Fuente.LineHeight;
 			}
 		}
 
-		public List<string> Objetos { get; }
+		public List<Entrada> Objetos { get; }
+
+		public Func<TObj, string> Stringificación { get; set; }
 
 		int cursorIndex;
 
@@ -102,6 +123,101 @@ namespace KarTac.Cliente.Controls
 					CursorIndex--;
 			}
 		}
+
+		#region IList
+
+		int IList<TObj>.IndexOf (TObj item)
+		{
+			throw new NotImplementedException ();
+		}
+
+		void IList<TObj>.Insert (int index, TObj item)
+		{
+			throw new NotImplementedException ();
+		}
+
+		void IList<TObj>.RemoveAt (int index)
+		{
+			throw new NotImplementedException ();
+		}
+
+		public void Add (TObj item)
+		{
+			Add (item, Color.White);
+		}
+
+		public void Add (TObj item, Color color)
+		{
+			Add (new Entrada (item, color));
+		}
+
+		public void Add (Entrada entrada)
+		{
+			Objetos.Add (entrada);
+		}
+
+		public void Clear ()
+		{
+			Objetos.Clear ();
+		}
+
+		public bool Contains (TObj item)
+		{
+			throw new NotImplementedException ();
+		}
+
+		void ICollection<TObj>.CopyTo (TObj[] array, int arrayIndex)
+		{
+			throw new NotImplementedException ();
+		}
+
+		public bool Remove (TObj item)
+		{
+			throw new NotImplementedException ();
+		}
+
+		IEnumerator<TObj> IEnumerable<TObj>.GetEnumerator ()
+		{
+			throw new NotImplementedException ();
+		}
+
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator ()
+		{
+			throw new NotImplementedException ();
+		}
+
+		public TObj this [int index]
+		{
+			get
+			{
+				return Objetos [index].Objeto;
+			}
+			set
+			{
+				var old = Objetos [index];
+				Objetos [index] = new Entrada (value, old.Color);
+			}
+		}
+
+		public int Count
+		{
+			get
+			{
+				return Objetos.Count;
+			}
+		}
+
+		public bool IsReadOnly
+		{
+			get
+			{
+				return false;
+			}
+		}
+
+
+
+		#endregion
 
 		#region Eventos
 

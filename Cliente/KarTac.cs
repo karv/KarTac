@@ -74,18 +74,24 @@ namespace KarTac.Cliente
 			unidad.Interactor = new InteracciónHumano (unidad, this);
 			unidad.PosPrecisa = new Vector2 (200, 150);
 			unidad.Equipo = new Equipo (1, Color.Red);
-			var ord = new Huir (unidad, TimeSpan.FromSeconds (60));
-			unidad.OrdenActual = ord;
 
 			var unidad2 = new Unidad (pj2, c);
 			unidad2.Interactor = new InteracciónHumano (unidad2, this);
 			unidad2.PosPrecisa = new Vector2 (100, 100);
 			unidad2.Equipo = new Equipo (2, Color.Yellow);
 
+			var unidad3 = new Unidad (pj, c);
+			unidad3.Interactor = new InteracciónHumano (unidad3, this);
+			unidad3.PosPrecisa = new Vector2 (200, 180);
+			unidad3.Equipo = new Equipo (1, Color.Red);
+
+			var ord = new Perseguir (unidad, unidad2);
+			unidad.OrdenActual = ord;
 			//sc.UnidadActual = unidad;
 
 			c.Unidades.Add (unidad);
 			c.Unidades.Add (unidad2);
+			c.Unidades.Add (unidad3);
 
 			c.SelectorTarget = new Selector (this);
 
