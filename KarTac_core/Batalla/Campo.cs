@@ -48,7 +48,7 @@ namespace KarTac.Batalla
 
 		public void Tick (GameTime delta)
 		{
-			foreach (var x in Unidades)
+			foreach (var x in UnidadesVivas)
 			{
 				var ord = x.OrdenActual;
 				if (ord != null)
@@ -65,7 +65,7 @@ namespace KarTac.Batalla
 
 			RecibirExp (delta.ElapsedGameTime);
 
-			foreach (var x in Unidades)
+			foreach (var x in UnidadesVivas)
 			{
 				x.AcumularPetición (delta.ElapsedGameTime);
 				// Sus recursos
