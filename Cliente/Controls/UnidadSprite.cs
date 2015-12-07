@@ -137,7 +137,7 @@ namespace KarTac.Cliente.Controls
 		public override void Dibujar (GameTime gameTime)
 		{
 			var bat = Screen.Batch;
-			bat.Draw (texturaClase, área, Color.Black);  // Icono
+			bat.Draw (texturaClase, área, Color.Black * (UnidadBase.EstáVivo ? 1 : 0.3f));  // Icono
 			bat.Draw (texturaRect, flagRect, FlagColor); // Bandera
 			bat.Draw (texturaRect, hpBar, Color.White);  // HP background
 			bat.Draw (texturaRect, currHpBar, Color.Red);// HP actual
