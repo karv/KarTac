@@ -10,9 +10,9 @@ namespace KarTac.Cliente.Controls
 	/// <summary>
 	/// El menú "en pausa"
 	/// </summary>
-	public class BottomMenu : SBC
+	public class MenúTurno : SBC
 	{
-		public BottomMenu (IScreen screen)
+		public MenúTurno (IScreen screen)
 			: base (screen)
 		{
 			Prioridad = -20;

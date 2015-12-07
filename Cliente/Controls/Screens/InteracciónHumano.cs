@@ -10,7 +10,7 @@ namespace KarTac.Cliente.Controls.Screens
 		const double _distCercaUnidadClickCuadrada = 400;
 		// dist = 20
 
-		BottomMenu menú { get; }
+		MenúTurno menú { get; }
 
 		public Unidad UnidadActual
 		{
@@ -31,7 +31,7 @@ namespace KarTac.Cliente.Controls.Screens
 		public InteracciónHumano (Unidad unid, KarTacGame game)
 			: base (game)
 		{
-			menú = new BottomMenu (this);
+			menú = new MenúTurno (this);
 			menú.UnidadActual = unid;
 			menú.Include ();
 		}

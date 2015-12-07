@@ -55,7 +55,6 @@
     <Compile Include="Controls\IContenedor.cs" />
     <Compile Include="Controls\ContenedorBotón.cs" />
     <Compile Include="Controls\Screens\Screen.cs" />
-    <Compile Include="Controls\BottomMenu.cs" />
     <Compile Include="Controls\Screens\IScreen.cs" />
     <Compile Include="Controls\Screens\BattleScreen.cs" />
     <Compile Include="Controls\Screens\Selector.cs" />
@@ -71,6 +70,7 @@
     <Compile Include="Controls\Utils\ContadorFps.cs" />
     <Compile Include="Controls\Label.cs" />
     <Compile Include="InputManager.cs" />
+    <Compile Include="Controls\MenúTurno.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
