@@ -60,6 +60,9 @@ namespace KarTac.Cliente.Controls.Screens
 			base.Update (gameTime);
 			// Ejecutar órdenes
 			CampoBatalla.Tick (gameTime);
+
+			if (CampoBatalla.EquipoGanador != null)
+				Game.Exit (); // Cuando alguien gana, se acaba.
 		}
 
 		public override void Inicializar ()

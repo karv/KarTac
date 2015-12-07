@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using KarTac.Skills;
+using System.Runtime.InteropServices;
 
 namespace KarTac.Batalla
 {
@@ -37,6 +38,12 @@ namespace KarTac.Batalla
 						yield return u;
 				}
 			}
+		}
+
+		public void AñadirUnidad (Unidad u)
+		{
+			Unidades.Add (u);
+			u.PersonajeBase.AlMorir += RevisarEquipoGanador;
 		}
 
 		public Campo (Point tamaño)
@@ -122,7 +129,31 @@ namespace KarTac.Batalla
 
 		}
 
-		public void AlTerminar ()
+		public Equipo? EquipoGanador { get; private set; }
+
+		void RevisarEquipoGanador ()
+		{
+			Equipo? currEq = null;
+			foreach (var x in UnidadesVivas)
+			{
+				if (!currEq.HasValue)
+					currEq = x.Equipo;
+				else
+				{
+					if (!currEq.Value.Equals (x.Equipo))
+					{
+						EquipoGanador = null;
+						return;
+					}
+				}
+			}
+			EquipoGanador = currEq;
+		}
+
+		/// <summary>
+		/// Lo que hace cuando acaba una batalla
+		/// </summary>
+		public void OnTerminar ()
 		{
 			foreach (var u in Unidades)
 			{
