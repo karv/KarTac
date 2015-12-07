@@ -26,11 +26,12 @@ namespace KarTac.Cliente.Controls
 			var tr = new Vector2 (Bounds.Right, Bounds.Top);
 			var br = new Vector2 (Bounds.Right, Bounds.Bottom);
 			var bl = new Vector2 (Bounds.Left, Bounds.Bottom);
+			/*
 			Formas.DrawLine (bat, tl, tr, Color.White, Screen.Device);
 			Formas.DrawLine (bat, tr, br, Color.White, Screen.Device);
 			Formas.DrawLine (bat, br, bl, Color.White, Screen.Device);
 			Formas.DrawLine (bat, bl, tl, Color.White, Screen.Device);
-
+*/ //TODO
 			// Background
 			bat.Draw (noTexture, Bounds, ColorBG);
 

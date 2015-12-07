@@ -145,8 +145,8 @@ namespace KarTac.Cliente.Controls
 			if (Marcado)
 			{
 				// Dibujar un rectángulo alrededor
-				bat.Draw (texturaRect, GetBounds (), Color.Yellow * 0.7f);
-				//Formas.DrawRectangle (bat, GetBounds (), Color.Yellow * 0.8f, Screen.Device);
+				//bat.Draw (texturaRect, GetBounds (), Color.Yellow * 0.7f);
+				Formas.DrawRectangle (bat, GetBounds (), Color.Yellow * 0.8f, texturaRect);
 			}
 
 			// Nombre
