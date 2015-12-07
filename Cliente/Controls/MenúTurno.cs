@@ -4,15 +4,17 @@ using KarTac.Cliente.Controls.Screens;
 using MonoGame.Extended.BitmapFonts;
 using System;
 using KarTac.Skills;
+using OpenTK.Graphics.OpenGL;
+using System.Resources;
 
 namespace KarTac.Cliente.Controls
 {
 	/// <summary>
 	/// El menú "en pausa"
 	/// </summary>
-	public class BottomMenu : SBC
+	public class MenúTurno : SBC
 	{
-		public BottomMenu (IScreen screen)
+		public MenúTurno (IScreen screen)
 			: base (screen)
 		{
 			Prioridad = -20;
@@ -146,8 +148,23 @@ namespace KarTac.Cliente.Controls
 
 		public override Rectangle GetBounds ()
 		{
-			return new Rectangle (0, Screen.GetDisplayMode.Height - TamañoY,
-			                      Screen.GetDisplayMode.Width, TamañoY);
+			return new Rectangle (
+				0, 
+				DibujarAbajo ? Screen.GetDisplayMode.Height - TamañoY : 0,
+				Screen.GetDisplayMode.Width,
+				TamañoY);
+		}
+
+		/// <summary>
+		/// Devuelve si el control debe dibujarse en la parte baja de la pantalla
+		/// </summary>
+		/// <value><c>true</c> if dibujar abajo; otherwise, <c>false</c>.</value>
+		public bool DibujarAbajo
+		{
+			get
+			{
+				return UnidadActual.Pos.Y < Screen.GetDisplayMode.Height - TamañoY - 50;
+			}
 		}
 	}
 }
