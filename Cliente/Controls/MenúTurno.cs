@@ -4,6 +4,8 @@ using KarTac.Cliente.Controls.Screens;
 using MonoGame.Extended.BitmapFonts;
 using System;
 using KarTac.Skills;
+using OpenTK.Graphics.OpenGL;
+using System.Resources;
 
 namespace KarTac.Cliente.Controls
 {
@@ -146,8 +148,23 @@ namespace KarTac.Cliente.Controls
 
 		public override Rectangle GetBounds ()
 		{
-			return new Rectangle (0, Screen.GetDisplayMode.Height - TamañoY,
-			                      Screen.GetDisplayMode.Width, TamañoY);
+			return new Rectangle (
+				0, 
+				DibujarAbajo ? Screen.GetDisplayMode.Height - TamañoY : 0,
+				Screen.GetDisplayMode.Width,
+				TamañoY);
+		}
+
+		/// <summary>
+		/// Devuelve si el control debe dibujarse en la parte baja de la pantalla
+		/// </summary>
+		/// <value><c>true</c> if dibujar abajo; otherwise, <c>false</c>.</value>
+		public bool DibujarAbajo
+		{
+			get
+			{
+				return UnidadActual.Pos.Y < Screen.GetDisplayMode.Height - TamañoY - 50;
+			}
 		}
 	}
 }
