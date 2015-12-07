@@ -126,17 +126,17 @@ namespace KarTac.Cliente.Controls
 
 		#region IList
 
-		public int IndexOf (TObj item)
+		int IList<TObj>.IndexOf (TObj item)
 		{
 			throw new NotImplementedException ();
 		}
 
-		public void Insert (int index, TObj item)
+		void IList<TObj>.Insert (int index, TObj item)
 		{
 			throw new NotImplementedException ();
 		}
 
-		public void RemoveAt (int index)
+		void IList<TObj>.RemoveAt (int index)
 		{
 			throw new NotImplementedException ();
 		}
@@ -158,7 +158,7 @@ namespace KarTac.Cliente.Controls
 
 		public void Clear ()
 		{
-			throw new NotImplementedException ();
+			Objetos.Clear ();
 		}
 
 		public bool Contains (TObj item)
@@ -166,7 +166,7 @@ namespace KarTac.Cliente.Controls
 			throw new NotImplementedException ();
 		}
 
-		public void CopyTo (TObj[] array, int arrayIndex)
+		void ICollection<TObj>.CopyTo (TObj[] array, int arrayIndex)
 		{
 			throw new NotImplementedException ();
 		}
@@ -176,7 +176,7 @@ namespace KarTac.Cliente.Controls
 			throw new NotImplementedException ();
 		}
 
-		public IEnumerator<TObj> GetEnumerator ()
+		IEnumerator<TObj> IEnumerable<TObj>.GetEnumerator ()
 		{
 			throw new NotImplementedException ();
 		}
@@ -190,11 +190,12 @@ namespace KarTac.Cliente.Controls
 		{
 			get
 			{
-				throw new NotImplementedException ();
+				return Objetos [index].Objeto;
 			}
 			set
 			{
-				throw new NotImplementedException ();
+				var old = Objetos [index];
+				Objetos [index] = new Entrada (value, old.Color);
 			}
 		}
 
@@ -202,7 +203,7 @@ namespace KarTac.Cliente.Controls
 		{
 			get
 			{
-				throw new NotImplementedException ();
+				return Objetos.Count;
 			}
 		}
 
@@ -210,9 +211,11 @@ namespace KarTac.Cliente.Controls
 		{
 			get
 			{
-				throw new NotImplementedException ();
+				return false;
 			}
 		}
+
+
 
 		#endregion
 

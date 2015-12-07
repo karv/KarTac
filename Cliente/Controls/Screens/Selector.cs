@@ -29,9 +29,9 @@ namespace KarTac.Cliente.Controls.Screens
 
 			var lista = diálogo.ListaComponente;
 
-			lista.Stringificación = new Func<Unidad, string> ((Unidad unidad) => string.Format ("{0}: {1}",
-			                                                                                    unidad.PersonajeBase.Nombre,
-			                                                                                    unidad.AtributosActuales.HP));
+			lista.Stringificación = new Func<Unidad, string> (unidad => string.Format ("{0}: {1}",
+			                                                                           unidad.PersonajeBase.Nombre,
+			                                                                           unidad.AtributosActuales.HP));
 
 			foreach (var x in PosiblesBlancos)
 			{
