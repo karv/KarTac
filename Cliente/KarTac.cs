@@ -50,6 +50,7 @@ namespace KarTac.Cliente
 		protected override void Initialize ()
 		{
 			var c = new Campo (new Point (GetDisplayMode.Width, GetDisplayMode.Height));
+			Huir.Tamaño = c.Área;
 
 			var pj = new Personaje ();
 			var pj2 = new Personaje ();
