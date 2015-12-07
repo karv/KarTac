@@ -43,7 +43,7 @@ namespace KarTac.Skills
 			var área = new Círculo (usuario.Pos, 100);
 
 			selector.MaxSelect = 1;
-			selector.PosiblesBlancos = new List<Unidad> (campo.Unidades.Where (x => área.Contiene (x.Pos)));
+			selector.PosiblesBlancos = new List<Unidad> (campo.Unidades.Where (x => área.Contiene (x.Pos)).OrderBy (x => usuario.Equipo.EsAliado (x)));
 			selector.IgualdadEstricta = true;
 			if (!selector.Validar ())
 				throw new Exception ();
