@@ -42,6 +42,10 @@ namespace KarTac.Batalla
 				{
 					yield return x;
 				}
+				foreach (var x in AtributosActuales.Recs)
+				{
+					yield return x;
+				}
 			}
 		}
 
@@ -111,9 +115,12 @@ namespace KarTac.Batalla
 				suma += x.PeticiónExpAcumulada;
 			}
 
-			foreach (var petit in Expables)
+			if (suma > 0)
 			{
-				petit.CommitExp (BolsaExp / suma);
+				foreach (var petit in Expables)
+				{
+					petit.CommitExp (BolsaExp / suma);
+				}
 			}
 
 			BolsaExp = 0;
