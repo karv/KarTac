@@ -2,6 +2,8 @@
 using System;
 using System.Linq;
 using Microsoft.Xna.Framework;
+using KarTac.Skills;
+using System.Runtime.InteropServices;
 
 namespace KarTac.Batalla
 {
@@ -36,6 +38,12 @@ namespace KarTac.Batalla
 						yield return u;
 				}
 			}
+		}
+
+		public void AñadirUnidad (Unidad u)
+		{
+			Unidades.Add (u);
+			u.PersonajeBase.AlMorir += RevisarEquipoGanador;
 		}
 
 		public Campo (Point tamaño)
@@ -119,6 +127,54 @@ namespace KarTac.Batalla
 			vect = vect * (Fuerza * (float)delta.TotalSeconds);
 			destino.PosPrecisa += vect;
 
+		}
+
+		public Equipo? EquipoGanador { get; private set; }
+
+		void RevisarEquipoGanador ()
+		{
+			Equipo? currEq = null;
+			foreach (var x in UnidadesVivas)
+			{
+				if (!currEq.HasValue)
+					currEq = x.Equipo;
+				else
+				{
+					if (!currEq.Value.Equals (x.Equipo))
+					{
+						EquipoGanador = null;
+						return;
+					}
+				}
+			}
+			EquipoGanador = currEq;
+		}
+
+		/// <summary>
+		/// Lo que hace cuando acaba una batalla
+		/// </summary>
+		public void Terminar ()
+		{
+			// Los skills
+			// Añadir nuevos desbloqueados
+			foreach (var x in Unidades)
+			{
+				x.CommitExp ();
+				foreach (var s in x.PersonajeBase.Skills)
+				{
+					x.PersonajeBase.Desbloqueables.UnionWith (s.DesbloquearSkills ());
+				}
+
+				// Agregar los skills que ya se deben aprender.
+				foreach (var sk in new List<ISkill> (x.PersonajeBase.Desbloqueables))
+				{
+					if (sk.PuedeAprender ())
+					{
+						x.PersonajeBase.Desbloqueables.Remove (sk);
+						x.PersonajeBase.Skills.Add (sk);
+					}
+				}
+			}
 		}
 
 		public event Action<Unidad> AlRequerirOrdenAntes;

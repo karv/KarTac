@@ -6,7 +6,10 @@ namespace KarTac.Batalla.Exp
 	/// </summary>
 	public interface IExp
 	{
-		void RecibirExp (double exp);
+		/// <summary>
+		/// Recive la experiencia ya procesada y neta.
+		/// </summary>
+		void CommitExp (double exp);
 
 		/// <summary>
 		/// Devuelve número no negativo especificando cuánto peso de lo que recibe en exp

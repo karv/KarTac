@@ -90,9 +90,9 @@ namespace KarTac.Cliente
 			unidad.OrdenActual = ord;
 			//sc.UnidadActual = unidad;
 
-			c.Unidades.Add (unidad);
-			c.Unidades.Add (unidad2);
-			c.Unidades.Add (unidad3);
+			c.AñadirUnidad (unidad);
+			c.AñadirUnidad (unidad2);
+			c.AñadirUnidad (unidad3);
 
 			c.SelectorTarget = new Selector (this);
 

@@ -3,17 +3,19 @@ using System.Linq;
 using KarTac.Batalla.Shape;
 using System.Collections.Generic;
 using System;
-using KarTac.Batalla.Exp;
 using KarTac.Batalla.Orden;
+using KarTac.Personajes;
 
 namespace KarTac.Skills
 {
 	public class Golpe : ISkill
 	{
-		public Golpe ()
+		public Golpe (Personaje usuario)
 		{
-			ExpTags = new DictionaryTag ();
+			Usuario = usuario;
 		}
+
+		public Personaje Usuario { get; }
 
 		public double TotalExp { get; private set; }
 
@@ -25,8 +27,6 @@ namespace KarTac.Skills
 			}
 		}
 
-		public ITagging ExpTags { get; }
-
 		public string IconTextureName
 		{
 			get
@@ -36,6 +36,17 @@ namespace KarTac.Skills
 		}
 
 		public double PeticiónExpAcumulada { get; private set; }
+
+		public IEnumerable<ISkill> DesbloquearSkills ()
+		{
+			return new ISkill[0]; // Regresa vacío, por ahora.
+
+		}
+
+		public bool PuedeAprender ()
+		{
+			return true; // Skill básico, siempre se puede aprender
+		}
 
 		public void Ejecutar (Unidad usuario, Campo campo)
 		{
@@ -70,7 +81,7 @@ namespace KarTac.Skills
 			return true; //Siempre me puedo golpear solo :3
 		}
 
-		public void RecibirExp (double exp)
+		public void CommitExp (double exp)
 		{
 			TotalExp += exp;
 			PeticiónExpAcumulada = 0;
