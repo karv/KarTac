@@ -65,8 +65,9 @@ namespace KarTac.Skills
 				throw new Exception ();
 
 			selector.AlResponder += delegate (SelecciónRespuesta obj)
-			{
+			{				
 				Terminal (obj);	
+				OnTerminar ();
 				selector.ClearStatus (); // Limpia el cache temporal
 			};
 
@@ -76,17 +77,12 @@ namespace KarTac.Skills
 		/// <summary>
 		/// Código heredado debe ir antes de base.Termilal
 		/// </summary>
-		public virtual void Terminal (SelecciónRespuesta obj)
-		{
-			OnTerminar ();
-		}
+		public abstract void Terminal (SelecciónRespuesta obj);
 
 		protected override void OnTerminar ()
 		{
 			var ordQuieto = new Quieto (UnidadUsuario, CalcularTiempoUso ());
 			UnidadUsuario.OrdenActual = ordQuieto;
 		}
-
 	}
 }
-

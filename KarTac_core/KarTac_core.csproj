@@ -78,6 +78,7 @@
     <Compile Include="Skills\SkillComún.cs" />
     <Compile Include="Skills\SkillTresPasos.cs" />
     <Compile Include="Skills\SkillTresPasosShaped.cs" />
+    <Compile Include="Skills\RayoManá.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

@@ -73,7 +73,6 @@ namespace KarTac.Skills
 		public override void Terminal (SelecciónRespuesta obj)
 		{
 			estado_Seleccionado (obj);
-			base.Terminal (obj);
 		}
 
 		void estado_Seleccionado (SelecciónRespuesta resp)
@@ -95,7 +94,6 @@ namespace KarTac.Skills
 
 			PeticiónExpAcumulada += 1;
 		}
-
 
 		public override bool Usable ()
 		{
