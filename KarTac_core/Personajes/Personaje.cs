@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using KarTac.Skills;
-using System.Runtime.InteropServices;
+using KarTac.Batalla;
 
 namespace KarTac.Personajes
 {
@@ -18,6 +18,20 @@ namespace KarTac.Personajes
 		/// </summary>
 		/// <value>The atributos.</value>
 		public AtributosPersonaje Atributos { get; }
+
+		public Unidad Unidad { get; private set; }
+
+		public Unidad ConstruirUnidadUnidad (Campo campoBatalla)
+		{
+			var ret = new Unidad (this, campoBatalla);
+			Unidad = ret;
+			return ret;
+		}
+
+		public void LimpiarUnidad ()
+		{
+			Unidad = null;
+		}
 
 		public Personaje ()
 		{

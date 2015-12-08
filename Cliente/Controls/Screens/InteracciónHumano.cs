@@ -51,7 +51,7 @@ namespace KarTac.Cliente.Controls.Screens
 			}
 			if (InputManager.FuePresionado (Key.Enter))
 			{
-				menú.SkillSeleccionado.Ejecutar (UnidadActual, CampoBatalla);
+				menú.SkillSeleccionado.Ejecutar (CampoBatalla);
 			}
 
 			if (InputManager.FuePresionado (Key.Tab)) // Huir

@@ -11,14 +11,14 @@ namespace KarTac.Skills
 
 		Personaje Usuario { get; }
 
-		void Ejecutar (Unidad usuario, Campo campo);
+		void Ejecutar (Campo campo);
 
 		/// <summary>
 		/// Determina si es posible usar este skill.
 		/// </summary>
 		/// <param name="campo">Campo.</param>
 		/// <param name="usuario">Usuario</param>
-		bool Usable (Unidad usuario, Campo campo);
+		bool Usable (Campo campo);
 
 		string IconTextureName { get; }
 
