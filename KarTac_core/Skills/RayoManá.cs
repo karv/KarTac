@@ -3,6 +3,7 @@ using KarTac.Personajes;
 using System.Collections.Generic;
 using KarTac.Batalla.Shape;
 using KarTac.Batalla;
+using KarTac.Recursos;
 
 namespace KarTac.Skills
 {
@@ -11,6 +12,19 @@ namespace KarTac.Skills
 		public RayoManá (Personaje usuario)
 			: base (usuario)
 		{
+		}
+
+		public override void AlAprender ()
+		{
+			Usuario.Atributos.Recs.Add (new Maná ());
+		}
+
+		Maná ManáRecurso
+		{
+			get
+			{
+				return UnidadUsuario.AtributosActuales.Recs ["Maná"] as Maná;
+			}
 		}
 
 		public override string Nombre
@@ -36,7 +50,7 @@ namespace KarTac.Skills
 
 		public override bool PuedeAprender ()
 		{
-			return false; // Skill básico, ya está aprendido
+			return Usuario.Atributos.HP.Valor >= 70;
 		}
 
 		protected override IShape GetÁrea ()
@@ -70,9 +84,11 @@ namespace KarTac.Skills
 			}
 		}
 
+		const float UsaManá = 5;
+
 		public override bool Usable ()
 		{
-			return true;
+			return ManáRecurso.Valor >= UsaManá;
 		}
 
 		public override void Terminal (SelecciónRespuesta obj)
@@ -88,6 +104,8 @@ namespace KarTac.Skills
 				UnidadUsuario,
 				daño,
 				selección));
+
+			ManáRecurso.Valor -= UsaManá;
 
 			PeticiónExpAcumulada += 1.5;
 		}
