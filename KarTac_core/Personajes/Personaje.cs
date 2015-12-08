@@ -21,7 +21,7 @@ namespace KarTac.Personajes
 
 		public Unidad Unidad { get; private set; }
 
-		public Unidad ConstruirUnidadUnidad (Campo campoBatalla)
+		public Unidad ConstruirUnidad (Campo campoBatalla)
 		{
 			var ret = new Unidad (this, campoBatalla);
 			Unidad = ret;
