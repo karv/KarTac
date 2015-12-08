@@ -1,5 +1,4 @@
-﻿using KarTac.Batalla;
-using KarTac.Batalla.Exp;
+﻿using KarTac.Batalla.Exp;
 using System.Collections.Generic;
 using KarTac.Personajes;
 
@@ -11,14 +10,12 @@ namespace KarTac.Skills
 
 		Personaje Usuario { get; }
 
-		void Ejecutar (Campo campo);
+		void Ejecutar ();
 
 		/// <summary>
 		/// Determina si es posible usar este skill.
 		/// </summary>
-		/// <param name="campo">Campo.</param>
-		/// <param name="usuario">Usuario</param>
-		bool Usable (Campo campo);
+		bool Usable ();
 
 		string IconTextureName { get; }
 
@@ -32,5 +29,10 @@ namespace KarTac.Skills
 		/// Revisa si una Unidad cumple los requicitos para aprender este Skill.
 		/// </summary>
 		bool PuedeAprender ();
+
+		/// <summary>
+		/// Se ejecuta al aprender
+		/// </summary>
+		void AlAprender ();
 	}
 }

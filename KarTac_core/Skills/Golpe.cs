@@ -1,33 +1,19 @@
 ﻿using KarTac.Batalla;
-using System.Linq;
 using KarTac.Batalla.Shape;
 using System.Collections.Generic;
 using System;
-using KarTac.Batalla.Orden;
 using KarTac.Personajes;
 
 namespace KarTac.Skills
 {
-	public class Golpe : ISkill
+	public class Golpe : SkillTresPasosShaped
 	{
 		public Golpe (Personaje usuario)
+			: base (usuario)
 		{
-			Usuario = usuario;
 		}
 
-		public Personaje Usuario { get; }
-
-		public Unidad Unidad
-		{
-			get
-			{
-				return Usuario.Unidad;
-			}
-		}
-
-		public double TotalExp { get; private set; }
-
-		public string Nombre
+		public override string Nombre
 		{
 			get
 			{
@@ -35,7 +21,7 @@ namespace KarTac.Skills
 			}
 		}
 
-		public string IconTextureName
+		public override string IconTextureName
 		{
 			get
 			{
@@ -43,56 +29,51 @@ namespace KarTac.Skills
 			}
 		}
 
-		public double PeticiónExpAcumulada { get; private set; }
-
-		public IEnumerable<ISkill> DesbloquearSkills ()
+		public override IEnumerable<ISkill> DesbloquearSkills ()
 		{
 			return new ISkill[0]; // Regresa vacío, por ahora.
-
 		}
 
-		public bool PuedeAprender ()
+		public override bool PuedeAprender ()
 		{
-			return true; // Skill básico, siempre se puede aprender
+			return false; // Skill básico, ya está aprendido
 		}
 
-		public void Ejecutar (Campo campo)
+		protected override TimeSpan CalcularTiempoPreparación ()
 		{
-			var selector = campo.SelectorTarget;
-			var área = new Círculo (Unidad.Pos, 100);
+			return TimeSpan.Zero;
+		}
 
-			selector.MaxSelect = 1;
-			selector.PosiblesBlancos = new List<Unidad> (campo.Unidades.Where (x => área.Contiene (x.Pos)).OrderBy (x => Unidad.Equipo.EsAliado (x)));
-			selector.IgualdadEstricta = true;
-			if (!selector.Validar ())
-				throw new Exception ();
+		protected override TimeSpan CalcularTiempoUso ()
+		{
+			return TimeSpan.FromSeconds (3.0 / UnidadUsuario.AtributosActuales.Agilidad);
+		}
 
-			selector.AlResponder += delegate (SelecciónRespuesta obj)
+		protected override IShape GetÁrea ()
+		{
+			return new Círculo (UnidadUsuario.Pos, 60);
+		}
+
+		protected override bool IgualdadEstricta
+		{
+			get
 			{
-				estado_Seleccionado (obj);	
-				selector.ClearStatus (); // Limpia el cache temporal
-			};
-
-			selector.Selecciona (Unidad);
+				return true;
+			}
 		}
 
-		/// <summary>
-		/// Calcula el tiempo de uso (post) de esta habilidad.
-		/// </summary>
-		static TimeSpan CalcularTiempoUso (Unidad unidad)
+		protected override int MaxSelect
 		{
-			return TimeSpan.FromSeconds (3.0 / unidad.AtributosActuales.Agilidad);
+			get
+			{
+				return 1;
+			}
 		}
 
-		public bool Usable (Campo campo)
+		public override void Terminal (SelecciónRespuesta obj)
 		{
-			return true; //Siempre me puedo golpear solo :3
-		}
-
-		public void CommitExp (double exp)
-		{
-			TotalExp += exp;
-			PeticiónExpAcumulada = 0;
+			estado_Seleccionado (obj);
+			base.Terminal (obj);
 		}
 
 		void estado_Seleccionado (SelecciónRespuesta resp)
@@ -101,26 +82,24 @@ namespace KarTac.Skills
 			// usuario ataca a selección
 
 			var dañoBloqueado = Math.Max (
-				                    Unidad.AtributosActuales.Ataque - selección.AtributosActuales.Defensa,
+				                    UnidadUsuario.AtributosActuales.Ataque - selección.AtributosActuales.Defensa,
 				                    0);
 			var daño = Math.Max (20 - dañoBloqueado, 1);
 
 			selección.AtributosActuales.HP.Valor -= daño;
 			System.Diagnostics.Debug.WriteLine (string.Format (
 				"{0} causa {1} daño HP a {2}",
-				Unidad,
+				UnidadUsuario,
 				daño,
 				selección));
 
 			PeticiónExpAcumulada += 1;
-			OnTerminar ();
-
 		}
 
-		void OnTerminar ()
+
+		public override bool Usable ()
 		{
-			var ordQuieto = new Quieto (Unidad, CalcularTiempoUso (Unidad));
-			Unidad.OrdenActual = ordQuieto;
+			return true;
 		}
 	}
 }

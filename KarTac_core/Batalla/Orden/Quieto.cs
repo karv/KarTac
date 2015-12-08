@@ -30,6 +30,9 @@ namespace KarTac.Batalla.Orden
 		{
 			if (Unidad.OrdenActual == this)
 				Unidad.OrdenActual = null;
+			AlTerminar?.Invoke ();
 		}
+
+		public event Action AlTerminar;
 	}
 }

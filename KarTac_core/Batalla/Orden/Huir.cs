@@ -44,9 +44,12 @@ namespace KarTac.Batalla.Orden
 			if (DuraciónRestante <= TimeSpan.Zero)
 			{
 				Unidad.OrdenActual = null;
+				AlTerminar?.Invoke ();
 				return true;
 			}
 			return false;
 		}
+
+		public event Action AlTerminar;
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System.Net.Mail;
 
 namespace KarTac.Batalla.Orden
 {
@@ -38,6 +39,9 @@ namespace KarTac.Batalla.Orden
 		{
 			if (Unidad.OrdenActual == this)
 				Unidad.OrdenActual = null;
+			AlTerminar?.Invoke ();
 		}
+
+		public event System.Action AlTerminar;
 	}
 }
