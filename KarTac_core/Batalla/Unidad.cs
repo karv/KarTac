@@ -34,6 +34,17 @@ namespace KarTac.Batalla
 			}
 		}
 
+		public IEnumerable<IExp> Expables
+		{
+			get
+			{
+				foreach (var x in PersonajeBase.Skills)
+				{
+					yield return x;
+				}
+			}
+		}
+
 		public Campo CampoBatalla { get; }
 
 		public Personaje PersonajeBase { get; }
@@ -49,6 +60,7 @@ namespace KarTac.Batalla
 			PersonajeBase = personaje;
 			CampoBatalla = campo;
 			AtributosActuales = PersonajeBase.Atributos.Clonar ();
+
 		}
 
 		/// <summary>
@@ -92,9 +104,16 @@ namespace KarTac.Batalla
 		public void CommitExp ()
 		{
 			// Hacer diccionario de IExp s con sus pesos y normalizarlo
-			foreach (var petit in PeticiónExpNormalizado)
+			// Obtener suma
+			double suma = 0;
+			foreach (var x in Expables)
 			{
-				petit.Key.RecibirExp (petit.Value * BolsaExp);
+				suma += x.PeticiónExpAcumulada;
+			}
+
+			foreach (var petit in Expables)
+			{
+				petit.CommitExp (BolsaExp / suma);
 			}
 
 			BolsaExp = 0;
@@ -111,30 +130,6 @@ namespace KarTac.Batalla
 			movDir *= AtributosActuales.Velocidad * (float)time.TotalSeconds;
 			PosPrecisa += movDir;
 
-		}
-
-
-		/// <summary>
-		/// Devuelve un diccionario de las peticiones de experiencia ya normalizadas
-		/// </summary>
-		DictionaryTag PeticiónExpNormalizado = new DictionaryTag ();
-
-		void NormalizarPetición ()
-		{
-			double suma = 0;
-			foreach (var x in PeticiónExpNormalizado.Values)
-			{
-				suma += x;
-			}
-
-			// Normalizar
-			if (suma > 0)
-			{
-				foreach (var x in PeticiónExpNormalizado.Keys)
-				{
-					PeticiónExpNormalizado [x] /= suma;
-				}
-			}
 		}
 
 		public void AcumularPetición (TimeSpan time)

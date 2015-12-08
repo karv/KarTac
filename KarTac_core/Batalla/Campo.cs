@@ -153,26 +153,22 @@ namespace KarTac.Batalla
 		/// <summary>
 		/// Lo que hace cuando acaba una batalla
 		/// </summary>
-		public void OnTerminar ()
+		public void Terminar ()
 		{
-			foreach (var u in Unidades)
-			{
-				u.CommitExp ();
-			}
-
 			// Los skills
 			// Añadir nuevos desbloqueados
 			foreach (var x in Unidades)
 			{
+				x.CommitExp ();
 				foreach (var s in x.PersonajeBase.Skills)
 				{
-					x.PersonajeBase.Desbloqueables.UnionWith (s.DesbloquearSkills (x.PersonajeBase));
+					x.PersonajeBase.Desbloqueables.UnionWith (s.DesbloquearSkills ());
 				}
 
 				// Agregar los skills que ya se deben aprender.
 				foreach (var sk in new List<ISkill> (x.PersonajeBase.Desbloqueables))
 				{
-					if (sk.PuedeAprender (x.PersonajeBase))
+					if (sk.PuedeAprender ())
 					{
 						x.PersonajeBase.Desbloqueables.Remove (sk);
 						x.PersonajeBase.Skills.Add (sk);

@@ -9,6 +9,8 @@ namespace KarTac.Skills
 	{
 		string Nombre { get; }
 
+		Personaje Usuario { get; }
+
 		void Ejecutar (Unidad usuario, Campo campo);
 
 		/// <summary>
@@ -21,19 +23,14 @@ namespace KarTac.Skills
 		string IconTextureName { get; }
 
 		/// <summary>
-		/// Tags de experiencia
-		/// </summary>
-		ITagging ExpTags { get; }
-
-		/// <summary>
 		/// Se ejecuta después de asignar experiencia.
 		/// Debe devolver los skills a la lista de 'podría aprender' de la unidad.
 		/// </summary>
-		IEnumerable<ISkill> DesbloquearSkills (Personaje  personaje);
+		IEnumerable<ISkill> DesbloquearSkills ();
 
 		/// <summary>
 		/// Revisa si una Unidad cumple los requicitos para aprender este Skill.
 		/// </summary>
-		bool PuedeAprender (Personaje persona);
+		bool PuedeAprender ();
 	}
 }

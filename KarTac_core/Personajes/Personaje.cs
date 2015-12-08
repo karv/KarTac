@@ -26,7 +26,8 @@ namespace KarTac.Personajes
 			Skills = new List<ISkill> ();
 
 			// Agregar defaults
-			Skills.Add (new Golpe ());
+			Skills.Add (new Golpe (this));
+			Desbloqueables = new HashSet<ISkill> ();
 		}
 
 		public IList<ISkill> Skills { get; }

@@ -9,7 +9,7 @@ namespace KarTac.Batalla.Exp
 		/// <summary>
 		/// Recive la experiencia ya procesada y neta.
 		/// </summary>
-		void RecibirExp (double exp);
+		void CommitExp (double exp);
 
 		/// <summary>
 		/// Devuelve número no negativo especificando cuánto peso de lo que recibe en exp
