@@ -3,7 +3,7 @@ using KarTac.Batalla;
 
 namespace KarTac.Recursos
 {
-	public class HP : RecursoAcotado
+	public class HP : RecursoAcotadoRegenerativo
 	{
 
 		public override string Nombre
@@ -14,11 +14,18 @@ namespace KarTac.Recursos
 			}
 		}
 
-
 		/// <summary>
-		/// HP regenerada por minuto
+		/// Regeneración constante por minuto
 		/// </summary>
-		public float Regen { get; set; }
+		public float Regeneración { get; set; }
+
+		protected override float Regen
+		{
+			get
+			{
+				return Regeneración;
+			}
+		}
 
 		public override void CommitExp (double exp)
 		{

@@ -52,6 +52,10 @@ namespace KarTac.Recursos
 
 		public abstract void CommitExp (double exp);
 
+		public virtual void Tick (Microsoft.Xna.Framework.GameTime delta)
+		{
+		}
+
 		public override string ToString ()
 		{
 			return string.Format ("{0}:\t{1}/{2}", Nombre, Valor, Max);
@@ -73,6 +77,7 @@ namespace KarTac.Recursos
 		/// Ocurre cuando cambia el valor actual
 		/// </summary>
 		public event Action AlCambiarValor;
+
 
 
 	}
