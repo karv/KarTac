@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using KarTac.Cliente.Controls.Screens;
+using Microsoft.Xna.Framework.Input;
 
 namespace KarTac.Cliente.Controls
 {
@@ -122,6 +123,16 @@ namespace KarTac.Cliente.Controls
 		{
 			var ret = new Botón (Screen, CalcularPosición (Count));
 			controles.Add (ret);
+			ret.Habilidato = true;
+			ret.Include ();
+			return ret;
+		}
+
+		public Botón Add (int índice)
+		{
+			var ret = new Botón (Screen, CalcularPosición (Count));
+			controles.Insert (índice, ret);
+			ret.Habilidato = true;
 			ret.Include ();
 			return ret;
 		}

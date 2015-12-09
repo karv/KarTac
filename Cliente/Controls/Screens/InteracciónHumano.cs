@@ -51,8 +51,12 @@ namespace KarTac.Cliente.Controls.Screens
 			}
 			if (InputManager.FuePresionado (Key.Enter))
 			{
-				menú.SkillSeleccionado.Ejecutar ();
-				Salir ();
+				var skill = menú.SkillSeleccionado;
+				if (skill.Usable ())
+				{
+					menú.SkillSeleccionado.Ejecutar ();
+					Salir ();
+				}
 			}
 
 			if (InputManager.FuePresionado (Key.Tab)) // Huir
