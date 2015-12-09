@@ -95,9 +95,12 @@ namespace KarTac.Skills
 			PeticiónExpAcumulada += 1;
 		}
 
-		public override bool Usable ()
+		public override bool Usable
 		{
-			return true;
+			get
+			{
+				return true;
+			}
 		}
 	}
 }

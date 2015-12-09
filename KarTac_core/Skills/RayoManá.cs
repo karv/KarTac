@@ -87,9 +87,12 @@ namespace KarTac.Skills
 
 		const float UsaManá = 5;
 
-		public override bool Usable ()
+		public override bool Usable
 		{
-			return ManáRecurso.Valor >= UsaManá;
+			get
+			{
+				return ManáRecurso.Valor >= UsaManá;
+			}
 		}
 
 		public override void Terminal (SelecciónRespuesta obj)

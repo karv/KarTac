@@ -97,7 +97,7 @@ namespace KarTac.Cliente.Controls
 			foreach (var sk in UnidadActual.PersonajeBase.Skills)
 			{
 				Botón bt;
-				if (sk.Usable ())
+				if (sk.Usable)
 				{
 					bt = skillsList.Add (numUsables++);
 					bt.Color = Color.Red;

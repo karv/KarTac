@@ -52,9 +52,9 @@ namespace KarTac.Cliente.Controls.Screens
 			if (InputManager.FuePresionado (Key.Enter))
 			{
 				var skill = menú.SkillSeleccionado;
-				if (skill.Usable ())
+				if (skill.Usable)
 				{
-					menú.SkillSeleccionado.Ejecutar ();
+					skill.Ejecutar ();
 					Salir ();
 				}
 			}
