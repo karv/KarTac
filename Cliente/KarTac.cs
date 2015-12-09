@@ -126,10 +126,12 @@ namespace KarTac.Cliente
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Update (GameTime gameTime)
 		{
+			#if DEBUG
 			if (InputManager.EstáPresionado (Key.Escape) && InputManager.EstáPresionado (Key.ControlLeft))
 			{
 				Exit ();
 			}
+			#endif
 
 			base.Update (gameTime);
 			CurrentScreen.Update (gameTime);
