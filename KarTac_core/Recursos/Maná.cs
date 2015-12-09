@@ -20,7 +20,7 @@ namespace KarTac.Recursos
 		{
 			get
 			{
-				return "MP";
+				return "Maná";
 			}
 		}
 
