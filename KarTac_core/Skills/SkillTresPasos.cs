@@ -4,7 +4,6 @@ using System;
 using KarTac.Batalla.Orden;
 using System.Collections.Generic;
 using System.Linq;
-using OpenTK.Platform.MacOS;
 
 namespace KarTac.Skills
 {
@@ -31,16 +30,11 @@ namespace KarTac.Skills
 		/// </summary>
 		public virtual void Preparación (TimeSpan tiempoPreparación)
 		{
-			if (tiempoPreparación == TimeSpan.Zero)
-				Ejecución ();
-			else
+			Usuario.Unidad.OrdenActual = new Quieto (Usuario.Unidad, tiempoPreparación);
+			Usuario.Unidad.OrdenActual.AlTerminar += delegate
 			{
-				Usuario.Unidad.OrdenActual = new Quieto (Usuario.Unidad, tiempoPreparación);
-				Usuario.Unidad.OrdenActual.AlTerminar += delegate
-				{
-					Ejecución ();
-				};
-			}
+				Ejecución ();
+			};
 		}
 
 		protected abstract TimeSpan CalcularTiempoUso ();

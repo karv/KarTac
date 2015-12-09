@@ -65,6 +65,7 @@ namespace KarTac.Skills
 
 		protected override TimeSpan CalcularTiempoPreparación ()
 		{
+			//return TimeSpan.Zero;
 			return TimeSpan.FromSeconds (1);
 		}
 
