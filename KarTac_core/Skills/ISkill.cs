@@ -15,7 +15,7 @@ namespace KarTac.Skills
 		/// <summary>
 		/// Determina si es posible usar este skill.
 		/// </summary>
-		bool Usable ();
+		bool Usable { get; }
 
 		string IconTextureName { get; }
 

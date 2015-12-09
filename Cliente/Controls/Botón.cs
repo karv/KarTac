@@ -37,5 +37,6 @@ namespace KarTac.Cliente.Controls
 			TexturaInstancia = Screen.Content.Load<Texture2D> (Textura);
 		}
 
+		public bool Habilidato { get; set; }
 	}
 }

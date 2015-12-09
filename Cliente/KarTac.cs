@@ -8,6 +8,7 @@ using KarTac.Personajes;
 using OpenTK.Input;
 using KarTac.Batalla;
 using KarTac.Batalla.Orden;
+using KarTac.Skills;
 
 namespace KarTac.Cliente
 {
@@ -59,14 +60,16 @@ namespace KarTac.Cliente
 
 			pj.Atributos.HP.Max = 100;
 			pj.Atributos.HP.Valor = 80;
-			pj.Atributos.HP.Regen = 60;
+			pj.Atributos.HP.Regeneración = 60;
 			pj.Atributos.Velocidad = 100;
 			pj.Atributos.Agilidad = 30;
 			pj.Nombre = "Juanito";
+			pj.Skills.Add (new RayoManá (pj));
+			pj.Skills [1].AlAprender ();
 
 			pj2.Atributos.HP.Max = 120;
 			pj2.Atributos.HP.Valor = 80;
-			pj2.Atributos.HP.Regen = 50;
+			pj2.Atributos.HP.Regeneración = 50;
 			pj2.Atributos.Velocidad = 90;
 			pj2.Atributos.Agilidad = 24;
 			pj2.Nombre = "Gordo";

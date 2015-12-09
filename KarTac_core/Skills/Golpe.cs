@@ -31,7 +31,7 @@ namespace KarTac.Skills
 
 		public override IEnumerable<ISkill> DesbloquearSkills ()
 		{
-			return new ISkill[0]; // Regresa vacío, por ahora.
+			yield return new RayoManá (Usuario);
 		}
 
 		public override bool PuedeAprender ()
@@ -73,7 +73,6 @@ namespace KarTac.Skills
 		public override void Terminal (SelecciónRespuesta obj)
 		{
 			estado_Seleccionado (obj);
-			base.Terminal (obj);
 		}
 
 		void estado_Seleccionado (SelecciónRespuesta resp)
@@ -96,10 +95,12 @@ namespace KarTac.Skills
 			PeticiónExpAcumulada += 1;
 		}
 
-
-		public override bool Usable ()
+		public override bool Usable
 		{
-			return true;
+			get
+			{
+				return true;
+			}
 		}
 	}
 }

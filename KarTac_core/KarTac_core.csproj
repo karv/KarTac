@@ -78,6 +78,10 @@
     <Compile Include="Skills\SkillComún.cs" />
     <Compile Include="Skills\SkillTresPasos.cs" />
     <Compile Include="Skills\SkillTresPasosShaped.cs" />
+    <Compile Include="Skills\RayoManá.cs" />
+    <Compile Include="Recursos\Maná.cs" />
+    <Compile Include="Recursos\RecursoAcotado.cs" />
+    <Compile Include="Recursos\RecursoAcotadoRegenerativo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

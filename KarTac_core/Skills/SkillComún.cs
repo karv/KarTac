@@ -42,7 +42,7 @@ namespace KarTac.Skills
 
 		public abstract void Ejecutar ();
 
-		public abstract bool Usable ();
+		public abstract bool Usable { get; }
 
 		public void CommitExp (double exp)
 		{

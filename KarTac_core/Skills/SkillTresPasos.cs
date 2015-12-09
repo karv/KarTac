@@ -4,7 +4,6 @@ using System;
 using KarTac.Batalla.Orden;
 using System.Collections.Generic;
 using System.Linq;
-using OpenTK.Platform.MacOS;
 
 namespace KarTac.Skills
 {
@@ -31,16 +30,11 @@ namespace KarTac.Skills
 		/// </summary>
 		public virtual void Preparación (TimeSpan tiempoPreparación)
 		{
-			if (tiempoPreparación == TimeSpan.Zero)
-				Ejecución ();
-			else
+			Usuario.Unidad.OrdenActual = new Quieto (Usuario.Unidad, tiempoPreparación);
+			Usuario.Unidad.OrdenActual.AlTerminar += delegate
 			{
-				Usuario.Unidad.OrdenActual = new Quieto (Usuario.Unidad, tiempoPreparación);
-				Usuario.Unidad.OrdenActual.AlTerminar += delegate
-				{
-					Ejecución ();
-				};
-			}
+				Ejecución ();
+			};
 		}
 
 		protected abstract TimeSpan CalcularTiempoUso ();
@@ -65,8 +59,9 @@ namespace KarTac.Skills
 				throw new Exception ();
 
 			selector.AlResponder += delegate (SelecciónRespuesta obj)
-			{
+			{				
 				Terminal (obj);	
+				OnTerminar ();
 				selector.ClearStatus (); // Limpia el cache temporal
 			};
 
@@ -76,17 +71,12 @@ namespace KarTac.Skills
 		/// <summary>
 		/// Código heredado debe ir antes de base.Termilal
 		/// </summary>
-		public virtual void Terminal (SelecciónRespuesta obj)
-		{
-			OnTerminar ();
-		}
+		public abstract void Terminal (SelecciónRespuesta obj);
 
 		protected override void OnTerminar ()
 		{
 			var ordQuieto = new Quieto (UnidadUsuario, CalcularTiempoUso ());
 			UnidadUsuario.OrdenActual = ordQuieto;
 		}
-
 	}
 }
-

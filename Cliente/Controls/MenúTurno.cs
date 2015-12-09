@@ -63,6 +63,7 @@ namespace KarTac.Cliente.Controls
 			display.Color = Color.Green * 0.8f;
 
 			display.Inicializar ();
+			rehacerSkills ();
 
 			foreach (var x in UnidadActual.AtributosActuales.Recs)
 			{
@@ -83,18 +84,34 @@ namespace KarTac.Cliente.Controls
 			set
 			{
 				unidadActual = value;
-
-				// Actualizar skills
-				skillsList.Clear ();
-
-				foreach (var sk in UnidadActual.PersonajeBase.Skills)
-				{
-					
-					var bt = skillsList.Add ();
-					bt.Textura = sk.IconTextureName;
-				}
-
+				rehacerSkills ();
 			}
+		}
+
+		void rehacerSkills ()
+		{
+			// Actualizar skills
+			skillsList.Clear ();
+			var numUsables = 0;
+
+			foreach (var sk in UnidadActual.PersonajeBase.Skills)
+			{
+				Botón bt;
+				if (sk.Usable)
+				{
+					bt = skillsList.Add (numUsables++);
+					bt.Color = Color.Red;
+
+				}
+				else
+				{
+					bt = skillsList.Add ();
+					bt.Habilidato = false;
+					bt.Color = Color.Gray;
+				}
+				bt.Textura = sk.IconTextureName;
+			}
+
 		}
 
 		public int TamañoY = 200;
