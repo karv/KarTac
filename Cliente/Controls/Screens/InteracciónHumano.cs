@@ -3,6 +3,8 @@ using KarTac.Batalla.Orden;
 using OpenTK.Input;
 using Microsoft.Xna.Framework;
 using System;
+using KarTac.Cliente.Controls.Primitivos;
+using KarTac.Skills;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -54,7 +56,19 @@ namespace KarTac.Cliente.Controls.Screens
 				var skill = menú.SkillSeleccionado;
 				if (skill.Usable)
 				{
+					// Si tiene forma, usarla
+					//TODO hacerlo interface para no hacer que esta clase sea la única encargada de esto.
+					var skillForma = skill as SkillTresPasosShaped; 
+					Forma forma = null;
+					if (skillForma != null)
+					{
+						forma = new Forma (ScreenBase, skillForma.GetÁrea ());
+						forma.LoadContent ();
+						forma.Color = Color.Yellow * 0.7f;
+						forma.Include ();
+					}
 					skill.Ejecutar ();
+					forma?.Exclude ();
 					Salir ();
 				}
 			}
