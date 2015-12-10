@@ -24,6 +24,8 @@ namespace KarTac.Skills
 
 		public abstract string IconTextureName { get; }
 
+		public abstract string Descripción { get; }
+
 		public Campo CampoBatalla
 		{
 			get

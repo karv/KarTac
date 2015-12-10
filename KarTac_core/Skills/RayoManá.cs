@@ -37,6 +37,14 @@ namespace KarTac.Skills
 			}
 		}
 
+		public override string Descripción
+		{
+			get
+			{
+				return "Ataque mágico de buen rango.\nRequiere 5 Maná.";
+			}
+		}
+
 		public override string IconTextureName
 		{
 			get
