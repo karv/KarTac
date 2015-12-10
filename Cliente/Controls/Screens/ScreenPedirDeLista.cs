@@ -9,6 +9,25 @@ namespace KarTac.Cliente.Controls.Screens
 	/// </summary>
 	public class ScreenPedirDeLista<TObj> : ScreenDial
 	{
+		public struct TipoSalida
+		{
+			public enum EnumTipoSalida
+			{
+				Cancelación,
+				Aceptación
+			}
+
+			public TipoSalida (EnumTipoSalida tipo, IEnumerable<TObj> selección)
+			{
+				Tipo = tipo;
+				Selección = selección;
+			}
+
+			public EnumTipoSalida Tipo;
+			public IEnumerable<TObj> Selección;
+		}
+
+		public TipoSalida Salida { get; private set; }
 
 		const string fontTexture = "UnitNameFont";
 
@@ -50,7 +69,10 @@ namespace KarTac.Cliente.Controls.Screens
 		public override void Update (GameTime gameTime)
 		{
 			if (InputManager.FuePresionado (Key.Escape))
+			{
+				Salida = new TipoSalida (TipoSalida.EnumTipoSalida.Cancelación, SelecciónActual);
 				Salir ();
+			}
 
 			if (InputManager.FuePresionado (Key.Space))
 			{
@@ -62,7 +84,10 @@ namespace KarTac.Cliente.Controls.Screens
 			}
 
 			if (InputManager.FuePresionado (Key.Enter))
+			{
+				Salida = new TipoSalida (TipoSalida.EnumTipoSalida.Aceptación, SelecciónActual);
 				Salir ();
+			}
 				
 			base.Update (gameTime);
 		}

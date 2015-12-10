@@ -40,11 +40,19 @@ namespace KarTac.Cliente.Controls.Screens
 
 			diálogo.AlTerminar += delegate
 			{
-				var sel = diálogo.SelecciónActual;
-				if (sel.Count == 0 && !PuedeSerVacío)
-					sel.Add (diálogo.ObjetoEnCursor);
-				AlResponder?.Invoke (new SelecciónRespuesta (sel));
-				Salir ();
+				var sel = diálogo.Salida;
+				if (sel.Tipo == ScreenPedirDeLista<Unidad>.TipoSalida.EnumTipoSalida.Aceptación)
+				{
+					var selección = new List<Unidad> (sel.Selección);
+					if (selección.Count == 0 && !PuedeSerVacío)
+						selección.Add (diálogo.ObjetoEnCursor);
+					AlResponder?.Invoke (new SelecciónRespuesta (selección));
+					Salir ();
+				}
+				else
+				{
+					Salir ();
+				}
 			};
 
 			diálogo.Ejecutar ();
