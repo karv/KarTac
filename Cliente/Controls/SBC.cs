@@ -45,7 +45,7 @@ namespace KarTac.Cliente.Controls
 
 		public virtual void Update (GameTime gameTime)
 		{
-			CheckMouseState ();
+			CheckMouseState (gameTime.ElapsedGameTime);
 		}
 
 		public abstract Rectangle GetBounds ();
@@ -53,7 +53,7 @@ namespace KarTac.Cliente.Controls
 		/// <summary>
 		/// Se ejecuta cada llamada a game.Update 
 		/// </summary>
-		public virtual void CheckMouseState ()
+		public virtual void CheckMouseState (TimeSpan time)
 		{
 			if (MouseOver)
 			{
@@ -63,6 +63,12 @@ namespace KarTac.Cliente.Controls
 
 				if (InputManager.FuePresionado (OpenTK.Input.MouseButton.Left))
 					AlClick?.Invoke ();
+
+				TiempoMouseOver += time;
+			}
+			else
+			{
+				TiempoMouseOver = TimeSpan.Zero;
 			}
 		}
 
@@ -74,6 +80,8 @@ namespace KarTac.Cliente.Controls
 				return GetBounds ().Contains (state.Position);
 			}
 		}
+
+		public TimeSpan TiempoMouseOver { get; private set; }
 
 		public event Action<MouseState> AlPresionalMouse;
 		public event Action AlClick;
