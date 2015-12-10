@@ -117,9 +117,17 @@ namespace KarTac.Cliente.Controls.Screens
 
 			if (InputManager.FuePresionado (MouseButton.Left))
 			{
+				var ordMov = new Movimiento (UnidadActual);
+				ordMov.Destino = new Point (InputManager.EstadoActualMouse.X,
+				                            InputManager.EstadoActualMouse.Y);
+				UnidadActual.OrdenActual = ordMov;
+				Salir (); // Devuelve el control a la pantalla anterior
+			}
+
+			if (InputManager.FuePresionado (MouseButton.Right))
+			{
 				var clickLoc = new Vector2 (InputManager.EstadoActualMouse.X,
 				                            InputManager.EstadoActualMouse.Y);
-
 				// Ver si una unidad está cerca
 				foreach (var x in CampoBatalla.Unidades)
 				{
@@ -133,12 +141,6 @@ namespace KarTac.Cliente.Controls.Screens
 						return;
 					}
 				}
-
-				var ordMov = new Movimiento (UnidadActual);
-				ordMov.Destino = new Point (InputManager.EstadoActualMouse.X,
-				                            InputManager.EstadoActualMouse.Y);
-				UnidadActual.OrdenActual = ordMov;
-				Salir (); // Devuelve el control a la pantalla anterior
 			}
 		}
 
