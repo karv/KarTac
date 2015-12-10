@@ -66,14 +66,25 @@ namespace KarTac.Cliente.Controls.Screens
 						forma.LoadContent ();
 						forma.Color = Color.Yellow * 0.7f;
 
-						skillForma.AlIniciarEjecución += delegate
+						Action iniciarDel = null;
+						Action terminarDel = null;
+
+						iniciarDel = delegate
 						{
 							forma.Include ();
+							skillForma.AlIniciarEjecución -= iniciarDel;
 						};
-						skillForma.AlIniciarCooldown += delegate
+
+						terminarDel = delegate
 						{
 							forma.Exclude ();
+							skillForma.AlIniciarCooldown -= terminarDel;
+							skillForma.AlCancelar -= terminarDel;
 						};
+
+						skillForma.AlIniciarEjecución += iniciarDel;
+						skillForma.AlIniciarCooldown += terminarDel;
+						skillForma.AlCancelar += terminarDel;
 					}
 
 					skill.Ejecutar ();

@@ -51,6 +51,7 @@ namespace KarTac.Cliente.Controls.Screens
 				}
 				else
 				{
+					AlCancelar?.Invoke ();
 					Salir ();
 				}
 			};
@@ -90,6 +91,7 @@ namespace KarTac.Cliente.Controls.Screens
 		}
 
 		public event Action<SelecciónRespuesta> AlResponder;
+		public event Action AlCancelar;
 
 		public void ClearStatus ()
 		{

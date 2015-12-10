@@ -65,6 +65,12 @@ namespace KarTac.Skills
 				Terminal (obj);	
 				OnTerminar ();
 				selector.ClearStatus (); // Limpia el cache temporal
+				AlResponder?.Invoke ();
+			};
+
+			selector.AlCancelar += delegate
+			{
+				AlCancelar?.Invoke ();
 			};
 
 			selector.Selecciona (UnidadUsuario);
@@ -86,5 +92,7 @@ namespace KarTac.Skills
 		public event Action AlIniciarPreparación;
 		public event Action AlIniciarEjecución;
 		public event Action AlIniciarCooldown;
+		public event Action AlResponder;
+		public event Action AlCancelar;
 	}
 }

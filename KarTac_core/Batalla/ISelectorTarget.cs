@@ -36,6 +36,7 @@ namespace KarTac.Batalla
 		void Selecciona (Unidad unidad);
 
 		event Action<SelecciónRespuesta> AlResponder;
+		event Action AlCancelar;
 
 		/// <summary>
 		/// Limpia el caché temporal, se DEBE ejecutar cuando ya no se necesite esta instancia
