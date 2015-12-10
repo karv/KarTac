@@ -7,16 +7,13 @@ namespace KarTac.Cliente.Controls
 {
 	public class VanishingString :SBC
 	{
-		public VanishingString (IScreen screen)
-			: base (screen)
-		{
-		}
-
 		public VanishingString (IScreen screen, string texto, TimeSpan duración)
 			: base (screen)
 		{
 			this.texto = texto;
 			Restante = duración;
+			TiempoInicial = duración;
+			ColorFinal = Color.Transparent;
 		}
 
 		BitmapFont Font;
@@ -24,6 +21,8 @@ namespace KarTac.Cliente.Controls
 		Vector2 topLeft;
 
 		public TimeSpan Restante { get; private set; }
+
+		public TimeSpan TiempoInicial { get; }
 
 		public string Texto
 		{
@@ -78,11 +77,43 @@ namespace KarTac.Cliente.Controls
 			return Bounds;
 		}
 
-		public Color Color { get; set; }
+		public Color ColorInicial { get; set; }
+
+		public Color ColorFinal { get; set; }
+
+		public Color ColorActual
+		{
+			get
+			{
+				var t = escalarColor;
+				var ret = new Color (
+					          (int)(ColorInicial.R * t + ColorFinal.R * (1 - t)),
+					          (int)(ColorInicial.G * t + ColorFinal.G * (1 - t)),
+					          (int)(ColorInicial.B * t + ColorFinal.B * (1 - t)),
+					          (int)(ColorInicial.A * t + ColorFinal.A * (1 - t))
+				          );
+				return ret;
+			}
+		}
+
+
+
+		/// <summary>
+		/// Devuelve valor en [0, 1] depende de dónde en el tiempo es el estado actual de este control (lineal)
+		/// 0 si está en el punto de terminación
+		/// 1 si está en el punto de inicio
+		/// </summary>
+		float escalarColor
+		{
+			get
+			{
+				return (float)Restante.Ticks / TiempoInicial.Ticks;
+			}
+		}
 
 		public override void Dibujar (GameTime gameTime)
 		{
-			Screen.Batch.DrawString (Font, Texto, TopLeft, Color);
+			Screen.Batch.DrawString (Font, Texto, TopLeft, ColorActual);
 		}
 
 		public override void LoadContent ()

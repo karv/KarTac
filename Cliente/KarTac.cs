@@ -135,6 +135,7 @@ namespace KarTac.Cliente
 
 			base.Update (gameTime);
 			CurrentScreen.Update (gameTime);
+			(this as IScreen).Update (gameTime);
 
 			InputManager.Update ();
 		}
@@ -199,7 +200,7 @@ namespace KarTac.Cliente
 
 		void IScreen.Update (GameTime gametime)
 		{
-			foreach (var cu in ControlesUniversales)
+			foreach (var cu in new List<IControl> (ControlesUniversales))
 			{
 				cu.Update (gametime);
 			}
