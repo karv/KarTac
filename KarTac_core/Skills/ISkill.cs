@@ -1,6 +1,7 @@
 ﻿using KarTac.Batalla.Exp;
 using System.Collections.Generic;
 using KarTac.Personajes;
+using System;
 
 namespace KarTac.Skills
 {
@@ -34,5 +35,7 @@ namespace KarTac.Skills
 		/// Se ejecuta al aprender
 		/// </summary>
 		void AlAprender ();
+
+		event Action AlTerminarEjecución;
 	}
 }

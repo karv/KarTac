@@ -16,7 +16,7 @@ namespace KarTac.Skills
 		{
 		}
 
-		protected abstract IShape GetÁrea ();
+		public abstract IShape GetÁrea ();
 
 		protected override bool SeleccionaTarget (Unidad u)
 		{
@@ -24,4 +24,3 @@ namespace KarTac.Skills
 		}
 	}
 }
-

@@ -53,6 +53,7 @@ namespace KarTac.Skills
 		protected virtual void OnTerminar ()
 		{
 			Usuario.Unidad.OrdenActual = null;
+			AlTerminarEjecución?.Invoke ();
 		}
 
 		protected SkillComún (Personaje usuario)
@@ -64,5 +65,7 @@ namespace KarTac.Skills
 		{
 			Usuario = usuario.PersonajeBase;
 		}
+
+		public event System.Action AlTerminarEjecución;
 	}
 }

@@ -49,7 +49,7 @@ namespace KarTac.Skills
 			return TimeSpan.FromSeconds (3.0 / UnidadUsuario.AtributosActuales.Agilidad);
 		}
 
-		protected override IShape GetÁrea ()
+		public override IShape GetÁrea ()
 		{
 			return new Círculo (UnidadUsuario.Pos, 60);
 		}

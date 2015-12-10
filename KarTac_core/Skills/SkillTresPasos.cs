@@ -30,6 +30,7 @@ namespace KarTac.Skills
 		/// </summary>
 		public virtual void Preparación (TimeSpan tiempoPreparación)
 		{
+			AlIniciarPreparación?.Invoke ();
 			Usuario.Unidad.OrdenActual = new Quieto (Usuario.Unidad, tiempoPreparación);
 			Usuario.Unidad.OrdenActual.AlTerminar += delegate
 			{
@@ -50,6 +51,7 @@ namespace KarTac.Skills
 		public virtual void Ejecución ()
 		{
 			var selector = CampoBatalla.SelectorTarget;
+			AlIniciarEjecución?.Invoke ();
 
 			selector.MaxSelect = MaxSelect;
 			selector.PosiblesBlancos = new List<Unidad> (CampoBatalla.Unidades.Where (SeleccionaTarget).OrderBy (x => UnidadUsuario.Equipo.EsAliado (x)));
@@ -59,10 +61,16 @@ namespace KarTac.Skills
 				throw new Exception ();
 
 			selector.AlResponder += delegate (SelecciónRespuesta obj)
-			{				
+			{
 				Terminal (obj);	
 				OnTerminar ();
 				selector.ClearStatus (); // Limpia el cache temporal
+				AlResponder?.Invoke ();
+			};
+
+			selector.AlCancelar += delegate
+			{
+				AlCancelar?.Invoke ();
 			};
 
 			selector.Selecciona (UnidadUsuario);
@@ -75,8 +83,16 @@ namespace KarTac.Skills
 
 		protected override void OnTerminar ()
 		{
+			AlIniciarCooldown?.Invoke ();
+			base.OnTerminar ();
 			var ordQuieto = new Quieto (UnidadUsuario, CalcularTiempoUso ());
 			UnidadUsuario.OrdenActual = ordQuieto;
 		}
+
+		public event Action AlIniciarPreparación;
+		public event Action AlIniciarEjecución;
+		public event Action AlIniciarCooldown;
+		public event Action AlResponder;
+		public event Action AlCancelar;
 	}
 }

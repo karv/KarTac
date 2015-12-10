@@ -15,6 +15,7 @@ namespace KarTac.Cliente.Controls.Primitivos
 			this.shape = shape;
 			Prioridad = 1;
 			Color = Color.White;
+			construirTextura ();
 		}
 
 		Texture2D texture;
