@@ -75,6 +75,7 @@ namespace KarTac.Skills
 
 		protected override void OnTerminar ()
 		{
+			base.OnTerminar ();
 			var ordQuieto = new Quieto (UnidadUsuario, CalcularTiempoUso ());
 			UnidadUsuario.OrdenActual = ordQuieto;
 		}

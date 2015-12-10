@@ -57,7 +57,7 @@ namespace KarTac.Cliente.Controls.Screens
 				if (skill.Usable)
 				{
 					// Si tiene forma, usarla
-					//TODO hacerlo interface para no hacer que esta clase sea la única encargada de esto.
+					// TODO hacerlo interface para no hacer que esta clase sea la única encargada de esto.
 					var skillForma = skill as SkillTresPasosShaped; 
 					Forma forma = null;
 					if (skillForma != null)
@@ -67,8 +67,12 @@ namespace KarTac.Cliente.Controls.Screens
 						forma.Color = Color.Yellow * 0.7f;
 						forma.Include ();
 					}
+					skill.AlTerminarEjecución += delegate
+					{
+						forma?.Exclude ();
+					};
+
 					skill.Ejecutar ();
-					forma?.Exclude ();
 					Salir ();
 				}
 			}
