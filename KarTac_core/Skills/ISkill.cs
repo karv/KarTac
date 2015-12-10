@@ -2,9 +2,40 @@
 using System.Collections.Generic;
 using KarTac.Personajes;
 using System;
+using Microsoft.Xna.Framework;
+using KarTac.Recursos;
 
 namespace KarTac.Skills
 {
+	public interface ISkillReturnType
+	{
+		float Delta { get; }
+
+		Color? Color { get; }
+	}
+
+	public struct SkillReturnType : ISkillReturnType
+	{
+		public SkillReturnType (float delta, IRecurso recurso)
+		{
+			Delta = delta;
+			Recurso = recurso;
+		}
+
+		public float Delta { get; }
+
+		public IRecurso Recurso { get; }
+
+		public Color? Color
+		{
+			get
+			{
+				return Delta < 0 ? Recurso.ColorMostrarPerdido : Recurso.ColorMostrarGanado;
+			}
+		}
+	}
+
+
 	public interface ISkill: IExp
 	{
 		string Nombre { get; }
@@ -36,6 +67,6 @@ namespace KarTac.Skills
 		/// </summary>
 		void AlAprender ();
 
-		event Action AlTerminarEjecución;
+		event Action<ISkillReturnType> AlTerminarEjecución;
 	}
 }
