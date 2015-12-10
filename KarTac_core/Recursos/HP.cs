@@ -1,5 +1,6 @@
 ﻿using System;
 using KarTac.Batalla;
+using Microsoft.Xna.Framework;
 
 namespace KarTac.Recursos
 {
@@ -40,6 +41,20 @@ namespace KarTac.Recursos
 			PeticiónExpAcumulada += (1 - pct) * time.Minutes;
 		}
 
+		public override Color? ColorMostrarGanado
+		{
+			get
+			{
+				return Color.White;
+			}
+		}
 
+		public override Color? ColorMostrarPerdido
+		{
+			get
+			{
+				return Color.Red;
+			}
+		}
 	}
 }

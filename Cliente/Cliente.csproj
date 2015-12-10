@@ -71,6 +71,7 @@
     <Compile Include="Controls\Label.cs" />
     <Compile Include="InputManager.cs" />
     <Compile Include="Controls\MenúTurno.cs" />
+    <Compile Include="Controls\VanishingString.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

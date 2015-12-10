@@ -68,6 +68,22 @@ namespace KarTac.Recursos
 
 		protected abstract void PedirExp (TimeSpan time, Campo campo);
 
+		public virtual Microsoft.Xna.Framework.Color? ColorMostrarGanado
+		{
+			get
+			{
+				return null;
+			}
+		}
+
+		public virtual Microsoft.Xna.Framework.Color? ColorMostrarPerdido
+		{
+			get
+			{
+				return null;
+			}
+		}
+
 		/// <summary>
 		/// Ocurre cuando HP no es positivo
 		/// </summary>
@@ -77,8 +93,5 @@ namespace KarTac.Recursos
 		/// Ocurre cuando cambia el valor actual
 		/// </summary>
 		public event Action AlCambiarValor;
-
-
-
 	}
 }

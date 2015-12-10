@@ -11,7 +11,6 @@ namespace KarTac.Cliente.Controls.Screens
 	public class InteracciónHumano : ScreenDial, IInteractor
 	{
 		const double _distCercaUnidadClickCuadrada = 400;
-		// dist = 20
 
 		MenúTurno menú { get; }
 
@@ -68,6 +67,7 @@ namespace KarTac.Cliente.Controls.Screens
 
 						Action iniciarDel = null;
 						Action terminarDel = null;
+						Action<ISkillReturnType> skillAlEjecutar;
 
 						iniciarDel = delegate
 						{
@@ -82,9 +82,24 @@ namespace KarTac.Cliente.Controls.Screens
 							skillForma.AlCancelar -= terminarDel;
 						};
 
+						skillAlEjecutar = delegate(ISkillReturnType ret)
+						{
+							if (ret.Color.HasValue)
+							{
+								var texto = Math.Abs (ret.Delta).ToString ();
+
+								var mostrarDaño = new VanishingString (Juego, texto, TimeSpan.FromSeconds (1));
+								mostrarDaño.LoadContent ();
+								mostrarDaño.ColorInicial = ret.Color.Value;
+								mostrarDaño.Centro = ret.Loc.ToVector2 ();
+								mostrarDaño.Include ();
+							}
+						};
+
 						skillForma.AlIniciarEjecución += iniciarDel;
 						skillForma.AlIniciarCooldown += terminarDel;
 						skillForma.AlCancelar += terminarDel;
+						skill.AlTerminarEjecución += skillAlEjecutar;
 					}
 
 					skill.Ejecutar ();

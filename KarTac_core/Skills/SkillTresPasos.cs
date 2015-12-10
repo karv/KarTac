@@ -63,7 +63,7 @@ namespace KarTac.Skills
 			selector.AlResponder += delegate (SelecciónRespuesta obj)
 			{
 				Terminal (obj);	
-				OnTerminar ();
+				OnTerminar (LastReturn);
 				selector.ClearStatus (); // Limpia el cache temporal
 				AlResponder?.Invoke ();
 			};
@@ -76,15 +76,17 @@ namespace KarTac.Skills
 			selector.Selecciona (UnidadUsuario);
 		}
 
+		protected abstract ISkillReturnType LastReturn { get; set; }
+
 		/// <summary>
 		/// Código heredado debe ir antes de base.Termilal
 		/// </summary>
 		public abstract void Terminal (SelecciónRespuesta obj);
 
-		protected override void OnTerminar ()
+		protected override void OnTerminar (ISkillReturnType returnInfo)
 		{
 			AlIniciarCooldown?.Invoke ();
-			base.OnTerminar ();
+			base.OnTerminar (returnInfo);
 			var ordQuieto = new Quieto (UnidadUsuario, CalcularTiempoUso ());
 			UnidadUsuario.OrdenActual = ordQuieto;
 		}

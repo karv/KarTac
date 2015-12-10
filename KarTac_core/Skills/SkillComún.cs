@@ -50,10 +50,10 @@ namespace KarTac.Skills
 			PeticiónExpAcumulada = 0;
 		}
 
-		protected virtual void OnTerminar ()
+		protected virtual void OnTerminar (ISkillReturnType returnInfo)
 		{
 			Usuario.Unidad.OrdenActual = null;
-			AlTerminarEjecución?.Invoke ();
+			AlTerminarEjecución?.Invoke (returnInfo);
 		}
 
 		protected SkillComún (Personaje usuario)
@@ -66,6 +66,6 @@ namespace KarTac.Skills
 			Usuario = usuario.PersonajeBase;
 		}
 
-		public event System.Action AlTerminarEjecución;
+		public event System.Action<ISkillReturnType> AlTerminarEjecución;
 	}
 }

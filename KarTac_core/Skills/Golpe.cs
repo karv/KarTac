@@ -70,6 +70,9 @@ namespace KarTac.Skills
 			}
 		}
 
+		protected override ISkillReturnType LastReturn { get; set; }
+
+
 		public override void Terminal (SelecciónRespuesta obj)
 		{
 			estado_Seleccionado (obj);
@@ -93,6 +96,11 @@ namespace KarTac.Skills
 				selección));
 
 			PeticiónExpAcumulada += 1;
+
+			LastReturn = new  SkillReturnType (
+				-daño,
+				selección.AtributosActuales.HP,
+				selección.Pos);
 		}
 
 		public override bool Usable
