@@ -11,7 +11,6 @@ namespace KarTac.Cliente.Controls.Screens
 	public class InteracciónHumano : ScreenDial, IInteractor
 	{
 		const double _distCercaUnidadClickCuadrada = 400;
-		// dist = 20
 
 		MenúTurno menú { get; }
 

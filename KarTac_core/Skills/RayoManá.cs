@@ -119,6 +119,5 @@ namespace KarTac.Skills
 				selección.AtributosActuales.HP,
 				selección.Pos);
 		}
-
 	}
 }

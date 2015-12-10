@@ -93,8 +93,5 @@ namespace KarTac.Recursos
 		/// Ocurre cuando cambia el valor actual
 		/// </summary>
 		public event Action AlCambiarValor;
-
-
-
 	}
 }

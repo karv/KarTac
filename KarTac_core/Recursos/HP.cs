@@ -41,7 +41,7 @@ namespace KarTac.Recursos
 			PeticiónExpAcumulada += (1 - pct) * time.Minutes;
 		}
 
-		public override Microsoft.Xna.Framework.Color? ColorMostrarGanado
+		public override Color? ColorMostrarGanado
 		{
 			get
 			{

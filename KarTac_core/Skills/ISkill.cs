@@ -72,6 +72,9 @@ namespace KarTac.Skills
 		/// </summary>
 		void AlAprender ();
 
+		/// <summary>
+		/// Ocurre al terminar completamente el procedumiento de este ISkill
+		/// </summary>
 		event Action<ISkillReturnType> AlTerminarEjecución;
 	}
 }
