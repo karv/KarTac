@@ -12,8 +12,6 @@ namespace KarTac.Cliente.Controls
 	/// </summary>
 	public class RandomStringDisplay: SBCC
 	{
-		public List<string> Mostrables { get; }
-
 		public RandomStringDisplay (IScreen screen, string fontName = "fonts")
 			: base (screen)
 		{
@@ -21,6 +19,8 @@ namespace KarTac.Cliente.Controls
 			TiempoEntreCambios = TimeSpan.FromSeconds (1);
 			fontString = fontName;
 		}
+
+		public List<string> Mostrables { get; }
 
 		BitmapFont Font;
 

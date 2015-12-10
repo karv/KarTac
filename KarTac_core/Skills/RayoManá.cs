@@ -7,7 +7,7 @@ using KarTac.Recursos;
 
 namespace KarTac.Skills
 {
-	public class RayoManá:SkillTresPasosShaped
+	public class RayoManá : SkillTresPasosShaped
 	{
 		public RayoManá (Personaje usuario)
 			: base (usuario)

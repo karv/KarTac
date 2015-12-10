@@ -6,6 +6,16 @@ namespace KarTac.Skills
 {
 	public abstract class SkillComún : ISkill
 	{
+		protected SkillComún (Personaje usuario)
+		{
+			Usuario = usuario;
+		}
+
+		protected SkillComún (Unidad usuario)
+		{
+			Usuario = usuario.PersonajeBase;
+		}
+
 		public Personaje Usuario { get; }
 
 		public Unidad UnidadUsuario
@@ -56,16 +66,6 @@ namespace KarTac.Skills
 		{
 			Usuario.Unidad.OrdenActual = null;
 			AlTerminarEjecución?.Invoke (returnInfo);
-		}
-
-		protected SkillComún (Personaje usuario)
-		{
-			Usuario = usuario;
-		}
-
-		protected SkillComún (Unidad usuario)
-		{
-			Usuario = usuario.PersonajeBase;
 		}
 
 		public event System.Action<ISkillReturnType> AlTerminarEjecución;

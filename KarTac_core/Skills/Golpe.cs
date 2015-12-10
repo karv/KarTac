@@ -80,7 +80,6 @@ namespace KarTac.Skills
 
 		protected override ISkillReturnType LastReturn { get; set; }
 
-
 		public override void Terminal (SelecciónRespuesta obj)
 		{
 			estado_Seleccionado (obj);
