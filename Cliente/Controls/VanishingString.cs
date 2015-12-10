@@ -118,7 +118,7 @@ namespace KarTac.Cliente.Controls
 
 		public override void LoadContent ()
 		{
-			Font = Screen.Content.Load<BitmapFont> ("UnitNameFont");
+			Font = Screen.Content.Load<BitmapFont> ("fonts");
 		}
 
 		public override void Update (GameTime gameTime)
