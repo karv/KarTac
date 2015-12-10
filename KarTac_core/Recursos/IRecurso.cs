@@ -32,5 +32,17 @@ namespace KarTac.Recursos
 		/// Ocurre cuando cambia el valor actual
 		/// </summary>
 		event Action AlCambiarValor;
+
+		/// <summary>
+		/// Color a mostrar si se aumenta este recurso
+		/// Null para nunca mostrar.
+		/// </summary>
+		Color? ColorMostrarGanado { get; }
+
+		/// <summary>
+		/// Color a mostrar si se reduce este recurso
+		/// Null para nunca mostrar.
+		/// </summary>
+		Color? ColorMostrarPerdido { get; }
 	}
 }
