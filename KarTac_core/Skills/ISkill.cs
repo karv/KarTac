@@ -12,15 +12,20 @@ namespace KarTac.Skills
 		float Delta { get; }
 
 		Color? Color { get; }
+
+		Point Loc { get; }
 	}
 
 	public struct SkillReturnType : ISkillReturnType
 	{
-		public SkillReturnType (float delta, IRecurso recurso)
+		public SkillReturnType (float delta, IRecurso recurso, Point pos)
 		{
 			Delta = delta;
 			Recurso = recurso;
+			Loc = pos;
 		}
+
+		public Point Loc { get; }
 
 		public float Delta { get; }
 

@@ -15,7 +15,7 @@ namespace KarTac.Cliente.Controls
 		public VanishingString (IScreen screen, string texto, TimeSpan duración)
 			: base (screen)
 		{
-			Texto = texto;
+			this.texto = texto;
 			Restante = duración;
 		}
 

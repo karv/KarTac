@@ -114,7 +114,10 @@ namespace KarTac.Skills
 			ManáRecurso.Valor -= UsaManá;
 
 			PeticiónExpAcumulada += 1.5;
-			LastReturn = new SkillReturnType (-daño, selección.AtributosActuales.HP);
+			LastReturn = new SkillReturnType (
+				-daño,
+				selección.AtributosActuales.HP,
+				selección.Pos);
 		}
 
 	}

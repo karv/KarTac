@@ -97,7 +97,10 @@ namespace KarTac.Skills
 
 			PeticiónExpAcumulada += 1;
 
-			LastReturn = new  SkillReturnType (-daño, selección.AtributosActuales.HP);
+			LastReturn = new  SkillReturnType (
+				-daño,
+				selección.AtributosActuales.HP,
+				selección.Pos);
 		}
 
 		public override bool Usable
