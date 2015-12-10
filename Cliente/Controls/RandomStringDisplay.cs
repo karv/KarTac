@@ -14,14 +14,18 @@ namespace KarTac.Cliente.Controls
 	{
 		public List<string> Mostrables { get; }
 
-		public RandomStringDisplay (IScreen screen)
+		public RandomStringDisplay (IScreen screen, string fontName = "fonts")
 			: base (screen)
 		{
 			Mostrables = new List<string> ();
 			TiempoEntreCambios = TimeSpan.FromSeconds (1);
+			fontString = fontName;
 		}
 
 		BitmapFont Font;
+
+		string fontString { get; }
+
 		public Color Color = Color.White * 0.8f;
 
 		public Vector2 Pos;
@@ -46,7 +50,7 @@ namespace KarTac.Cliente.Controls
 
 		public override void LoadContent ()
 		{
-			Font = Screen.Content.Load<BitmapFont> ("fonts");
+			Font = Screen.Content.Load<BitmapFont> (fontString);
 		}
 
 		int índiceActualString;
