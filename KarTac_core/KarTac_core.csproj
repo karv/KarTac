@@ -82,6 +82,7 @@
     <Compile Include="Recursos\Maná.cs" />
     <Compile Include="Recursos\RecursoAcotado.cs" />
     <Compile Include="Recursos\RecursoAcotadoRegenerativo.cs" />
+    <Compile Include="Clan.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
