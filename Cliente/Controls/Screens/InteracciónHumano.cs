@@ -65,12 +65,16 @@ namespace KarTac.Cliente.Controls.Screens
 						forma = new Forma (ScreenBase, skillForma.GetÁrea ());
 						forma.LoadContent ();
 						forma.Color = Color.Yellow * 0.7f;
-						forma.Include ();
+
+						skillForma.AlIniciarEjecución += delegate
+						{
+							forma.Include ();
+						};
+						skillForma.AlIniciarCooldown += delegate
+						{
+							forma.Exclude ();
+						};
 					}
-					skill.AlTerminarEjecución += delegate
-					{
-						forma?.Exclude ();
-					};
 
 					skill.Ejecutar ();
 					Salir ();
