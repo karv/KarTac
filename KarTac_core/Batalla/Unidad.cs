@@ -64,7 +64,7 @@ namespace KarTac.Batalla
 			PersonajeBase = personaje;
 			CampoBatalla = campo;
 			AtributosActuales = PersonajeBase.Atributos.Clonar ();
-
+			PosPrecisa = new Vector2 ();
 		}
 
 		/// <summary>

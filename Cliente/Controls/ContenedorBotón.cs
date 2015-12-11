@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using KarTac.Cliente.Controls.Screens;
-using Microsoft.Xna.Framework.Input;
 
 namespace KarTac.Cliente.Controls
 {
@@ -139,6 +138,10 @@ namespace KarTac.Cliente.Controls
 
 		public void Clear ()
 		{
+			foreach (var x in controles)
+			{
+				x.Exclude ();
+			}
 			controles.Clear ();
 		}
 

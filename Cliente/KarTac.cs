@@ -4,11 +4,9 @@ using System.Collections.Generic;
 using KarTac.Cliente.Controls;
 using KarTac.Cliente.Controls.Screens;
 using System;
-using KarTac.Personajes;
 using OpenTK.Input;
 using KarTac.Batalla;
-using KarTac.Batalla.Orden;
-using KarTac.Skills;
+using System.Diagnostics;
 
 namespace KarTac.Cliente
 {
@@ -19,6 +17,8 @@ namespace KarTac.Cliente
 	,IScreen // Para poder tener controles globales (cursor)
 	{
 		readonly Ratón mouse;
+
+		readonly Label fpsLabel;
 
 		public ListaControl ControlesUniversales { get; }
 
@@ -38,6 +38,13 @@ namespace KarTac.Cliente
 			Content.RootDirectory = "Content";
 			graphics.IsFullScreen = true;
 			mouse = new Ratón (this);
+			#if FPS
+			fpsLabel = new Label (this);
+			fpsLabel.Texto = () => string.Format ("fps: {0}", GetDisplayMode.RefreshRate);
+			fpsLabel.UseFont = @"UnitNameFont";
+			fpsLabel.Color = Color.White;
+			fpsLabel.Include ();
+			#endif
 			mouse.Include ();
 
 		}
@@ -50,51 +57,10 @@ namespace KarTac.Cliente
 		/// </summary>
 		protected override void Initialize ()
 		{
-			var c = new Campo (new Point (GetDisplayMode.Width, GetDisplayMode.Height));
-			Huir.Tamaño = c.Área;
-
-			var pj = new Personaje ();
-			var pj2 = new Personaje ();
-			CurrentScreen = new BattleScreen (this, c);
-			Screens.Add (CurrentScreen);
-
-			pj.Atributos.HP.Max = 100;
-			pj.Atributos.HP.Valor = 80;
-			pj.Atributos.HP.Regeneración = 60;
-			pj.Atributos.Velocidad = 100;
-			pj.Atributos.Agilidad = 30;
-			pj.Nombre = "Juanito";
-			pj.Skills.Add (new RayoManá (pj));
-			pj.Skills [1].AlAprender ();
-
-			pj2.Atributos.HP.Max = 120;
-			pj2.Atributos.HP.Valor = 80;
-			pj2.Atributos.HP.Regeneración = 50;
-			pj2.Atributos.Velocidad = 90;
-			pj2.Atributos.Agilidad = 24;
-			pj2.Nombre = "Gordo";
-
-			var unidad = pj.ConstruirUnidad (c);
-			unidad.Interactor = new InteracciónHumano (unidad, this);
-			unidad.PosPrecisa = new Vector2 (200, 150);
-			unidad.Equipo = new Equipo (1, Color.Red);
-
-			var unidad2 = pj2.ConstruirUnidad (c);
-			unidad2.Interactor = new InteracciónHumano (unidad2, this);
-			unidad2.PosPrecisa = new Vector2 (100, 100);
-			unidad2.Equipo = new Equipo (2, Color.Yellow);
-
-			var ord = new Perseguir (unidad, unidad2);
-			unidad.OrdenActual = ord;
-			//sc.UnidadActual = unidad;
-
-			c.AñadirUnidad (unidad);
-			c.AñadirUnidad (unidad2);
-
-			c.SelectorTarget = new Selector (this);
-
-			CurrentScreen.Inicializar ();
-
+			var unClan = Clan.BuildStartingClan ();
+			var scr = new OutsideScreen (this, unClan);
+			CurrentScreen = scr;
+			scr.LoadContent ();
 			base.Initialize ();
 		}
 
@@ -127,11 +93,18 @@ namespace KarTac.Cliente
 		protected override void Update (GameTime gameTime)
 		{
 			#if DEBUG
+			if (CurrentScreen is IInteractor)
+			{
+				Debug.WriteLine ("!!!");
+				var ii = CurrentScreen as InteracciónHumano;
+				Debug.WriteLine (ii.UnidadActual.PosPrecisa);
+			}
 			if (InputManager.EstáPresionado (Key.Escape) && InputManager.EstáPresionado (Key.ControlLeft))
 			{
 				Exit ();
 			}
 			#endif
+
 
 			base.Update (gameTime);
 			CurrentScreen.Update (gameTime);
@@ -146,10 +119,12 @@ namespace KarTac.Cliente
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw (GameTime gameTime)
 		{
-			graphics.GraphicsDevice.Clear (Color.Green);
-			CurrentScreen.Dibujar (gameTime);
+			graphics.GraphicsDevice.Clear (BackgroundColor);
 
 			Batch.Begin ();
+
+			CurrentScreen.Dibujar (gameTime);
+
 			foreach (var x in ControlesUniversales)
 			{
 				x.Dibujar (gameTime);
@@ -157,9 +132,26 @@ namespace KarTac.Cliente
 
 			//mouse.Dibujar (gameTime);
 			Batch.End ();
+
+		}
+
+		public Color BackgroundColor
+		{
+			get
+			{
+				return CurrentScreen.BgColor;
+			}
 		}
 
 		#region IScreen
+
+		Color IScreen.BgColor
+		{
+			get
+			{
+				return BackgroundColor;
+			}
+		}
 
 		public SpriteBatch GetNewBatch ()
 		{

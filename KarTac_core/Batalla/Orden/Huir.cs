@@ -7,7 +7,13 @@ namespace KarTac.Batalla.Orden
 	{
 		public Unidad Unidad { get; }
 
-		public static Rectangle Tamaño { get; set; }
+		public Rectangle Tamaño
+		{
+			get
+			{
+				return Unidad.CampoBatalla.Área;
+			}
+		}
 
 		public TimeSpan DuraciónRestante { get; set; }
 

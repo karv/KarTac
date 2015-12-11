@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using System;
+using Microsoft.Xna.Framework;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -22,12 +23,20 @@ namespace KarTac.Cliente.Controls.Screens
 			ScreenBase = baseScreen;
 			Juego = juego;
 			Controles = new ListaControl ();
-
 		}
 
-		public void Dibujar (Microsoft.Xna.Framework.GameTime gameTime)
+		public virtual Color BgColor
+		{
+			get
+			{
+				return ScreenBase.BgColor;
+			}
+		}
+
+		public virtual void Dibujar (GameTime gameTime)
 		{
 			ScreenBase.Dibujar (gameTime);
+
 			Batch = GetNewBatch ();
 			Batch.Begin ();
 			foreach (var x in Controles)
@@ -35,6 +44,7 @@ namespace KarTac.Cliente.Controls.Screens
 				x.Dibujar (gameTime);
 			}
 			Batch.End ();
+
 		}
 
 		public virtual void LoadContent ()
@@ -45,7 +55,7 @@ namespace KarTac.Cliente.Controls.Screens
 			}
 		}
 
-		public virtual void Update (Microsoft.Xna.Framework.GameTime gameTime)
+		public virtual void Update (GameTime gameTime)
 		{
 			foreach (var x in Controles)
 			{
@@ -60,7 +70,7 @@ namespace KarTac.Cliente.Controls.Screens
 		public void Ejecutar ()
 		{
 			#if DEBUG
-			System.Diagnostics.Debug.WriteLine ("\n\nEntrando a " + this + "\nDesde " + Juego.CurrentScreen);
+			System.Diagnostics.Debug.WriteLine ("\n\nEntrando a " + this);
 			#endif
 			Inicializar ();
 			LoadContent ();
@@ -70,7 +80,7 @@ namespace KarTac.Cliente.Controls.Screens
 		public void Salir ()
 		{
 			#if DEBUG
-			System.Diagnostics.Debug.WriteLine ("\n\nSaliendo a " + ScreenBase + "\nDesde " + this);
+			System.Diagnostics.Debug.WriteLine ("\n\nEntrando a " + ScreenBase);
 			#endif
 			Juego.CurrentScreen = ScreenBase;
 			AlTerminar?.Invoke ();
@@ -114,7 +124,7 @@ namespace KarTac.Cliente.Controls.Screens
 
 		public override string ToString ()
 		{
-			return string.Format ("[{0}]\nAnterior: {1}\nGame: {2}", GetType (), ScreenBase, Juego);
+			return string.Format ("[{0}]\nAnterior: {1}", GetType (), ScreenBase);
 		}
 
 		public event Action AlTerminar;

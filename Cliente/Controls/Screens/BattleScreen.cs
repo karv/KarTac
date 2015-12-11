@@ -4,15 +4,10 @@ using KarTac.Cliente.Controls;
 using System;
 using Microsoft.Xna.Framework;
 
-
 namespace KarTac.Cliente.Controls.Screens
 {
 	public class BattleScreen: Screen
 	{
-		#if FPS
-		readonly Label fpsLabel;
-		#endif
-
 		public List<UnidadSprite> Unidades { get; private set; }
 
 		public Campo CampoBatalla { get; }
@@ -21,25 +16,14 @@ namespace KarTac.Cliente.Controls.Screens
 			: base (juego)
 		{
 			CampoBatalla = campo;
+		}
 
-			CampoBatalla.AlRequerirOrdenAntes += delegate(Unidad x)
+		public override Color BgColor
+		{
+			get
 			{
-				var y = Unidades.Find (z => z.UnidadBase == x);
-				y.Marcado = true;
-			};
-
-			CampoBatalla.AlRequerirOrdenDespués += delegate(Unidad x)
-			{
-				var y = Unidades.Find (z => z.UnidadBase == x);
-				y.Marcado = false;
-			};
-
-			#if FPS
-			fpsLabel = new Label (this);
-			fpsLabel.Texto = () => string.Format ("fps: {0}", juego.GetDisplayMode.RefreshRate);
-			fpsLabel.UseFont = @"UnitNameFont";
-			fpsLabel.Color = Color.White;
-			#endif
+				return Color.Green;
+			}
 		}
 
 		/// <summary>
@@ -64,7 +48,7 @@ namespace KarTac.Cliente.Controls.Screens
 			if (CampoBatalla.EquipoGanador != null)
 			{
 				CampoBatalla.Terminar ();
-				Game.Exit (); // Cuando alguien gana, se acaba.
+				AlTerminarBatalla?.Invoke ();
 			}
 		}
 
@@ -72,18 +56,18 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 			// Crear sprites de unidades
 			Unidades = new List<UnidadSprite> (CampoBatalla.Unidades.Count);
+			LoadContent ();
 			foreach (var u in CampoBatalla.Unidades)
 			{
 				var sprite = new UnidadSprite (this, u);
+				sprite.LoadContent ();
 				Unidades.Add (sprite);
 				sprite.Include ();
 			}
 
-			#if FPS
-			fpsLabel.Include ();
-			#endif
-
 			base.Inicializar ();
 		}
+
+		public event Action AlTerminarBatalla;
 	}
 }

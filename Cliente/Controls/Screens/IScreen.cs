@@ -27,6 +27,11 @@ namespace KarTac.Cliente.Controls.Screens
 		void UnloadContent ();
 
 		/// <summary>
+		/// Color de fondo
+		/// </summary>
+		Color BgColor { get; }
+
+		/// <summary>
 		/// La lista de controles de esta Screen
 		/// </summary>
 		ListaControl Controles { get; }
