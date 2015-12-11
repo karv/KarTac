@@ -57,5 +57,13 @@ namespace KarTac
 
 			return ret;
 		}
+
+		public void Reestablecer ()
+		{
+			foreach (var u in Personajes)
+			{
+				u.Atributos.Inicializar ();
+			}
+		}
 	}
 }

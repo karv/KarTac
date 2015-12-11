@@ -44,6 +44,17 @@ namespace KarTac.Personajes
 			Recs.Add (new HP ());
 		}
 
+		/// <summary>
+		/// Reestablece los atributos a sus valores default
+		/// </summary>
+		public void Inicializar ()
+		{
+			foreach (var x in Recs)
+			{
+				x.Reestablecer ();
+			}
+		}
+
 		public AtributosPersonaje Clonar ()
 		{
 			return MemberwiseClone () as AtributosPersonaje;
