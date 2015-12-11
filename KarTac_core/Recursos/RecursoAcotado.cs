@@ -12,6 +12,19 @@ namespace KarTac.Recursos
 		float _max;
 		float _actual;
 
+		protected virtual float Inicial
+		{
+			get
+			{
+				return Max;
+			}
+		}
+
+		public void AlEstadoInicial ()
+		{
+			Valor = Inicial;
+		}
+
 		public double PeticiónExpAcumulada { get; protected set; }
 
 		public float Max
