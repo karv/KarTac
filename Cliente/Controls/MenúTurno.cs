@@ -16,6 +16,7 @@ namespace KarTac.Cliente.Controls
 			: base (screen)
 		{
 			Prioridad = -20;
+			TiempoCambioLado = TimeSpan.FromMilliseconds (700);
 			skillsList = new ContenedorBotón (screen);
 			skillsList.TipoOrden = ContenedorBotón.TipoOrdenEnum.ColumnaPrimero;
 			display = new RandomStringDisplay (screen);
@@ -23,6 +24,8 @@ namespace KarTac.Cliente.Controls
 		}
 
 		int índiceSkillSel;
+
+		public TimeSpan TiempoCambioLado;
 
 		public int ÍndiceSkillSel
 		{
@@ -185,7 +188,7 @@ namespace KarTac.Cliente.Controls
 		{
 			base.Update (gameTime);
 			display.Update (gameTime);
-			if (TiempoMouseOver > TimeSpan.FromMilliseconds (1500))
+			if (TiempoMouseOver > TiempoCambioLado)
 			{
 				Switched = !Switched;
 				reposicionarControles ();
