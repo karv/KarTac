@@ -15,7 +15,7 @@ namespace KarTac.Cliente.Controls.Screens
 			MyClan = clan;
 
 			personajes = new Lista<Personaje> (this);
-			personajes.Stringificación = x => x.Nombre;
+			personajes.Stringificación = x => x.Nombre + " " + x.Atributos.HP;
 			personajes.Bounds = new Rectangle (10, 10, 400, 300);
 			iniciar = new Botón (this, new Rectangle (500, 30, 30, 30));
 			iniciar.Textura = "Rect";
@@ -46,6 +46,7 @@ namespace KarTac.Cliente.Controls.Screens
 
 			btScr.AlTerminarBatalla += delegate
 			{
+				MyClan.Reestablecer ();
 				recargar ();
 				Game.CurrentScreen = this;
 			};

@@ -20,7 +20,7 @@ namespace KarTac.Recursos
 			}
 		}
 
-		public void AlEstadoInicial ()
+		public void Reestablecer ()
 		{
 			Valor = Inicial;
 		}

@@ -28,7 +28,7 @@ namespace KarTac.Recursos
 		/// </summary>
 		void PedirExp (TimeSpan time, Campo campo);
 
-		void AlEstadoInicial ();
+		void Reestablecer ();
 
 		/// <summary>
 		/// Ocurre cuando cambia el valor actual
