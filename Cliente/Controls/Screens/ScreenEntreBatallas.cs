@@ -56,7 +56,7 @@ namespace KarTac.Cliente.Controls.Screens
 
 		void recargar ()
 		{
-			foreach (var x in personajes)
+			foreach (var x in MyClan.Personajes)
 			{
 				personajes.Objetos.Add (new Lista<Personaje>.Entrada (x));
 			}
