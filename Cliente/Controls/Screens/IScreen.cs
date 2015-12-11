@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using OpenTK.Graphics;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -25,6 +26,11 @@ namespace KarTac.Cliente.Controls.Screens
 		/// Descargar contenido
 		/// </summary>
 		void UnloadContent ();
+
+		/// <summary>
+		/// Color de fondo
+		/// </summary>
+		Color BgColor { get; }
 
 		/// <summary>
 		/// La lista de controles de esta Screen

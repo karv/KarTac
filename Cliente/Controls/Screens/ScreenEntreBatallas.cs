@@ -25,6 +25,14 @@ namespace KarTac.Cliente.Controls.Screens
 			iniciar.AlClick += iniciarCombate;
 		}
 
+		public override Color BgColor
+		{
+			get
+			{
+				return Color.BlueViolet;
+			}
+		}
+
 		void iniciarCombate ()
 		{
 			var campoBatalla = new Campo (new Point (GetDisplayMode.Width, GetDisplayMode.Height));

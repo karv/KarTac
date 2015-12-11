@@ -30,6 +30,14 @@ namespace KarTac.Cliente.Controls.Screens
 			#endif
 		}
 
+		public override Color BgColor
+		{
+			get
+			{
+				return Color.Green;
+			}
+		}
+
 		/// <summary>
 		/// Agrega una unidad
 		/// </summary>

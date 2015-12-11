@@ -23,6 +23,14 @@ namespace KarTac.Cliente.Controls.Screens
 			Controles = new ListaControl ();
 		}
 
+		public virtual Color BgColor
+		{
+			get
+			{
+				return Color.Black;
+			}
+		}
+
 		public virtual void Inicializar ()
 		{
 			foreach (var x in Controles)

@@ -113,7 +113,7 @@ namespace KarTac.Cliente
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw (GameTime gameTime)
 		{
-			graphics.GraphicsDevice.Clear (Color.Green);
+			graphics.GraphicsDevice.Clear (BackgroundColor);
 			CurrentScreen.Dibujar (gameTime);
 
 			Batch.Begin ();
@@ -126,7 +126,23 @@ namespace KarTac.Cliente
 			Batch.End ();
 		}
 
+		public Color BackgroundColor
+		{
+			get
+			{
+				return CurrentScreen.BgColor;
+			}
+		}
+
 		#region IScreen
+
+		Color IScreen.BgColor
+		{
+			get
+			{
+				return BackgroundColor;
+			}
+		}
 
 		public SpriteBatch GetNewBatch ()
 		{

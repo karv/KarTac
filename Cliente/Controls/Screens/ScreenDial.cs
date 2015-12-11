@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using System;
+using Microsoft.Xna.Framework;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -22,7 +23,14 @@ namespace KarTac.Cliente.Controls.Screens
 			ScreenBase = baseScreen;
 			Juego = juego;
 			Controles = new ListaControl ();
+		}
 
+		public virtual Color BgColor
+		{
+			get
+			{
+				return Color.Black;
+			}
 		}
 
 		public void Dibujar (Microsoft.Xna.Framework.GameTime gameTime)
