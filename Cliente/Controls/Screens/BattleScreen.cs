@@ -3,6 +3,7 @@ using KarTac.Batalla;
 using KarTac.Cliente.Controls;
 using System;
 using Microsoft.Xna.Framework;
+using OpenTK.Graphics.OpenGL;
 
 
 namespace KarTac.Cliente.Controls.Screens
@@ -17,7 +18,6 @@ namespace KarTac.Cliente.Controls.Screens
 			: base (juego)
 		{
 			CampoBatalla = campo;
-
 		}
 
 		public override Color BgColor
@@ -50,7 +50,7 @@ namespace KarTac.Cliente.Controls.Screens
 			if (CampoBatalla.EquipoGanador != null)
 			{
 				CampoBatalla.Terminar ();
-				Game.Exit (); // Cuando alguien gana, se acaba.
+				AlTerminarBatalla?.Invoke ();
 			}
 		}
 
@@ -69,5 +69,7 @@ namespace KarTac.Cliente.Controls.Screens
 
 			base.Inicializar ();
 		}
+
+		public event Action AlTerminarBatalla;
 	}
 }

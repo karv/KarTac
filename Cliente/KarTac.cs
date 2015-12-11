@@ -64,10 +64,6 @@ namespace KarTac.Cliente
 			var scr = new OutsideScreen (this, unClan);
 			CurrentScreen = scr;
 			scr.LoadContent ();
-			#if DEBUG
-
-
-			#endif
 			base.Initialize ();
 		}
 

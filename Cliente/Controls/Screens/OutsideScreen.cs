@@ -44,6 +44,12 @@ namespace KarTac.Cliente.Controls.Screens
 			campoBatalla.SelectorTarget = new Selector (Game, btScr);
 			Game.CurrentScreen = btScr;
 
+			btScr.AlTerminarBatalla += delegate
+			{
+				recargar ();
+				Game.CurrentScreen = this;
+			};
+
 			var ClanEnemigo = Clan.BuildStartingClan ();
 			var equipoRojo = new Equipo (0, Color.Red);
 			var equipoAmarillo = new Equipo (1, Color.Yellow);
@@ -87,6 +93,7 @@ namespace KarTac.Cliente.Controls.Screens
 
 		void recargar ()
 		{
+			personajes.Objetos.Clear ();
 			foreach (var x in MyClan.Personajes)
 			{
 				personajes.Objetos.Add (new Lista<Personaje>.Entrada (x));

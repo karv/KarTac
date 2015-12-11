@@ -145,7 +145,7 @@ namespace KarTac.Cliente.Controls
 
 		Texture2D textura;
 		BitmapFont InfoFont;
-		public Color BgColor = Color.Blue;
+		public Color BgColor = Color.Blue * 0.4f;
 
 		ContenedorBotón skillsList { get; }
 
