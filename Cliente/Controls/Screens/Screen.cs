@@ -41,11 +41,9 @@ namespace KarTac.Cliente.Controls.Screens
 
 		public virtual void Dibujar (GameTime gameTime)
 		{
-			Game.GraphicsDevice.Clear (Color.Green);
-
 			//base.Draw (gameTime);
 
-			Batch = Batch ?? GetNewBatch ();
+			//var Batch = GetNewBatch ();
 			Batch.Begin ();
 			foreach (var x in Controles)
 			{
@@ -109,7 +107,7 @@ namespace KarTac.Cliente.Controls.Screens
 
 		public override string ToString ()
 		{
-			return string.Format ("[{0}]\nGame: {1}", GetType (), Game);
+			return string.Format ("[{0}]", GetType ());
 		}
 	}
 }

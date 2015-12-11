@@ -1,6 +1,7 @@
 ﻿using KarTac.Personajes;
 using Microsoft.Xna.Framework;
 using KarTac.Batalla;
+using System;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -36,10 +37,11 @@ namespace KarTac.Cliente.Controls.Screens
 
 		void iniciarCombate ()
 		{
+			var r = new Random ();
 			var campoBatalla = new Campo (new Point (GetDisplayMode.Width, GetDisplayMode.Height));
-			campoBatalla.SelectorTarget = new Selector (Game);
 
 			var btScr = new BattleScreen (Game, campoBatalla);
+			campoBatalla.SelectorTarget = new Selector (Game, btScr);
 			Game.CurrentScreen = btScr;
 
 			var ClanEnemigo = Clan.BuildStartingClan ();
@@ -66,7 +68,21 @@ namespace KarTac.Cliente.Controls.Screens
 				unid.Interactor = new InteracciónHumano (unid, Game);
 			}
 
+			// Asignar posiciones
+			foreach (var u in campoBatalla.Unidades)
+			{
+				u.PosPrecisa = randomPointInRectangle (campoBatalla.Área, r);
+			}
+
 			btScr.Inicializar ();
+		}
+
+		static Vector2 randomPointInRectangle (Rectangle rect, Random r)
+		{
+			return new Vector2 (
+				rect.Left + (float)r.NextDouble () * rect.Width,
+				rect.Top + (float)r.NextDouble () * rect.Height
+			);
 		}
 
 		void recargar ()

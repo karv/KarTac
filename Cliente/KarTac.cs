@@ -9,6 +9,7 @@ using OpenTK.Input;
 using KarTac.Batalla;
 using KarTac.Batalla.Orden;
 using OpenTK.Graphics.OpenGL;
+using System.Diagnostics;
 
 namespace KarTac.Cliente
 {
@@ -99,11 +100,18 @@ namespace KarTac.Cliente
 		protected override void Update (GameTime gameTime)
 		{
 			#if DEBUG
+			if (CurrentScreen is IInteractor)
+			{
+				Debug.WriteLine ("!!!");
+				var ii = CurrentScreen as InteracciónHumano;
+				Debug.WriteLine (ii.UnidadActual.PosPrecisa);
+			}
 			if (InputManager.EstáPresionado (Key.Escape) && InputManager.EstáPresionado (Key.ControlLeft))
 			{
 				Exit ();
 			}
 			#endif
+
 
 			base.Update (gameTime);
 			CurrentScreen.Update (gameTime);
@@ -119,9 +127,11 @@ namespace KarTac.Cliente
 		protected override void Draw (GameTime gameTime)
 		{
 			graphics.GraphicsDevice.Clear (BackgroundColor);
-			CurrentScreen.Dibujar (gameTime);
 
 			Batch.Begin ();
+
+			CurrentScreen.Dibujar (gameTime);
+
 			foreach (var x in ControlesUniversales)
 			{
 				x.Dibujar (gameTime);
@@ -129,6 +139,7 @@ namespace KarTac.Cliente
 
 			//mouse.Dibujar (gameTime);
 			Batch.End ();
+
 		}
 
 		public Color BackgroundColor

@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using KarTac.Skills;
+using System.Diagnostics;
 
 namespace KarTac.Batalla
 {
@@ -41,9 +42,7 @@ namespace KarTac.Batalla
 
 		public void AñadirUnidad (Unidad u)
 		{
-			var r = new Random ();
 			Unidades.Add (u);
-			u.PosPrecisa = randomPointInRectangle (Área, r);
 			u.PersonajeBase.AlMorir += RevisarEquipoGanador;
 		}
 
@@ -130,7 +129,6 @@ namespace KarTac.Batalla
 			var Fuerza = usarCoef / dist;
 			vect = vect * (Fuerza * (float)delta.TotalSeconds);
 			destino.PosPrecisa += vect;
-
 		}
 
 		public Equipo? EquipoGanador { get; private set; }
@@ -181,14 +179,6 @@ namespace KarTac.Batalla
 			}
 
 			AlTerminar?.Invoke ();
-		}
-
-		static Vector2 randomPointInRectangle (Rectangle rect, Random r)
-		{
-			return new Vector2 (
-				rect.Left + (float)r.NextDouble () * rect.Width,
-				rect.Top + (float)r.NextDouble () * rect.Height
-			);
 		}
 
 		public event Action<Unidad> AlRequerirOrdenAntes;

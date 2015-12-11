@@ -58,6 +58,7 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 			// Crear sprites de unidades
 			Unidades = new List<UnidadSprite> (CampoBatalla.Unidades.Count);
+			LoadContent ();
 			foreach (var u in CampoBatalla.Unidades)
 			{
 				var sprite = new UnidadSprite (this, u);
