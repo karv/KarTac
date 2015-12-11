@@ -85,6 +85,11 @@ namespace KarTac.Skills
 			estado_Seleccionado (obj);
 		}
 
+		protected override bool SeleccionaTarget (Unidad u)
+		{
+			return u.EstáVivo && base.SeleccionaTarget (u);
+		}
+
 		void estado_Seleccionado (SelecciónRespuesta resp)
 		{
 			var selección = resp.Selección [0];

@@ -105,6 +105,11 @@ namespace KarTac.Skills
 			}
 		}
 
+		protected override bool SeleccionaTarget (Unidad u)
+		{
+			return u.EstáVivo && base.SeleccionaTarget (u);
+		}
+
 		public override void Terminal (SelecciónRespuesta obj)
 		{
 			var selección = obj.Selección [0];
