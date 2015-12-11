@@ -198,7 +198,7 @@ namespace KarTac.Cliente.Controls
 		{
 			get
 			{
-				return UnidadActual.Pos.Y < Screen.GetDisplayMode.Height - TamañoY - 50;
+				return UnidadActual.Pos.Y < Screen.GetDisplayMode.Height - TamañoY - 50 && !MouseOver;
 			}
 		}
 	}
