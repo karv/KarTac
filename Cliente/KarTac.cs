@@ -42,14 +42,6 @@ namespace KarTac.Cliente
 
 		}
 
-		static Vector2 randomPointInRectangle (Rectangle rect, Random r)
-		{
-			return new Vector2 (
-				rect.Left + (float)r.NextDouble () * rect.Width,
-				rect.Top + (float)r.NextDouble () * rect.Height
-			);
-		}
-
 		/// <summary>
 		/// Allows the game to perform any initialization it needs to before starting to run.
 		/// This is where it can query for any required services and load any non-graphic

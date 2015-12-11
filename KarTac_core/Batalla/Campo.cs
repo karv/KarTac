@@ -41,7 +41,9 @@ namespace KarTac.Batalla
 
 		public void AñadirUnidad (Unidad u)
 		{
+			var r = new Random ();
 			Unidades.Add (u);
+			u.PosPrecisa = randomPointInRectangle (Área, r);
 			u.PersonajeBase.AlMorir += RevisarEquipoGanador;
 		}
 
@@ -179,6 +181,14 @@ namespace KarTac.Batalla
 			}
 
 			AlTerminar?.Invoke ();
+		}
+
+		static Vector2 randomPointInRectangle (Rectangle rect, Random r)
+		{
+			return new Vector2 (
+				rect.Left + (float)r.NextDouble () * rect.Width,
+				rect.Top + (float)r.NextDouble () * rect.Height
+			);
 		}
 
 		public event Action<Unidad> AlRequerirOrdenAntes;
