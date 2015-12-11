@@ -20,6 +20,8 @@ namespace KarTac.Cliente
 	{
 		readonly Ratón mouse;
 
+		readonly Label fpsLabel;
+
 		public ListaControl ControlesUniversales { get; }
 
 		public IScreen CurrentScreen;
@@ -38,6 +40,13 @@ namespace KarTac.Cliente
 			Content.RootDirectory = "Content";
 			graphics.IsFullScreen = true;
 			mouse = new Ratón (this);
+			#if FPS
+			fpsLabel = new Label (this);
+			fpsLabel.Texto = () => string.Format ("fps: {0}", GetDisplayMode.RefreshRate);
+			fpsLabel.UseFont = @"UnitNameFont";
+			fpsLabel.Color = Color.White;
+			fpsLabel.Include ();
+			#endif
 			mouse.Include ();
 
 		}
@@ -54,6 +63,10 @@ namespace KarTac.Cliente
 			var scr = new OutsideScreen (this, unClan);
 			CurrentScreen = scr;
 			scr.LoadContent ();
+			#if DEBUG
+
+
+			#endif
 			base.Initialize ();
 		}
 

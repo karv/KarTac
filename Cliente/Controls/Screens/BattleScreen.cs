@@ -9,10 +9,6 @@ namespace KarTac.Cliente.Controls.Screens
 {
 	public class BattleScreen: Screen
 	{
-		#if FPS
-		readonly Label fpsLabel;
-		#endif
-
 		public List<UnidadSprite> Unidades { get; private set; }
 
 		public Campo CampoBatalla { get; }
@@ -22,12 +18,6 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 			CampoBatalla = campo;
 
-			#if FPS
-			fpsLabel = new Label (this);
-			fpsLabel.Texto = () => string.Format ("fps: {0}", juego.GetDisplayMode.RefreshRate);
-			fpsLabel.UseFont = @"UnitNameFont";
-			fpsLabel.Color = Color.White;
-			#endif
 		}
 
 		public override Color BgColor
@@ -71,13 +61,10 @@ namespace KarTac.Cliente.Controls.Screens
 			foreach (var u in CampoBatalla.Unidades)
 			{
 				var sprite = new UnidadSprite (this, u);
+				sprite.LoadContent ();
 				Unidades.Add (sprite);
 				sprite.Include ();
 			}
-
-			#if FPS
-			fpsLabel.Include ();
-			#endif
 
 			base.Inicializar ();
 		}
