@@ -54,7 +54,7 @@ namespace KarTac.Skills
 
 		protected override TimeSpan CalcularTiempoUso ()
 		{
-			return TimeSpan.FromSeconds (3.0 / UnidadUsuario.AtributosActuales.Agilidad);
+			return TimeSpan.FromSeconds (6.0f / UnidadUsuario.AtributosActuales.Agilidad);
 		}
 
 		public override IShape GetÁrea ()
