@@ -8,6 +8,7 @@ using KarTac.Personajes;
 using OpenTK.Input;
 using KarTac.Batalla;
 using KarTac.Batalla.Orden;
+using OpenTK.Graphics.OpenGL;
 
 namespace KarTac.Cliente
 {
@@ -60,6 +61,7 @@ namespace KarTac.Cliente
 			var unClan = Clan.BuildStartingClan ();
 			var scr = new ScreenEntreBatallas (this, unClan);
 			CurrentScreen = scr;
+			scr.LoadContent ();
 			base.Initialize ();
 		}
 

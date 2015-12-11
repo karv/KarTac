@@ -14,6 +14,7 @@ namespace KarTac.Cliente.Controls.Screens
 			MyClan = clan;
 
 			personajes = new Lista<Personaje> (this);
+			personajes.Stringificación = x => x.Nombre;
 			personajes.Bounds = new Rectangle (10, 10, 400, 300);
 			iniciar = new Botón (this, new Rectangle (500, 30, 30, 30));
 			iniciar.Textura = "Rect";
@@ -22,7 +23,6 @@ namespace KarTac.Cliente.Controls.Screens
 			personajes.Include ();
 
 			iniciar.AlClick += iniciarCombate;
-
 		}
 
 		void iniciarCombate ()
