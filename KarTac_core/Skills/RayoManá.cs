@@ -7,7 +7,7 @@ using KarTac.Recursos;
 
 namespace KarTac.Skills
 {
-	public class RayoManá:SkillTresPasosShaped
+	public class RayoManá : SkillTresPasosShaped
 	{
 		public RayoManá (Personaje usuario)
 			: base (usuario)
@@ -34,6 +34,14 @@ namespace KarTac.Skills
 			get
 			{
 				return "Rayo mana";
+			}
+		}
+
+		public override string Descripción
+		{
+			get
+			{
+				return "Ataque mágico de buen rango.\nRequiere 5 Maná.";
 			}
 		}
 

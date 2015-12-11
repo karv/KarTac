@@ -45,6 +45,8 @@ namespace KarTac.Skills
 	{
 		string Nombre { get; }
 
+		string Descripción { get; }
+
 		Personaje Usuario { get; }
 
 		void Ejecutar ();

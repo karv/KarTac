@@ -21,6 +21,14 @@ namespace KarTac.Skills
 			}
 		}
 
+		public override string Descripción
+		{
+			get
+			{
+				return "Causa daño a un sólo enemigo cercano.\nNo gasta recurso alguno.";
+			}
+		}
+
 		public override string IconTextureName
 		{
 			get
@@ -71,7 +79,6 @@ namespace KarTac.Skills
 		}
 
 		protected override ISkillReturnType LastReturn { get; set; }
-
 
 		public override void Terminal (SelecciónRespuesta obj)
 		{

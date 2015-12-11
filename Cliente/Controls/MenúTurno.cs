@@ -19,6 +19,7 @@ namespace KarTac.Cliente.Controls
 			skillsList = new ContenedorBotón (screen);
 			skillsList.TipoOrden = ContenedorBotón.TipoOrdenEnum.ColumnaPrimero;
 			display = new RandomStringDisplay (screen);
+			descripDisplay = new RandomStringDisplay (screen, "Arial small");
 		}
 
 		int índiceSkillSel;
@@ -32,6 +33,7 @@ namespace KarTac.Cliente.Controls
 				skillsList.BotónEnÍndice (ÍndiceSkillSel).Color = skillNoSelColor;
 				índiceSkillSel = nuevoInd;
 				skillsList.BotónEnÍndice (ÍndiceSkillSel).Color = skillSelColor;
+				actualizaDesc ();
 			}
 		}
 
@@ -53,8 +55,16 @@ namespace KarTac.Cliente.Controls
 			get{ return Color.Green; }
 		}
 
+		RandomStringDisplay descripDisplay;
+
+		void actualizaDesc ()
+		{
+			descripDisplay.Mostrables [0] = SkillSeleccionado.Descripción;
+		}
+
 		public override void Inicializar ()
 		{
+			LoadContent ();
 			skillsList.Posición = new Point (
 				GetBounds ().Right - skillsList.GetBounds ().Width - 50,
 				GetBounds ().Bottom - skillsList.GetBounds ().Height - 50
@@ -65,12 +75,20 @@ namespace KarTac.Cliente.Controls
 			display.Inicializar ();
 			rehacerSkills ();
 
+			descripDisplay.Inicializar ();
+			descripDisplay.Pos = new Vector2 (
+				skillsList.GetBounds ().Left - 300,
+				skillsList.GetBounds ().Top
+			);
+			descripDisplay.Mostrables.Add ("");
+
 			foreach (var x in UnidadActual.AtributosActuales.Recs)
 			{
 				display.Mostrables.Add (x.ToString ());
 			}
 
 			base.Inicializar ();
+			actualizaDesc ();
 		}
 
 		KarTac.Batalla.Unidad unidadActual;
@@ -130,6 +148,7 @@ namespace KarTac.Cliente.Controls
 			InfoFont = Screen.Content.Load<BitmapFont> ("fonts");
 			skillsList.LoadContent ();
 			display.LoadContent ();
+			descripDisplay.LoadContent ();
 		}
 
 		public override void Dibujar (GameTime gameTime)
@@ -151,6 +170,7 @@ namespace KarTac.Cliente.Controls
 				skillsList.Dibujar (gameTime);
 
 				display.Dibujar (gameTime);
+				descripDisplay.Dibujar (gameTime);
 			}
 			bat.End ();
 		}
