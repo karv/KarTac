@@ -46,7 +46,7 @@ namespace KarTac
 				var pj = new Personaje ();
 
 				pj.Atributos.HP.Max = 100;
-				pj.Atributos.HP.Valor = 80;
+				pj.Atributos.HP.Valor = 100;
 				pj.Atributos.HP.Regeneración = 60;
 				pj.Atributos.Velocidad = 100;
 				pj.Atributos.Agilidad = 30;
