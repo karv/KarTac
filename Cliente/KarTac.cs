@@ -57,37 +57,9 @@ namespace KarTac.Cliente
 		/// </summary>
 		protected override void Initialize ()
 		{
-			var c = new Campo (new Point (GetDisplayMode.Width, GetDisplayMode.Height));
-			CurrentScreen = new BattleScreen (this, c);
-			Screens.Add (CurrentScreen);
-
-			Huir.Tamaño = c.Área;
-
-			var r = new Random ();
-
-			var equipos = new Equipo[2];
-			var clanes = new Clan[2];
-			equipos [0] = new Equipo (1, Color.Red);
-			equipos [1] = new Equipo (2, Color.Yellow);
-
-			for (int i = 0; i < 2; i++)
-			{
-				clanes [i] = Clan.BuildStartingClan ();
-				foreach (var pj in clanes[i].Personajes)
-				{
-					var unid = pj.ConstruirUnidad (c);
-					unid.Interactor = new InteracciónHumano (unid, this);
-					unid.PosPrecisa = randomPointInRectangle (c.Área, r);
-					unid.Equipo = equipos [i];
-
-					c.AñadirUnidad (unid);
-				}
-			}
-
-			c.SelectorTarget = new Selector (this);
-
-			CurrentScreen.Inicializar ();
-
+			var unClan = Clan.BuildStartingClan ();
+			var scr = new ScreenEntreBatallas (this, unClan);
+			CurrentScreen = scr;
 			base.Initialize ();
 		}
 

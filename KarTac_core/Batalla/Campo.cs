@@ -177,9 +177,12 @@ namespace KarTac.Batalla
 					}
 				}
 			}
+
+			AlTerminar?.Invoke ();
 		}
 
 		public event Action<Unidad> AlRequerirOrdenAntes;
 		public event Action<Unidad> AlRequerirOrdenDespués;
+		public event Action AlTerminar;
 	}
 }
