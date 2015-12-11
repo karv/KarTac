@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using KarTac.Batalla;
 using System;
+using OpenTK.Input;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -99,6 +100,13 @@ namespace KarTac.Cliente.Controls.Screens
 			{
 				personajes.Objetos.Add (new Lista<Personaje>.Entrada (x));
 			}
+		}
+
+		public override void Update (GameTime gameTime)
+		{
+			base.Update (gameTime);
+			if (InputManager.FuePresionado (Key.Enter))
+				iniciarCombate ();
 		}
 
 		Lista<Personaje> personajes { get; }
