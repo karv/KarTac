@@ -52,6 +52,8 @@ namespace KarTac.Cliente.Controls.Screens
 				var unid = u.ConstruirUnidad (campoBatalla);
 				unid.Equipo = equipoRojo;
 				campoBatalla.AñadirUnidad (unid);
+
+				unid.Interactor = new InteracciónHumano (unid, Game);
 			}
 
 			// Asignar a todas las unidades del clan enemigo al equipo amarillo
@@ -60,6 +62,8 @@ namespace KarTac.Cliente.Controls.Screens
 				var unid = u.ConstruirUnidad (campoBatalla);
 				unid.Equipo = equipoAmarillo;
 				campoBatalla.AñadirUnidad (unid);
+
+				unid.Interactor = new InteracciónHumano (unid, Game);
 			}
 
 			btScr.Inicializar ();
