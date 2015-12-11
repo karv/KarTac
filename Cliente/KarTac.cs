@@ -8,7 +8,6 @@ using KarTac.Personajes;
 using OpenTK.Input;
 using KarTac.Batalla;
 using KarTac.Batalla.Orden;
-using KarTac.Skills;
 
 namespace KarTac.Cliente
 {
@@ -42,6 +41,14 @@ namespace KarTac.Cliente
 
 		}
 
+		static Vector2 randomPointInRectangle (Rectangle rect, Random r)
+		{
+			return new Vector2 (
+				rect.Left + (float)r.NextDouble () * rect.Width,
+				rect.Top + (float)r.NextDouble () * rect.Height
+			);
+		}
+
 		/// <summary>
 		/// Allows the game to perform any initialization it needs to before starting to run.
 		/// This is where it can query for any required services and load any non-graphic
@@ -51,45 +58,31 @@ namespace KarTac.Cliente
 		protected override void Initialize ()
 		{
 			var c = new Campo (new Point (GetDisplayMode.Width, GetDisplayMode.Height));
-			Huir.Tamaño = c.Área;
-
-			var pj = new Personaje ();
-			var pj2 = new Personaje ();
 			CurrentScreen = new BattleScreen (this, c);
 			Screens.Add (CurrentScreen);
 
-			pj.Atributos.HP.Max = 100;
-			pj.Atributos.HP.Valor = 80;
-			pj.Atributos.HP.Regeneración = 60;
-			pj.Atributos.Velocidad = 100;
-			pj.Atributos.Agilidad = 30;
-			pj.Nombre = "Juanito";
-			pj.Skills.Add (new RayoManá (pj));
-			pj.Skills [1].AlAprender ();
+			Huir.Tamaño = c.Área;
 
-			pj2.Atributos.HP.Max = 120;
-			pj2.Atributos.HP.Valor = 80;
-			pj2.Atributos.HP.Regeneración = 50;
-			pj2.Atributos.Velocidad = 90;
-			pj2.Atributos.Agilidad = 24;
-			pj2.Nombre = "Gordo";
+			var r = new Random ();
 
-			var unidad = pj.ConstruirUnidad (c);
-			unidad.Interactor = new InteracciónHumano (unidad, this);
-			unidad.PosPrecisa = new Vector2 (200, 150);
-			unidad.Equipo = new Equipo (1, Color.Red);
+			var equipos = new Equipo[2];
+			var clanes = new Clan[2];
+			equipos [0] = new Equipo (1, Color.Red);
+			equipos [1] = new Equipo (2, Color.Yellow);
 
-			var unidad2 = pj2.ConstruirUnidad (c);
-			unidad2.Interactor = new InteracciónHumano (unidad2, this);
-			unidad2.PosPrecisa = new Vector2 (100, 100);
-			unidad2.Equipo = new Equipo (2, Color.Yellow);
+			for (int i = 0; i < 2; i++)
+			{
+				clanes [i] = Clan.BuildStartingClan ();
+				foreach (var pj in clanes[i].Personajes)
+				{
+					var unid = pj.ConstruirUnidad (c);
+					unid.Interactor = new InteracciónHumano (unid, this);
+					unid.PosPrecisa = randomPointInRectangle (c.Área, r);
+					unid.Equipo = equipos [i];
 
-			var ord = new Perseguir (unidad, unidad2);
-			unidad.OrdenActual = ord;
-			//sc.UnidadActual = unidad;
-
-			c.AñadirUnidad (unidad);
-			c.AñadirUnidad (unidad2);
+					c.AñadirUnidad (unid);
+				}
+			}
 
 			c.SelectorTarget = new Selector (this);
 
