@@ -59,7 +59,7 @@ namespace KarTac.Cliente
 		protected override void Initialize ()
 		{
 			var unClan = Clan.BuildStartingClan ();
-			var scr = new ScreenEntreBatallas (this, unClan);
+			var scr = new OutsideScreen (this, unClan);
 			CurrentScreen = scr;
 			scr.LoadContent ();
 			base.Initialize ();
