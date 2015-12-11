@@ -4,11 +4,11 @@ using KarTac.Batalla;
 
 namespace KarTac.Cliente.Controls.Screens
 {
-	public class ScreenEntreBatallas: Screen
+	public class OutsideScreen: Screen
 	{
 		public Clan MyClan { get; }
 
-		public ScreenEntreBatallas (KarTacGame juego, Clan clan)
+		public OutsideScreen (KarTacGame juego, Clan clan)
 			: base (juego)
 		{
 			MyClan = clan;
@@ -21,6 +21,7 @@ namespace KarTac.Cliente.Controls.Screens
 
 			recargar ();
 			personajes.Include ();
+			iniciar.Include ();
 
 			iniciar.AlClick += iniciarCombate;
 		}
