@@ -22,18 +22,6 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 			CampoBatalla = campo;
 
-			CampoBatalla.AlRequerirOrdenAntes += delegate(Unidad x)
-			{
-				var y = Unidades.Find (z => z.UnidadBase == x);
-				y.Marcado = true;
-			};
-
-			CampoBatalla.AlRequerirOrdenDespués += delegate(Unidad x)
-			{
-				var y = Unidades.Find (z => z.UnidadBase == x);
-				y.Marcado = false;
-			};
-
 			#if FPS
 			fpsLabel = new Label (this);
 			fpsLabel.Texto = () => string.Format ("fps: {0}", juego.GetDisplayMode.RefreshRate);

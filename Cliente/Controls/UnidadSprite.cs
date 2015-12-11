@@ -94,21 +94,14 @@ namespace KarTac.Cliente.Controls
 		Texture2D texturaRect;
 		BitmapFont font;
 
-		bool marcado;
-
 		/// <summary>
-		/// Devuelve o establece si esta unidad debe aparecer como 'marcada' para algún tipo de selección
+		/// Devuelve si esta unidad debe aparecer como 'marcada' para algún tipo de selección
 		/// </summary>
 		public bool Marcado
 		{
 			get
 			{
-				return marcado;
-			}
-			set
-			{
-				marcado = value;
-				AlCambiarMarcado?.Invoke ();
+				return UnidadBase.CampoBatalla.UnidadActual == UnidadBase;
 			}
 		}
 
@@ -160,7 +153,5 @@ namespace KarTac.Cliente.Controls
 			                new Vector2 (área.Center.X - hSize / 2, área.Top - ySize - 2),
 			                Color.White);
 		}
-
-		public event Action AlCambiarMarcado;
 	}
 }

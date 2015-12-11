@@ -3,7 +3,6 @@ using System;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using KarTac.Skills;
-using System.Runtime.InteropServices;
 
 namespace KarTac.Batalla
 {
@@ -63,6 +62,7 @@ namespace KarTac.Batalla
 					ord.Update (delta);
 				else
 				{
+					UnidadActual = x;
 					// Pedir orden al usuario o a la IA
 					AlRequerirOrdenAntes?.Invoke (x);
 					x.Interactor.Ejecutar ();
@@ -86,6 +86,8 @@ namespace KarTac.Batalla
 			// Empuje
 			Empujes (delta.ElapsedGameTime);
 		}
+
+		public Unidad UnidadActual { get; private set; }
 
 		/// <summary>
 		/// Unidades vivas reciben exp
