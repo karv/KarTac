@@ -5,7 +5,6 @@ using System;
 using KarTac.Batalla.Orden;
 using KarTac.Personajes;
 using KarTac.Batalla.Exp;
-using System.Diagnostics;
 
 namespace KarTac.Batalla
 {
@@ -25,11 +24,6 @@ namespace KarTac.Batalla
 		{
 			get
 			{
-				if (float.IsNaN (_posPrecisa.X))
-				{
-					Debug.WriteLine ("!!!");
-					Console.WriteLine ();
-				}
 				return _posPrecisa;
 			}
 			set
@@ -37,10 +31,6 @@ namespace KarTac.Batalla
 				float x = Math.Min (Math.Max (value.X, 0), CampoBatalla.Área.Width);
 				float y = Math.Min (Math.Max (value.Y, 0), CampoBatalla.Área.Height);
 				_posPrecisa = new Vector2 (x, y);
-				if (float.IsNaN (_posPrecisa.X))
-				{
-					Console.WriteLine ();
-				}
 			}
 		}
 

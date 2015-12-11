@@ -3,7 +3,6 @@ using System;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using KarTac.Skills;
-using System.Diagnostics;
 
 namespace KarTac.Batalla
 {

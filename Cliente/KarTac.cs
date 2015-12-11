@@ -4,11 +4,8 @@ using System.Collections.Generic;
 using KarTac.Cliente.Controls;
 using KarTac.Cliente.Controls.Screens;
 using System;
-using KarTac.Personajes;
 using OpenTK.Input;
 using KarTac.Batalla;
-using KarTac.Batalla.Orden;
-using OpenTK.Graphics.OpenGL;
 using System.Diagnostics;
 
 namespace KarTac.Cliente
