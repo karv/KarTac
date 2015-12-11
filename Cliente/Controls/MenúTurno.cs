@@ -65,23 +65,15 @@ namespace KarTac.Cliente.Controls
 		public override void Inicializar ()
 		{
 			LoadContent ();
-			skillsList.Posición = new Point (
-				GetBounds ().Right - skillsList.GetBounds ().Width - 50,
-				GetBounds ().Bottom - skillsList.GetBounds ().Height - 50
-			);
-			display.Pos = new Vector2 (20, GetBounds ().Top + 50);
-			display.Color = Color.Green * 0.8f;
-
-			display.Inicializar ();
 			rehacerSkills ();
 
 			descripDisplay.Inicializar ();
-			descripDisplay.Pos = new Vector2 (
-				skillsList.GetBounds ().Left - 300,
-				skillsList.GetBounds ().Top
-			);
 			descripDisplay.Mostrables.Add ("");
 
+			display.Inicializar ();
+			reposicionarControles ();
+
+			display.Color = Color.Green * 0.8f;
 			foreach (var x in UnidadActual.AtributosActuales.Recs)
 			{
 				display.Mostrables.Add (x.ToString ());
@@ -89,6 +81,21 @@ namespace KarTac.Cliente.Controls
 
 			base.Inicializar ();
 			actualizaDesc ();
+		}
+
+		void reposicionarControles ()
+		{
+			skillsList.Posición = new Point (
+				GetBounds ().Right - skillsList.GetBounds ().Width - 50,
+				GetBounds ().Bottom - skillsList.GetBounds ().Height - 50
+			);
+			display.Pos = new Vector2 (20, GetBounds ().Top + 50);
+
+			descripDisplay.Pos = new Vector2 (
+				skillsList.GetBounds ().Left - 300,
+				skillsList.GetBounds ().Top
+			);
+				
 		}
 
 		KarTac.Batalla.Unidad unidadActual;
@@ -119,7 +126,6 @@ namespace KarTac.Cliente.Controls
 				{
 					bt = skillsList.Add (numUsables++);
 					bt.Color = Color.Red;
-
 				}
 				else
 				{
@@ -179,6 +185,11 @@ namespace KarTac.Cliente.Controls
 		{
 			base.Update (gameTime);
 			display.Update (gameTime);
+			if (TiempoMouseOver > TimeSpan.FromMilliseconds (1500))
+			{
+				Switched = !Switched;
+				reposicionarControles ();
+			}
 		}
 
 		public override Rectangle GetBounds ()
@@ -198,8 +209,10 @@ namespace KarTac.Cliente.Controls
 		{
 			get
 			{
-				return UnidadActual.Pos.Y < Screen.GetDisplayMode.Height - TamañoY - 50 && !MouseOver;
+				return UnidadActual.Pos.Y < Screen.GetDisplayMode.Height - TamañoY - 50 ^ Switched;
 			}
 		}
+
+		bool Switched { get; set; }
 	}
 }

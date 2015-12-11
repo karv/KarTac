@@ -139,6 +139,10 @@ namespace KarTac.Cliente.Controls
 
 		public void Clear ()
 		{
+			foreach (var x in controles)
+			{
+				x.Exclude ();
+			}
 			controles.Clear ();
 		}
 
