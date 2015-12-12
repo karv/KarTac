@@ -1,6 +1,8 @@
-﻿namespace KarTac.Personajes
+﻿using KarTac.IO;
+
+namespace KarTac.Personajes
 {
-	public struct Empuje
+	public struct Empuje : IGuardable
 	{
 		public float HaciaEnemigo;
 		public float HaciaAliado;
@@ -11,6 +13,18 @@
 			HaciaEnemigo = haciaEnemigo;
 			HaciaAliado = haciaAliado;
 			Masa = masa;
+		}
+
+		public void Guardar (System.IO.BinaryWriter writer)
+		{
+			writer.Write (HaciaEnemigo);
+			writer.Write (HaciaAliado);
+			writer.Write (Masa);
+		}
+
+		public TObj Cargar<TObj> (System.IO.BinaryReader reader)
+		{
+			throw new System.NotImplementedException ();
 		}
 	}
 }

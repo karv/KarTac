@@ -6,6 +6,6 @@ namespace KarTac.IO
 	{
 		void Guardar (BinaryWriter writer);
 
-		void Cargar (BinaryWriter writer);
+		TObj Cargar<TObj> (BinaryReader reader);
 	}
 }

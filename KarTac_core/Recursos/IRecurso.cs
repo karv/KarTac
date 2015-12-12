@@ -2,10 +2,11 @@
 using Microsoft.Xna.Framework;
 using KarTac.Batalla;
 using KarTac.Batalla.Exp;
+using KarTac.IO;
 
 namespace KarTac.Recursos
 {
-	public interface IRecurso : IExp
+	public interface IRecurso : IExp, IGuardable
 	{
 		/// <summary>
 		/// Nombre del recurso

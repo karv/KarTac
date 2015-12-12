@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using KarTac.Skills;
 using KarTac.Batalla;
+using KarTac.IO;
+using System.IO;
 
 namespace KarTac.Personajes
 {
-	public class Personaje
+	public class Personaje : IGuardable
 	{
 		/// <summary>
 		/// Nombre del personaje
@@ -60,6 +62,21 @@ namespace KarTac.Personajes
 			}
 		}
 
-		//	public InteracciónHumano
+		#region IGuardable
+
+		public void Guardar (BinaryWriter writer)
+		{
+			writer.Write (Nombre);
+			Atributos.Guardar (writer);
+			(Skills as ICollection<IGuardable>).Guardar (writer);
+			(Desbloqueables as ICollection<IGuardable>).Guardar (writer);
+		}
+
+		public TObj Cargar<TObj> (BinaryReader reader)
+		{
+			throw new NotImplementedException ();
+		}
+
+		#endregion
 	}
 }

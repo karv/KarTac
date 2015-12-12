@@ -84,6 +84,7 @@
     <Compile Include="Recursos\RecursoAcotadoRegenerativo.cs" />
     <Compile Include="Clan.cs" />
     <Compile Include="IO\IGuardable.cs" />
+    <Compile Include="IO\IOComún.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

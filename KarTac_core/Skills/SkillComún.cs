@@ -69,5 +69,21 @@ namespace KarTac.Skills
 		}
 
 		public event System.Action<ISkillReturnType> AlTerminarEjecución;
+
+		#region Guardable
+
+		public virtual void Guardar (System.IO.BinaryWriter writer)
+		{
+			// No se requiere guardar usuario
+			writer.Write (GetType ().FullName);
+			writer.Write (TotalExp);
+		}
+
+		public TObj Cargar<TObj> (System.IO.BinaryReader reader)
+		{
+			throw new System.NotImplementedException ();
+		}
+
+		#endregion
 	}
 }

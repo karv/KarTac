@@ -1,9 +1,10 @@
 ﻿using KarTac.Recursos;
 using System.Collections.Generic;
+using KarTac.IO;
 
 namespace KarTac.Recursos
 {
-	public class ListaRecursos : List<IRecurso>
+	public class ListaRecursos : List<IRecurso>, IGuardable
 	{
 		public IRecurso this [string nombre]
 		{
@@ -11,6 +12,16 @@ namespace KarTac.Recursos
 			{
 				return Find (x => x.Nombre == nombre);
 			}
+		}
+
+		public void Guardar (System.IO.BinaryWriter writer)
+		{
+			(this as ICollection<IGuardable>).Guardar (writer);
+		}
+
+		public TObj Cargar<TObj> (System.IO.BinaryReader reader)
+		{
+			throw new System.NotImplementedException ();
 		}
 	}
 }
