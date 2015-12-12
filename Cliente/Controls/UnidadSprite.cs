@@ -16,7 +16,7 @@ namespace KarTac.Cliente.Controls
 			UnidadBase = unid;
 			unid.PersonajeBase.AlMorir += delegate
 			{
-				texturaClase = screen.Content.Load<Texture2D> (@"Icons/Unidades/dead-head");
+				texturaClase = screen.Content.Load<Texture2D> (@"Icons/Unidades/dead");
 			};
 		}
 
@@ -121,7 +121,7 @@ namespace KarTac.Cliente.Controls
 		public override void LoadContent ()
 		{
 			var content = Screen.Content;
-			texturaClase = content.Load<Texture2D> (@"Icons/Unidades/cowled");
+			texturaClase = content.Load<Texture2D> (@"Icons/Unidades/default");
 			//texturaClase = content.Load<Texture2D> ("Unidad");
 			texturaRect = content.Load<Texture2D> ("Rect");
 			font = content.Load<BitmapFont> (@"UnitNameFont");
