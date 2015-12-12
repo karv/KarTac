@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using KarTac.Personajes;
 using System;
+using KarTac.IO;
 
 namespace KarTac
 {
 	/// <summary>
 	/// Clase principal de el estado de un juego, en forma global.
 	/// </summary>
-	public class Clan
+	public class Clan : IGuardable
 	{
 		/// <summary>
 		/// Personajes
@@ -18,20 +19,6 @@ namespace KarTac
 		/// Fondos del clan
 		/// </summary>
 		public int Dinero { get; set; }
-
-		#region IO
-
-		public void Guardar ()
-		{
-			throw new NotImplementedException ();
-		}
-
-		public void Cargar ()
-		{
-			throw new NotImplementedException ();
-		}
-
-		#endregion
 
 		/// <summary>
 		/// Devuelve un clan de estado inicial.
@@ -65,5 +52,20 @@ namespace KarTac
 				u.Atributos.Inicializar ();
 			}
 		}
+
+		#region Guardable
+
+		public void Guardar (System.IO.BinaryWriter writer)
+		{
+			writer.Write (Dinero);
+			(Personajes as ICollection<IGuardable>).Guardar (writer);
+		}
+
+		public TObj Cargar<TObj> (System.IO.BinaryReader reader)
+		{
+			throw new NotImplementedException ();
+		}
+
+		#endregion
 	}
 }
