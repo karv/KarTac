@@ -19,7 +19,7 @@ namespace KarTac.Cliente.Controls.Screens
 			personajes.Stringificación = x => x.Nombre + " " + x.Atributos.HP;
 			personajes.Bounds = new Rectangle (10, 10, 400, 300);
 			iniciar = new Botón (this, new Rectangle (500, 30, 30, 30));
-			iniciar.Textura = "Rect";
+			iniciar.Textura = @"Icons/sword";
 
 			recargar ();
 			personajes.Include ();
