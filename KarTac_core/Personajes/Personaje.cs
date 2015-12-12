@@ -68,8 +68,8 @@ namespace KarTac.Personajes
 		{
 			writer.Write (Nombre);
 			Atributos.Guardar (writer);
-			(Skills as ICollection<IGuardable>).Guardar (writer);
-			(Desbloqueables as ICollection<IGuardable>).Guardar (writer);
+			IOComún.Guardar (Skills, writer);
+			IOComún.Guardar (Desbloqueables, writer);
 		}
 
 		public TObj Cargar<TObj> (BinaryReader reader)

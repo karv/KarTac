@@ -58,7 +58,7 @@ namespace KarTac
 		public void Guardar (System.IO.BinaryWriter writer)
 		{
 			writer.Write (Dinero);
-			(Personajes as ICollection<IGuardable>).Guardar (writer);
+			IOComún.Guardar (Personajes, writer);
 		}
 
 		public TObj Cargar<TObj> (System.IO.BinaryReader reader)

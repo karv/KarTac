@@ -5,8 +5,9 @@ namespace KarTac.IO
 {
 	public static class IOComún
 	{
-		public static void Guardar (this ICollection<IGuardable> list,
-		                            BinaryWriter writer)
+		public static void Guardar<TObjeto> (ICollection<TObjeto> list,
+		                                     BinaryWriter writer)
+			where TObjeto : IGuardable
 		{
 			writer.Write (list.Count);
 			foreach (var x in list)

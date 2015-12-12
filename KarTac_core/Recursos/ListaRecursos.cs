@@ -16,7 +16,7 @@ namespace KarTac.Recursos
 
 		public void Guardar (System.IO.BinaryWriter writer)
 		{
-			(this as ICollection<IGuardable>).Guardar (writer);
+			IOComún.Guardar (this, writer);
 		}
 
 		public TObj Cargar<TObj> (System.IO.BinaryReader reader)
