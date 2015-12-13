@@ -1,8 +1,9 @@
 ﻿using KarTac.Recursos;
+using KarTac.IO;
 
 namespace KarTac.Personajes
 {
-	public class AtributosPersonaje
+	public class AtributosPersonaje : IGuardable
 	{
 		public int Ataque { get; set; }
 
@@ -41,7 +42,6 @@ namespace KarTac.Personajes
 		public AtributosPersonaje ()
 		{
 			Recs = new ListaRecursos ();
-			Recs.Add (new HP ());
 		}
 
 		/// <summary>
@@ -59,5 +59,29 @@ namespace KarTac.Personajes
 		{
 			return MemberwiseClone () as AtributosPersonaje;
 		}
+
+		#region IGuardable
+
+		public void Guardar (System.IO.BinaryWriter writer)
+		{
+			writer.Write (Ataque);
+			writer.Write (Defensa);
+			writer.Write (Velocidad);
+			writer.Write (Agilidad);
+			Empuje.Guardar (writer);
+			Recs.Guardar (writer);
+		}
+
+		public void Cargar (System.IO.BinaryReader reader)
+		{
+			Ataque = reader.ReadInt32 ();
+			Defensa = reader.ReadInt32 ();
+			Velocidad = reader.ReadInt32 ();
+			Agilidad = reader.ReadInt32 ();
+			Empuje.Cargar (reader);
+			Recs.Cargar (reader);
+		}
+
+		#endregion
 	}
 }

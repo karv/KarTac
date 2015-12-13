@@ -4,6 +4,7 @@ using KarTac.Personajes;
 using System;
 using Microsoft.Xna.Framework;
 using KarTac.Recursos;
+using KarTac.IO;
 
 namespace KarTac.Skills
 {
@@ -41,7 +42,7 @@ namespace KarTac.Skills
 	}
 
 
-	public interface ISkill: IExp
+	public interface ISkill: IExp, IGuardable
 	{
 		string Nombre { get; }
 

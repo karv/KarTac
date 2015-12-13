@@ -83,6 +83,8 @@
     <Compile Include="Recursos\RecursoAcotado.cs" />
     <Compile Include="Recursos\RecursoAcotadoRegenerativo.cs" />
     <Compile Include="Clan.cs" />
+    <Compile Include="IO\IGuardable.cs" />
+    <Compile Include="IO\IOComún.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
@@ -107,6 +109,7 @@
     <Folder Include="Buff\" />
     <Folder Include="Batalla\Orden\" />
     <Folder Include="Personajes\" />
+    <Folder Include="IO\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OpenTK.dll.config" />

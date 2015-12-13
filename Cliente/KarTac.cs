@@ -7,6 +7,7 @@ using System;
 using OpenTK.Input;
 using KarTac.Batalla;
 using System.Diagnostics;
+using System.IO;
 
 namespace KarTac.Cliente
 {
@@ -57,7 +58,17 @@ namespace KarTac.Cliente
 		/// </summary>
 		protected override void Initialize ()
 		{
-			var unClan = Clan.BuildStartingClan ();
+			Clan unClan;
+			if (File.Exists ("game.sav"))
+			{
+				unClan = new Clan ();
+				unClan.Cargar ();
+				unClan.Reestablecer ();
+			}
+			else
+				unClan = Clan.BuildStartingClan ();
+
+			//Exit ();
 			var scr = new OutsideScreen (this, unClan);
 			CurrentScreen = scr;
 			scr.LoadContent ();

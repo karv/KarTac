@@ -106,5 +106,20 @@ namespace KarTac.Recursos
 		/// Ocurre cuando cambia el valor actual
 		/// </summary>
 		public event Action AlCambiarValor;
+
+		#region Guardable
+
+		public virtual void Guardar (System.IO.BinaryWriter writer)
+		{
+			writer.Write (GetType ().Name);
+			writer.Write (Max);
+		}
+
+		public virtual void Cargar (System.IO.BinaryReader reader)
+		{
+			Max = reader.ReadSingle ();
+		}
+
+		#endregion
 	}
 }

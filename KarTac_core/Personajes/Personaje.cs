@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using KarTac.Skills;
 using KarTac.Batalla;
+using KarTac.IO;
+using System.IO;
 
 namespace KarTac.Personajes
 {
-	public class Personaje
+	public class Personaje : IGuardable
 	{
 		/// <summary>
 		/// Nombre del personaje
@@ -60,6 +62,35 @@ namespace KarTac.Personajes
 			}
 		}
 
-		//	public InteracciónHumano
+		#region IGuardable
+
+		public void Guardar (BinaryWriter writer)
+		{
+			writer.Write (Nombre);
+			Atributos.Guardar (writer);
+			IOComún.Guardar (Skills, writer);
+			IOComún.Guardar (Desbloqueables, writer);
+		}
+
+		public void Cargar (BinaryReader reader)
+		{
+			Nombre = reader.ReadString ();
+			Atributos.Cargar (reader);
+
+			Skills.Clear ();
+			Desbloqueables.Clear ();
+			int count = reader.ReadInt32 ();
+			for (int i = 0; i < count; i++)
+			{
+				Skills.Add (SkillComún.Cargar (reader, this));
+			}
+			count = reader.ReadInt32 ();
+			for (int i = 0; i < count; i++)
+			{
+				Desbloqueables.Add (SkillComún.Cargar (reader, this));
+			}
+		}
+
+		#endregion
 	}
 }

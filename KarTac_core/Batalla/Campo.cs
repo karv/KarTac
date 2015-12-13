@@ -14,7 +14,7 @@ namespace KarTac.Batalla
 		/// <summary>
 		/// Experiencia por minuto
 		/// </summary>
-		public float ExpPorMinuto = 1;
+		public float ExpPorMinuto = 60;
 
 		public ISelectorTarget SelectorTarget { get; set; }
 
