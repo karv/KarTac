@@ -1,8 +1,8 @@
 ﻿using KarTac.Cliente.Controls.Screens;
 using Microsoft.Xna.Framework;
-using System;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -76,7 +76,10 @@ namespace KarTac.Cliente.Controls.Screens
 
 		public void UnloadContent ()
 		{
-			throw new NotImplementedException ();
+			foreach (var x in new List<IControl> (Controles))
+			{
+				x.Dispose ();
+			}
 		}
 
 		public ContentManager Content

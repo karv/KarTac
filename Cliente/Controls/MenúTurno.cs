@@ -160,6 +160,17 @@ namespace KarTac.Cliente.Controls
 			descripDisplay.LoadContent ();
 		}
 
+		protected override void Dispose ()
+		{
+			textura = null;
+			InfoFont = null;
+			((IDisposable)skillsList).Dispose ();
+			((IDisposable)display).Dispose ();
+			((IDisposable)descripDisplay).Dispose ();
+
+			base.Dispose ();
+		}
+
 		public override void Dibujar (GameTime gameTime)
 		{
 			var bat = Screen.GetNewBatch ();

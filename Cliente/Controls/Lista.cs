@@ -108,6 +108,13 @@ namespace KarTac.Cliente.Controls
 			noTexture = Screen.Content.Load<Texture2D> ("Rect");
 		}
 
+		protected override void Dispose ()
+		{
+			Fuente = null;
+			noTexture = null;
+			base.Dispose ();
+		}
+
 		public Key AbajoKey = Key.Down;
 		public Key ArribaKey = Key.Up;
 

@@ -26,6 +26,12 @@ namespace KarTac.Cliente.Controls
 
 		public Texture2D Textura { get; protected set; }
 
+		protected override void Dispose ()
+		{
+			Textura = null;
+			base.Dispose ();
+		}
+
 		public static Point Pos
 		{
 			get

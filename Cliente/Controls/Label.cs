@@ -39,6 +39,11 @@ namespace KarTac.Cliente.Controls
 			font = Screen.Content.Load<BitmapFont> (UseFont);
 		}
 
+		protected override void Dispose ()
+		{
+			font = null;
+			base.Dispose ();
+		}
 	}
 }
 

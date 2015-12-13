@@ -48,6 +48,12 @@ namespace KarTac.Cliente.Controls.Primitivos
 			texture = Screen.Content.Load<Texture2D> (textureString);
 		}
 
+		protected override void Dispose ()
+		{
+			texture = null;
+			base.Dispose ();
+		}
+
 		public override void Dibujar (GameTime gameTime)
 		{
 			var bat = Screen.Batch;

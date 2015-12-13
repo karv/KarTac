@@ -127,6 +127,14 @@ namespace KarTac.Cliente.Controls
 			font = content.Load<BitmapFont> (@"UnitNameFont");
 		}
 
+		protected override void Dispose ()
+		{
+			texturaClase = null;
+			texturaRect = null;
+			font = null;
+			base.Dispose ();
+		}
+
 		public override void Dibujar (GameTime gameTime)
 		{
 			var bat = Screen.Batch;
