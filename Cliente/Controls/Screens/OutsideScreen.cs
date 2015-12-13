@@ -22,7 +22,8 @@ namespace KarTac.Cliente.Controls.Screens
 			iniciar.Textura = @"Icons/sword";
 
 			guardar = new Botón (this, new Rectangle (535, 30, 30, 30));
-			//guardar.Textura = @"Icons/guardar"; //TODO Guardar icon
+			guardar.Textura = @"Icons/guardar"; 
+			guardar.Color = Color.Yellow;
 
 			recargar ();
 			personajes.Include ();
