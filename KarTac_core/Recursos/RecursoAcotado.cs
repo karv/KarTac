@@ -1,7 +1,5 @@
 ﻿using System;
 using KarTac.Batalla;
-using OpenTK;
-using System.Threading;
 
 namespace KarTac.Recursos
 {

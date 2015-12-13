@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using KarTac.Personajes;
-using System;
 using KarTac.IO;
 using KarTac.Recursos;
 using System.IO;

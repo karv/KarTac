@@ -3,7 +3,6 @@ using KarTac.Batalla;
 using System.Collections.Generic;
 using System.IO;
 using System;
-using MonoGame.Utilities.Png;
 
 namespace KarTac.Skills
 {
@@ -71,22 +70,24 @@ namespace KarTac.Skills
 			AlTerminarEjecución?.Invoke (returnInfo);
 		}
 
-		public event System.Action<ISkillReturnType> AlTerminarEjecución;
+		public event Action<ISkillReturnType> AlTerminarEjecución;
 
 		#region Guardable
 
-		public virtual void Guardar (System.IO.BinaryWriter writer)
+		public virtual void Guardar (BinaryWriter writer)
 		{
 			// No se requiere guardar usuario
 			writer.Write (GetType ().Name);
 			writer.Write (TotalExp);
 		}
 
-		public void Cargar (System.IO.BinaryReader reader)
+
+		public virtual void Cargar (BinaryReader reader)
 		{
-			throw new System.NotImplementedException ();
+			TotalExp = reader.ReadDouble ();
 		}
 
+		// TODO: ¿debería mover esto a una clase etática separada?
 		public static SkillComún Cargar (BinaryReader reader, Personaje pj)
 		{
 			var tipo = reader.ReadString ();
@@ -102,7 +103,7 @@ namespace KarTac.Skills
 				default:
 					throw new Exception ("No se reconoce tipo de skill " + tipo);
 			}
-			ret.TotalExp = reader.ReadDouble ();
+			ret.Cargar (reader);
 
 			return ret;
 		}

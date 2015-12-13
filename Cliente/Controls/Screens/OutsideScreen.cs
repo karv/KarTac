@@ -126,6 +126,5 @@ namespace KarTac.Cliente.Controls.Screens
 		Botón iniciar { get; }
 
 		Botón guardar { get; }
-
 	}
 }

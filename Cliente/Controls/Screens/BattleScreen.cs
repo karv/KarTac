@@ -3,7 +3,6 @@ using KarTac.Batalla;
 using KarTac.Cliente.Controls;
 using System;
 using Microsoft.Xna.Framework;
-using System.IO;
 
 namespace KarTac.Cliente.Controls.Screens
 {

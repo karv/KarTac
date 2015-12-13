@@ -8,8 +8,6 @@ using OpenTK.Input;
 using KarTac.Batalla;
 using System.Diagnostics;
 using System.IO;
-using KarTac.Personajes;
-using KarTac.Recursos;
 
 namespace KarTac.Cliente
 {

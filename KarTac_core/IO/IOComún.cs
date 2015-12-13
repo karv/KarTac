@@ -6,17 +6,30 @@ namespace KarTac.IO
 {
 	public static class IOComún
 	{
-		public static void Guardar<TObjeto> (ICollection<TObjeto> list,
+		/// <summary>
+		/// Guarda una collección de IGuardables por un BinaryWriter
+		/// </summary>
+		/// <param name="coll">Colección a guardar</param>
+		/// <param name="writer">Writer.</param>
+		/// <typeparam name="TObjeto">Tipo de objetos de la colección</typeparam>
+		public static void Guardar<TObjeto> (ICollection<TObjeto> coll,
 		                                     BinaryWriter writer)
 			where TObjeto : IGuardable
 		{
-			writer.Write (list.Count);
-			foreach (var x in list)
+			writer.Write (coll.Count);
+			foreach (var x in coll)
 			{
 				x.Guardar (writer);
 			}
 		}
 
+		/// <summary>
+		/// Carga una colección de IGuardables por un BinaryReader
+		/// </summary>
+		/// <param name="coll">La colección donde se agregarán los objetos</param>
+		/// <param name="ctor">Constructor del tipo de objetos</param>
+		/// <param name="reader">Lector binario</param>
+		/// <typeparam name="TObj">Tipo de objetos de la lista</typeparam>
 		public static void Cargar<TObj> (ICollection<TObj> coll,
 		                                 Func<TObj> ctor,
 		                                 BinaryReader reader)
