@@ -85,7 +85,8 @@ namespace KarTac.Cliente.Controls
 				}
 				if (InputManager.FuePresionado (Key.Back))
 				{
-					Texto = Texto.Remove (Texto.Length - 1);
+					if (Texto.Length > 0)
+						Texto = Texto.Remove (Texto.Length - 1);
 				}
 			}
 		}
