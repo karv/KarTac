@@ -1,9 +1,10 @@
 ﻿using KarTac.Cliente.Controls.Screens;
 using Microsoft.Xna.Framework;
+using System;
 
 namespace KarTac.Cliente.Controls
 {
-	public interface IControl
+	public interface IControl: IDisposable
 	{
 		IScreen Screen { get; }
 
@@ -42,6 +43,7 @@ namespace KarTac.Cliente.Controls
 		/// Se ejecuta antes del ciclo, pero después de saber un poco sobre los controladores
 		/// </summary>
 		void Inicializar ();
+
 
 	}
 }

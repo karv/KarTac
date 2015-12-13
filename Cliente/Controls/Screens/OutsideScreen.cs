@@ -63,6 +63,7 @@ namespace KarTac.Cliente.Controls.Screens
 				MyClan.Reestablecer ();
 				recargar ();
 				Game.CurrentScreen = this;
+				btScr.UnloadContent ();
 			};
 
 			var ClanEnemigo = Clan.BuildStartingClan ();

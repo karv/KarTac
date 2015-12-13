@@ -30,7 +30,7 @@ namespace KarTac.Cliente.Controls
 
 		List<Botón> controles { get; }
 
-		Texture2D texturafondo;
+		Texture2D texturaFondo;
 		public Color BgColor = Color.DarkBlue;
 
 		int filas = 3;
@@ -192,12 +192,12 @@ namespace KarTac.Cliente.Controls
 
 		public override void Dibujar (GameTime gameTime)
 		{
-			Screen.Batch.Draw (texturafondo, GetBounds (), BgColor);
+			Screen.Batch.Draw (texturaFondo, GetBounds (), BgColor);
 		}
 
 		public override void LoadContent ()
 		{
-			texturafondo = Screen.Content.Load<Texture2D> ("Rect");
+			texturaFondo = Screen.Content.Load<Texture2D> ("Rect");
 		}
 
 		public override Rectangle GetBounds ()
@@ -226,6 +226,16 @@ namespace KarTac.Cliente.Controls
 			                        bb.Top + Márgenes.Top + TamañoBotón.Y * locGrid.Y,
 			                        TamañoBotón.X, TamañoBotón.Y);
 			return bounds;
+		}
+
+		protected override void Dispose ()
+		{
+			texturaFondo = null;
+			foreach (IControl x in controles)
+			{
+				x.Dispose ();
+			}
+			base.Dispose ();
 		}
 	}
 }

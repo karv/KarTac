@@ -37,6 +37,13 @@ namespace KarTac.Cliente.Controls
 			TexturaInstancia = Screen.Content.Load<Texture2D> (Textura);
 		}
 
+		protected override void Dispose ()
+		{
+			TexturaInstancia = null;
+			Textura = "";
+			base.Dispose ();
+		}
+
 		public bool Habilidato { get; set; }
 	}
 }

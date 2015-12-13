@@ -121,6 +121,12 @@ namespace KarTac.Cliente.Controls
 			Font = Screen.Content.Load<BitmapFont> ("fonts");
 		}
 
+		protected override void Dispose ()
+		{
+			Font = null;
+			base.Dispose ();
+		}
+
 		public override void Update (GameTime gameTime)
 		{
 			Restante -= gameTime.ElapsedGameTime;

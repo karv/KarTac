@@ -83,6 +83,21 @@ namespace KarTac.Cliente.Controls
 
 		public TimeSpan TiempoMouseOver { get; private set; }
 
+		void IDisposable.Dispose ()
+		{
+			Dispose ();
+		}
+
+		/// <summary>
+		/// Releases all resource used by the <see cref="KarTac.Cliente.Controls.SBC"/> object.
+		/// Liberar cada textura.
+		/// </summary>
+		protected virtual void Dispose ()
+		{
+			Exclude ();
+		}
+
+
 		public event Action<MouseState> AlPresionalMouse;
 		public event Action AlClick;
 	}

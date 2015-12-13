@@ -53,6 +53,11 @@ namespace KarTac.Cliente.Controls
 			Font = Screen.Content.Load<BitmapFont> (fontString);
 		}
 
+		protected override void Dispose ()
+		{
+			Font = null;
+		}
+
 		int índiceActualString;
 
 		void StringSiguiente ()
