@@ -22,9 +22,11 @@ namespace KarTac.Personajes
 			writer.Write (Masa);
 		}
 
-		public TObj Cargar<TObj> (System.IO.BinaryReader reader)
+		public void Cargar (System.IO.BinaryReader reader)
 		{
-			throw new System.NotImplementedException ();
+			HaciaEnemigo = reader.ReadSingle ();
+			HaciaAliado = reader.ReadSingle ();
+			Masa = reader.ReadSingle ();
 		}
 	}
 }

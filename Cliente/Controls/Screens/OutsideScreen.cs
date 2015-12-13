@@ -21,12 +21,24 @@ namespace KarTac.Cliente.Controls.Screens
 			iniciar = new Botón (this, new Rectangle (500, 30, 30, 30));
 			iniciar.Textura = @"Icons/sword";
 
+			guardar = new Botón (this, new Rectangle (535, 30, 30, 30));
+			//guardar.Textura = @"Icons/guardar"; //TODO Guardar icon
+
 			recargar ();
 			personajes.Include ();
 			iniciar.Include ();
+			guardar.Include ();
 
 			iniciar.AlClick += iniciarCombate;
+			guardar.AlClick += guardarClan;
 		}
+
+		void guardarClan ()
+		{
+			MyClan.Guardar ();
+		}
+
+		public bool Autoguardado { get; set; }
 
 		public override Color BgColor
 		{
@@ -112,5 +124,8 @@ namespace KarTac.Cliente.Controls.Screens
 		Lista<Personaje> personajes { get; }
 
 		Botón iniciar { get; }
+
+		Botón guardar { get; }
+
 	}
 }

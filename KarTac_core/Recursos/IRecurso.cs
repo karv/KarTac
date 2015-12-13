@@ -3,9 +3,31 @@ using Microsoft.Xna.Framework;
 using KarTac.Batalla;
 using KarTac.Batalla.Exp;
 using KarTac.IO;
+using System.IO;
 
 namespace KarTac.Recursos
 {
+	public static class Lector
+	{
+		public static IRecurso Cargar (BinaryReader reader)
+		{
+			IRecurso ret;
+			switch (reader.ReadString ())
+			{
+				case "HP":
+					ret = new HP ();
+					break;
+				case "Maná":
+					ret = new Maná ();
+					break;
+				default:
+					throw new Exception ("No se reconoce recurso");
+			}
+			ret.Cargar (reader);
+			return ret;
+		}
+	}
+
 	public interface IRecurso : IExp, IGuardable
 	{
 		/// <summary>

@@ -1,5 +1,7 @@
 ﻿using System;
 using KarTac.Batalla;
+using OpenTK;
+using System.Threading;
 
 namespace KarTac.Recursos
 {
@@ -111,13 +113,13 @@ namespace KarTac.Recursos
 
 		public virtual void Guardar (System.IO.BinaryWriter writer)
 		{
-			writer.Write (GetType ().FullName);
+			writer.Write (GetType ().Name);
 			writer.Write (Max);
 		}
 
-		public TObj Cargar<TObj> (System.IO.BinaryReader reader)
+		public virtual void Cargar (System.IO.BinaryReader reader)
 		{
-			throw new NotImplementedException ();
+			Max = reader.ReadSingle ();
 		}
 
 		#endregion

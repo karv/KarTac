@@ -35,8 +35,9 @@ namespace KarTac.Recursos
 		{
 			get
 			{
-				return 10;
+				return Max;
 			}
 		}
+
 	}
 }

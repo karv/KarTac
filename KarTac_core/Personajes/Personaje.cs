@@ -72,9 +72,23 @@ namespace KarTac.Personajes
 			IOComún.Guardar (Desbloqueables, writer);
 		}
 
-		public TObj Cargar<TObj> (BinaryReader reader)
+		public void Cargar (BinaryReader reader)
 		{
-			throw new NotImplementedException ();
+			Nombre = reader.ReadString ();
+			Atributos.Cargar (reader);
+
+			Skills.Clear ();
+			Desbloqueables.Clear ();
+			int count = reader.ReadInt32 ();
+			for (int i = 0; i < count; i++)
+			{
+				Skills.Add (SkillComún.Cargar (reader, this));
+			}
+			count = reader.ReadInt32 ();
+			for (int i = 0; i < count; i++)
+			{
+				Desbloqueables.Add (SkillComún.Cargar (reader, this));
+			}
 		}
 
 		#endregion

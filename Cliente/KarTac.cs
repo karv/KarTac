@@ -8,6 +8,8 @@ using OpenTK.Input;
 using KarTac.Batalla;
 using System.Diagnostics;
 using System.IO;
+using KarTac.Personajes;
+using KarTac.Recursos;
 
 namespace KarTac.Cliente
 {
@@ -58,14 +60,17 @@ namespace KarTac.Cliente
 		/// </summary>
 		protected override void Initialize ()
 		{
-			var unClan = Clan.BuildStartingClan ();
+			Clan unClan;
+			if (File.Exists ("game.sav"))
+			{
+				unClan = new Clan ();
+				unClan.Cargar ();
+				unClan.Reestablecer ();
+			}
+			else
+				unClan = Clan.BuildStartingClan ();
 
-			var wr = new BinaryWriter (File.Open ("game01.sav", FileMode.Create));
-			unClan.Guardar (wr);
-			wr.Flush ();
-			wr.Close ();
-
-			Exit ();
+			//Exit ();
 			var scr = new OutsideScreen (this, unClan);
 			CurrentScreen = scr;
 			scr.LoadContent ();

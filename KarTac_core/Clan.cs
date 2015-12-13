@@ -2,6 +2,8 @@
 using KarTac.Personajes;
 using System;
 using KarTac.IO;
+using KarTac.Recursos;
+using System.IO;
 
 namespace KarTac
 {
@@ -27,10 +29,12 @@ namespace KarTac
 		{
 			var ret = new Clan ();
 			const int personajesIniciales = 3;
+			ret.Dinero = 100;
 			ret.Personajes = new List<Personaje> (personajesIniciales);
 			for (int i = 0; i < personajesIniciales; i++)
 			{
 				var pj = new Personaje ();
+				pj.Atributos.Recs.Add (new HP ());
 
 				pj.Atributos.HP.Max = 100;
 				pj.Atributos.HP.Valor = 100;
@@ -55,15 +59,33 @@ namespace KarTac
 
 		#region Guardable
 
-		public void Guardar (System.IO.BinaryWriter writer)
+		public void Guardar (BinaryWriter writer)
 		{
 			writer.Write (Dinero);
+
 			IOComún.Guardar (Personajes, writer);
 		}
 
-		public TObj Cargar<TObj> (System.IO.BinaryReader reader)
+		public void Cargar (BinaryReader reader)
 		{
-			throw new NotImplementedException ();
+			Dinero = reader.ReadInt32 ();
+			Personajes = new List<Personaje> ();
+			IOComún.Cargar (Personajes, () => new Personaje (), reader);
+		}
+
+		public void Guardar (string archivo = "game.sav")
+		{
+			var rd = new BinaryWriter (File.Open (archivo, FileMode.Create));
+			Guardar (rd);
+			rd.Flush ();
+			rd.Close ();
+		}
+
+		public void Cargar (string archivo = "game.sav")
+		{
+			var rd = new BinaryReader (File.Open (archivo, FileMode.Open));
+			Cargar (rd);
+			rd.Close ();
 		}
 
 		#endregion

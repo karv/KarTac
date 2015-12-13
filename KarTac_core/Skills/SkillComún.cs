@@ -1,6 +1,9 @@
 ﻿using KarTac.Personajes;
 using KarTac.Batalla;
 using System.Collections.Generic;
+using System.IO;
+using System;
+using MonoGame.Utilities.Png;
 
 namespace KarTac.Skills
 {
@@ -75,13 +78,33 @@ namespace KarTac.Skills
 		public virtual void Guardar (System.IO.BinaryWriter writer)
 		{
 			// No se requiere guardar usuario
-			writer.Write (GetType ().FullName);
+			writer.Write (GetType ().Name);
 			writer.Write (TotalExp);
 		}
 
-		public TObj Cargar<TObj> (System.IO.BinaryReader reader)
+		public void Cargar (System.IO.BinaryReader reader)
 		{
 			throw new System.NotImplementedException ();
+		}
+
+		public static SkillComún Cargar (BinaryReader reader, Personaje pj)
+		{
+			var tipo = reader.ReadString ();
+			SkillComún ret;
+			switch (tipo)
+			{
+				case "Golpe":
+					ret = new Golpe (pj);
+					break;
+				case "RayoManá":
+					ret = new RayoManá (pj);
+					break;
+				default:
+					throw new Exception ("No se reconoce tipo de skill " + tipo);
+			}
+			ret.TotalExp = reader.ReadDouble ();
+
+			return ret;
 		}
 
 		#endregion

@@ -42,7 +42,6 @@ namespace KarTac.Personajes
 		public AtributosPersonaje ()
 		{
 			Recs = new ListaRecursos ();
-			Recs.Add (new HP ());
 		}
 
 		/// <summary>
@@ -73,9 +72,14 @@ namespace KarTac.Personajes
 			Recs.Guardar (writer);
 		}
 
-		public TObj Cargar<TObj> (System.IO.BinaryReader reader)
+		public void Cargar (System.IO.BinaryReader reader)
 		{
-			throw new System.NotImplementedException ();
+			Ataque = reader.ReadInt32 ();
+			Defensa = reader.ReadInt32 ();
+			Velocidad = reader.ReadInt32 ();
+			Agilidad = reader.ReadInt32 ();
+			Empuje.Cargar (reader);
+			Recs.Cargar (reader);
 		}
 
 		#endregion

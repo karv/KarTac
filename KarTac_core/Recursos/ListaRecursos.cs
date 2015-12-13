@@ -19,9 +19,13 @@ namespace KarTac.Recursos
 			IOComún.Guardar (this, writer);
 		}
 
-		public TObj Cargar<TObj> (System.IO.BinaryReader reader)
+		public void Cargar (System.IO.BinaryReader reader)
 		{
-			throw new System.NotImplementedException ();
+			int count = reader.ReadInt32 ();
+			for (int i = 0; i < count; i++)
+			{
+				Add (Lector.Cargar (reader));
+			}
 		}
 	}
 }
