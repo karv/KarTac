@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -75,7 +76,7 @@ namespace KarTac.Cliente.Controls.Screens
 
 		public void UnloadContent ()
 		{
-			foreach (var x in Controles)
+			foreach (var x in new List<IControl> (Controles))
 			{
 				x.Dispose ();
 			}
