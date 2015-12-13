@@ -36,7 +36,7 @@ namespace KarTac.Cliente.Controls.Screens
 
 		void guardarClan ()
 		{
-			MyClan.Guardar ();
+			MyClan.Guardar (KarTacGame.FileName);
 		}
 
 		public bool Autoguardado { get; set; }

@@ -73,6 +73,7 @@
     <Compile Include="Controls\MenúTurno.cs" />
     <Compile Include="Controls\VanishingString.cs" />
     <Compile Include="Controls\Screens\OutsideScreen.cs" />
+    <Compile Include="Controls\EntradaTexto.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

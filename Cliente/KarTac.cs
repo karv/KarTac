@@ -17,6 +17,8 @@ namespace KarTac.Cliente
 	public class KarTacGame : Game
 	,IScreen // Para poder tener controles globales (cursor)
 	{
+		public const string FileName = "game.sav";
+
 		readonly Ratón mouse;
 
 		readonly Label fpsLabel;
@@ -59,10 +61,10 @@ namespace KarTac.Cliente
 		protected override void Initialize ()
 		{
 			Clan unClan;
-			if (File.Exists ("game.sav"))
+			if (File.Exists (FileName))
 			{
 				unClan = new Clan ();
-				unClan.Cargar ();
+				unClan.Cargar (FileName);
 				unClan.Reestablecer ();
 			}
 			else
@@ -72,6 +74,7 @@ namespace KarTac.Cliente
 			var scr = new OutsideScreen (this, unClan);
 			CurrentScreen = scr;
 			scr.LoadContent ();
+
 			base.Initialize ();
 		}
 
