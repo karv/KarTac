@@ -57,10 +57,6 @@ namespace KarTac.Cliente.Controls
 		{
 			if (MouseOver)
 			{
-				var state = Mouse.GetState ();
-				if (state.LeftButton == ButtonState.Pressed)
-					AlPresionalMouse?.Invoke (state);
-
 				if (InputManager.FuePresionado (OpenTK.Input.MouseButton.Left))
 					AlClick?.Invoke ();
 
@@ -97,8 +93,6 @@ namespace KarTac.Cliente.Controls
 			Exclude ();
 		}
 
-
-		public event Action<MouseState> AlPresionalMouse;
 		public event Action AlClick;
 	}
 }
