@@ -72,7 +72,7 @@ namespace KarTac
 			IOComún.Cargar (Personajes, () => new Personaje (), reader);
 		}
 
-		public void Guardar (string archivo = "game.sav")
+		public void Guardar (string archivo)
 		{
 			var rd = new BinaryWriter (File.Open (archivo, FileMode.Create));
 			Guardar (rd);
@@ -80,7 +80,7 @@ namespace KarTac
 			rd.Close ();
 		}
 
-		public void Cargar (string archivo = "game.sav")
+		public void Cargar (string archivo)
 		{
 			var rd = new BinaryReader (File.Open (archivo, FileMode.Open));
 			Cargar (rd);

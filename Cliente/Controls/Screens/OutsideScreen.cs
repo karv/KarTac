@@ -18,25 +18,41 @@ namespace KarTac.Cliente.Controls.Screens
 			personajes = new Lista<Personaje> (this);
 			personajes.Stringificación = x => x.Nombre + " HP: " + x.Atributos.HP.Valor;
 			personajes.Bounds = new Rectangle (10, 10, 400, 300);
-			iniciar = new Botón (this, new Rectangle (500, 30, 30, 30));
-			iniciar.Textura = @"Icons/sword";
+			botónIniciar = new Botón (this, new Rectangle (500, 30, 30, 30));
+			botónIniciar.Textura = @"Icons/sword";
 
-			guardar = new Botón (this, new Rectangle (535, 30, 30, 30));
-			guardar.Textura = @"Icons/guardar"; 
-			guardar.Color = Color.Yellow;
+			botónGuardar = new Botón (this, new Rectangle (535, 30, 30, 30));
+			botónGuardar.Textura = @"Icons/guardar"; 
+			botónGuardar.Color = Color.Yellow;
+
+			botónRenombrar = new Botón (this, new Rectangle (570, 30, 30, 30));
+			botónRenombrar.Color = Color.Yellow;
 
 			recargar ();
 			personajes.Include ();
-			iniciar.Include ();
-			guardar.Include ();
+			botónIniciar.Include ();
+			botónGuardar.Include ();
+			botónRenombrar.Include ();
 
-			iniciar.AlClick += iniciarCombate;
-			guardar.AlClick += guardarClan;
+			botónIniciar.AlClick += iniciarCombate;
+			botónGuardar.AlClick += guardarClan;
+			botónRenombrar.AlClick += delegate // Renombrar
+			{
+				var dial = new ScreenRenombrarDial (juego, this);
+				dial.TextoPreg = "Renombrar a " + personajes.ObjetoEnCursor.Nombre;
+				dial.AlTerminar += delegate
+				{
+					var ind = personajes.CursorIndex;
+					personajes.Objetos [ind].Objeto.Nombre = dial.Texto;
+				};
+
+				dial.Ejecutar ();
+			};
 		}
 
 		void guardarClan ()
 		{
-			MyClan.Guardar ();
+			MyClan.Guardar (KarTacGame.FileName);
 		}
 
 		public bool Autoguardado { get; set; }
@@ -125,8 +141,10 @@ namespace KarTac.Cliente.Controls.Screens
 
 		Lista<Personaje> personajes { get; }
 
-		Botón iniciar { get; }
+		Botón botónIniciar { get; }
 
-		Botón guardar { get; }
+		Botón botónGuardar { get; }
+
+		Botón botónRenombrar { get; }
 	}
 }

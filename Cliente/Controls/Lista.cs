@@ -84,6 +84,14 @@ namespace KarTac.Cliente.Controls
 			}
 		}
 
+		public TObj ObjetoEnCursor
+		{
+			get
+			{
+				return Objetos [CursorIndex].Objeto;
+			}
+		}
+
 		public BitmapFont Fuente { get; set; }
 
 		Texture2D noTexture { get; set; }
