@@ -16,6 +16,11 @@ namespace KarTac.Batalla
 		/// </summary>
 		public float ExpPorMinuto = 60;
 
+		/// <summary>
+		/// Duración de la batalla (hasta este momento, si no ha terminado)
+		/// </summary>
+		public TimeSpan DuraciónBatalla { get; private set; }
+
 		public ISelectorTarget SelectorTarget { get; set; }
 
 		/// <summary>
@@ -49,12 +54,14 @@ namespace KarTac.Batalla
 		{
 			Unidades = new List<Unidad> ();
 			Área = new Rectangle (Point.Zero, tamaño);
+			DuraciónBatalla = TimeSpan.Zero;
 		}
 
 		public Rectangle Área { get; private set; }
 
 		public void Tick (GameTime delta)
 		{
+			DuraciónBatalla += delta.ElapsedGameTime;
 			foreach (var x in UnidadesVivas)
 			{
 				var ord = x.OrdenActual;
