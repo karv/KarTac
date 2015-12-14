@@ -74,7 +74,7 @@ namespace KarTac.Cliente.Controls.Screens
 			campoBatalla.SelectorTarget = new Selector (Game, btScr);
 			Game.CurrentScreen = btScr;
 
-			btScr.AlTerminarBatalla += delegate
+			campoBatalla.AlTerminar += delegate
 			{
 				MyClan.Reestablecer ();
 				recargar ();

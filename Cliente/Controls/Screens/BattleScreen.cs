@@ -48,7 +48,7 @@ namespace KarTac.Cliente.Controls.Screens
 			if (CampoBatalla.EquipoGanador != null)
 			{
 				CampoBatalla.Terminar ();
-				AlTerminarBatalla?.Invoke ();
+				//AlTerminarBatalla?.Invoke ();
 			}
 		}
 
@@ -68,6 +68,6 @@ namespace KarTac.Cliente.Controls.Screens
 			base.Inicializar ();
 		}
 
-		public event Action AlTerminarBatalla;
+		//public event Action AlTerminarBatalla;
 	}
 }
