@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using KarTac.Cliente.Controls.Screens;
+using OpenTK.Input;
 
 namespace KarTac.Cliente.Controls
 {
@@ -57,8 +58,11 @@ namespace KarTac.Cliente.Controls
 		{
 			if (MouseOver)
 			{
-				if (InputManager.FuePresionado (OpenTK.Input.MouseButton.Left))
+				if (InputManager.FuePresionado (MouseButton.Left))
 					AlClick?.Invoke ();
+
+				if (InputManager.FuePresionado (MouseButton.Right))
+					AlClickDerecho?.Invoke ();
 
 				TiempoMouseOver += time;
 			}
@@ -94,5 +98,6 @@ namespace KarTac.Cliente.Controls
 		}
 
 		public event Action AlClick;
+		public event Action AlClickDerecho;
 	}
 }
