@@ -39,12 +39,17 @@ namespace KarTac.Cliente.Controls.Screens
 
 			Batch = GetNewBatch ();
 			Batch.Begin ();
+			Dibujar (gameTime, Batch);
 			foreach (var x in Controles)
 			{
 				x.Dibujar (gameTime);
 			}
 			Batch.End ();
 
+		}
+
+		public virtual void Dibujar (GameTime gametime, SpriteBatch bat)
+		{
 		}
 
 		public virtual void LoadContent ()
