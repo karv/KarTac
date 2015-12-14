@@ -16,7 +16,15 @@ namespace KarTac.Cliente.Controls.Screens
 			: base (juego)
 		{
 			CampoBatalla = campo;
+			contadorTiempo = new Label (this);
+			contadorTiempo.Texto = () => CampoBatalla.DuraciónBatalla.ToString ("ss\\.fff");
+			contadorTiempo.UseFont = @"UnitNameFont";
+			contadorTiempo.Color = Color.White;
+			contadorTiempo.Posición = new Point (0, 20);
+			contadorTiempo.Include ();
 		}
+
+		Label contadorTiempo;
 
 		public override Color BgColor
 		{
@@ -48,7 +56,6 @@ namespace KarTac.Cliente.Controls.Screens
 			if (CampoBatalla.EquipoGanador != null)
 			{
 				CampoBatalla.Terminar ();
-				//AlTerminarBatalla?.Invoke ();
 			}
 		}
 
@@ -67,7 +74,5 @@ namespace KarTac.Cliente.Controls.Screens
 
 			base.Inicializar ();
 		}
-
-		//public event Action AlTerminarBatalla;
 	}
 }
