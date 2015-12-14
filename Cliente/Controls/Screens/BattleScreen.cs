@@ -16,7 +16,12 @@ namespace KarTac.Cliente.Controls.Screens
 			: base (juego)
 		{
 			CampoBatalla = campo;
+			contadorTiempo = new RandomStringDisplay (this);
+			contadorTiempo.Mostrables.Add ("");
+			contadorTiempo.Pos = new Vector2 (0, 20);
 		}
+
+		RandomStringDisplay contadorTiempo;
 
 		public override Color BgColor
 		{
@@ -44,6 +49,7 @@ namespace KarTac.Cliente.Controls.Screens
 			base.Update (gameTime);
 			// Ejecutar órdenes
 			CampoBatalla.Tick (gameTime);
+			contadorTiempo.Mostrables [0] = CampoBatalla.DuraciónBatalla.ToString ("ss");
 
 			if (CampoBatalla.EquipoGanador != null)
 			{
