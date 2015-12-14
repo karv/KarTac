@@ -23,6 +23,9 @@ namespace KarTac.Cliente.Controls.Screens
 
 		}
 
+		/// <summary>
+		/// Texto que aparece como título de la pregunta.
+		/// </summary>
 		public string TextoPreg
 		{
 			get
@@ -35,8 +38,14 @@ namespace KarTac.Cliente.Controls.Screens
 			}
 		}
 
+		/// <summary>
+		/// Límites de el área del rectángulo donde se muestra este "diálogo"
+		/// </summary>
 		public Rectangle Bounds { get; set; }
 
+		/// <summary>
+		/// Texto que el usuario introduce.
+		/// </summary>
 		public string Texto { get; private set; }
 
 		Texture2D bgTexture;

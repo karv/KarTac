@@ -41,11 +41,20 @@ namespace KarTac.Cliente.Controls
 			}
 		}
 
+		/// <summary>
+		/// Color del contorno
+		/// </summary>
 		public Color ColorContorno = Color.White;
+		/// <summary>
+		/// Color del texto
+		/// </summary>
 		public Color ColorTexto = Color.White;
 		Texture2D contornoTexture;
 		BitmapFont fontTexture;
 
+		/// <summary>
+		/// Límites de el control
+		/// </summary>
 		public Rectangle Bounds { get; set; }
 
 		public override void Dibujar (GameTime gameTime)

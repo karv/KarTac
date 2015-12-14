@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using KarTac.Cliente.Controls;
 using KarTac.Cliente.Controls.Screens;
-using System;
 using OpenTK.Input;
 using KarTac.Batalla;
 using System.Diagnostics;
@@ -214,7 +213,6 @@ namespace KarTac.Cliente
 
 		void IScreen.UnloadContent ()
 		{
-			throw new NotImplementedException ();
 		}
 
 		public DisplayMode GetDisplayMode
