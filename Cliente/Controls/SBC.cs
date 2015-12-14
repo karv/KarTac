@@ -76,7 +76,7 @@ namespace KarTac.Cliente.Controls
 		{
 			get
 			{
-				var state = Mouse.GetState ();
+				var state = Microsoft.Xna.Framework.Input.Mouse.GetState ();
 				return GetBounds ().Contains (state.Position);
 			}
 		}
