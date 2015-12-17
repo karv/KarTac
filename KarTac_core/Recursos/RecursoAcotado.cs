@@ -25,7 +25,7 @@ namespace KarTac.Recursos
 			Valor = Inicial;
 		}
 
-		public double PeticiónExpAcumulada { get; protected set; }
+		public double PeticiónExpAcumulada { get; set; }
 
 		public float Max
 		{
@@ -111,7 +111,7 @@ namespace KarTac.Recursos
 
 		public virtual void Guardar (System.IO.BinaryWriter writer)
 		{
-			writer.Write (GetType ().Name);
+			writer.Write (Nombre);
 			writer.Write (Max);
 		}
 

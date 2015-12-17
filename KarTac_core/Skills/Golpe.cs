@@ -54,7 +54,7 @@ namespace KarTac.Skills
 
 		protected override TimeSpan CalcularTiempoUso ()
 		{
-			return TimeSpan.FromSeconds (6.0f / UnidadUsuario.AtributosActuales.Agilidad);
+			return TimeSpan.FromSeconds (6.0f / UnidadUsuario.AtributosActuales.Recs ["Agilidad"].Valor);
 		}
 
 		public override IShape GetÁrea ()
@@ -96,7 +96,7 @@ namespace KarTac.Skills
 			// usuario ataca a selección
 
 			var dañoBloqueado = Math.Max (
-				                    UnidadUsuario.AtributosActuales.Ataque - selección.AtributosActuales.Defensa,
+				                    UnidadUsuario.AtributosActuales.Recs ["Ataque"].Valor - selección.AtributosActuales.Recs ["Defensa"].Valor,
 				                    0);
 			var daño = Math.Max (20 - dañoBloqueado, 1);
 
@@ -108,6 +108,8 @@ namespace KarTac.Skills
 				selección));
 
 			PeticiónExpAcumulada += 1;
+			UnidadUsuario.PersonajeBase.Atributos.Ataque.PeticiónExpAcumulada += 0.3;
+			selección.PersonajeBase.Atributos.Defensa.PeticiónExpAcumulada += 0.3;
 
 			LastReturn = new  SkillReturnType (
 				-daño,

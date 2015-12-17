@@ -12,7 +12,8 @@ namespace KarTac.Recursos
 		public static IRecurso Cargar (BinaryReader reader)
 		{
 			IRecurso ret;
-			switch (reader.ReadString ())
+			var recNombre = reader.ReadString ();
+			switch (recNombre)
 			{
 				case "HP":
 					ret = new HP ();
@@ -21,7 +22,8 @@ namespace KarTac.Recursos
 					ret = new Maná ();
 					break;
 				default:
-					throw new Exception ("No se reconoce recurso");
+					ret = new AtributoGenérico (recNombre);
+					break;
 			}
 			ret.Cargar (reader);
 			return ret;

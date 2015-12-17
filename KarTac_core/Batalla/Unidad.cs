@@ -134,7 +134,7 @@ namespace KarTac.Batalla
 		public void Mover (Vector2 movDir, TimeSpan time)
 		{
 			movDir.Normalize ();
-			movDir *= AtributosActuales.Velocidad * (float)time.TotalSeconds;
+			movDir *= AtributosActuales.Recs ["Velocidad"].Valor * (float)time.TotalSeconds;
 			PosPrecisa += movDir;
 
 		}

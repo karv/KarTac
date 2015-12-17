@@ -1,25 +1,12 @@
 ﻿using KarTac.Recursos;
 using KarTac.IO;
+using System.Collections.Generic;
+using NUnit.Framework;
 
 namespace KarTac.Personajes
 {
 	public class AtributosPersonaje : IGuardable
 	{
-		public int Ataque { get; set; }
-
-		public int Defensa { get; set; }
-
-		/// <summary>
-		/// Que tan rápido recorre terreno.
-		/// Pixeles por segundo.
-		/// </summary>
-		public int Velocidad { get; set; }
-
-		/// <summary>
-		/// Qué tan rápido y agil es para usar algunas habilidades
-		/// </summary>
-		public int Agilidad { get; set; }
-
 		public Empuje Empuje { get; set; }
 
 		/// <summary>
@@ -33,6 +20,12 @@ namespace KarTac.Personajes
 			}
 		}
 
+		// Atributos
+		public readonly AtributoGenérico Ataque;
+		public readonly AtributoGenérico Defensa;
+		public readonly AtributoGenérico Velocidad;
+		public readonly AtributoGenérico Agilidad;
+
 		/// <summary>
 		/// Lista de recursos
 		/// </summary>
@@ -42,6 +35,16 @@ namespace KarTac.Personajes
 		public AtributosPersonaje ()
 		{
 			Recs = new ListaRecursos ();
+
+			Ataque = new AtributoGenérico ("Ataque");
+			Defensa = new AtributoGenérico ("Defensa");
+			Velocidad = new AtributoGenérico ("Velocidad");
+			Agilidad = new AtributoGenérico ("Agilidad");
+
+			Recs.Add (Ataque);
+			Recs.Add (Defensa);
+			Recs.Add (Velocidad);
+			Recs.Add (Agilidad);
 		}
 
 		/// <summary>
@@ -64,20 +67,12 @@ namespace KarTac.Personajes
 
 		public void Guardar (System.IO.BinaryWriter writer)
 		{
-			writer.Write (Ataque);
-			writer.Write (Defensa);
-			writer.Write (Velocidad);
-			writer.Write (Agilidad);
 			Empuje.Guardar (writer);
 			Recs.Guardar (writer);
 		}
 
 		public void Cargar (System.IO.BinaryReader reader)
 		{
-			Ataque = reader.ReadInt32 ();
-			Defensa = reader.ReadInt32 ();
-			Velocidad = reader.ReadInt32 ();
-			Agilidad = reader.ReadInt32 ();
 			Empuje.Cargar (reader);
 			Recs.Cargar (reader);
 		}
