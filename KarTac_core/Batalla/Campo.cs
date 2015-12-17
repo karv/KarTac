@@ -84,7 +84,7 @@ namespace KarTac.Batalla
 			{
 				x.AcumularPetición (delta.ElapsedGameTime);
 				// Sus recursos
-				foreach (var y in x.AtributosActuales.Recs)
+				foreach (var y in x.AtributosActuales.Recs.Values)
 				{
 					y.Tick (delta);
 				}

@@ -4,19 +4,31 @@ using KarTac.IO;
 
 namespace KarTac.Recursos
 {
-	public class ListaRecursos : List<IRecurso>, IGuardable
+	public class ListaRecursos : Dictionary<string, IRecurso>, IGuardable
 	{
 		public IRecurso this [string nombre]
 		{
 			get
 			{
-				return Find (x => x.Nombre == nombre);
+				IRecurso ret;
+				if (!TryGetValue (nombre, out ret))
+				{
+					ret = new AtributoGenérico (nombre);
+					Add (ret);
+				}
+
+				return ret;
 			}
+		}
+
+		public void Add (IRecurso rec)
+		{
+			Add (rec.Nombre, rec);
 		}
 
 		public void Guardar (System.IO.BinaryWriter writer)
 		{
-			IOComún.Guardar (this, writer);
+			IOComún.Guardar (Values, writer);
 		}
 
 		public void Cargar (System.IO.BinaryReader reader)

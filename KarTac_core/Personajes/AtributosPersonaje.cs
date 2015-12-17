@@ -1,7 +1,5 @@
 ﻿using KarTac.Recursos;
 using KarTac.IO;
-using System.Collections.Generic;
-using NUnit.Framework;
 
 namespace KarTac.Personajes
 {
@@ -52,7 +50,7 @@ namespace KarTac.Personajes
 		/// </summary>
 		public void Inicializar ()
 		{
-			foreach (var x in Recs)
+			foreach (var x in Recs.Values)
 			{
 				x.Reestablecer ();
 			}
