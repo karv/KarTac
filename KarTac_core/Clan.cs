@@ -35,9 +35,19 @@ namespace KarTac
 				var pj = new Personaje ();
 				pj.Atributos.Recs.Add (new HP ());
 
+				pj.Atributos.Recs.Add (new AtributoGenérico ("Ataque"));
+				pj.Atributos.Recs.Add (new AtributoGenérico ("Defensa"));
+				pj.Atributos.Recs.Add (new AtributoGenérico ("Velocidad"));
+				pj.Atributos.Recs.Add (new AtributoGenérico ("Agilidad"));
+
 				pj.Atributos.HP.Max = 100;
 				pj.Atributos.HP.Valor = 100;
 				pj.Atributos.HP.Regeneración = 60;
+				pj.Atributos.Ataque.Valor = 10;
+				pj.Atributos.Agilidad.Valor = 10;
+				pj.Atributos.Defensa.Valor = 10;
+				pj.Atributos.Velocidad.Valor = 50;
+
 				pj.Nombre = "Persona " + i;
 
 				ret.Personajes.Add (pj);

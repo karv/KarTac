@@ -45,10 +45,6 @@ namespace KarTac.Personajes
 			Skills.Add (new Golpe (this));
 			Desbloqueables = new HashSet<ISkill> ();
 
-			Atributos.Ataque.Valor = 10;
-			Atributos.Agilidad.Valor = 10;
-			Atributos.Defensa.Valor = 10;
-			Atributos.Velocidad.Valor = 10;
 		}
 
 		public IList<ISkill> Skills { get; }

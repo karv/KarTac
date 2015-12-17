@@ -1,7 +1,5 @@
 ﻿using KarTac.Recursos;
 using KarTac.IO;
-using System.Collections.Generic;
-using NUnit.Framework;
 
 namespace KarTac.Personajes
 {
@@ -20,11 +18,41 @@ namespace KarTac.Personajes
 			}
 		}
 
-		// Atributos
-		public readonly AtributoGenérico Ataque;
-		public readonly AtributoGenérico Defensa;
-		public readonly AtributoGenérico Velocidad;
-		public readonly AtributoGenérico Agilidad;
+		#region Atributos
+
+		public AtributoGenérico Ataque
+		{
+			get
+			{
+				return Recs ["Ataque"] as AtributoGenérico;
+			}
+		}
+
+		public AtributoGenérico Defensa
+		{
+			get
+			{
+				return Recs ["Defensa"] as AtributoGenérico;
+			}
+		}
+
+		public AtributoGenérico Velocidad
+		{
+			get
+			{
+				return Recs ["Velocidad"] as AtributoGenérico;
+			}
+		}
+
+		public AtributoGenérico Agilidad
+		{
+			get
+			{
+				return Recs ["Agilidad"] as AtributoGenérico;
+			}
+		}
+
+		#endregion
 
 		/// <summary>
 		/// Lista de recursos
@@ -35,16 +63,6 @@ namespace KarTac.Personajes
 		public AtributosPersonaje ()
 		{
 			Recs = new ListaRecursos ();
-
-			Ataque = new AtributoGenérico ("Ataque");
-			Defensa = new AtributoGenérico ("Defensa");
-			Velocidad = new AtributoGenérico ("Velocidad");
-			Agilidad = new AtributoGenérico ("Agilidad");
-
-			Recs.Add (Ataque);
-			Recs.Add (Defensa);
-			Recs.Add (Velocidad);
-			Recs.Add (Agilidad);
 		}
 
 		/// <summary>
@@ -52,7 +70,7 @@ namespace KarTac.Personajes
 		/// </summary>
 		public void Inicializar ()
 		{
-			foreach (var x in Recs)
+			foreach (var x in Recs.Values)
 			{
 				x.Reestablecer ();
 			}
