@@ -88,6 +88,10 @@ namespace KarTac.Recursos
 
 		public double PeticiónExpAcumulada { get; set; }
 
+		public override string ToString ()
+		{
+			return string.Format ("{0}: {1}", Nombre, Valor);
+		}
 
 	}
 }

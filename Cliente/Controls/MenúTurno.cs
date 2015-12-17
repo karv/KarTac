@@ -58,6 +58,9 @@ namespace KarTac.Cliente.Controls
 			get{ return Color.Green; }
 		}
 
+		/// <summary>
+		/// El control que se muestra bajo el nombre para mostrar atributos y recursos
+		/// </summary>
 		RandomStringDisplay descripDisplay;
 
 		void actualizaDesc ()
@@ -77,7 +80,7 @@ namespace KarTac.Cliente.Controls
 			reposicionarControles ();
 
 			display.Color = Color.Green * 0.8f;
-			foreach (var x in UnidadActual.AtributosActuales.Recs)
+			foreach (var x in UnidadActual.AtributosActuales.Recs.Values)
 			{
 				display.Mostrables.Add (x.ToString ());
 			}

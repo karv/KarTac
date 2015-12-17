@@ -18,7 +18,8 @@ namespace KarTac.Personajes
 			}
 		}
 
-		// Atributos
+		#region Atributos
+
 		public AtributoGenérico Ataque
 		{
 			get
@@ -50,6 +51,8 @@ namespace KarTac.Personajes
 				return Recs ["Agilidad"] as AtributoGenérico;
 			}
 		}
+
+		#endregion
 
 		/// <summary>
 		/// Lista de recursos
