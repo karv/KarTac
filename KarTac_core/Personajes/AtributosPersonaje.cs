@@ -19,10 +19,37 @@ namespace KarTac.Personajes
 		}
 
 		// Atributos
-		public readonly AtributoGenérico Ataque;
-		public readonly AtributoGenérico Defensa;
-		public readonly AtributoGenérico Velocidad;
-		public readonly AtributoGenérico Agilidad;
+		public AtributoGenérico Ataque
+		{
+			get
+			{
+				return Recs ["Ataque"] as AtributoGenérico;
+			}
+		}
+
+		public AtributoGenérico Defensa
+		{
+			get
+			{
+				return Recs ["Defensa"] as AtributoGenérico;
+			}
+		}
+
+		public AtributoGenérico Velocidad
+		{
+			get
+			{
+				return Recs ["Velocidad"] as AtributoGenérico;
+			}
+		}
+
+		public AtributoGenérico Agilidad
+		{
+			get
+			{
+				return Recs ["Agilidad"] as AtributoGenérico;
+			}
+		}
 
 		/// <summary>
 		/// Lista de recursos
@@ -33,16 +60,6 @@ namespace KarTac.Personajes
 		public AtributosPersonaje ()
 		{
 			Recs = new ListaRecursos ();
-
-			Ataque = new AtributoGenérico ("Ataque");
-			Defensa = new AtributoGenérico ("Defensa");
-			Velocidad = new AtributoGenérico ("Velocidad");
-			Agilidad = new AtributoGenérico ("Agilidad");
-
-			Recs.Add (Ataque);
-			Recs.Add (Defensa);
-			Recs.Add (Velocidad);
-			Recs.Add (Agilidad);
 		}
 
 		/// <summary>

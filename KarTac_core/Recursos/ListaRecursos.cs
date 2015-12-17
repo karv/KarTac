@@ -6,7 +6,7 @@ namespace KarTac.Recursos
 {
 	public class ListaRecursos : Dictionary<string, IRecurso>, IGuardable
 	{
-		public IRecurso this [string nombre]
+		public new IRecurso this [string nombre]
 		{
 			get
 			{
@@ -14,7 +14,7 @@ namespace KarTac.Recursos
 				if (!TryGetValue (nombre, out ret))
 				{
 					ret = new AtributoGenérico (nombre);
-					Add (ret);
+					// Add (ret);
 				}
 
 				return ret;

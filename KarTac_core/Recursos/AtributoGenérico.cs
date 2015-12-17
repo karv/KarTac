@@ -1,23 +1,41 @@
 ﻿using KarTac.Batalla;
 using System;
+using Microsoft.Xna.Framework;
 
 namespace KarTac.Recursos
 {
-	public class AtributoGenérico : RecursoAcotado
+	public class AtributoGenérico : IRecurso
 	{
 		public AtributoGenérico (string nombre)
 		{
 			_nombre = nombre;
 		}
 
-		public override void CommitExp (double exp)
+		float _valor;
+
+		public float Valor
 		{
-			Max += (float)exp;
+			get
+			{
+				return _valor;
+			}
+			set
+			{
+				_valor = value;
+				AlCambiarValor?.Invoke ();
+			}
+		}
+
+		public float Inicial;
+
+		public void CommitExp (double exp)
+		{
+			Valor += (float)exp;
 		}
 
 		string _nombre;
 
-		public override string Nombre
+		public string Nombre
 		{
 			get
 			{
@@ -25,8 +43,51 @@ namespace KarTac.Recursos
 			}
 		}
 
-		protected override void PedirExp (TimeSpan time, Campo campo)
+		public void PedirExp (TimeSpan time, Campo campo)
 		{
 		}
+
+		public event Action AlCambiarValor;
+
+		public void Tick (GameTime delta)
+		{
+		}
+
+		public void Reestablecer ()
+		{
+			Valor = Inicial;
+		}
+
+		public void Guardar (System.IO.BinaryWriter writer)
+		{
+			writer.Write (Nombre);
+			writer.Write (Inicial);
+			// No es necesario escribir valor, no queremos guardar el estado de una batalla.
+		}
+
+		public void Cargar (System.IO.BinaryReader reader)
+		{
+			Inicial = reader.ReadSingle ();
+		}
+
+		public Color? ColorMostrarGanado
+		{
+			get
+			{
+				return null;
+			}
+		}
+
+		public Color? ColorMostrarPerdido
+		{
+			get
+			{
+				return null;
+			}
+		}
+
+		public double PeticiónExpAcumulada { get; set; }
+
+
 	}
 }
