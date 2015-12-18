@@ -43,10 +43,10 @@ namespace KarTac
 				pj.Atributos.HP.Max = 100;
 				pj.Atributos.HP.Valor = 100;
 				pj.Atributos.HP.Regeneración = 60;
-				pj.Atributos.Ataque.Valor = 10;
-				pj.Atributos.Agilidad.Valor = 10;
-				pj.Atributos.Defensa.Valor = 10;
-				pj.Atributos.Velocidad.Valor = 50;
+				pj.Atributos.Ataque.Inicial = 10;
+				pj.Atributos.Agilidad.Inicial = 10;
+				pj.Atributos.Defensa.Inicial = 10;
+				pj.Atributos.Velocidad.Inicial = 50;
 
 				pj.Nombre = "Persona " + i;
 
