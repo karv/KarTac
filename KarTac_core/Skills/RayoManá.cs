@@ -60,7 +60,7 @@ namespace KarTac.Skills
 
 		public override bool PuedeAprender ()
 		{
-			return Usuario.Atributos.HP.Valor >= 70;
+			return Usuario.Atributos.HP.Max >= 105;
 		}
 
 		public override IShape GetÁrea ()
