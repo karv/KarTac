@@ -171,6 +171,7 @@ namespace KarTac.Batalla
 				foreach (var s in x.PersonajeBase.Skills)
 				{
 					x.PersonajeBase.Desbloqueables.UnionWith (s.DesbloquearSkills ());
+					x.PersonajeBase.Desbloqueables.ExceptWith (x.PersonajeBase.Skills); // No agregar cosas que ya sé.
 				}
 
 				// Agregar los skills que ya se deben aprender.
@@ -180,6 +181,7 @@ namespace KarTac.Batalla
 					{
 						x.PersonajeBase.Desbloqueables.Remove (sk);
 						x.PersonajeBase.Skills.Add (sk);
+						sk.AlAprender ();
 					}
 				}
 			}
