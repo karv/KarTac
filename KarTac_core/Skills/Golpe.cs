@@ -8,7 +8,13 @@ namespace KarTac.Skills
 {
 	public class Golpe : SkillTresPasosShaped
 	{
-		public const float Alcance = 40;
+		public override double Rango
+		{
+			get
+			{
+				return 40;
+			}
+		}
 
 		public Golpe (Personaje usuario)
 			: base (usuario)
@@ -61,7 +67,7 @@ namespace KarTac.Skills
 
 		public override IShape GetÁrea ()
 		{
-			return new Círculo (UnidadUsuario.Pos, Alcance);
+			return new Círculo (UnidadUsuario.Pos, (float)Rango);
 		}
 
 		protected override bool IgualdadEstricta

@@ -63,9 +63,17 @@ namespace KarTac.Skills
 			return Usuario.Atributos.HP.Max >= 105;
 		}
 
+		public override double Rango
+		{
+			get
+			{
+				return 350;
+			}
+		}
+
 		public override IShape GetÁrea ()
 		{
-			return new Círculo (UnidadUsuario.Pos, 350);
+			return new Círculo (UnidadUsuario.Pos, (float)Rango);
 		}
 
 		protected override TimeSpan CalcularTiempoUso ()

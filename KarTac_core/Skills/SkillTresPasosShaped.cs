@@ -4,7 +4,7 @@ using KarTac.Batalla.Shape;
 
 namespace KarTac.Skills
 {
-	public abstract class SkillTresPasosShaped: SkillTresPasos
+	public abstract class SkillTresPasosShaped: SkillTresPasos, IRangedSkill
 	{
 		protected SkillTresPasosShaped (Personaje usuario)
 			: base (usuario)
@@ -22,5 +22,7 @@ namespace KarTac.Skills
 		{
 			return GetÁrea ().Contiene (u.Pos);
 		}
+
+		public abstract double Rango { get; }
 	}
 }

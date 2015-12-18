@@ -10,7 +10,7 @@ namespace KarTac.Cliente.Controls.Screens
 {
 	public class InteracciónHumano : ScreenDial, IInteractor
 	{
-		const double _distCercaUnidadClickCuadrada = 400;
+		//public double DistCercaUnidadClick;
 
 		MenúTurno menú { get; }
 
@@ -131,8 +131,10 @@ namespace KarTac.Cliente.Controls.Screens
 				// Ver si una unidad está cerca
 				foreach (var x in CampoBatalla.Unidades)
 				{
+					var selSkill = menú.SkillSeleccionado;
+					double rang = (selSkill as IRangedSkill)?.Rango ?? 40;
 					var vectorDist = x.PosPrecisa - clickLoc;
-					if (vectorDist.LengthSquared () < _distCercaUnidadClickCuadrada && x != UnidadActual)
+					if (vectorDist.Length () < rang && x != UnidadActual)
 					{
 						var ord = new Perseguir (UnidadActual);
 						ord.UnidadDestino = x;

@@ -86,6 +86,7 @@
     <Compile Include="IO\IGuardable.cs" />
     <Compile Include="IO\IOComún.cs" />
     <Compile Include="Recursos\AtributoGenérico.cs" />
+    <Compile Include="Skills\IRangedSkill.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
