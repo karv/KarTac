@@ -141,7 +141,7 @@ namespace KarTac.Batalla
 			movDir.Normalize ();
 			movDir *= AtributosActuales.Recs ["Velocidad"].Valor * (float)time.TotalSeconds;
 			PosPrecisa += movDir;
-
+			AtributosActuales.Velocidad.PeticiónExpAcumulada += time.TotalSeconds * 1;
 		}
 
 		public void AcumularPetición (TimeSpan time)

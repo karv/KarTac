@@ -31,7 +31,6 @@ namespace KarTac.Batalla.Orden
 				return true;
 			}
 			Unidad.Mover (movDir, time.ElapsedGameTime);
-			Unidad.AtributosActuales.Velocidad.PeticiónExpAcumulada += time.ElapsedGameTime.TotalSeconds * 1;
 			return false;
 		}
 
