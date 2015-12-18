@@ -76,11 +76,6 @@ namespace KarTac.Personajes
 			}
 		}
 
-		public AtributosPersonaje Clonar ()
-		{
-			return MemberwiseClone () as AtributosPersonaje;
-		}
-
 		#region IGuardable
 
 		public void Guardar (System.IO.BinaryWriter writer)

@@ -57,13 +57,18 @@ namespace KarTac.Batalla
 
 		public IOrden OrdenActual { get; set; }
 
-		public AtributosPersonaje AtributosActuales { get; private set; }
+		public AtributosPersonaje AtributosActuales
+		{
+			get
+			{
+				return PersonajeBase.Atributos;
+			}
+		}
 
 		public Unidad (Personaje personaje, Campo campo)
 		{
 			PersonajeBase = personaje;
 			CampoBatalla = campo;
-			AtributosActuales = PersonajeBase.Atributos.Clonar ();
 			PosPrecisa = new Vector2 ();
 		}
 
