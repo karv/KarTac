@@ -68,7 +68,6 @@ namespace KarTac.Cliente
 			else
 				unClan = Clan.BuildStartingClan ();
 
-			unClan.Reestablecer ();
 			var scr = new OutsideScreen (this, unClan);
 			CurrentScreen = scr;
 			scr.LoadContent ();

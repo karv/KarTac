@@ -94,6 +94,7 @@ namespace KarTac.Cliente.Controls.Screens
 				campoBatalla.AñadirUnidad (unid);
 
 				unid.Interactor = new InteracciónHumano (unid, Game);
+
 			}
 
 			// Asignar a todas las unidades del clan enemigo al equipo amarillo
@@ -109,6 +110,7 @@ namespace KarTac.Cliente.Controls.Screens
 			// Asignar posiciones
 			foreach (var u in campoBatalla.Unidades)
 			{
+				u.PersonajeBase.Atributos.Inicializar ();
 				u.PosPrecisa = randomPointInRectangle (campoBatalla.Área, r);
 			}
 
