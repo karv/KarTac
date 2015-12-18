@@ -16,7 +16,7 @@ namespace KarTac.Cliente.Controls.Screens
 			MyClan = clan;
 
 			personajes = new Lista<Personaje> (this);
-			personajes.Stringificación = x => x.Nombre + " HP: " + x.Atributos.HP.Valor;
+			personajes.Stringificación = x => x.Nombre + " HP: " + x.Atributos.HP.Max;
 			personajes.Bounds = new Rectangle (10, 10, 400, 300);
 			botónIniciar = new Botón (this, new Rectangle (500, 30, 30, 30));
 			botónIniciar.Textura = @"Icons/sword";
