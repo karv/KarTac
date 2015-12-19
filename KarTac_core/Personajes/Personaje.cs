@@ -4,6 +4,7 @@ using KarTac.Skills;
 using KarTac.Batalla;
 using KarTac.IO;
 using System.IO;
+using KarTac.Equipos;
 
 namespace KarTac.Personajes
 {
@@ -40,6 +41,7 @@ namespace KarTac.Personajes
 			Atributos = new AtributosPersonaje ();
 			Atributos.Empuje = new Empuje (300, 100, 30);
 			Skills = new List<ISkill> ();
+			Equipamento = new List<IEquipamento> ();
 
 			// Agregar defaults
 			Skills.Add (new Golpe (this));
@@ -50,6 +52,8 @@ namespace KarTac.Personajes
 		public IList<ISkill> Skills { get; }
 
 		public HashSet<ISkill> Desbloqueables { get; }
+
+		public ICollection<IEquipamento> Equipamento { get; }
 
 		public event Action AlMorir
 		{

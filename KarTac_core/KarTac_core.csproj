@@ -92,6 +92,7 @@
     <Compile Include="Batalla\Orden\OrdenSerie.cs" />
     <Compile Include="Batalla\Orden\OrdenPedirTarget.cs" />
     <Compile Include="Batalla\Orden\OrdenAtacar.cs" />
+    <Compile Include="Equipos\IEquipamento.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
@@ -117,6 +118,7 @@
     <Folder Include="Batalla\Orden\" />
     <Folder Include="Personajes\" />
     <Folder Include="IO\" />
+    <Folder Include="Equipos\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OpenTK.dll.config" />
