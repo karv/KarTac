@@ -30,7 +30,7 @@ namespace KarTac.Recursos
 
 		public void CommitExp (double exp)
 		{
-			Valor += (float)exp;
+			Inicial += (float)exp;
 		}
 
 		string _nombre;
