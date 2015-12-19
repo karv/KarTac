@@ -6,6 +6,8 @@ namespace KarTac.Equipos
 {
 	public interface IEquipamento
 	{
+		string Nombre { get; }
+
 		/// <summary>
 		/// Personaje que porta este equipamento,
 		/// </summary>
@@ -37,6 +39,6 @@ namespace KarTac.Equipos
 		/// Ocurre al desequiparse.
 		/// Argumento es sy usuario anterior.
 		/// </summary>
-		event Action<Personaje> ElDesequipar;
+		event Action<Personaje> AlDesequipar;
 	}
 }

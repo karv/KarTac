@@ -93,6 +93,7 @@
     <Compile Include="Batalla\Orden\OrdenPedirTarget.cs" />
     <Compile Include="Batalla\Orden\OrdenAtacar.cs" />
     <Compile Include="Equipos\IEquipamento.cs" />
+    <Compile Include="Equipos\Equipamento.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
