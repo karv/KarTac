@@ -132,7 +132,7 @@ namespace KarTac.Cliente.Controls.Screens
 				foreach (var x in CampoBatalla.Unidades)
 				{
 					var selSkill = menú.SkillSeleccionado;
-					double rang = (selSkill as IRangedSkill)?.Rango ?? 40;
+					double rang = (selSkill as IRangedSkill)?.Rango * 0.9 ?? 40;
 					var vectorDist = x.PosPrecisa - clickLoc;
 					if (vectorDist.Length () < rang && x != UnidadActual)
 					{
