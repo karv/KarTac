@@ -14,7 +14,7 @@ namespace KarTac
 	{
 		public Clan ()
 		{
-			Inventario = new List<IItem> ();
+			Inventario = new InventarioClan ();
 		}
 
 		/// <summary>
@@ -70,7 +70,7 @@ namespace KarTac
 			}
 		}
 
-		public List<IItem> Inventario { get; }
+		public InventarioClan Inventario { get; }
 
 		#region Guardable
 
