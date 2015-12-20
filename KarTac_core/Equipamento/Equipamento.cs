@@ -1,19 +1,16 @@
 ﻿using System;
 using KarTac.Personajes;
+using System.Collections.Generic;
 
 namespace KarTac.Equipamento
 {
 	public abstract class Equipamento : IEquipamento
 	{
-		protected Equipamento ()
-		{
-		}
-
 		public event Action<Personaje> AlEquipar;
 
 		public event Action<Personaje> AlDesequipar;
 
-		public void EquiparEn (Personaje personaje)
+		public virtual void EquiparEn (Personaje personaje)
 		{
 			var anterior = Portador;
 			Desequipar ();
@@ -45,6 +42,28 @@ namespace KarTac.Equipamento
 			}
 		}
 
-		public abstract System.Collections.Generic.IEnumerable<string> Tags { get; }
+		/// <summary>
+		/// Devuelve los equipamentos de la misma unidad.
+		/// </summary>
+		/// <value>The equip set.</value>
+		public ICollection<IEquipamento> EquipSet
+		{
+			get
+			{
+				return Portador?.Equipamento;
+			}
+		}
+
+		public abstract IEnumerable<string> Tags { get; }
+
+		ISet<string> IEquipamento.Tags
+		{
+			get
+			{
+				return new HashSet<string> (Tags);
+			}
+		}
+
+		public abstract string IconContentString { get; }
 	}
 }

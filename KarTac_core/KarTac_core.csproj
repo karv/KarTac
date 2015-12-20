@@ -94,6 +94,7 @@
     <Compile Include="Batalla\Orden\OrdenAtacar.cs" />
     <Compile Include="Equipamento\IEquipamento.cs" />
     <Compile Include="Equipamento\Equipamento.cs" />
+    <Compile Include="Equipamento\EquipArma.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

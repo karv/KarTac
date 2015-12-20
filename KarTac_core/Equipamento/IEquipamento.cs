@@ -16,7 +16,9 @@ namespace KarTac.Equipamento
 		/// <summary>
 		/// Tags
 		/// </summary>
-		IEnumerable<string> Tags { get; }
+		ISet<string> Tags { get; }
+
+		string IconContentString { get; }
 
 		/// <summary>
 		/// Se equipa en un personaje.
