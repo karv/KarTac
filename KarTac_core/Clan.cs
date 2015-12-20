@@ -3,6 +3,7 @@ using KarTac.Personajes;
 using KarTac.IO;
 using KarTac.Recursos;
 using System.IO;
+using KarTac.Equipamento;
 
 namespace KarTac
 {
@@ -11,6 +12,11 @@ namespace KarTac
 	/// </summary>
 	public class Clan : IGuardable
 	{
+		public Clan ()
+		{
+			Inventario = new List<IItem> ();
+		}
+
 		/// <summary>
 		/// Personajes
 		/// </summary>
@@ -64,18 +70,34 @@ namespace KarTac
 			}
 		}
 
+		public List<IItem> Inventario { get; }
+
 		#region Guardable
 
 		public void Guardar (BinaryWriter writer)
 		{
 			writer.Write (Dinero);
-
+			IOComún.Guardar (Inventario, writer);
 			IOComún.Guardar (Personajes, writer);
 		}
 
 		public void Cargar (BinaryReader reader)
 		{
 			Dinero = reader.ReadInt32 ();
+			var count = reader.ReadInt32 ();
+			for (int i = 0; i < count; i++)
+			{
+				IItem item;
+				var tipo = reader.ReadString ();
+				switch (tipo)
+				{
+					default:
+						// TODO: cargar por clase
+						item = null;
+						break;
+				}
+				Inventario.Add (item);
+			}
 			Personajes = new List<Personaje> ();
 			IOComún.Cargar (Personajes, () => new Personaje (), reader);
 		}

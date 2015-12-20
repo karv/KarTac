@@ -26,7 +26,7 @@ namespace KarTac.Equipamento
 			AlDesequipar?.Invoke (anterior); //TODO: ¿Debe invocarse cuando no tenía dueño?
 		}
 
-		public abstract string Nombre { get; }
+		public abstract string Nombre { get; protected set; }
 
 		Personaje portador;
 
@@ -56,7 +56,7 @@ namespace KarTac.Equipamento
 
 		public abstract IEnumerable<string> Tags { get; }
 
-		ISet<string> IEquipamento.Tags
+		ISet<string> IItem.Tags
 		{
 			get
 			{
@@ -65,5 +65,16 @@ namespace KarTac.Equipamento
 		}
 
 		public abstract string IconContentString { get; }
+
+		public void Guardar (System.IO.BinaryWriter writer)
+		{
+			writer.Write (GetType ().Name);
+			writer.Write (Nombre);
+		}
+
+		public void Cargar (System.IO.BinaryReader reader)
+		{
+			Nombre = reader.ReadString ();
+		}
 	}
 }

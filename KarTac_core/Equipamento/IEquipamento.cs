@@ -1,22 +1,15 @@
-﻿using System.Collections.Generic;
-using System;
+﻿using System;
 using KarTac.Personajes;
 
 namespace KarTac.Equipamento
 {
-	public interface IEquipamento
+	public interface IEquipamento : IItem
 	{
-		string Nombre { get; }
 
 		/// <summary>
 		/// Personaje que porta este equipamento,
 		/// </summary>
 		Personaje Portador { get; set; }
-
-		/// <summary>
-		/// Tags
-		/// </summary>
-		ISet<string> Tags { get; }
 
 		string IconContentString { get; }
 
