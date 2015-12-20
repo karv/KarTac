@@ -61,22 +61,23 @@ namespace KarTac.Batalla
 
 		public void Tick (GameTime delta)
 		{
-			DuraciónBatalla += delta.ElapsedGameTime;
-			foreach (var x in UnidadesVivas)
+			var turnoUnidad = UnidadesVivas.FirstOrDefault (x => x.OrdenActual == null);
+			if (turnoUnidad == null)
 			{
-				var ord = x.OrdenActual;
-				if (ord != null)
-					ord.Update (delta);
-				else
+				DuraciónBatalla += delta.ElapsedGameTime;
+				foreach (var x in UnidadesVivas)
 				{
-					UnidadActual = x;
-					// Pedir orden al usuario o a la IA
-					AlRequerirOrdenAntes?.Invoke (x);
-					x.Interactor.Ejecutar ();
-					x.Interactor.AlTerminar += () => AlRequerirOrdenDespués?.Invoke (x);
+					x.OrdenActual.Update (delta);
 				}
 			}
-
+			else
+			{
+				UnidadActual = turnoUnidad;
+				// Pedir orden al usuario o a la IA
+				AlRequerirOrdenAntes?.Invoke (turnoUnidad);
+				turnoUnidad.Interactor.Ejecutar ();
+				turnoUnidad.Interactor.AlTerminar += () => AlRequerirOrdenDespués?.Invoke (turnoUnidad);
+			}
 
 			RecibirExp (delta.ElapsedGameTime);
 
