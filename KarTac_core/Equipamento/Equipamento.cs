@@ -1,7 +1,7 @@
 ﻿using System;
 using KarTac.Personajes;
 
-namespace KarTac.Equipos
+namespace KarTac.Equipamento
 {
 	public abstract class Equipamento : IEquipamento
 	{

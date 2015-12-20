@@ -4,7 +4,7 @@ using KarTac.Skills;
 using KarTac.Batalla;
 using KarTac.IO;
 using System.IO;
-using KarTac.Equipos;
+using KarTac.Equipamento;
 
 namespace KarTac.Personajes
 {

@@ -2,7 +2,7 @@
 using System;
 using KarTac.Personajes;
 
-namespace KarTac.Equipos
+namespace KarTac.Equipamento
 {
 	public interface IEquipamento
 	{
