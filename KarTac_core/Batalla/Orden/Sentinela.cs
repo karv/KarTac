@@ -18,7 +18,7 @@ namespace KarTac.Batalla.Orden
 			RangoAlerta = rangoAlerta;
 		}
 
-		public override bool Update (Microsoft.Xna.Framework.GameTime time)
+		public override bool Update (TimeSpan time)
 		{
 			var ret = base.Update (time);
 			if (ret)

@@ -44,11 +44,7 @@ namespace KarTac.Batalla
 		void ClearStatus ();
 	}
 
-	public interface IResponseSelector
-	{
-	}
-
-	public struct SelecciónRespuesta : IResponseSelector
+	public struct SelecciónRespuesta
 	{
 		public SelecciónRespuesta (IList<Unidad> unidades)
 		{

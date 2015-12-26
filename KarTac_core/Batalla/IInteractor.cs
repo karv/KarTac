@@ -7,6 +7,8 @@ namespace KarTac.Batalla
 	{
 		Unidad Unidad { get; }
 
+		ISelectorTarget Selector { get; }
+
 		void Ejecutar ();
 
 		event Action AlTerminar;

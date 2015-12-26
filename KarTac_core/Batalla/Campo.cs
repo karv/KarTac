@@ -21,8 +21,6 @@ namespace KarTac.Batalla
 		/// </summary>
 		public TimeSpan DuraciónBatalla { get; private set; }
 
-		public ISelectorTarget SelectorTarget { get; set; }
-
 		/// <summary>
 		/// Unidades en el campo
 		/// </summary>
@@ -67,7 +65,7 @@ namespace KarTac.Batalla
 				DuraciónBatalla += delta.ElapsedGameTime;
 				foreach (var x in UnidadesVivas)
 				{
-					x.OrdenActual.Update (delta);
+					x.OrdenActual.Update (delta.ElapsedGameTime);
 				}
 			}
 			else

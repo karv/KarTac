@@ -5,7 +5,7 @@ using KarTac.Cliente.Controls.Screens;
 
 namespace KarTac.Cliente.Controls
 {
-	public class VanishingString :SBC
+	public class VanishingString : SBC
 	{
 		public VanishingString (IScreen screen, string texto, TimeSpan duración)
 			: base (screen)

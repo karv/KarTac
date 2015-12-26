@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using System;
+﻿using System;
 
 namespace KarTac.Batalla.Orden
 {
@@ -15,7 +14,7 @@ namespace KarTac.Batalla.Orden
 		/// Realiza la orden a la unidad,
 		/// devuelve true si terminó la orden
 		/// </summary>
-		bool Update (GameTime time);
+		bool Update (TimeSpan time);
 
 		event Action AlTerminar;
 	}

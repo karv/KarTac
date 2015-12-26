@@ -8,7 +8,7 @@ using KarTac.Batalla.Exp;
 
 namespace KarTac.Batalla
 {
-	public class Unidad : IObjetivo
+	public class Unidad : IObjetivo, IAccionable, IMóvil
 	{
 		public Point Pos
 		{
@@ -176,6 +176,28 @@ namespace KarTac.Batalla
 		}
 
 		public double BolsaExp { get; private set; }
+
+		public void AvanzarTiempo (TimeSpan time)
+		{
+			// TODO
+			if (OrdenActual == null)
+				OrdenActual = null;
+			else
+				OrdenActual?.Update (time);
+		}
+
+		public void Mover (Vector2 dirección)
+		{
+			throw new NotImplementedException ();
+		}
+
+		Point IMóvil.Posición
+		{
+			get
+			{
+				return Pos;
+			}
+		}
 
 		public override string ToString ()
 		{

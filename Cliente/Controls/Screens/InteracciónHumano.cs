@@ -10,9 +10,9 @@ namespace KarTac.Cliente.Controls.Screens
 {
 	public class InteracciónHumano : ScreenDial, IInteractor
 	{
-		//public double DistCercaUnidadClick;
-
 		MenúTurno menú { get; }
+
+		public ISelectorTarget Selector { get; }
 
 		public Unidad UnidadActual
 		{
@@ -33,6 +33,7 @@ namespace KarTac.Cliente.Controls.Screens
 		public InteracciónHumano (Unidad unid, KarTacGame game)
 			: base (game)
 		{
+			Selector = new Selector (game, game.CurrentScreen);
 			menú = new MenúTurno (this);
 			menú.UnidadActual = unid;
 			menú.Include ();

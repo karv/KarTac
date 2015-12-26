@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 
 namespace KarTac.Batalla.Orden
 {
@@ -19,7 +20,7 @@ namespace KarTac.Batalla.Orden
 			UnidadDestino = destino;
 		}
 
-		public override bool Update (GameTime time)
+		public override bool Update (TimeSpan time)
 		{
 			var dist = UnidadDestino.PosPrecisa - Unidad.PosPrecisa;
 			if (dist.Length () < _distanciaCercano)

@@ -118,27 +118,27 @@ namespace KarTac.Skills
 			return u.EstáVivo && base.SeleccionaTarget (u);
 		}
 
-		public override void Terminal (SelecciónRespuesta obj)
+		protected override void EffectOnTarget (Unidad unid)
 		{
-			var selección = obj.Selección [0];
 			// usuario ataca a selección
 
 			const int daño = 10;
 
-			selección.AtributosActuales.HP.Valor -= daño;
+			unid.AtributosActuales.HP.Valor -= daño;
 			System.Diagnostics.Debug.WriteLine (string.Format (
 				"{0} causa {1} daño HP a {2}",
 				UnidadUsuario,
 				daño,
-				selección));
+				unid));
 
 			ManáRecurso.Valor -= UsaManá;
 
 			PeticiónExpAcumulada += 1.5;
 			LastReturn = new SkillReturnType (
 				-daño,
-				selección.AtributosActuales.HP,
-				selección.Pos);
+				unid.AtributosActuales.HP,
+				unid.Pos);
 		}
+
 	}
 }
