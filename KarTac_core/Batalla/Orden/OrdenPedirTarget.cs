@@ -11,17 +11,7 @@ namespace KarTac.Batalla.Orden
 
 		#region IOrden implementation
 
-		public event Action AlTerminar
-		{
-			add
-			{
-				throw new Exception ();
-			}
-			remove
-			{
-				throw new Exception ();
-			}
-		}
+		public event Action AlTerminar;
 
 		public bool Update (TimeSpan time)
 		{
@@ -32,11 +22,16 @@ namespace KarTac.Batalla.Orden
 			if (!selector.Validar ())
 				throw new Exception ();
 
-			selector.AlResponder += (obj) => selector.ClearStatus ();
+			selector.AlResponder += delegate
+			{
+				selector.ClearStatus ();
+				AlTerminar?.Invoke ();
+			};
 
 			selector.AlCancelar += delegate
 			{
 				Unidad.OrdenActual = null;
+				AlTerminar?.Invoke ();
 				//AlCancelar?.Invoke ();
 			};
 

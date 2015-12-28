@@ -25,6 +25,10 @@ namespace KarTac.Skills
 			ords [0] = ConstruirPreparación ();
 			ords [1] = ConstruirEjecución ();
 			ords [2] = ConstruirTerminal ();
+			ords [0].AlTerminar += delegate
+			{
+				
+			};
 			AlIniciarPreparación?.Invoke ();
 			UnidadUsuario.OrdenActual = new OrdenSerie (UnidadUsuario, ords);
 		}
@@ -32,6 +36,10 @@ namespace KarTac.Skills
 		protected virtual IOrden ConstruirPreparación ()
 		{
 			var ret = new Quieto (Usuario.Unidad, CalcularTiempoPreparación ());
+			ret.AlTerminar += delegate
+			{
+				AlIniciarEjecución?.Invoke ();
+			};
 			return ret;
 
 		}
@@ -58,7 +66,7 @@ namespace KarTac.Skills
 			};
 			ret.AlTerminar += delegate
 			{
-				AlIniciarEjecución?.Invoke ();
+				AlIniciarCooldown?.Invoke ();
 			};
 			return ret;
 		}

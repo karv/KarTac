@@ -73,14 +73,11 @@ namespace KarTac.Cliente.Controls.Screens
 						iniciarDel = delegate
 						{
 							forma.Include ();
-							skillForma.AlIniciarEjecución -= iniciarDel;
 						};
 
 						terminarDel = delegate
 						{
 							forma.Exclude ();
-							skillForma.AlIniciarCooldown -= terminarDel;
-							skillForma.AlCancelar -= terminarDel;
 						};
 
 						skillAlEjecutar = delegate(ISkillReturnType ret)
