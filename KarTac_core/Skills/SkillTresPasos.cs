@@ -49,10 +49,16 @@ namespace KarTac.Skills
 				{
 					EffectOnTarget (x);
 				}
+				AlResponder?.Invoke ();
 			};
 			inter.Selector.AlCancelar += delegate
 			{
 				UnidadUsuario.OrdenActual = null;
+				AlCancelar?.Invoke ();
+			};
+			ret.AlTerminar += delegate
+			{
+				AlIniciarEjecución?.Invoke ();
 			};
 			return ret;
 		}
