@@ -118,7 +118,7 @@ namespace KarTac.Skills
 			return u.EstáVivo && base.SeleccionaTarget (u);
 		}
 
-		protected override void EffectOnTarget (Unidad unid)
+		protected override ISkillReturnType EffectOnTarget (Unidad unid)
 		{
 			// usuario ataca a selección
 
@@ -138,7 +138,8 @@ namespace KarTac.Skills
 				-daño,
 				unid.AtributosActuales.HP,
 				unid.Pos);
-		}
 
+			return LastReturn;
+		}
 	}
 }

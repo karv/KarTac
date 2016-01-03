@@ -3,10 +3,11 @@ using KarTac.Batalla;
 using KarTac.Cliente.Controls;
 using System;
 using Microsoft.Xna.Framework;
+using KarTac.Skills;
 
 namespace KarTac.Cliente.Controls.Screens
 {
-	public class BattleScreen: Screen
+	public class BattleScreen : Screen
 	{
 		public List<UnidadSprite> Unidades { get; private set; }
 
@@ -70,9 +71,26 @@ namespace KarTac.Cliente.Controls.Screens
 				sprite.LoadContent ();
 				Unidades.Add (sprite);
 				sprite.Include ();
+				u.AlSerBlanco += x => HacerDamageInfoString (x);
 			}
 
 			base.Inicializar ();
+		}
+
+		public VanishingString HacerDamageInfoString (ISkillReturnType sklRet)
+		{
+			if (sklRet.Color.HasValue)
+			{
+				var texto = Math.Abs (sklRet.Delta).ToString ();
+
+				var mostrarDaño = new VanishingString (Game, texto, TimeSpan.FromSeconds (1));
+				mostrarDaño.LoadContent ();
+				mostrarDaño.ColorInicial = sklRet.Color.Value;
+				mostrarDaño.Centro = sklRet.Loc.ToVector2 ();
+				mostrarDaño.Include ();
+				return mostrarDaño;
+			}
+			return null;
 		}
 	}
 }

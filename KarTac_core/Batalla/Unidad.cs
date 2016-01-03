@@ -5,6 +5,7 @@ using System;
 using KarTac.Batalla.Orden;
 using KarTac.Personajes;
 using KarTac.Batalla.Exp;
+using KarTac.Skills;
 
 namespace KarTac.Batalla
 {
@@ -179,11 +180,7 @@ namespace KarTac.Batalla
 
 		public void AvanzarTiempo (TimeSpan time)
 		{
-			// TODO
-			if (OrdenActual == null)
-				OrdenActual = null;
-			else
-				OrdenActual?.Update (time);
+			OrdenActual?.Update (time);
 		}
 
 		public void Mover (Vector2 dirección)
@@ -203,5 +200,15 @@ namespace KarTac.Batalla
 		{
 			return PersonajeBase.Nombre;
 		}
+
+		public void OnSerBlanco (ISkillReturnType skill)
+		{
+			AlSerBlanco?.Invoke (skill);
+		}
+
+		/// <summary>
+		/// Se ejecuta cuando un skill tiene a esta unidad como objetivo.
+		/// </summary>
+		public event Action<ISkillReturnType> AlSerBlanco;
 	}
 }

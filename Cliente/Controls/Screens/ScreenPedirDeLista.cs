@@ -42,13 +42,6 @@ namespace KarTac.Cliente.Controls.Screens
 			SelecciónActual = new List<TObj> ();
 		}
 
-		public override void Ejecutar ()
-		{
-//			if (!(Juego.CurrentScreen is BattleScreen))
-//				throw new Exception ("No se puede abrir este control desde fuera de un BattleScreen");
-			base.Ejecutar ();
-		}
-
 		public TObj ObjetoEnCursor
 		{
 			get

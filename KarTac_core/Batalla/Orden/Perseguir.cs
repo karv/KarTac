@@ -31,6 +31,5 @@ namespace KarTac.Batalla.Orden
 			Destino = UnidadDestino.Pos;
 			return base.Update (time);
 		}
-
 	}
 }

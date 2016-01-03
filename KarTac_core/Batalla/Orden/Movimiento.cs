@@ -42,6 +42,6 @@ namespace KarTac.Batalla.Orden
 			AlTerminar?.Invoke ();
 		}
 
-		public event System.Action AlTerminar;
+		public event Action AlTerminar;
 	}
 }

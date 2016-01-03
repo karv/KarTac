@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using KarTac.Cliente.Controls;
 using KarTac.Cliente.Controls.Screens;
 using OpenTK.Input;
-using KarTac.Batalla;
-using System.Diagnostics;
 using System.IO;
 
 namespace KarTac.Cliente

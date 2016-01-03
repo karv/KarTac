@@ -93,7 +93,7 @@ namespace KarTac.Skills
 			return u.EstáVivo && base.SeleccionaTarget (u);
 		}
 
-		protected override void EffectOnTarget (Unidad unid)
+		protected override ISkillReturnType EffectOnTarget (Unidad unid)
 		{
 			var dañoBloqueado = Math.Max (
 				                    UnidadUsuario.AtributosActuales.Recs ["Ataque"].Valor - unid.AtributosActuales.Recs ["Defensa"].Valor,
@@ -115,6 +115,8 @@ namespace KarTac.Skills
 				-daño,
 				unid.AtributosActuales.HP,
 				unid.Pos);
+
+			return LastReturn;
 		}
 
 		public override bool Usable

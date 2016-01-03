@@ -66,9 +66,8 @@ namespace KarTac.Cliente.Controls.Screens
 						forma.LoadContent ();
 						forma.Color = Color.Yellow * 0.7f;
 
-						Action iniciarDel = null;
-						Action terminarDel = null;
-						Action<ISkillReturnType> skillAlEjecutar;
+						Action iniciarDel;
+						Action terminarDel;
 
 						iniciarDel = delegate
 						{
@@ -80,26 +79,9 @@ namespace KarTac.Cliente.Controls.Screens
 							forma.Exclude ();
 						};
 
-						skillAlEjecutar = delegate(ISkillReturnType ret)
-						{
-							if (ret.Color.HasValue)
-							{
-								var texto = Math.Abs (ret.Delta).ToString ();
-
-								var mostrarDaño = new VanishingString (Juego, texto, TimeSpan.FromSeconds (1));
-								mostrarDaño.LoadContent ();
-								mostrarDaño.ColorInicial = ret.Color.Value;
-								mostrarDaño.Centro = ret.Loc.ToVector2 ();
-								mostrarDaño.Include ();
-							}
-						};
-
-						//skillForma.AlIniciarEjecución += iniciarDel;
 						skillForma.AlResponder += terminarDel;
 						skillForma.AlMostrarLista += iniciarDel;
-						//skillForma.AlIniciarCooldown += terminarDel;
 						skillForma.AlCancelar += terminarDel;
-						skill.AlTerminarEjecución += skillAlEjecutar;
 					}
 
 					skill.Ejecutar ();

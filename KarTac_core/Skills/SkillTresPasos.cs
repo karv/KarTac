@@ -51,7 +51,8 @@ namespace KarTac.Skills
 			{
 				foreach (var x in obj.Selección)
 				{
-					EffectOnTarget (x);
+					var rt = EffectOnTarget (x);
+					x.OnSerBlanco (rt);
 				}
 				AlResponder?.Invoke ();
 			};
@@ -74,7 +75,7 @@ namespace KarTac.Skills
 		/// <summary>
 		/// El efecto en el blanco
 		/// </summary>
-		protected abstract void EffectOnTarget (Unidad unid);
+		protected abstract ISkillReturnType EffectOnTarget (Unidad unid);
 
 		protected virtual IOrden ConstruirTerminal ()
 		{
@@ -93,14 +94,6 @@ namespace KarTac.Skills
 		protected abstract bool IgualdadEstricta { get; }
 
 		protected abstract ISkillReturnType LastReturn { get; set; }
-
-		//public abstract void Terminal (SelecciónRespuesta obj);
-
-		protected override void OnTerminar (ISkillReturnType returnInfo)
-		{
-			AlIniciarCooldown?.Invoke ();
-			base.OnTerminar (returnInfo);
-		}
 
 		public event Action AlIniciarPreparación;
 		public event Action AlIniciarEjecución;

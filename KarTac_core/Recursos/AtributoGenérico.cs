@@ -92,6 +92,5 @@ namespace KarTac.Recursos
 		{
 			return string.Format ("{0}: {1}", Nombre, Valor);
 		}
-
 	}
 }
