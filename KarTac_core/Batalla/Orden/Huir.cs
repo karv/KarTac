@@ -34,7 +34,7 @@ namespace KarTac.Batalla.Orden
 					var sumando = (Unidad.PosPrecisa - u.PosPrecisa);
 					sumando /= sumando.LengthSquared ();
 					if (Unidad.Equipo.EsAliado (u))
-						sumando *= -1;
+						sumando *= -0.3f;
 					vectorMov += sumando;
 				}
 			}
