@@ -91,6 +91,7 @@
     <Compile Include="IAccionable.cs" />
     <Compile Include="Batalla\Orden\OrdenSerie.cs" />
     <Compile Include="Batalla\Orden\OrdenPedirTarget.cs" />
+    <Compile Include="Batalla\Orden\OrdenAtacar.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

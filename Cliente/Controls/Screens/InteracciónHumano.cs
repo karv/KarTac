@@ -89,6 +89,14 @@ namespace KarTac.Cliente.Controls.Screens
 				}
 			}
 
+			if (InputManager.FuePresionado (Key.Space)) // A la carga
+			{
+				var sk = menú.SkillSeleccionado as IRangedSkill;
+				var orden = new OrdenAtacar (UnidadActual, (sk?.Rango ?? 40) * 0.9f);
+				UnidadActual.OrdenActual = orden;
+				Salir ();
+			}
+
 			if (InputManager.FuePresionado (Key.Tab)) // Huir
 			{
 				var orden = new Huir (UnidadActual, TimeSpan.FromSeconds (2));
