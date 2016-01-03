@@ -38,6 +38,8 @@ namespace KarTac.Batalla.Orden
 			};
 
 			selector.Selecciona (Unidad);
+
+			AlMostrarLista?.Invoke ();
 			return TimeSpan.Zero;
 		}
 
