@@ -17,7 +17,7 @@ namespace KarTac.Batalla.Orden
 
 		public event Action AlTerminar;
 
-		public TimeSpan Update (TimeSpan time)
+		public UpdateReturnType Update (TimeSpan time)
 		{
 			Unidad másCercana = null;
 			double lastDistSq = double.PositiveInfinity;
@@ -35,7 +35,7 @@ namespace KarTac.Batalla.Orden
 			{
 				Unidad.OrdenActual = null;
 				AlTerminar?.Invoke ();
-				return time;
+				return new UpdateReturnType (time, TimeSpan.Zero);
 			}
 			else
 			{
@@ -43,7 +43,7 @@ namespace KarTac.Batalla.Orden
 					másCercana.PosPrecisa - Unidad.PosPrecisa,
 					time);
 
-				return TimeSpan.Zero;
+				return new UpdateReturnType (time);
 			}
 		}
 	}

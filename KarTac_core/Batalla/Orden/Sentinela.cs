@@ -18,7 +18,7 @@ namespace KarTac.Batalla.Orden
 			RangoAlerta = rangoAlerta;
 		}
 
-		public override TimeSpan Update (TimeSpan time)
+		public override UpdateReturnType Update (TimeSpan time)
 		{
 			var ret = base.Update (time);
 
@@ -27,7 +27,7 @@ namespace KarTac.Batalla.Orden
 				if (Unidad.Equipo.EsEnemigo (unid))
 				{
 					OnTerminar ();
-					return TimeSpan.Zero;
+					return new UpdateReturnType (time, ret.TiempoUsado);
 				}
 			}
 			return ret;

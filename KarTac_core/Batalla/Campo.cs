@@ -59,6 +59,7 @@ namespace KarTac.Batalla
 
 		public void Tick (TimeSpan delta)
 		{
+			TimeSpan realDelta;
 			var turnoUnidad = UnidadesVivas.FirstOrDefault (x => x.OrdenActual == null);
 			if (turnoUnidad != null)
 			{
@@ -67,28 +68,34 @@ namespace KarTac.Batalla
 				AlRequerirOrdenAntes?.Invoke (turnoUnidad);
 				turnoUnidad.Interactor.Ejecutar ();
 				turnoUnidad.Interactor.AlTerminar += () => AlRequerirOrdenDespués?.Invoke (turnoUnidad);
+				realDelta = TimeSpan.Zero;
+				//return;
+			}
+			else
+			{
+				realDelta = delta;
 			}
 
-			DuraciónBatalla += delta;
+			DuraciónBatalla += realDelta;
 			foreach (var x in UnidadesVivas)
 			{
-				x.OrdenActual?.Update (delta);
+				x.OrdenActual?.Update (realDelta);
 			}
 
-			RecibirExp (delta);
+			RecibirExp (realDelta);
 
 			foreach (var x in UnidadesVivas)
 			{
-				x.AcumularPetición (delta);
+				x.AcumularPetición (realDelta);
 				// Sus recursos
 				foreach (var y in x.AtributosActuales.Recs.Values)
 				{
-					y.Tick (delta);
+					y.Tick (realDelta);
 				}
 			}
 
 			// Empuje
-			Empujes (delta);
+			Empujes (realDelta);
 		}
 
 		public Unidad UnidadActual { get; private set; }

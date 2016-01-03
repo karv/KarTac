@@ -11,11 +11,13 @@ namespace KarTac.Batalla.Orden
 
 		public event Action AlMostrarLista;
 
+		public bool FueRespondido { get; private set; }
+
 		#region IOrden implementation
 
 		public event Action AlTerminar;
 
-		public TimeSpan Update (TimeSpan time)
+		public UpdateReturnType Update (TimeSpan time)
 		{
 			var selector = Unidad.Interactor.Selector;
 
@@ -28,19 +30,21 @@ namespace KarTac.Batalla.Orden
 			{
 				selector.ClearStatus ();
 				AlTerminar?.Invoke ();
+				FueRespondido = true;
 			};
 
 			selector.AlCancelar += delegate
 			{
 				Unidad.OrdenActual = null;
 				AlTerminar?.Invoke ();
+				FueRespondido = true;
 				//AlCancelar?.Invoke ();
 			};
 
 			selector.Selecciona (Unidad);
 
 			AlMostrarLista?.Invoke ();
-			return TimeSpan.Zero;
+			return new UpdateReturnType (time, TimeSpan.Zero);
 		}
 
 		public Unidad Unidad { get; }

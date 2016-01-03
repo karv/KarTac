@@ -20,13 +20,13 @@ namespace KarTac.Batalla.Orden
 			UnidadDestino = destino;
 		}
 
-		public override TimeSpan Update (TimeSpan time)
+		public override UpdateReturnType Update (TimeSpan time)
 		{
 			var dist = UnidadDestino.PosPrecisa - Unidad.PosPrecisa;
 			if (dist.Length () < _distanciaCercano)
 			{
 				Unidad.OrdenActual = null;
-				return TimeSpan.Zero;
+				return new UpdateReturnType (time, TimeSpan.Zero);
 			}
 			Destino = UnidadDestino.Pos;
 			return base.Update (time);

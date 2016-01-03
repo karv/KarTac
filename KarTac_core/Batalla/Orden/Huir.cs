@@ -24,7 +24,7 @@ namespace KarTac.Batalla.Orden
 
 		}
 
-		public TimeSpan Update (TimeSpan time)
+		public UpdateReturnType Update (TimeSpan time)
 		{
 			var vectorMov = new Vector2 ();
 			foreach (var u in Unidad.CampoBatalla.UnidadesVivas)
@@ -51,9 +51,9 @@ namespace KarTac.Batalla.Orden
 			{
 				Unidad.OrdenActual = null;
 				AlTerminar?.Invoke ();
-				return TimeSpan.Zero;
+				return new UpdateReturnType (time, TimeSpan.Zero);
 			}
-			return time;
+			return new UpdateReturnType (time);
 		}
 
 		public event Action AlTerminar;

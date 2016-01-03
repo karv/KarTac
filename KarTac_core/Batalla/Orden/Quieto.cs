@@ -19,15 +19,20 @@ namespace KarTac.Batalla.Orden
 			Unidad = unidad;
 		}
 
-		public virtual TimeSpan Update (TimeSpan time)
+		public virtual UpdateReturnType Update (TimeSpan time)
 		{
 			Duración -= time;
+			UpdateReturnType ret;
 			if (Duración.TotalMilliseconds < 0)
 			{
 				OnTerminar ();
-				return time + Duración;
+				ret = new UpdateReturnType (time, TimeSpan.Zero);
 			}
-			return time;
+			else
+			{
+				ret = new UpdateReturnType (time);
+			}
+			return ret;
 		}
 
 		public virtual void OnTerminar ()
