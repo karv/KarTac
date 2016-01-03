@@ -15,7 +15,7 @@ namespace KarTac.Batalla.Orden
 
 		public double Distancia { get; set; }
 
-		public event System.Action AlTerminar;
+		public event Action AlTerminar;
 
 		public TimeSpan Update (TimeSpan time)
 		{
