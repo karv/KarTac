@@ -22,13 +22,9 @@ namespace KarTac.Skills
 		public override void Ejecutar ()
 		{
 			var ords = new IOrden[3];
-			ords [0] = ConstruirPreparación ();
+			ords [0] = ConstruirPreparación (); //TODO MARK
 			ords [1] = ConstruirEjecución ();
 			ords [2] = ConstruirTerminal ();
-			ords [0].AlTerminar += delegate
-			{
-				
-			};
 			AlIniciarPreparación?.Invoke ();
 			UnidadUsuario.OrdenActual = new OrdenSerie (UnidadUsuario, ords);
 		}

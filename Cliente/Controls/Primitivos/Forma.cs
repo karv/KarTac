@@ -64,5 +64,10 @@ namespace KarTac.Cliente.Controls.Primitivos
 		{
 			return bounds;
 		}
+
+		public override void Include ()
+		{
+			base.Include ();
+		}
 	}
 }
