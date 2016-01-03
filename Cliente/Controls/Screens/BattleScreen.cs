@@ -81,7 +81,7 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 			if (sklRet.Color.HasValue)
 			{
-				var texto = Math.Abs (sklRet.Delta).ToString ();
+				var texto = string.Format ("{0:f2}", Math.Abs (sklRet.Delta));
 
 				var mostrarDaño = new VanishingString (Game, texto, TimeSpan.FromSeconds (1));
 				mostrarDaño.LoadContent ();
