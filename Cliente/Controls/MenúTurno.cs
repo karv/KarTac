@@ -20,7 +20,7 @@ namespace KarTac.Cliente.Controls
 			skillsList = new ContenedorBotón (screen);
 			skillsList.TipoOrden = ContenedorBotón.TipoOrdenEnum.ColumnaPrimero;
 			display = new RandomStringDisplay (screen);
-			descripDisplay = new RandomStringDisplay (screen, "Arial small");
+			descripDisplay = new RandomStringDisplay (screen, "UnitNameFont");
 		}
 
 		int índiceSkillSel;
