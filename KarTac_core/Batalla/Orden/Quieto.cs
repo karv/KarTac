@@ -23,7 +23,7 @@ namespace KarTac.Batalla.Orden
 		{
 			Duración -= time;
 			UpdateReturnType ret;
-			if (Duración.TotalMilliseconds < 0)
+			if (Duración.TotalMilliseconds <= 0)
 			{
 				OnTerminar ();
 				ret = new UpdateReturnType (time, TimeSpan.Zero);
