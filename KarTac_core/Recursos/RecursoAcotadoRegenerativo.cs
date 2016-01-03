@@ -9,9 +9,9 @@ namespace KarTac.Recursos
 		/// </summary>
 		protected abstract float Regen { get; }
 
-		public override void Tick (Microsoft.Xna.Framework.GameTime delta)
+		public override void Tick (TimeSpan delta)
 		{
-			DoRegen (delta.ElapsedGameTime);
+			DoRegen (delta);
 		}
 
 		void DoRegen (TimeSpan delta)

@@ -49,7 +49,7 @@ namespace KarTac.Recursos
 
 		public event Action AlCambiarValor;
 
-		public void Tick (GameTime delta)
+		public void Tick (TimeSpan delta)
 		{
 		}
 

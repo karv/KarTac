@@ -45,7 +45,7 @@ namespace KarTac.Recursos
 		/// <summary>
 		/// Ejecuta un tick de longitud dada
 		/// </summary>
-		void Tick (GameTime delta);
+		void Tick (TimeSpan delta);
 
 		/// <summary>
 		/// Se ejecuta junto con Update,

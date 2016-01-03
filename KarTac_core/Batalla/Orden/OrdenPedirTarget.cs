@@ -9,6 +9,8 @@ namespace KarTac.Batalla.Orden
 			Unidad = unidad;
 		}
 
+		public event Action AlMostrarLista;
+
 		#region IOrden implementation
 
 		public event Action AlTerminar;

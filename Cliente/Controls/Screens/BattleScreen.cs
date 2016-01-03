@@ -51,7 +51,7 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 			base.Update (gameTime);
 			// Ejecutar órdenes
-			CampoBatalla.Tick (gameTime);
+			CampoBatalla.Tick (gameTime.ElapsedGameTime);
 
 			if (CampoBatalla.EquipoGanador != null)
 			{

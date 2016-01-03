@@ -57,15 +57,15 @@ namespace KarTac.Batalla
 
 		public Rectangle Área { get; private set; }
 
-		public void Tick (GameTime delta)
+		public void Tick (TimeSpan delta)
 		{
 			var turnoUnidad = UnidadesVivas.FirstOrDefault (x => x.OrdenActual == null);
 			if (turnoUnidad == null)
 			{
-				DuraciónBatalla += delta.ElapsedGameTime;
+				DuraciónBatalla += delta;
 				foreach (var x in UnidadesVivas)
 				{
-					x.OrdenActual.Update (delta.ElapsedGameTime);
+					x.OrdenActual.Update (delta);
 				}
 			}
 			else
@@ -77,11 +77,11 @@ namespace KarTac.Batalla
 				turnoUnidad.Interactor.AlTerminar += () => AlRequerirOrdenDespués?.Invoke (turnoUnidad);
 			}
 
-			RecibirExp (delta.ElapsedGameTime);
+			RecibirExp (delta);
 
 			foreach (var x in UnidadesVivas)
 			{
-				x.AcumularPetición (delta.ElapsedGameTime);
+				x.AcumularPetición (delta);
 				// Sus recursos
 				foreach (var y in x.AtributosActuales.Recs.Values)
 				{
@@ -90,7 +90,7 @@ namespace KarTac.Batalla
 			}
 
 			// Empuje
-			Empujes (delta.ElapsedGameTime);
+			Empujes (delta);
 		}
 
 		public Unidad UnidadActual { get; private set; }
