@@ -19,15 +19,15 @@ namespace KarTac.Batalla.Orden
 			Unidad = unidad;
 		}
 
-		public virtual bool Update (TimeSpan time)
+		public virtual TimeSpan Update (TimeSpan time)
 		{
 			Duración -= time;
 			if (Duración.TotalMilliseconds < 0)
 			{
 				OnTerminar ();
-				return true;
+				return time + Duración;
 			}
-			return false;
+			return time;
 		}
 
 		public virtual void OnTerminar ()

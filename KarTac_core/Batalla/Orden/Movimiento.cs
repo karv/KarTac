@@ -22,17 +22,17 @@ namespace KarTac.Batalla.Orden
 			Unidad = unidad;
 		}
 
-		public virtual bool Update (TimeSpan time)
+		public virtual TimeSpan Update (TimeSpan time)
 		{
 			var movDir = (Destino - Unidad.Pos).ToVector2 ();
 			if (movDir.Length () < _distanciaCercano)
 			{
 				Unidad.PosPrecisa = Destino.ToVector2 ();
 				OnTerminar ();
-				return true;
+				return TimeSpan.Zero;
 			}
 			Unidad.Mover (movDir, time);
-			return false;
+			return time;
 		}
 
 		public virtual void OnTerminar ()

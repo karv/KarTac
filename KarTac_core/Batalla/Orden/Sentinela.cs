@@ -18,21 +18,19 @@ namespace KarTac.Batalla.Orden
 			RangoAlerta = rangoAlerta;
 		}
 
-		public override bool Update (TimeSpan time)
+		public override TimeSpan Update (TimeSpan time)
 		{
 			var ret = base.Update (time);
-			if (ret)
-				return true;
 
 			foreach (var unid in Unidad.CampoBatalla.Unidades)
 			{
 				if (Unidad.Equipo.EsEnemigo (unid))
 				{
 					OnTerminar ();
-					return true;
+					return TimeSpan.Zero;
 				}
 			}
-			return false;
+			return ret;
 		}
 	}
 }

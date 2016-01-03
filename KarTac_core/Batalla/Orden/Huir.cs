@@ -24,7 +24,7 @@ namespace KarTac.Batalla.Orden
 
 		}
 
-		public bool Update (TimeSpan time)
+		public TimeSpan Update (TimeSpan time)
 		{
 			var vectorMov = new Vector2 ();
 			foreach (var u in Unidad.CampoBatalla.UnidadesVivas)
@@ -51,9 +51,9 @@ namespace KarTac.Batalla.Orden
 			{
 				Unidad.OrdenActual = null;
 				AlTerminar?.Invoke ();
-				return true;
+				return TimeSpan.Zero;
 			}
-			return false;
+			return time;
 		}
 
 		public event Action AlTerminar;

@@ -94,8 +94,10 @@ namespace KarTac.Cliente.Controls.Screens
 							}
 						};
 
-						skillForma.AlIniciarEjecución += iniciarDel;
-						skillForma.AlIniciarCooldown += terminarDel;
+						//skillForma.AlIniciarEjecución += iniciarDel;
+						skillForma.AlResponder += terminarDel;
+						skillForma.AlMostrarLista += iniciarDel;
+						//skillForma.AlIniciarCooldown += terminarDel;
 						skillForma.AlCancelar += terminarDel;
 						skill.AlTerminarEjecución += skillAlEjecutar;
 					}

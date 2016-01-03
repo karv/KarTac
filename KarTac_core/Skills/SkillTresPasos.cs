@@ -22,7 +22,7 @@ namespace KarTac.Skills
 		public override void Ejecutar ()
 		{
 			var ords = new IOrden[3];
-			ords [0] = ConstruirPreparación (); //TODO MARK
+			ords [0] = ConstruirPreparación ();
 			ords [1] = ConstruirEjecución ();
 			ords [2] = ConstruirTerminal ();
 			AlIniciarPreparación?.Invoke ();
@@ -64,6 +64,10 @@ namespace KarTac.Skills
 			{
 				AlIniciarCooldown?.Invoke ();
 			};
+			ret.AlMostrarLista += delegate
+			{
+				AlMostrarLista?.Invoke ();
+			};
 			return ret;
 		}
 
@@ -103,5 +107,6 @@ namespace KarTac.Skills
 		public event Action AlIniciarCooldown;
 		public event Action AlResponder;
 		public event Action AlCancelar;
+		public event Action AlMostrarLista;
 	}
 }

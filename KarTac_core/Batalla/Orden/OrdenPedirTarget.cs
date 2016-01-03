@@ -15,7 +15,7 @@ namespace KarTac.Batalla.Orden
 
 		public event Action AlTerminar;
 
-		public bool Update (TimeSpan time)
+		public TimeSpan Update (TimeSpan time)
 		{
 			var selector = Unidad.Interactor.Selector;
 
@@ -38,7 +38,7 @@ namespace KarTac.Batalla.Orden
 			};
 
 			selector.Selecciona (Unidad);
-			return true;
+			return TimeSpan.Zero;
 		}
 
 		public Unidad Unidad { get; }

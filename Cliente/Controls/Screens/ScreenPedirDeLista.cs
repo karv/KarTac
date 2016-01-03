@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using OpenTK.Input;
-using System;
 
 namespace KarTac.Cliente.Controls.Screens
 {

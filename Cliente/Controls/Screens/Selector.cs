@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace KarTac.Cliente.Controls.Screens
 {
-	public class Selector: ScreenDial, ISelectorTarget
+	public class Selector : ScreenDial, ISelectorTarget
 	{
 		public Selector (KarTacGame game, IScreen screenBase)
 			: base (game, screenBase)

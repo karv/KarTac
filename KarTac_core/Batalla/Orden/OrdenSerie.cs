@@ -32,21 +32,23 @@ namespace KarTac.Batalla.Orden
 
 		public event Action AlTerminar;
 
-		public bool Update (TimeSpan time)
+		public TimeSpan Update (TimeSpan time)
 		{
-			if (Actual == null)
-				return true;
-			if (Actual.Update (time))
+			while (Actual != null && time > TimeSpan.Zero)
 			{
-				Serie.Dequeue ();
-				if (Serie.Count == 0)
+				var tiempo = Actual.Update (time);
+				time -= tiempo;
+				if (time > TimeSpan.Zero)
 				{
-					AlTerminar?.Invoke ();
-					Unidad.OrdenActual = null;
-					return true;
+					Serie.Dequeue ();
+					if (Serie.Count == 0)
+					{
+						AlTerminar?.Invoke ();
+						Unidad.OrdenActual = null;
+					}
 				}
 			}
-			return false;
+			return time;
 		}
 
 		public Unidad Unidad { get; }
