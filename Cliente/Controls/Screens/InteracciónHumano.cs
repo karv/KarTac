@@ -66,8 +66,8 @@ namespace KarTac.Cliente.Controls.Screens
 						forma.LoadContent ();
 						forma.Color = Color.Yellow * 0.7f;
 
-						Action iniciarDel;
-						Action terminarDel;
+						Action iniciarDel = null;
+						Action terminarDel = null;
 
 						iniciarDel = delegate
 						{
@@ -76,7 +76,10 @@ namespace KarTac.Cliente.Controls.Screens
 
 						terminarDel = delegate
 						{
-							forma.Exclude ();
+							forma?.Exclude ();
+							skillForma.AlResponder -= terminarDel;
+							skillForma.AlMostrarLista -= iniciarDel;
+							skillForma.AlCancelar -= terminarDel;
 						};
 
 						skillForma.AlResponder += terminarDel;
