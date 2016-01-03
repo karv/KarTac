@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.Xna.Framework;
 
 namespace KarTac.Batalla.Orden
 {
@@ -15,15 +14,20 @@ namespace KarTac.Batalla.Orden
 			Duración = time;
 		}
 
-		public virtual bool Update (GameTime time)
+		protected Quieto (Unidad unidad)
 		{
-			Duración -= time.ElapsedGameTime;
+			Unidad = unidad;
+		}
+
+		public virtual TimeSpan Update (TimeSpan time)
+		{
+			Duración -= time;
 			if (Duración.TotalMilliseconds < 0)
 			{
 				OnTerminar ();
-				return true;
+				return time + Duración;
 			}
-			return false;
+			return time;
 		}
 
 		public virtual void OnTerminar ()

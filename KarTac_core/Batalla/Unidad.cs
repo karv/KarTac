@@ -5,10 +5,11 @@ using System;
 using KarTac.Batalla.Orden;
 using KarTac.Personajes;
 using KarTac.Batalla.Exp;
+using KarTac.Skills;
 
 namespace KarTac.Batalla
 {
-	public class Unidad : IObjetivo
+	public class Unidad : IObjetivo, IAccionable, IMóvil
 	{
 		public Point Pos
 		{
@@ -177,9 +178,37 @@ namespace KarTac.Batalla
 
 		public double BolsaExp { get; private set; }
 
+		public void AvanzarTiempo (TimeSpan time)
+		{
+			OrdenActual?.Update (time);
+		}
+
+		public void Mover (Vector2 dirección)
+		{
+			throw new NotImplementedException ();
+		}
+
+		Point IMóvil.Posición
+		{
+			get
+			{
+				return Pos;
+			}
+		}
+
 		public override string ToString ()
 		{
 			return PersonajeBase.Nombre;
 		}
+
+		public void OnSerBlanco (ISkillReturnType skill)
+		{
+			AlSerBlanco?.Invoke (skill);
+		}
+
+		/// <summary>
+		/// Se ejecuta cuando un skill tiene a esta unidad como objetivo.
+		/// </summary>
+		public event Action<ISkillReturnType> AlSerBlanco;
 	}
 }

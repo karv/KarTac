@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using KarTac.Cliente.Controls;
 using KarTac.Cliente.Controls.Screens;
 using OpenTK.Input;
-using KarTac.Batalla;
-using System.Diagnostics;
 using System.IO;
 
 namespace KarTac.Cliente
@@ -104,18 +102,11 @@ namespace KarTac.Cliente
 		protected override void Update (GameTime gameTime)
 		{
 			#if DEBUG
-			if (CurrentScreen is IInteractor)
-			{
-				Debug.WriteLine ("!!!");
-				var ii = CurrentScreen as InteracciónHumano;
-				Debug.WriteLine (ii.UnidadActual.PosPrecisa);
-			}
 			if (InputManager.EstáPresionado (Key.Escape) && InputManager.EstáPresionado (Key.ControlLeft))
 			{
 				Exit ();
 			}
 			#endif
-
 
 			base.Update (gameTime);
 			CurrentScreen.Update (gameTime);
@@ -123,6 +114,7 @@ namespace KarTac.Cliente
 
 			InputManager.Update ();
 		}
+
 
 		/// <summary>
 		/// This is called when the game should draw itself.

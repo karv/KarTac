@@ -88,41 +88,35 @@ namespace KarTac.Skills
 
 		protected override ISkillReturnType LastReturn { get; set; }
 
-		public override void Terminal (SelecciónRespuesta obj)
-		{
-			estado_Seleccionado (obj);
-		}
-
 		protected override bool SeleccionaTarget (Unidad u)
 		{
 			return u.EstáVivo && base.SeleccionaTarget (u);
 		}
 
-		void estado_Seleccionado (SelecciónRespuesta resp)
+		protected override ISkillReturnType EffectOnTarget (Unidad unid)
 		{
-			var selección = resp.Selección [0];
-			// usuario ataca a selección
-
 			var dañoBloqueado = Math.Max (
-				                    UnidadUsuario.AtributosActuales.Recs ["Ataque"].Valor - selección.AtributosActuales.Recs ["Defensa"].Valor,
+				                    UnidadUsuario.AtributosActuales.Recs ["Ataque"].Valor - unid.AtributosActuales.Recs ["Defensa"].Valor,
 				                    0);
 			var daño = Math.Max (20 - dañoBloqueado, 1);
 
-			selección.AtributosActuales.HP.Valor -= daño;
+			unid.AtributosActuales.HP.Valor -= daño;
 			System.Diagnostics.Debug.WriteLine (string.Format (
 				"{0} causa {1} daño HP a {2}",
 				UnidadUsuario,
 				daño,
-				selección));
+				unid));
 
 			PeticiónExpAcumulada += 1;
 			UnidadUsuario.PersonajeBase.Atributos.Ataque.PeticiónExpAcumulada += 0.3;
-			selección.PersonajeBase.Atributos.Defensa.PeticiónExpAcumulada += 0.3;
+			unid.PersonajeBase.Atributos.Defensa.PeticiónExpAcumulada += 0.3;
 
 			LastReturn = new  SkillReturnType (
 				-daño,
-				selección.AtributosActuales.HP,
-				selección.Pos);
+				unid.AtributosActuales.HP,
+				unid.Pos);
+
+			return LastReturn;
 		}
 
 		public override bool Usable

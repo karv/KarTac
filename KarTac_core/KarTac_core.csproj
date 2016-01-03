@@ -87,6 +87,10 @@
     <Compile Include="IO\IOComún.cs" />
     <Compile Include="Recursos\AtributoGenérico.cs" />
     <Compile Include="Skills\IRangedSkill.cs" />
+    <Compile Include="IMóvil.cs" />
+    <Compile Include="IAccionable.cs" />
+    <Compile Include="Batalla\Orden\OrdenSerie.cs" />
+    <Compile Include="Batalla\Orden\OrdenPedirTarget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

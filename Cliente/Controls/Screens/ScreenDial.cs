@@ -72,7 +72,7 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 		}
 
-		public void Ejecutar ()
+		public virtual void Ejecutar ()
 		{
 			#if DEBUG
 			System.Diagnostics.Debug.WriteLine ("\n\nEntrando a " + this);

@@ -21,21 +21,66 @@ namespace KarTac.Skills
 
 		public override void Ejecutar ()
 		{
-			Preparación (CalcularTiempoPreparación ());
+			var ords = new IOrden[3];
+			ords [0] = ConstruirPreparación ();
+			ords [1] = ConstruirEjecución ();
+			ords [2] = ConstruirTerminal ();
+			AlIniciarPreparación?.Invoke ();
+			UnidadUsuario.OrdenActual = new OrdenSerie (UnidadUsuario, ords);
+		}
+
+		protected virtual IOrden ConstruirPreparación ()
+		{
+			var ret = new Quieto (Usuario.Unidad, CalcularTiempoPreparación ());
+			ret.AlTerminar += delegate
+			{
+				AlIniciarEjecución?.Invoke ();
+			};
+			return ret;
+
+		}
+
+		protected virtual IOrden ConstruirEjecución ()
+		{
+			var ret = new OrdenPedirTarget (UnidadUsuario);
+			var inter = UnidadUsuario.Interactor;
+			inter.Selector.MaxSelect = MaxSelect;
+			inter.Selector.IgualdadEstricta = IgualdadEstricta;
+			inter.Selector.PosiblesBlancos = new List<Unidad> (CampoBatalla.Unidades.Where (SeleccionaTarget).OrderBy (x => UnidadUsuario.Equipo.EsAliado (x)));
+			inter.Selector.AlResponder += delegate(SelecciónRespuesta obj)
+			{
+				foreach (var x in obj.Selección)
+				{
+					var rt = EffectOnTarget (x);
+					x.OnSerBlanco (rt);
+				}
+				AlResponder?.Invoke ();
+			};
+			inter.Selector.AlCancelar += delegate
+			{
+				UnidadUsuario.OrdenActual = null;
+				AlCancelar?.Invoke ();
+			};
+			ret.AlTerminar += delegate
+			{
+				AlIniciarCooldown?.Invoke ();
+			};
+			ret.AlMostrarLista += delegate
+			{
+				AlMostrarLista?.Invoke ();
+			};
+			return ret;
 		}
 
 		/// <summary>
-		/// Preparar el skill
-		/// Invocar base.Preparación al final
+		/// El efecto en el blanco
 		/// </summary>
-		public virtual void Preparación (TimeSpan tiempoPreparación)
+		protected abstract ISkillReturnType EffectOnTarget (Unidad unid);
+
+		protected virtual IOrden ConstruirTerminal ()
 		{
-			AlIniciarPreparación?.Invoke ();
-			Usuario.Unidad.OrdenActual = new Quieto (Usuario.Unidad, tiempoPreparación);
-			Usuario.Unidad.OrdenActual.AlTerminar += delegate
-			{
-				Ejecución ();
-			};
+			var ret = new Quieto (Usuario.Unidad, CalcularTiempoUso ());
+			return ret;
 		}
 
 		protected abstract TimeSpan CalcularTiempoUso ();
@@ -48,53 +93,13 @@ namespace KarTac.Skills
 
 		protected abstract bool IgualdadEstricta { get; }
 
-		public virtual void Ejecución ()
-		{
-			var selector = CampoBatalla.SelectorTarget;
-			AlIniciarEjecución?.Invoke ();
-
-			selector.MaxSelect = MaxSelect;
-			selector.PosiblesBlancos = new List<Unidad> (CampoBatalla.Unidades.Where (SeleccionaTarget).OrderBy (x => UnidadUsuario.Equipo.EsAliado (x)));
-			selector.IgualdadEstricta = IgualdadEstricta;
-
-			if (!selector.Validar ())
-				throw new Exception ();
-
-			selector.AlResponder += delegate (SelecciónRespuesta obj)
-			{
-				Terminal (obj);	
-				OnTerminar (LastReturn);
-				selector.ClearStatus (); // Limpia el cache temporal
-				AlResponder?.Invoke ();
-			};
-
-			selector.AlCancelar += delegate
-			{
-				AlCancelar?.Invoke ();
-			};
-
-			selector.Selecciona (UnidadUsuario);
-		}
-
 		protected abstract ISkillReturnType LastReturn { get; set; }
-
-		/// <summary>
-		/// Código heredado debe ir antes de base.Termilal
-		/// </summary>
-		public abstract void Terminal (SelecciónRespuesta obj);
-
-		protected override void OnTerminar (ISkillReturnType returnInfo)
-		{
-			AlIniciarCooldown?.Invoke ();
-			base.OnTerminar (returnInfo);
-			var ordQuieto = new Quieto (UnidadUsuario, CalcularTiempoUso ());
-			UnidadUsuario.OrdenActual = ordQuieto;
-		}
 
 		public event Action AlIniciarPreparación;
 		public event Action AlIniciarEjecución;
 		public event Action AlIniciarCooldown;
 		public event Action AlResponder;
 		public event Action AlCancelar;
+		public event Action AlMostrarLista;
 	}
 }

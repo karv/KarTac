@@ -10,9 +10,9 @@ namespace KarTac.Cliente.Controls.Screens
 {
 	public class InteracciónHumano : ScreenDial, IInteractor
 	{
-		//public double DistCercaUnidadClick;
-
 		MenúTurno menú { get; }
+
+		public ISelectorTarget Selector { get; }
 
 		public Unidad UnidadActual
 		{
@@ -33,6 +33,7 @@ namespace KarTac.Cliente.Controls.Screens
 		public InteracciónHumano (Unidad unid, KarTacGame game)
 			: base (game)
 		{
+			Selector = new Selector (game, game.CurrentScreen);
 			menú = new MenúTurno (this);
 			menú.UnidadActual = unid;
 			menú.Include ();
@@ -65,41 +66,22 @@ namespace KarTac.Cliente.Controls.Screens
 						forma.LoadContent ();
 						forma.Color = Color.Yellow * 0.7f;
 
-						Action iniciarDel = null;
-						Action terminarDel = null;
-						Action<ISkillReturnType> skillAlEjecutar;
+						Action iniciarDel;
+						Action terminarDel;
 
 						iniciarDel = delegate
 						{
 							forma.Include ();
-							skillForma.AlIniciarEjecución -= iniciarDel;
 						};
 
 						terminarDel = delegate
 						{
 							forma.Exclude ();
-							skillForma.AlIniciarCooldown -= terminarDel;
-							skillForma.AlCancelar -= terminarDel;
 						};
 
-						skillAlEjecutar = delegate(ISkillReturnType ret)
-						{
-							if (ret.Color.HasValue)
-							{
-								var texto = Math.Abs (ret.Delta).ToString ();
-
-								var mostrarDaño = new VanishingString (Juego, texto, TimeSpan.FromSeconds (1));
-								mostrarDaño.LoadContent ();
-								mostrarDaño.ColorInicial = ret.Color.Value;
-								mostrarDaño.Centro = ret.Loc.ToVector2 ();
-								mostrarDaño.Include ();
-							}
-						};
-
-						skillForma.AlIniciarEjecución += iniciarDel;
-						skillForma.AlIniciarCooldown += terminarDel;
+						skillForma.AlResponder += terminarDel;
+						skillForma.AlMostrarLista += iniciarDel;
 						skillForma.AlCancelar += terminarDel;
-						skill.AlTerminarEjecución += skillAlEjecutar;
 					}
 
 					skill.Ejecutar ();

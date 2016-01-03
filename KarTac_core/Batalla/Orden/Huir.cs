@@ -24,7 +24,7 @@ namespace KarTac.Batalla.Orden
 
 		}
 
-		public bool Update (GameTime time)
+		public TimeSpan Update (TimeSpan time)
 		{
 			var vectorMov = new Vector2 ();
 			foreach (var u in Unidad.CampoBatalla.UnidadesVivas)
@@ -45,15 +45,15 @@ namespace KarTac.Batalla.Orden
 			vectorMov += new Vector2 (0, 1 / (Unidad.PosPrecisa.Y - Tamaño.Top));
 			vectorMov += new Vector2 (0, 1 / (Unidad.PosPrecisa.Y - Tamaño.Bottom));
 
-			Unidad.Mover (vectorMov, time.ElapsedGameTime);
-			DuraciónRestante -= time.ElapsedGameTime;
+			Unidad.Mover (vectorMov, time);
+			DuraciónRestante -= time;
 			if (DuraciónRestante <= TimeSpan.Zero)
 			{
 				Unidad.OrdenActual = null;
 				AlTerminar?.Invoke ();
-				return true;
+				return TimeSpan.Zero;
 			}
-			return false;
+			return time;
 		}
 
 		public event Action AlTerminar;

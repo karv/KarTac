@@ -71,7 +71,6 @@ namespace KarTac.Cliente.Controls.Screens
 			var campoBatalla = new Campo (new Point (GetDisplayMode.Width, GetDisplayMode.Height));
 
 			var btScr = new BattleScreen (Game, campoBatalla);
-			campoBatalla.SelectorTarget = new Selector (Game, btScr);
 			Game.CurrentScreen = btScr;
 
 			campoBatalla.AlTerminar += delegate

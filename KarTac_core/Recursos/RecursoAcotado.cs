@@ -65,7 +65,7 @@ namespace KarTac.Recursos
 
 		public abstract void CommitExp (double exp);
 
-		public virtual void Tick (Microsoft.Xna.Framework.GameTime delta)
+		public virtual void Tick (TimeSpan delta)
 		{
 		}
 

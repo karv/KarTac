@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 
 namespace KarTac.Batalla.Orden
 {
@@ -21,17 +22,17 @@ namespace KarTac.Batalla.Orden
 			Unidad = unidad;
 		}
 
-		public virtual bool Update (GameTime time)
+		public virtual TimeSpan Update (TimeSpan time)
 		{
 			var movDir = (Destino - Unidad.Pos).ToVector2 ();
 			if (movDir.Length () < _distanciaCercano)
 			{
 				Unidad.PosPrecisa = Destino.ToVector2 ();
 				OnTerminar ();
-				return true;
+				return TimeSpan.Zero;
 			}
-			Unidad.Mover (movDir, time.ElapsedGameTime);
-			return false;
+			Unidad.Mover (movDir, time);
+			return time;
 		}
 
 		public virtual void OnTerminar ()
@@ -41,6 +42,6 @@ namespace KarTac.Batalla.Orden
 			AlTerminar?.Invoke ();
 		}
 
-		public event System.Action AlTerminar;
+		public event Action AlTerminar;
 	}
 }
