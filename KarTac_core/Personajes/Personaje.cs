@@ -9,6 +9,19 @@ namespace KarTac.Personajes
 {
 	public class Personaje : IGuardable
 	{
+		internal class SkillComparer : IEqualityComparer<ISkill>
+		{
+			public bool Equals (ISkill x, ISkill y)
+			{
+				return x.Nombre == y.Nombre;
+			}
+
+			public int GetHashCode (ISkill obj)
+			{
+				return obj.ToString ().GetHashCode ();
+			}
+		}
+
 		/// <summary>
 		/// Nombre del personaje
 		/// </summary>
@@ -43,7 +56,7 @@ namespace KarTac.Personajes
 
 			// Agregar defaults
 			Skills.Add (new Golpe (this));
-			Desbloqueables = new HashSet<ISkill> ();
+			Desbloqueables = new HashSet<ISkill> (new SkillComparer ());
 
 		}
 
