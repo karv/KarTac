@@ -27,6 +27,7 @@ namespace KarTac.Cliente.Controls.Screens
 
 			botónRenombrar = new Botón (this, new Rectangle (570, 30, 30, 30));
 			botónRenombrar.Color = Color.Yellow;
+			botónRenombrar.Textura = @"Icons/rename";
 
 			recargar ();
 			personajes.Include ();
