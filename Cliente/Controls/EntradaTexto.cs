@@ -76,7 +76,7 @@ namespace KarTac.Cliente.Controls
 
 			if (CatchKeys)
 			{
-				for (var i = Key.A; i < Key.Z; i++)
+				for (var i = Key.A; i <= Key.Z; i++)
 				{
 					if (InputManager.FuePresionado (i))
 					{
