@@ -36,9 +36,23 @@ namespace KarTac.Batalla.Orden
 			if (Unidad.Equipo.EsAliado (unidad))
 			{
 				// Alejarse un poco para rodear
-				return vect * 0.1f;
+				return vect * 1f;
 			}
-			return vect * -1;
+			return Vector2.Zero;
+		}
+
+		public override Vector2 VectorMovimiento ()
+		{
+			var másCercana = UnidadEnemigoMásCercana ();
+			var ret = base.VectorMovimiento ();
+			if (másCercana != null)
+			{
+				var vect = (Unidad.PosPrecisa - másCercana.PosPrecisa);
+				vect *= -3 / vect.LengthSquared ();
+				ret += vect;
+			}
+
+			return ret;
 		}
 
 		public override UpdateReturnType Update (TimeSpan time)
@@ -59,6 +73,7 @@ namespace KarTac.Batalla.Orden
 			else
 			{
 				EjecutarMov (time);
+
 				return new UpdateReturnType (time);
 			}
 		}

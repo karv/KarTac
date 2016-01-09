@@ -99,9 +99,9 @@ namespace KarTac.Cliente.Controls.Screens
 				IOrden orden;
 				// Si usa ctrl, rodea; si no, se carga
 				if (InputManager.EstáPresionado (Key.ShiftLeft))
-					orden = new Rodear (UnidadActual, rng);
-				else
 					orden = new OrdenAtacar (UnidadActual, rng);
+				else
+					orden = new Rodear (UnidadActual, rng);
 				
 				UnidadActual.OrdenActual = orden;
 				Salir ();
@@ -109,7 +109,7 @@ namespace KarTac.Cliente.Controls.Screens
 
 			if (InputManager.FuePresionado (Key.Tab)) // Huir
 			{
-				var orden = new Huir (UnidadActual, TimeSpan.FromSeconds (2));
+				var orden = new Huir (UnidadActual, TimeSpan.FromSeconds (15));
 				UnidadActual.OrdenActual = orden;
 				Salir ();
 			}

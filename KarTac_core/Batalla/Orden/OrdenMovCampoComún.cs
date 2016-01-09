@@ -25,6 +25,10 @@ namespace KarTac.Batalla.Orden
 
 		public abstract Vector2 VectorDeMuro ();
 
+		/// <summary>
+		/// Devuelve la suma de los vectores de unidad y de muro.
+		/// No se normaliza.
+		/// </summary>
 		public virtual Vector2 VectorMovimiento ()
 		{
 			var vectorMov = new Vector2 ();
