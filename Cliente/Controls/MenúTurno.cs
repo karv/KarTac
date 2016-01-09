@@ -33,11 +33,22 @@ namespace KarTac.Cliente.Controls
 			set
 			{
 				var nuevoInd = Math.Min (Math.Max (value, 0), skillsList.Count - 1);
-				skillsList.BotónEnÍndice (ÍndiceSkillSel).Color = skillNoSelColor;
+				skillsList.BotónEnÍndice (ÍndiceSkillSel).Color = getSkillColor (false,
+				                                                                 skillsList.BotónEnÍndice (ÍndiceSkillSel).Habilidato);
 				índiceSkillSel = nuevoInd;
-				skillsList.BotónEnÍndice (ÍndiceSkillSel).Color = skillSelColor;
+				skillsList.BotónEnÍndice (ÍndiceSkillSel).Color = getSkillColor (true,
+				                                                                 skillsList.BotónEnÍndice (ÍndiceSkillSel).Habilidato);
 				actualizaDesc ();
 			}
+		}
+
+		static Color getSkillColor (bool selected, bool habil)
+		{
+			var ret = selected ? skillSelColor : skillNoSelColor;
+			if (!habil)
+				ret = new Color (ret.R / 2 + 128, ret.G / 2 + 128, ret.B / 2 + 128, ret.A);
+			//ret += Color.Gray * 0.4f;
+			return ret;
 		}
 
 		public ISkill SkillSeleccionado
@@ -140,7 +151,6 @@ namespace KarTac.Cliente.Controls
 				}
 				bt.Textura = sk.IconTextureName;
 			}
-
 		}
 
 		public int TamañoY = 200;
