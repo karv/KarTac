@@ -3,7 +3,7 @@ using System;
 
 namespace KarTac.Batalla.Orden
 {
-	public class Perseguir: Movimiento
+	public class Perseguir: OrdenMovCampoComún
 	{
 		const float _distanciaCercano = 30;
 
@@ -20,16 +20,28 @@ namespace KarTac.Batalla.Orden
 			UnidadDestino = destino;
 		}
 
+		public override Vector2 VectorDeMuro ()
+		{
+			return Vector2.Zero;
+		}
+
+		public override Vector2 VectorDeUnidad (Unidad unidad)
+		{
+			if (unidad != Unidad)
+				return Vector2.Zero;
+			return UnidadDestino.PosPrecisa - Unidad.PosPrecisa;
+		}
+
 		public override UpdateReturnType Update (TimeSpan time)
 		{
 			var dist = UnidadDestino.PosPrecisa - Unidad.PosPrecisa;
 			if (dist.Length () < _distanciaCercano)
 			{
-				Unidad.OrdenActual = null;
+				OnTerminar ();
 				return new UpdateReturnType (time, TimeSpan.Zero);
 			}
-			Destino = UnidadDestino.Pos;
-			return base.Update (time);
+			EjecutarMov (time);
+			return new UpdateReturnType (time);
 		}
 	}
 }
