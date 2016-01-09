@@ -53,7 +53,46 @@ namespace KarTac.Batalla.Orden
 
 		public abstract UpdateReturnType Update (TimeSpan time);
 
+		/// <summary>
+		/// Devuelve la unidad viva más cercana que satisface un predicado
+		/// </summary>
+		protected Unidad UnidadMás (Predicate<Unidad> pred)
+		{
+			Unidad másCercana = null;
+			double lastDistSq = double.PositiveInfinity;
+			foreach (var x in Unidad.CampoBatalla.UnidadesVivas)
+			{
+				if (pred (x))
+				{
+					var distSq = (x.PosPrecisa - Unidad.PosPrecisa).LengthSquared ();
+					if (distSq < lastDistSq)
+					{
+						lastDistSq = distSq;
+						másCercana = x;
+					}
+				}
+			}
+			return másCercana;
+		}
+
+		/// <summary>
+		/// Devuelve el enemigo vivo más cecano
+		/// </summary>
+		/// <returns>The enemigo más cercana.</returns>
+		protected Unidad UnidadEnemigoMásCercana ()
+		{
+			return UnidadMás (Unidad.Equipo.EsEnemigo);
+		}
+
+		/// <summary>
+		/// Devuelve el aliado vivo más cercano.
+		/// </summary>
+		/// <returns>The aliado más cercana.</returns>
+		protected Unidad UnidadAliadoMásCercana ()
+		{
+			return UnidadMás (u => !Unidad.Equals (u) && Unidad.Equipo.EsAliado (u));
+		}
+
 		public event Action AlTerminar;
 	}
 }
-

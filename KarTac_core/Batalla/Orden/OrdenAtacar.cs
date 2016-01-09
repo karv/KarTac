@@ -12,26 +12,13 @@ namespace KarTac.Batalla.Orden
 			Distancia = distancia;
 		}
 
+		/// <summary>
+		/// Distancia al objetivo para terminar la ordem
+		/// </summary>
 		public double Distancia { get; set; }
 
 
-		Unidad UnidadMáxCercana ()
-		{
-			Unidad másCercana = null;
-			double lastDistSq = double.PositiveInfinity;
-			foreach (var x in Unidad.CampoBatalla.UnidadesVivas)
-			{
-				var distSq = (x.PosPrecisa - Unidad.PosPrecisa).LengthSquared ();
-				if (Unidad.Equipo.EsEnemigo (x) && distSq < lastDistSq)
-				{
-					lastDistSq = distSq;
-					másCercana = x;
-				}
-			}
-			return másCercana;
-		}
-
-		public override Microsoft.Xna.Framework.Vector2 VectorDeMuro ()
+		public override Vector2 VectorDeMuro ()
 		{
 			return Vector2.Zero;
 		}
@@ -43,7 +30,7 @@ namespace KarTac.Batalla.Orden
 
 		public override UpdateReturnType Update (TimeSpan time)
 		{
-			var másCercana = UnidadMáxCercana ();
+			var másCercana = UnidadEnemigoMásCercana ();
 			var lastDistSq = (másCercana.PosPrecisa - Unidad.PosPrecisa).LengthSquared ();
 			if (lastDistSq < Distancia * Distancia)
 			{
