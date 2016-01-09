@@ -14,11 +14,17 @@ namespace KarTac.Cliente.Controls
 			Restante = duración;
 			TiempoInicial = duración;
 			ColorFinal = Color.Transparent;
+			Velocidad = new Vector2 (0, -20);
 		}
 
 		BitmapFont Font;
 		string texto;
 		Vector2 topLeft;
+
+		/// <summary>
+		/// Velocidad de este control.
+		/// </summary>
+		public Vector2 Velocidad { get; set; }
 
 		public TimeSpan Restante { get; private set; }
 
@@ -130,6 +136,7 @@ namespace KarTac.Cliente.Controls
 		public override void Update (GameTime gameTime)
 		{
 			Restante -= gameTime.ElapsedGameTime;
+			TopLeft += Velocidad * (float)gameTime.ElapsedGameTime.TotalSeconds;
 			if (Restante < TimeSpan.Zero)
 				Exclude ();
 		}
