@@ -77,6 +77,7 @@ namespace KarTac.Cliente.Controls
 			descripDisplay.Mostrables.Add ("");
 
 			display.Inicializar ();
+			ÍndiceSkillSel = 0;
 			reposicionarControles ();
 
 			display.Color = Color.Green * 0.8f;
@@ -86,7 +87,6 @@ namespace KarTac.Cliente.Controls
 			}
 
 			base.Inicializar ();
-			actualizaDesc ();
 		}
 
 		void reposicionarControles ()
@@ -101,7 +101,6 @@ namespace KarTac.Cliente.Controls
 				skillsList.GetBounds ().Left - 300,
 				skillsList.GetBounds ().Top
 			);
-				
 		}
 
 		KarTac.Batalla.Unidad unidadActual;
