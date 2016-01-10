@@ -47,6 +47,7 @@ namespace KarTac.Recursos
 
 		#region IGuardable
 
+
 		public override void Guardar (System.IO.BinaryWriter writer)
 		{
 			base.Guardar (writer);
@@ -58,6 +59,7 @@ namespace KarTac.Recursos
 			base.Cargar (reader);
 			Regeneración = reader.ReadSingle ();
 		}
+
 
 		#endregion
 
