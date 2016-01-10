@@ -49,7 +49,7 @@ namespace KarTac.Skills
 		{
 			get
 			{
-				return "Rect";
+				return @"Icons/Skills/rayo maná";
 			}
 		}
 

@@ -3,6 +3,7 @@ using KarTac.Personajes;
 using KarTac.IO;
 using KarTac.Recursos;
 using System.IO;
+using KarTac.Skills;
 
 namespace KarTac
 {
@@ -49,6 +50,8 @@ namespace KarTac
 				pj.Atributos.Velocidad.Inicial = 50;
 
 				pj.Nombre = "Persona " + i;
+				pj.Atributos.Recs.Add (new Maná ());
+				pj.Skills.Add (new RayoManá (pj));
 
 				ret.Personajes.Add (pj);
 			}
