@@ -14,7 +14,7 @@ namespace KarTac.Batalla.Exp
 		/// <summary>
 		/// Devuelve número no negativo especificando cuánto peso de lo que recibe en exp
 		/// </summary>
-		double PeticiónExpAcumulada { get; }
+		double PeticiónExpAcumulada { get; set; }
 
 	}
 }

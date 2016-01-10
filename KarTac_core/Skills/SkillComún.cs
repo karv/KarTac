@@ -30,7 +30,7 @@ namespace KarTac.Skills
 
 		public double TotalExp { get; protected set; }
 
-		public double PeticiónExpAcumulada { get; protected set; }
+		public double PeticiónExpAcumulada { get; set; }
 
 		public abstract string Nombre { get; }
 

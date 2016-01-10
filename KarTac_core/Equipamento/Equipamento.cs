@@ -2,9 +2,29 @@
 using KarTac.Personajes;
 using System.Collections.Generic;
 using KarTac.Skills;
+using System.IO;
 
 namespace KarTac.Equipamento
 {
+	public static class Lector
+	{
+		public static IEquipamento Cargar (BinaryReader reader)
+		{
+			IEquipamento ret;
+			var recNombre = reader.ReadString ();
+			switch (recNombre)
+			{
+				case "Espada":
+					ret = new EqEspada ();
+					break;
+				default:
+					throw new Exception ("No existe equipment " + recNombre);
+			}
+			ret.Cargar (reader);
+			return ret;
+		}
+	}
+
 	public abstract class Equipamento : IEquipamento
 	{
 		public event Action<ConjuntoEquipamento> AlEquipar;
@@ -22,14 +42,14 @@ namespace KarTac.Equipamento
 			Desequipar ();
 			conjEquipment = conjEquip;
 			conjEquipment.Add (this);
-			AlEquipar?.Invoke (anterior);
+			OnEquipar (anterior);
 		}
 
 		public void Desequipar ()
 		{
 			var anterior = ConjEquipment;
 			conjEquipment?.Remove (this);
-			AlDesequipar?.Invoke (anterior); //TODO: ¿Debe invocarse cuando no tenía dueño?
+			OnDesequipar (anterior);
 		}
 
 		public Personaje Portador
@@ -48,7 +68,7 @@ namespace KarTac.Equipamento
 			}
 		}
 
-		public abstract string Nombre { get; protected set; }
+		public abstract string Nombre { get; }
 
 		ConjuntoEquipamento conjEquipment;
 
@@ -98,9 +118,8 @@ namespace KarTac.Equipamento
 			writer.Write (Nombre);
 		}
 
-		public void Cargar (System.IO.BinaryReader reader)
+		public virtual void Cargar (BinaryReader reader)
 		{
-			Nombre = reader.ReadString ();
 		}
 
 		IEnumerable<ISkill> IEquipamento.Skills
@@ -109,6 +128,22 @@ namespace KarTac.Equipamento
 			{
 				return Skills;
 			}
+		}
+
+		/// <summary>
+		/// Se ejecuta al equipar un arma
+		/// </summary>
+		protected virtual void OnEquipar (ConjuntoEquipamento anterior)
+		{
+			AlEquipar?.Invoke (anterior);
+		}
+
+		/// <summary>
+		/// Se ejecuta al desequipar un arma
+		/// </summary>
+		protected virtual void OnDesequipar (ConjuntoEquipamento anterior)
+		{
+			AlDesequipar?.Invoke (anterior);
 		}
 
 		protected virtual IEnumerable<ISkill> Skills
