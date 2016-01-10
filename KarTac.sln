@@ -3,12 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KarTac_core", "KarTac_core\KarTac_core.csproj", "{7C3501FD-3912-4B74-9A43-552962281096}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cliente", "Cliente\Cliente.csproj", "{48B06E79-A028-4708-96BC-9B0D34933873}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{48B06E79-A028-4708-96BC-9B0D34933873}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48B06E79-A028-4708-96BC-9B0D34933873}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48B06E79-A028-4708-96BC-9B0D34933873}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48B06E79-A028-4708-96BC-9B0D34933873}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7C3501FD-3912-4B74-9A43-552962281096}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7C3501FD-3912-4B74-9A43-552962281096}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C3501FD-3912-4B74-9A43-552962281096}.Release|Any CPU.ActiveCfg = Release|Any CPU

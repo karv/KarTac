@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{48B06E79-A028-4708-96BC-9B0D34933873}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>KarTac.Cliente</RootNamespace>
+    <AssemblyName>Cliente</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;FPS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="MonoGame.Extended">
+      <HintPath>..\packages\MonoGame.Extended.0.3.44-alpha\lib\MonoGame.Extended.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>..\packages\MonoGame.Framework.Linux.3.4.0.459\lib\net40\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK">
+      <HintPath>..\packages\MonoGame.Framework.Linux.3.4.0.459\lib\net40\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="Tao.Sdl">
+      <HintPath>..\packages\MonoGame.Framework.Linux.3.4.0.459\lib\net40\Tao.Sdl.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="KarTac.cs" />
+    <Compile Include="Controls\IControl.cs" />
+    <Compile Include="Controls\SBC.cs" />
+    <Compile Include="Controls\Botón.cs" />
+    <Compile Include="Controls\Ratón.cs" />
+    <Compile Include="Controls\ListaControl.cs" />
+    <Compile Include="Controls\IContenedor.cs" />
+    <Compile Include="Controls\ContenedorBotón.cs" />
+    <Compile Include="Controls\Screens\Screen.cs" />
+    <Compile Include="Controls\Screens\IScreen.cs" />
+    <Compile Include="Controls\Screens\BattleScreen.cs" />
+    <Compile Include="Controls\Screens\Selector.cs" />
+    <Compile Include="Controls\UnidadSprite.cs" />
+    <Compile Include="Controls\Lista.cs" />
+    <Compile Include="Controls\Primitivos\Formas.cs" />
+    <Compile Include="Controls\Screens\ScreenDial.cs" />
+    <Compile Include="Controls\Screens\ScreenPedirDeLista.cs" />
+    <Compile Include="Controls\Primitivos\Forma.cs" />
+    <Compile Include="Controls\Screens\InteracciónHumano.cs" />
+    <Compile Include="Controls\SBCC.cs" />
+    <Compile Include="Controls\RandomStringDisplay.cs" />
+    <Compile Include="Controls\Label.cs" />
+    <Compile Include="InputManager.cs" />
+    <Compile Include="Controls\MenúTurno.cs" />
+    <Compile Include="Controls\VanishingString.cs" />
+    <Compile Include="Controls\Screens\OutsideScreen.cs" />
+    <Compile Include="Controls\EntradaTexto.cs" />
+    <Compile Include="Controls\Screens\ScreenRenombrarDial.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="OpenTK.dll.config" />
+    <None Include="Tao.Sdl.dll.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <Policies>
+          <TextStylePolicy FileWidth="120" TabsToSpaces="False" inheritsSet="VisualStudio" inheritsScope="text/plain" scope="text/x-csharp" />
+          <CSharpFormattingPolicy SimplePropertyFormatting="ForceNewLine" AutoPropertyFormatting="ForceOneLine" AnonymousMethodBraceStyle="NextLine" PropertyBraceStyle="NextLine" PropertyGetBraceStyle="NextLine" PropertySetBraceStyle="NextLine" EventBraceStyle="NextLine" EventAddBraceStyle="NextLine" StatementBraceStyle="NextLine" ElseNewLinePlacement="NewLine" ElseIfNewLinePlacement="NewLine" CatchNewLinePlacement="NewLine" FinallyNewLinePlacement="NewLine" NewLineBeforeConstructorInitializerColon="NewLine" AfterDelegateDeclarationParameterComma="True" SpaceAroundUnsafeArrowOperator="True" BeforeSizeOfParentheses="True" BeforeTypeOfParentheses="True" MethodCallArgumentWrapping="WrapIfTooLong" AlignToFirstMethodCallArgument="True" MethodDeclarationParameterWrapping="WrapIfTooLong" IndexerDeclarationParameterWrapping="WrapIfTooLong" IndexerArgumentWrapping="WrapIfTooLong" AlignToFirstIndexerArgument="True" inheritsSet="Mono" inheritsScope="text/x-csharp" scope="text/x-csharp" />
+          <TextStylePolicy FileWidth="120" TabsToSpaces="False" inheritsSet="VisualStudio" inheritsScope="text/plain" scope="text/plain" />
+          <DotNetNamingPolicy DirectoryNamespaceAssociation="PrefixedHierarchical" ResourceNamePolicy="FileFormatDefault" />
+        </Policies>
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
+  <ItemGroup>
+    <Folder Include="Controls\" />
+    <Folder Include="Content\" />
+    <Folder Include="Content\bin\" />
+    <Folder Include="Controls\Screens\" />
+    <Folder Include="Controls\Primitivos\" />
+    <Folder Include="Content\Icons\" />
+    <Folder Include="Content\Icons\Skills\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content.mgcb" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KarTac_core\KarTac_core.csproj">
+      <Project>{7C3501FD-3912-4B74-9A43-552962281096}</Project>
+      <Name>KarTac_core</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

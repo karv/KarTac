@@ -29,12 +29,100 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="nunit.framework">
+      <Package>nunit</Package>
+    </Reference>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>..\packages\MonoGame.Framework.Linux.3.4.0.459\lib\net40\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK">
+      <HintPath>..\packages\MonoGame.Framework.Linux.3.4.0.459\lib\net40\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="Tao.Sdl">
+      <HintPath>..\packages\MonoGame.Framework.Linux.3.4.0.459\lib\net40\Tao.Sdl.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AtributosPersonaje.cs" />
-    <Compile Include="Personaje.cs" />
-    <Compile Include="Unidad.cs" />
+    <Compile Include="Batalla\Campo.cs" />
+    <Compile Include="Batalla\Unidad.cs" />
+    <Compile Include="Batalla\IEquipoSelector.cs" />
+    <Compile Include="Batalla\Equipo.cs" />
+    <Compile Include="Recursos\IRecurso.cs" />
+    <Compile Include="Recursos\HP.cs" />
+    <Compile Include="Test\Pruebas.cs" />
+    <Compile Include="Skills\ISkill.cs" />
+    <Compile Include="Skills\Golpe.cs" />
+    <Compile Include="Batalla\ISelectorTarget.cs" />
+    <Compile Include="Batalla\Shape\IShape.cs" />
+    <Compile Include="Batalla\Shape\Círculo.cs" />
+    <Compile Include="Batalla\Exp\TotalExp.cs" />
+    <Compile Include="Buff\IBuff.cs" />
+    <Compile Include="IObjetivo.cs" />
+    <Compile Include="Buff\BuffCronometrado.cs" />
+    <Compile Include="Batalla\Shape\Rectángulo.cs" />
+    <Compile Include="Batalla\Orden\IOrden.cs" />
+    <Compile Include="Batalla\Orden\Quieto.cs" />
+    <Compile Include="Batalla\Orden\Sentinela.cs" />
+    <Compile Include="Batalla\Orden\Movimiento.cs" />
+    <Compile Include="Recursos\ListaRecursos.cs" />
+    <Compile Include="Batalla\Exp\DictionaryTag.cs" />
+    <Compile Include="Batalla\Exp\IExp.cs" />
+    <Compile Include="Batalla\Exp\ITagging.cs" />
+    <Compile Include="Batalla\IInteractor.cs" />
+    <Compile Include="Personajes\AtributosPersonaje.cs" />
+    <Compile Include="Personajes\Personaje.cs" />
+    <Compile Include="Batalla\Orden\Perseguir.cs" />
+    <Compile Include="Personajes\Empuje.cs" />
+    <Compile Include="Batalla\Orden\Huir.cs" />
+    <Compile Include="Skills\SkillComún.cs" />
+    <Compile Include="Skills\SkillTresPasos.cs" />
+    <Compile Include="Skills\SkillTresPasosShaped.cs" />
+    <Compile Include="Skills\RayoManá.cs" />
+    <Compile Include="Recursos\Maná.cs" />
+    <Compile Include="Recursos\RecursoAcotado.cs" />
+    <Compile Include="Recursos\RecursoAcotadoRegenerativo.cs" />
+    <Compile Include="Clan.cs" />
+    <Compile Include="IO\IGuardable.cs" />
+    <Compile Include="IO\IOComún.cs" />
+    <Compile Include="Recursos\AtributoGenérico.cs" />
+    <Compile Include="Skills\IRangedSkill.cs" />
+    <Compile Include="IMóvil.cs" />
+    <Compile Include="IAccionable.cs" />
+    <Compile Include="Batalla\Orden\OrdenSerie.cs" />
+    <Compile Include="Batalla\Orden\OrdenPedirTarget.cs" />
+    <Compile Include="Batalla\Orden\OrdenAtacar.cs" />
+    <Compile Include="Batalla\Orden\OrdenMovCampoComún.cs" />
+    <Compile Include="Batalla\Orden\Rodear.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <Policies>
+          <DotNetNamingPolicy DirectoryNamespaceAssociation="PrefixedHierarchical" ResourceNamePolicy="FileName" />
+          <TextStylePolicy TabsToSpaces="False" inheritsSet="VisualStudio" inheritsScope="text/plain" scope="text/x-csharp" />
+          <CSharpFormattingPolicy IndentSwitchBody="True" AutoPropertyFormatting="ForceOneLine" AnonymousMethodBraceStyle="NextLine" PropertyBraceStyle="NextLine" PropertyGetBraceStyle="NextLine" PropertySetBraceStyle="NextLine" EventBraceStyle="NextLine" EventAddBraceStyle="NextLine" EventRemoveBraceStyle="NextLine" StatementBraceStyle="NextLine" ElseNewLinePlacement="NewLine" CatchNewLinePlacement="NewLine" FinallyNewLinePlacement="NewLine" WhileNewLinePlacement="NewLine" ArrayInitializerBraceStyle="NextLine" NewLineBeforeConstructorInitializerColon="NewLine" NewLineAfterConstructorInitializerColon="SameLine" AfterDelegateDeclarationParameterComma="True" BeforeSizeOfParentheses="True" BeforeTypeOfParentheses="True" SpacesBeforeArrayDeclarationBrackets="True" MethodCallArgumentWrapping="WrapIfTooLong" MethodDeclarationParameterWrapping="WrapIfTooLong" IndexerDeclarationParameterWrapping="WrapIfTooLong" IndexerArgumentWrapping="WrapIfTooLong" inheritsSet="Mono" inheritsScope="text/x-csharp" scope="text/x-csharp" />
+          <TextStylePolicy FileWidth="120" TabsToSpaces="False" inheritsSet="VisualStudio" inheritsScope="text/plain" scope="text/plain" />
+        </Policies>
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
+  <ItemGroup>
+    <Folder Include="Batalla\" />
+    <Folder Include="Recursos\" />
+    <Folder Include="Test\" />
+    <Folder Include="Skills\" />
+    <Folder Include="Batalla\Shape\" />
+    <Folder Include="Batalla\Exp\" />
+    <Folder Include="Buff\" />
+    <Folder Include="Batalla\Orden\" />
+    <Folder Include="Personajes\" />
+    <Folder Include="IO\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="OpenTK.dll.config" />
+    <None Include="Tao.Sdl.dll.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
 </Project>
