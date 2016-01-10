@@ -25,7 +25,17 @@ namespace KarTac
 		/// <summary>
 		/// Fondos del clan
 		/// </summary>
-		public int Dinero { get; set; }
+		public int Dinero
+		{
+			get
+			{
+				return Inventario.Dinero;
+			}
+			set
+			{
+				Inventario.Dinero = value;
+			}
+		}
 
 		/// <summary>
 		/// Devuelve un clan de estado inicial.
