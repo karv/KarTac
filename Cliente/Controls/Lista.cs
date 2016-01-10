@@ -9,7 +9,9 @@ using OpenTK.Input;
 
 namespace KarTac.Cliente.Controls
 {
-	
+	/// <summary>
+	/// Representa un control que muestra una lista
+	/// </summary>
 	public class Lista<TObj> : SBC, IList<TObj>
 	{
 		public struct Entrada
