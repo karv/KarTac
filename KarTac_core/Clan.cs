@@ -66,6 +66,9 @@ namespace KarTac
 
 				pj.Nombre = "Persona " + i;
 
+				var eq = new EqEspada ();
+				eq.EquiparEn (pj);
+
 				ret.Personajes.Add (pj);
 			}
 

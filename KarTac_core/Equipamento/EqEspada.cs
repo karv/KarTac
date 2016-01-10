@@ -1,7 +1,6 @@
 ﻿using KarTac.Skills;
 using KarTac.Recursos;
 using System;
-using System.Diagnostics;
 using KarTac.Personajes;
 
 namespace KarTac.Equipamento
@@ -18,11 +17,27 @@ namespace KarTac.Equipamento
 			{
 			}
 
+			public override string Descripción
+			{
+				get
+				{
+					return "Da un golpe con la espada";
+				}
+			}
+
 			public override string Nombre
 			{
 				get
 				{
 					return "Espadazo";
+				}
+			}
+
+			public override string IconTextureName
+			{
+				get
+				{
+					return "Rect"; // TODO: Buscarle icono
 				}
 			}
 

@@ -44,7 +44,7 @@ namespace KarTac.Personajes
 			Equipamento = new ConjuntoEquipamento (this);
 
 			// Agregar defaults
-			Skills.Add (new Golpe (this));
+			innerSkill.Add (new Golpe (this));
 			Desbloqueables = new HashSet<ISkill> ();
 
 		}
@@ -63,8 +63,8 @@ namespace KarTac.Personajes
 		{
 			get
 			{
-				var ret = new List<ISkill> (innerSkill);
-				foreach (var x in Equipamento.GetSkills())
+				var ret = new List<ISkill> (Equipamento.GetSkills ());
+				foreach (var x in innerSkill)
 				{
 					ret.Add (x);
 				}
