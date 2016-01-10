@@ -92,6 +92,8 @@ namespace KarTac.Cliente.Controls
 			reposicionarControles ();
 
 			display.Color = Color.Green * 0.8f;
+			display.NumEntradasMostrar = 4;
+			display.TiempoEntreCambios = TimeSpan.FromMilliseconds (1500);
 			foreach (var x in UnidadActual.AtributosActuales.Recs.Values)
 			{
 				display.Mostrables.Add (x.ToString ());

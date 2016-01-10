@@ -18,6 +18,8 @@ namespace KarTac.Cliente.Controls
 			Mostrables = new List<string> ();
 			TiempoEntreCambios = TimeSpan.FromSeconds (1);
 			fontString = fontName;
+			NumEntradasMostrar = 1;
+			EspacioEntreLineas = 4;
 		}
 
 		public List<string> Mostrables { get; }
@@ -30,6 +32,15 @@ namespace KarTac.Cliente.Controls
 
 		public Vector2 Pos;
 
+		/// <summary>
+		/// Número de entradas que se muestran;
+		/// </summary>
+		/// <value>The number entradas mostrar.</value>
+		public int NumEntradasMostrar { get; set; }
+
+		public int EspacioEntreLineas { get; set; }
+
+		[Obsolete ("Usar Actual")]
 		public string StringActual
 		{
 			get
@@ -38,14 +49,32 @@ namespace KarTac.Cliente.Controls
 			}
 		}
 
+		public string[] Actual
+		{
+			get
+			{
+				var ret = new string[NumEntradasMostrar];
+				for (int i = 0; i < NumEntradasMostrar; i++)
+				{
+					ret [i] = Mostrables [(índiceActualString + i) % Mostrables.Count];
+				}
+				return ret;
+			}
+		}
+
 		public override void Dibujar (GameTime gameTime)
 		{
 			var bat = Screen.Batch;
-			string infoStr = StringActual;
-			bat.DrawString (Font,
-			                infoStr,
-			                Pos,
-			                Color);
+			var ht = Font.LineHeight + EspacioEntreLineas;
+			var strs = Actual;
+			for (int i = 0; i < NumEntradasMostrar; i++)
+			{
+				bat.DrawString (Font,
+				                strs [i],
+				                Pos + new Vector2 (0, ht * i),
+				                Color);
+				
+			}
 		}
 
 		public override void LoadContent ()
@@ -62,12 +91,21 @@ namespace KarTac.Cliente.Controls
 
 		void StringSiguiente ()
 		{
-			índiceActualString = (índiceActualString + 1) % Mostrables.Count;
+			índiceActualString = (índiceActualString + NumEntradasMostrar) % Mostrables.Count;
 		}
 
 		public override Rectangle GetBounds ()
 		{
-			return Font.GetStringRectangle (StringActual, Pos);
+			int ht;
+			int wd = 0;
+			// Altura
+			ht = NumEntradasMostrar * Font.LineHeight + (NumEntradasMostrar - 1) * EspacioEntreLineas;
+			// Grosor
+			foreach (var str in Actual)
+			{
+				wd = Math.Max (wd, Font.GetStringRectangle (str, Vector2.Zero).Width);
+			}
+			return new Rectangle ((int)Pos.X, (int)Pos.Y, wd, ht);
 		}
 
 		protected override void OnChrono ()
