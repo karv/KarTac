@@ -59,4 +59,3 @@ namespace KarTac.Batalla.Orden
 		public Unidad Unidad { get; }
 	}
 }
-

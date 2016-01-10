@@ -2,7 +2,7 @@
 
 namespace KarTac.Batalla.Shape
 {
-	public class Círculo:IShape
+	public class Círculo : IShape
 	{
 		public Point Centro { get; set; }
 

@@ -10,4 +10,3 @@ namespace KarTac.Cliente.Controls
 		ICollection<IControl> Controles { get; }
 	}
 }
-

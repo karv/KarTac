@@ -37,15 +37,12 @@ namespace KarTac.Batalla.Orden
 				OnTerminar ();
 				return new UpdateReturnType (time, TimeSpan.Zero);
 			}
-			else
-			{
-				if (másCercana != null)
-					Unidad.Mover (
-						másCercana.PosPrecisa - Unidad.PosPrecisa,
-						time);
+			if (másCercana != null)
+				Unidad.Mover (
+					másCercana.PosPrecisa - Unidad.PosPrecisa,
+					time);
 
-				return new UpdateReturnType (time);
-			}
+			return new UpdateReturnType (time);
 		}
 	}
 }

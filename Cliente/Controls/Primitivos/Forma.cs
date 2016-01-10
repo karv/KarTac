@@ -60,11 +60,6 @@ namespace KarTac.Cliente.Controls.Primitivos
 			bat.Draw (texture, bounds, Color);
 		}
 
-		public override void Exclude ()
-		{
-			base.Exclude ();
-		}
-
 		public override Rectangle GetBounds ()
 		{
 			return bounds;

@@ -42,7 +42,7 @@ namespace KarTac.Cliente.Controls.Screens
 		/// <value>The content.</value>
 		ContentManager Content { get; }
 
-		#region HW
+		#region hardware
 
 		/// <summary>
 		/// Batch de dibujo

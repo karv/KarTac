@@ -70,12 +70,9 @@ namespace KarTac.Batalla.Orden
 				OnTerminar ();
 				return new UpdateReturnType (time, TimeSpan.Zero);
 			}
-			else
-			{
-				EjecutarMov (time);
 
-				return new UpdateReturnType (time);
-			}
+			EjecutarMov (time);
+			return new UpdateReturnType (time);
 		}
 	}
 }

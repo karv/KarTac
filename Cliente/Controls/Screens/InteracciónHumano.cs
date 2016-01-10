@@ -97,7 +97,7 @@ namespace KarTac.Cliente.Controls.Screens
 				var sk = menú.SkillSeleccionado as IRangedSkill;
 				var rng = (sk?.Rango ?? 40) * 0.9f;
 				IOrden orden;
-				// Si usa ctrl, rodea; si no, se carga
+				// Si usa ctrl, se carga; si no, rodea
 				if (InputManager.EstáPresionado (Key.ShiftLeft))
 					orden = new OrdenAtacar (UnidadActual, rng);
 				else

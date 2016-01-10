@@ -5,7 +5,7 @@ namespace KarTac.Batalla.Orden
 {
 	public abstract class OrdenMovCampoComún : IOrden
 	{
-		public OrdenMovCampoComún (Unidad unidad)
+		protected OrdenMovCampoComún (Unidad unidad)
 		{
 			Unidad = unidad;
 		}
