@@ -141,7 +141,7 @@ namespace KarTac.Batalla
 		{
 			movDir.Normalize ();
 			AtributosActuales.Condición.Valor -= (float)(time.TotalSeconds);
-			var rapidez = AtributosActuales.Velocidad.Valor * (AtributosActuales.Condición.CoefVelocidad == 0 ? 0.3 : 1);
+			var rapidez = AtributosActuales.Velocidad.Valor * AtributosActuales.Condición.CoefVelocidad;
 			movDir *= (float)(rapidez * time.TotalSeconds);
 			PosPrecisa += movDir;
 
