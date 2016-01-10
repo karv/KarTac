@@ -37,7 +37,7 @@ namespace KarTac.Equipamento
 			{
 				get
 				{
-					return "Rect"; // TODO: Buscarle icono
+					return @"Icons/Equip/broadsword";
 				}
 			}
 
@@ -98,7 +98,7 @@ namespace KarTac.Equipamento
 		{
 			get
 			{
-				return "Rect"; // TODO: buscarle icono
+				return @"Icons/Equip/broadsword";
 			}
 		}
 
