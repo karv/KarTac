@@ -1,5 +1,7 @@
 ﻿using System;
 using KarTac.Personajes;
+using System.Collections.Generic;
+using KarTac.Skills;
 
 namespace KarTac.Equipamento
 {
@@ -23,6 +25,12 @@ namespace KarTac.Equipamento
 		/// Se desequipa
 		/// </summary>
 		void Desequipar ();
+
+		/// <summary>
+		/// Skills que ofrece este objeto
+		/// </summary>
+		/// <value>The skills.</value>
+		IEnumerable<ISkill> Skills { get; }
 
 		/// <summary>
 		/// Ocurre al equiparse.

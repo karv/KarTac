@@ -1,6 +1,7 @@
 ﻿using System;
 using KarTac.Personajes;
 using System.Collections.Generic;
+using KarTac.Skills;
 
 namespace KarTac.Equipamento
 {
@@ -100,6 +101,22 @@ namespace KarTac.Equipamento
 		public void Cargar (System.IO.BinaryReader reader)
 		{
 			Nombre = reader.ReadString ();
+		}
+
+		IEnumerable<ISkill> IEquipamento.Skills
+		{
+			get
+			{
+				return Skills;
+			}
+		}
+
+		protected virtual IEnumerable<ISkill> Skills
+		{
+			get
+			{
+				yield break;
+			}
 		}
 	}
 }

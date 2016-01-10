@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using KarTac.Personajes;
+using KarTac.Skills;
 
 namespace KarTac.Equipamento
 {
@@ -14,5 +15,17 @@ namespace KarTac.Equipamento
 		}
 
 		public Personaje Portador { get; }
+
+		public ICollection<ISkill> GetSkills ()
+		{
+			var ret = new HashSet<ISkill> ();
+			foreach (var x in this)
+			{
+				foreach (var y in x.Skills)
+				{
+					ret.Add (y);
+				}
+			}
+		}
 	}
 }
