@@ -26,6 +26,7 @@ namespace KarTac.Equipamento
 					ret.Add (y);
 				}
 			}
+			return ret;
 		}
 	}
 }

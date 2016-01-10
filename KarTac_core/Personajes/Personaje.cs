@@ -40,7 +40,7 @@ namespace KarTac.Personajes
 		{
 			Atributos = new AtributosPersonaje ();
 			Atributos.Empuje = new Empuje (300, 100, 30);
-			Skills = new List<ISkill> ();
+			innerSkill = new List<ISkill> ();
 			Equipamento = new ConjuntoEquipamento (this);
 
 			// Agregar defaults
@@ -49,7 +49,28 @@ namespace KarTac.Personajes
 
 		}
 
-		public IList<ISkill> Skills { get; }
+		/// <summary>
+		/// Habilidades inhatas del personaje
+		/// </summary>
+		/// <value>The inner skill.</value>
+		IList<ISkill> innerSkill { get; }
+
+		/// <summary>
+		/// Todas las habilidades del personaje, incluyendo de armas
+		/// </summary>
+		/// <value>The skills.</value>
+		public IList<ISkill> Skills
+		{
+			get
+			{
+				var ret = new List<ISkill> (innerSkill);
+				foreach (var x in Equipamento.GetSkills())
+				{
+					ret.Add (x);
+				}
+				return ret;
+			}
+		}
 
 		public HashSet<ISkill> Desbloqueables { get; }
 
@@ -73,7 +94,7 @@ namespace KarTac.Personajes
 		{
 			writer.Write (Nombre);
 			Atributos.Guardar (writer);
-			IOComún.Guardar (Skills, writer);
+			IOComún.Guardar (innerSkill, writer);
 			IOComún.Guardar (Desbloqueables, writer);
 		}
 
@@ -87,7 +108,7 @@ namespace KarTac.Personajes
 			int count = reader.ReadInt32 ();
 			for (int i = 0; i < count; i++)
 			{
-				Skills.Add (SkillComún.Cargar (reader, this));
+				innerSkill.Add (SkillComún.Cargar (reader, this));
 			}
 			count = reader.ReadInt32 ();
 			for (int i = 0; i < count; i++)
