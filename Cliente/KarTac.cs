@@ -18,7 +18,9 @@ namespace KarTac.Cliente
 
 		readonly Ratón mouse;
 
+		#if FPS
 		readonly Label fpsLabel;
+		#endif
 
 		public ListaControl ControlesUniversales { get; }
 
