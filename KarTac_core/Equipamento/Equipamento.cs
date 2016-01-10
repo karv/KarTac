@@ -6,39 +6,63 @@ namespace KarTac.Equipamento
 {
 	public abstract class Equipamento : IEquipamento
 	{
-		public event Action<Personaje> AlEquipar;
+		public event Action<ConjuntoEquipamento> AlEquipar;
 
-		public event Action<Personaje> AlDesequipar;
+		public event Action<ConjuntoEquipamento> AlDesequipar;
 
 		public virtual void EquiparEn (Personaje personaje)
 		{
-			var anterior = Portador;
+			EquiparEn (personaje.Equipamento);
+		}
+
+		public virtual void EquiparEn (ConjuntoEquipamento conjEquip)
+		{
+			var anterior = ConjEquipment;
 			Desequipar ();
-			portador = personaje;
-			portador.Equipamento.Add (this);
-			AlEquipar.Invoke (anterior);
+			conjEquipment = conjEquip;
+			conjEquipment.Add (this);
+			AlEquipar?.Invoke (anterior);
 		}
 
 		public void Desequipar ()
 		{
-			var anterior = Portador;
-			portador?.Equipamento.Remove (this);
+			var anterior = ConjEquipment;
+			conjEquipment?.Remove (this);
 			AlDesequipar?.Invoke (anterior); //TODO: ¿Debe invocarse cuando no tenía dueño?
 		}
-
-		public abstract string Nombre { get; protected set; }
-
-		Personaje portador;
 
 		public Personaje Portador
 		{
 			get
 			{
-				return portador;
+				return ConjEquipment.Portador;
+			}
+		}
+
+		ConjuntoEquipamento IEquipamento.Conjunto
+		{
+			get
+			{
+				return ConjEquipment;
+			}
+		}
+
+		public abstract string Nombre { get; protected set; }
+
+		ConjuntoEquipamento conjEquipment;
+
+		public ConjuntoEquipamento ConjEquipment
+		{
+			get
+			{
+				return conjEquipment;
 			}
 			set
 			{
-				EquiparEn (value);
+				if (value == null)
+					Desequipar ();
+				else
+					EquiparEn (value);
 			}
 		}
 
@@ -46,11 +70,12 @@ namespace KarTac.Equipamento
 		/// Devuelve los equipamentos de la misma unidad.
 		/// </summary>
 		/// <value>The equip set.</value>
+		[Obsolete ("Es mejor usar ConjEquipment")]
 		public ICollection<IEquipamento> EquipSet
 		{
 			get
 			{
-				return Portador?.Equipamento;
+				return ConjEquipment;
 			}
 		}
 

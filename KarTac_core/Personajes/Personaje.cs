@@ -41,7 +41,7 @@ namespace KarTac.Personajes
 			Atributos = new AtributosPersonaje ();
 			Atributos.Empuje = new Empuje (300, 100, 30);
 			Skills = new List<ISkill> ();
-			Equipamento = new List<IEquipamento> ();
+			Equipamento = new ConjuntoEquipamento (this);
 
 			// Agregar defaults
 			Skills.Add (new Golpe (this));
@@ -53,7 +53,7 @@ namespace KarTac.Personajes
 
 		public HashSet<ISkill> Desbloqueables { get; }
 
-		public ICollection<IEquipamento> Equipamento { get; }
+		public ConjuntoEquipamento Equipamento { get; }
 
 		public event Action AlMorir
 		{

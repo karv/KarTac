@@ -9,7 +9,7 @@ namespace KarTac.Equipamento
 		/// <summary>
 		/// Personaje que porta este equipamento,
 		/// </summary>
-		Personaje Portador { get; set; }
+		ConjuntoEquipamento Conjunto { get; }
 
 		string IconContentString { get; }
 
@@ -17,7 +17,7 @@ namespace KarTac.Equipamento
 		/// Se equipa en un personaje.
 		/// Se desequipa de su personaje anterior
 		/// </summary>
-		void EquiparEn (Personaje personaje);
+		void EquiparEn (ConjuntoEquipamento equips);
 
 		/// <summary>
 		/// Se desequipa
@@ -29,11 +29,11 @@ namespace KarTac.Equipamento
 		/// Primer argumento es el usuario anterior.
 		/// </summary>
 		/// 
-		event Action<Personaje> AlEquipar;
+		event Action<ConjuntoEquipamento> AlEquipar;
 		/// <summary>
 		/// Ocurre al desequiparse.
 		/// Argumento es sy usuario anterior.
 		/// </summary>
-		event Action<Personaje> AlDesequipar;
+		event Action<ConjuntoEquipamento> AlDesequipar;
 	}
 }

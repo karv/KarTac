@@ -14,7 +14,7 @@ namespace KarTac.Equipamento
 
 		public override void EquiparEn (KarTac.Personajes.Personaje personaje)
 		{
-			foreach (var x in new List<IEquipamento> (EquipSet))
+			foreach (var x in new List<IEquipamento> (ConjEquipment))
 			{
 				if (x.Tags.Contains ("arma"))
 					x.Desequipar ();
