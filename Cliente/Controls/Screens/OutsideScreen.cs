@@ -54,6 +54,12 @@ namespace KarTac.Cliente.Controls.Screens
 		void guardarClan ()
 		{
 			MyClan.Guardar (KarTacGame.FileName);
+			var msgGuardar = new VanishingString (this, "Guardado", TimeSpan.FromSeconds (2));
+			msgGuardar.LoadContent ();
+			msgGuardar.Inicializar ();
+			msgGuardar.Centro = Ratón.Pos.ToVector2 ();
+			msgGuardar.ColorInicial = Color.Red;
+			msgGuardar.Include ();
 		}
 
 		public bool Autoguardado { get; set; }

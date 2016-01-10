@@ -10,14 +10,14 @@ namespace KarTac.Cliente.Controls
 		public VanishingString (IScreen screen, string texto, TimeSpan duración)
 			: base (screen)
 		{
-			this.texto = texto;
+			_texto = texto;
 			Restante = duración;
 			TiempoInicial = duración;
 			ColorFinal = Color.Transparent;
 		}
 
 		BitmapFont Font;
-		string texto;
+		string _texto;
 		Vector2 topLeft;
 
 		public TimeSpan Restante { get; private set; }
@@ -28,11 +28,11 @@ namespace KarTac.Cliente.Controls
 		{
 			get
 			{
-				return texto;
+				return _texto;
 			}
 			set
 			{
-				texto = value;
+				_texto = value;
 				calcularBounds ();
 			}
 		}
@@ -132,6 +132,11 @@ namespace KarTac.Cliente.Controls
 			Restante -= gameTime.ElapsedGameTime;
 			if (Restante < TimeSpan.Zero)
 				Exclude ();
+		}
+
+		public override void Inicializar ()
+		{
+			calcularBounds ();
 		}
 	}
 }
