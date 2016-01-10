@@ -103,7 +103,10 @@
     <Folder Include="Content\Icons\Skills\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\**\*.*">
+    <Content Include="Content\**\*.fnt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\**\*.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content.mgcb" />

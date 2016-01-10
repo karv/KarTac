@@ -33,11 +33,11 @@ namespace KarTac.Cliente.Controls
 			set
 			{
 				var nuevoInd = Math.Min (Math.Max (value, 0), skillsList.Count - 1);
-				skillsList.BotónEnÍndice (ÍndiceSkillSel).Color = getSkillColor (false,
-				                                                                 skillsList.BotónEnÍndice (ÍndiceSkillSel).Habilidato);
+				skillsList.BotónEnÍndice (ÍndiceSkillSel).Color = 
+					getSkillColor (false, skillsList.BotónEnÍndice (ÍndiceSkillSel).Habilidato);
 				índiceSkillSel = nuevoInd;
-				skillsList.BotónEnÍndice (ÍndiceSkillSel).Color = getSkillColor (true,
-				                                                                 skillsList.BotónEnÍndice (ÍndiceSkillSel).Habilidato);
+				skillsList.BotónEnÍndice (ÍndiceSkillSel).Color = 
+					getSkillColor (true, skillsList.BotónEnÍndice (ÍndiceSkillSel).Habilidato);
 				actualizaDesc ();
 			}
 		}
