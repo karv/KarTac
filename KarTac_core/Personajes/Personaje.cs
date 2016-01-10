@@ -58,6 +58,7 @@ namespace KarTac.Personajes
 
 			// Agregar defaults
 			innerSkill.Add (new Golpe (this));
+			innerSkill.Add (new LanzaRoca (this));
 			Desbloqueables = new HashSet<ISkill> ();
 
 		}

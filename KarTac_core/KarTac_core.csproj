@@ -102,6 +102,7 @@
     <Compile Include="Equipamento\ConjuntoEquipamento.cs" />
     <Compile Include="Equipamento\EqEspada.cs" />
     <Compile Include="Recursos\Condición.cs" />
+    <Compile Include="Skills\LanzaRoca.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
