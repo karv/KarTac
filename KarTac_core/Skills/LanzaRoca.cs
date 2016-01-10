@@ -31,7 +31,7 @@ namespace KarTac.Skills
 
 		protected override TimeSpan CalcularTiempoUso ()
 		{
-			return TimeSpan.FromSeconds (6.0f / UnidadUsuario.AtributosActuales.Agilidad.Valor);
+			return TimeSpan.FromSeconds (24.0f / UnidadUsuario.AtributosActuales.Agilidad.Valor);
 		}
 
 		protected override ISkillReturnType EffectOnTarget (KarTac.Batalla.Unidad unid)
