@@ -7,6 +7,8 @@ namespace KarTac.Personajes
 	{
 		public Empuje Empuje { get; set; }
 
+		#region Atributos
+
 		/// <summary>
 		/// Max HP
 		/// </summary>
@@ -17,8 +19,6 @@ namespace KarTac.Personajes
 				return Recs ["HP"] as HP;
 			}
 		}
-
-		#region Atributos
 
 		public AtributoGenérico Ataque
 		{
@@ -49,6 +49,14 @@ namespace KarTac.Personajes
 			get
 			{
 				return Recs ["Agilidad"] as AtributoGenérico;
+			}
+		}
+
+		public Condición Condición
+		{
+			get
+			{
+				return Recs ["Condición"] as Condición;
 			}
 		}
 

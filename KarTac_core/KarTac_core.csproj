@@ -100,7 +100,8 @@
     <Compile Include="Equipamento\IItem.cs" />
     <Compile Include="Equipamento\InventarioClan.cs" />
     <Compile Include="Equipamento\ConjuntoEquipamento.cs" />
-    <Compile Include="Equipamento\EqEspada.cs" />    
+    <Compile Include="Equipamento\EqEspada.cs" />
+    <Compile Include="Recursos\Condición.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

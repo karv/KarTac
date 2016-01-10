@@ -22,12 +22,16 @@ namespace KarTac.Batalla.Orden
 		{
 			var ret = base.Update (time);
 
-			foreach (var unid in Unidad.CampoBatalla.Unidades)
+			foreach (var unid in Unidad.CampoBatalla.UnidadesVivas)
 			{
 				if (Unidad.Equipo.EsEnemigo (unid))
 				{
-					OnTerminar ();
-					return new UpdateReturnType (time, ret.TiempoUsado);
+					var dist = (unid.PosPrecisa - Unidad.PosPrecisa).Length ();
+					if (dist < RangoAlerta)
+					{
+						OnTerminar ();
+						return new UpdateReturnType (time, ret.TiempoUsado);
+					}
 				}
 			}
 			return ret;

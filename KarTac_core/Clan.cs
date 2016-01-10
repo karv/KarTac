@@ -55,6 +55,7 @@ namespace KarTac
 				pj.Atributos.Recs.Add (new AtributoGenérico ("Defensa"));
 				pj.Atributos.Recs.Add (new AtributoGenérico ("Velocidad"));
 				pj.Atributos.Recs.Add (new AtributoGenérico ("Agilidad"));
+				pj.Atributos.Recs.Add (new Condición ());
 
 				pj.Atributos.HP.Max = 100;
 				pj.Atributos.HP.Valor = 100;
@@ -63,6 +64,7 @@ namespace KarTac
 				pj.Atributos.Agilidad.Inicial = 10;
 				pj.Atributos.Defensa.Inicial = 10;
 				pj.Atributos.Velocidad.Inicial = 50;
+				pj.Atributos.Condición.Max = 120;
 
 				pj.Nombre = "Persona " + i;
 
