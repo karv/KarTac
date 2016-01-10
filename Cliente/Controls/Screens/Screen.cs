@@ -68,7 +68,7 @@ namespace KarTac.Cliente.Controls.Screens
 
 		public virtual void Update (GameTime gameTime)
 		{
-			foreach (var x in Controles)
+			foreach (var x in new List<IControl> (Controles))
 			{
 				x.Update (gameTime);
 			}

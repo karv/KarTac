@@ -38,6 +38,5 @@ namespace KarTac.Recursos
 				return Max;
 			}
 		}
-
 	}
 }

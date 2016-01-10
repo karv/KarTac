@@ -66,8 +66,8 @@ namespace KarTac.Cliente.Controls.Screens
 						forma.LoadContent ();
 						forma.Color = Color.Yellow * 0.7f;
 
-						Action iniciarDel;
-						Action terminarDel;
+						Action iniciarDel = null;
+						Action terminarDel = null;
 
 						iniciarDel = delegate
 						{
@@ -76,7 +76,10 @@ namespace KarTac.Cliente.Controls.Screens
 
 						terminarDel = delegate
 						{
-							forma.Exclude ();
+							forma?.Exclude ();
+							skillForma.AlResponder -= terminarDel;
+							skillForma.AlMostrarLista -= iniciarDel;
+							skillForma.AlCancelar -= terminarDel;
 						};
 
 						skillForma.AlResponder += terminarDel;
@@ -92,14 +95,21 @@ namespace KarTac.Cliente.Controls.Screens
 			if (InputManager.FuePresionado (Key.Space)) // A la carga
 			{
 				var sk = menú.SkillSeleccionado as IRangedSkill;
-				var orden = new OrdenAtacar (UnidadActual, (sk?.Rango ?? 40) * 0.9f);
+				var rng = (sk?.Rango ?? 40) * 0.9f;
+				IOrden orden;
+				// Si usa ctrl, se carga; si no, rodea
+				if (InputManager.EstáPresionado (Key.ShiftLeft))
+					orden = new OrdenAtacar (UnidadActual, rng);
+				else
+					orden = new Rodear (UnidadActual, rng);
+				
 				UnidadActual.OrdenActual = orden;
 				Salir ();
 			}
 
 			if (InputManager.FuePresionado (Key.Tab)) // Huir
 			{
-				var orden = new Huir (UnidadActual, TimeSpan.FromSeconds (2));
+				var orden = new Huir (UnidadActual, TimeSpan.FromSeconds (15));
 				UnidadActual.OrdenActual = orden;
 				Salir ();
 			}

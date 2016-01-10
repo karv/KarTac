@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using KarTac.Batalla;
 using System;
 using OpenTK.Input;
+using KarTac.Cliente.Controls;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -29,11 +30,16 @@ namespace KarTac.Cliente.Controls.Screens
 			botónRenombrar.Color = Color.Yellow;
 			botónRenombrar.Textura = @"Icons/rename";
 
+			botónSalir = new Botón (this, new Rectangle (605, 30, 30, 30));
+			botónSalir.Color = Color.Yellow;
+			botónSalir.Textura = @"Icons/salir";
+
 			recargar ();
 			personajes.Include ();
 			botónIniciar.Include ();
 			botónGuardar.Include ();
 			botónRenombrar.Include ();
+			botónSalir.Include ();
 
 			botónIniciar.AlClick += iniciarCombate;
 			botónGuardar.AlClick += guardarClan;
@@ -49,11 +55,23 @@ namespace KarTac.Cliente.Controls.Screens
 
 				dial.Ejecutar ();
 			};
+			botónSalir.AlClick += SalirJuego;
+		}
+
+		void SalirJuego ()
+		{
+			Game.Exit ();
 		}
 
 		void guardarClan ()
 		{
 			MyClan.Guardar (KarTacGame.FileName);
+			var msgGuardar = new VanishingString (this, "Guardado", TimeSpan.FromSeconds (2));
+			msgGuardar.LoadContent ();
+			msgGuardar.Inicializar ();
+			msgGuardar.Centro = Ratón.Pos.ToVector2 ();
+			msgGuardar.ColorInicial = Color.Red;
+			msgGuardar.Include ();
 		}
 
 		public bool Autoguardado { get; set; }
@@ -148,5 +166,7 @@ namespace KarTac.Cliente.Controls.Screens
 		Botón botónGuardar { get; }
 
 		Botón botónRenombrar { get; }
+
+		Botón botónSalir { get; }
 	}
 }

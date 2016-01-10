@@ -37,7 +37,6 @@ namespace KarTac.Batalla.Orden
 		/// Initializes a new instance of the <see cref="KarTac.Batalla.Orden.UpdateReturnType"/> struct.
 		/// Inicializado con término.
 		/// </summary>
-		/// <param name="petición">Petición.</param>
 		public UpdateReturnType (TimeSpan petición, TimeSpan usado)
 		{
 			TiempoPetición = petición;

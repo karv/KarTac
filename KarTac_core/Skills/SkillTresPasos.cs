@@ -37,7 +37,6 @@ namespace KarTac.Skills
 				AlIniciarEjecución?.Invoke ();
 			};
 			return ret;
-
 		}
 
 		protected virtual IOrden ConstruirEjecución ()

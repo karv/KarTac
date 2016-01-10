@@ -67,7 +67,6 @@
     <Compile Include="Controls\Screens\InteracciónHumano.cs" />
     <Compile Include="Controls\SBCC.cs" />
     <Compile Include="Controls\RandomStringDisplay.cs" />
-    <Compile Include="Controls\Utils\ContadorFps.cs" />
     <Compile Include="Controls\Label.cs" />
     <Compile Include="InputManager.cs" />
     <Compile Include="Controls\MenúTurno.cs" />
@@ -102,7 +101,6 @@
     <Folder Include="Controls\Primitivos\" />
     <Folder Include="Content\Icons\" />
     <Folder Include="Content\Icons\Skills\" />
-    <Folder Include="Controls\Utils\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\**\*.*">

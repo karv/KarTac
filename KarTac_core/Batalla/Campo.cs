@@ -193,6 +193,22 @@ namespace KarTac.Batalla
 			AlTerminar?.Invoke ();
 		}
 
+		public Unidad UnidadMásCercana (Vector2 pos)
+		{
+			Unidad másCercana = null;
+			double lastDistSq = double.PositiveInfinity;
+			foreach (var x in UnidadesVivas)
+			{
+				var distSq = (x.PosPrecisa - pos).LengthSquared ();
+				if (distSq < lastDistSq)
+				{
+					lastDistSq = distSq;
+					másCercana = x;
+				}
+			}
+			return másCercana;
+		}
+
 		public event Action<Unidad> AlRequerirOrdenAntes;
 		public event Action<Unidad> AlRequerirOrdenDespués;
 		public event Action AlTerminar;

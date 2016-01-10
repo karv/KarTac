@@ -10,6 +10,19 @@ namespace KarTac.Personajes
 {
 	public class Personaje : IGuardable
 	{
+		internal class SkillComparer : IEqualityComparer<ISkill>
+		{
+			public bool Equals (ISkill x, ISkill y)
+			{
+				return x.Nombre == y.Nombre;
+			}
+
+			public int GetHashCode (ISkill obj)
+			{
+				return obj.ToString ().GetHashCode ();
+			}
+		}
+
 		/// <summary>
 		/// Nombre del personaje
 		/// </summary>

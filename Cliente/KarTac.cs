@@ -3,8 +3,11 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using KarTac.Cliente.Controls;
 using KarTac.Cliente.Controls.Screens;
-using OpenTK.Input;
 using System.IO;
+
+#if DEBUG
+using OpenTK.Input;
+#endif
 
 namespace KarTac.Cliente
 {
@@ -18,7 +21,9 @@ namespace KarTac.Cliente
 
 		readonly Ratón mouse;
 
+		#if FPS
 		readonly Label fpsLabel;
+		#endif
 
 		public ListaControl ControlesUniversales { get; }
 

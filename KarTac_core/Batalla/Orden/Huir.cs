@@ -3,59 +3,50 @@ using Microsoft.Xna.Framework;
 
 namespace KarTac.Batalla.Orden
 {
-	public class Huir : IOrden
+	public class Huir : OrdenMovCampoComún
 	{
-		public Unidad Unidad { get; }
-
-		public Rectangle Tamaño
-		{
-			get
-			{
-				return Unidad.CampoBatalla.Área;
-			}
-		}
-
 		public TimeSpan DuraciónRestante { get; set; }
 
 		public Huir (Unidad unidad, TimeSpan duración)
+			: base (unidad)
 		{
 			DuraciónRestante = duración;
-			Unidad = unidad;
-
 		}
 
-		public UpdateReturnType Update (TimeSpan time)
+		public override Vector2 VectorDeMuro ()
 		{
-			var vectorMov = new Vector2 ();
-			foreach (var u in Unidad.CampoBatalla.UnidadesVivas)
-			{
-				if (u != Unidad)
-				{
-					var sumando = (Unidad.PosPrecisa - u.PosPrecisa);
-					sumando /= sumando.LengthSquared ();
-					if (Unidad.Equipo.EsAliado (u))
-						sumando *= -1;
-					vectorMov += sumando;
-				}
-			}
+			var ret = new Vector2 ();
+			ret += new Vector2 (1 / (Unidad.PosPrecisa.X - Tamaño.Left), 0);
+			ret += new Vector2 (1 / (Unidad.PosPrecisa.X - Tamaño.Right), 0);
+			ret += new Vector2 (0, 1 / (Unidad.PosPrecisa.Y - Tamaño.Top));
+			ret += new Vector2 (0, 1 / (Unidad.PosPrecisa.Y - Tamaño.Bottom));
 
-			// Sumar las paredes
-			vectorMov += new Vector2 (1 / (Unidad.PosPrecisa.X - Tamaño.Left), 0);
-			vectorMov += new Vector2 (1 / (Unidad.PosPrecisa.X - Tamaño.Right), 0);
-			vectorMov += new Vector2 (0, 1 / (Unidad.PosPrecisa.Y - Tamaño.Top));
-			vectorMov += new Vector2 (0, 1 / (Unidad.PosPrecisa.Y - Tamaño.Bottom));
-
-			Unidad.Mover (vectorMov, time);
-			DuraciónRestante -= time;
-			if (DuraciónRestante <= TimeSpan.Zero)
-			{
-				Unidad.OrdenActual = null;
-				AlTerminar?.Invoke ();
-				return new UpdateReturnType (time, TimeSpan.Zero);
-			}
-			return new UpdateReturnType (time);
+			return ret;
 		}
 
-		public event Action AlTerminar;
+		public override Vector2 VectorDeUnidad (Unidad unidad)
+		{
+			if (unidad != Unidad)
+			{
+				var ret = (Unidad.PosPrecisa - unidad.PosPrecisa);
+				ret /= ret.LengthSquared ();
+				if (Unidad.Equipo.EsAliado (unidad))
+					ret *= -0.3f;
+				return ret;
+			}
+			return Vector2.Zero;
+		}
+
+		public override UpdateReturnType Update (TimeSpan time)
+		{
+			DuraciónRestante -= time;
+			if (DuraciónRestante > TimeSpan.Zero)
+			{
+				EjecutarMov (time);
+				return new UpdateReturnType (time);
+			}
+			OnTerminar ();
+			return new UpdateReturnType (time, TimeSpan.Zero);
+		}
 	}
 }

@@ -43,7 +43,5 @@ namespace KarTac.Cliente.Controls
 		/// Se ejecuta antes del ciclo, pero después de saber un poco sobre los controladores
 		/// </summary>
 		void Inicializar ();
-
-
 	}
 }
