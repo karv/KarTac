@@ -35,8 +35,7 @@ namespace KarTac.Batalla.Orden
 
 			selector.AlCancelar += delegate
 			{
-				Unidad.OrdenActual = null;
-				AlTerminar?.Invoke ();
+				//AlTerminar?.Invoke ();
 				FueRespondido = true;
 				//AlCancelar?.Invoke ();
 			};

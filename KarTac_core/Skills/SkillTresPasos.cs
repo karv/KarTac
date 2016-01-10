@@ -46,14 +46,17 @@ namespace KarTac.Skills
 			inter.Selector.MaxSelect = MaxSelect;
 			inter.Selector.IgualdadEstricta = IgualdadEstricta;
 			inter.Selector.PosiblesBlancos = new List<Unidad> (CampoBatalla.Unidades.Where (SeleccionaTarget).OrderBy (x => UnidadUsuario.Equipo.EsAliado (x)));
-			inter.Selector.AlResponder += delegate(SelecciónRespuesta obj)
+
+			inter.Selector.AlResponder += delegate(SelecciónRespuesta obj) //TODO: No llamar muchas veces
 			{
 				foreach (var x in obj.Selección)
 				{
 					var rt = EffectOnTarget (x);
 					x.OnSerBlanco (rt);
 				}
+				obj.Clear ();
 				AlResponder?.Invoke ();
+
 			};
 			inter.Selector.AlCancelar += delegate
 			{

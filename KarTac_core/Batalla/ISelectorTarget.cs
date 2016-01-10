@@ -36,6 +36,7 @@ namespace KarTac.Batalla
 		void Selecciona (Unidad unidad);
 
 		event Action<SelecciónRespuesta> AlResponder;
+
 		event Action AlCancelar;
 
 		/// <summary>
@@ -51,6 +52,11 @@ namespace KarTac.Batalla
 			Selección = unidades;
 		}
 
-		public readonly IList<Unidad> Selección;
+		public void Clear ()
+		{
+			Selección = new Unidad[0];
+		}
+
+		public IList<Unidad> Selección { get; private set; }
 	}
 }
