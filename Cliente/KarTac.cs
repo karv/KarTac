@@ -5,6 +5,10 @@ using KarTac.Cliente.Controls;
 using KarTac.Cliente.Controls.Screens;
 using System.IO;
 
+#if DEBUG
+using OpenTK.Input;
+#endif
+
 namespace KarTac.Cliente
 {
 	/// <summary>
