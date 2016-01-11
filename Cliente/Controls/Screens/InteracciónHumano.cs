@@ -114,6 +114,10 @@ namespace KarTac.Cliente.Controls.Screens
 				Salir ();
 			}
 
+			if (InputManager.FuePresionado (Key.Escape)) // Pausar
+			{
+				(ScreenBase as BattleScreen)?.Pausar ();
+			}
 
 			if (InputManager.FuePresionado (MouseButton.Left))
 			{
