@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.BitmapFonts;
 using OpenTK.Input;
+using System.Collections.Generic;
 
 namespace KarTac.Cliente.Controls
 {
@@ -16,6 +17,18 @@ namespace KarTac.Cliente.Controls
 			: base (screen)
 		{
 			Texto = "";
+
+			TeclasPermitidas = new Dictionary<Key, string> ();
+
+			// Construir teclas permitidas
+			for (Key i = Key.A; i <= Key.Z; i++)
+			{
+				TeclasPermitidas.Add (i, i.ToString ());
+			}
+			for (Key i = Key.Number0; i <= Key.Number9; i++)
+			{
+				TeclasPermitidas.Add (i, ((int)i - 109).ToString ());
+			}
 		}
 
 		#region Estado
@@ -70,17 +83,19 @@ namespace KarTac.Cliente.Controls
 			fontTexture = Screen.Content.Load<BitmapFont> ("fonts");
 		}
 
+		public IDictionary<Key, string> TeclasPermitidas { get; set; }
+
 		public override void Update (GameTime gameTime)
 		{
 			base.Update (gameTime);
 
 			if (CatchKeys)
 			{
-				for (var i = Key.A; i <= Key.Z; i++)
+				foreach (var k in TeclasPermitidas)
 				{
-					if (InputManager.FuePresionado (i))
+					if (InputManager.FuePresionado (k.Key))
 					{
-						var tx = i.ToString ();
+						var tx = k.Value;
 						if (!InputManager.EstadoActualTeclado.IsKeyDown (Key.ShiftLeft) && !InputManager.EstadoActualTeclado.IsKeyDown (Key.ShiftRight))
 						{
 							tx = tx.ToLower ();
