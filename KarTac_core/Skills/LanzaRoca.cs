@@ -95,7 +95,7 @@ namespace KarTac.Skills
 		{
 			get
 			{
-				return "Rect";
+				return @"Icons/Skills/roca";
 			}
 		}
 
