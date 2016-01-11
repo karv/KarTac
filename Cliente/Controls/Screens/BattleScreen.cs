@@ -4,6 +4,7 @@ using KarTac.Cliente.Controls;
 using System;
 using Microsoft.Xna.Framework;
 using KarTac.Skills;
+using OpenTK.Input;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -58,6 +59,15 @@ namespace KarTac.Cliente.Controls.Screens
 			{
 				CampoBatalla.Terminar ();
 			}
+
+			if (InputManager.FuePresionado (Key.Escape))
+				Pausar ();
+		}
+
+		public void Pausar ()
+		{
+			var scr = new PauseScreen (Game, CampoBatalla);
+			scr.Ejecutar ();
 		}
 
 		public override void Inicializar ()
