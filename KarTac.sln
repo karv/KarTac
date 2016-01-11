@@ -195,5 +195,6 @@ Global
 		$29.LastFilePostfix = "@:\n  "
 		$29.Wrap = False
 		$28.inheritsSet = Mono
+		version = 0.1.1
 	EndGlobalSection
 EndGlobal
