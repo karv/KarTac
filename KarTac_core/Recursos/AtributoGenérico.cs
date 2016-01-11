@@ -26,6 +26,14 @@ namespace KarTac.Recursos
 			}
 		}
 
+		public string Icono
+		{
+			get
+			{
+				return "Rect"; //TODO
+			}
+		}
+
 		public float Inicial;
 
 		public void CommitExp (double exp)

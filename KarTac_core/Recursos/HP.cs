@@ -28,6 +28,14 @@ namespace KarTac.Recursos
 			}
 		}
 
+		public override string Icono
+		{
+			get
+			{
+				return "Rect"; //TODO
+			}
+		}
+
 		public override void CommitExp (double exp)
 		{
 			Max += (float)exp; //TODO Aquí no creo que termine siendo así de simple.

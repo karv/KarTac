@@ -43,6 +43,11 @@ namespace KarTac.Recursos
 		float Valor { get; }
 
 		/// <summary>
+		/// El icono que se usará para mostrarse
+		/// </summary>
+		string Icono { get; }
+
+		/// <summary>
 		/// Ejecuta un tick de longitud dada
 		/// </summary>
 		void Tick (TimeSpan delta);

@@ -20,6 +20,8 @@ namespace KarTac.Recursos
 			}
 		}
 
+		public abstract string Icono { get; }
+
 		public void Reestablecer ()
 		{
 			Valor = Inicial;
