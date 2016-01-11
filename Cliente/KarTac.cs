@@ -10,6 +10,10 @@ using System;
 using OpenTK.Input;
 #endif
 
+#if DEBUG
+using OpenTK.Input;
+#endif
+
 namespace KarTac.Cliente
 {
 	/// <summary>
