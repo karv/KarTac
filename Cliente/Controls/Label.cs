@@ -10,6 +10,7 @@ namespace KarTac.Cliente.Controls
 		public Label (IScreen screen)
 			: base (screen)
 		{
+			Color = Color.White;
 		}
 
 		public string UseFont { get; set; }

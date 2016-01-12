@@ -3,6 +3,7 @@ using KarTac.Cliente.Controls.Screens;
 using System.Collections.Generic;
 using MonoGame.Extended.BitmapFonts;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace KarTac.Cliente.Controls
 {
@@ -10,25 +11,83 @@ namespace KarTac.Cliente.Controls
 	/// Control que muestra un string de una lista;
 	/// cambia con el tiempo
 	/// </summary>
-	public class RandomStringDisplay: SBCC
+	public class RandomStringDisplay : SBCC
 	{
+		public interface IEntry
+		{
+			void Dibujar (SpriteBatch bat, Vector2 pos);
+
+			int Altura { get; }
+
+			int Largo { get; }
+		}
+
+		public class IconTextEntry : IEntry
+		{
+			public BitmapFont Font;
+			public Texture2D TexturaIcon;
+			public string Str;
+			public Point Tamaño;
+			public Color ColorTexto;
+			public Color ColorIcon;
+
+			public IconTextEntry ()
+			{
+			}
+
+			public IconTextEntry (BitmapFont font,
+			                      Texture2D texturaIcon,
+			                      string str,
+			                      Color colorTexto,
+			                      Color colorIcon)
+			{
+				Font = font;
+				TexturaIcon = texturaIcon;
+				Str = str;
+				Tamaño = new Point (Font.LineHeight, 24);
+				ColorTexto = colorTexto;
+				ColorIcon = colorIcon;
+			}
+
+
+			public void Dibujar (SpriteBatch bat, Vector2 pos)
+			{
+				bat.Draw (TexturaIcon, new Rectangle (pos.ToPoint (), Tamaño), ColorIcon);
+				bat.DrawString (Font, Str, pos + new Vector2 (Tamaño.X, 0), ColorTexto);
+			}
+
+			public int Altura
+			{
+				get
+				{
+					return Math.Max (Font.LineHeight, Tamaño.Y);
+				}
+			}
+
+			public int Largo
+			{
+				get
+				{
+					return Tamaño.X + Font.GetStringRectangle (Str, Vector2.Zero).Width;
+				}
+			}
+		}
+
 		public RandomStringDisplay (IScreen screen, string fontName = "fonts")
 			: base (screen)
 		{
-			Mostrables = new List<string> ();
+			Mostrables = new List<IEntry> ();
 			TiempoEntreCambios = TimeSpan.FromSeconds (1);
 			fontString = fontName;
 			NumEntradasMostrar = 1;
 			EspacioEntreLineas = 4;
 		}
 
-		public List<string> Mostrables { get; }
+		public List<IEntry> Mostrables { get; }
 
 		BitmapFont Font;
 
 		string fontString { get; }
-
-		public Color Color = Color.White * 0.8f;
 
 		public Vector2 Pos;
 
@@ -41,19 +100,19 @@ namespace KarTac.Cliente.Controls
 		public int EspacioEntreLineas { get; set; }
 
 		[Obsolete ("Usar Actual")]
-		public string StringActual
+		public IEntry EntradaActual
 		{
 			get
 			{
-				return índiceActualString < Mostrables.Count ? Mostrables [índiceActualString] : "";
+				return índiceActualString < Mostrables.Count ? Mostrables [índiceActualString] : null;
 			}
 		}
 
-		public string[] Actual
+		public IEntry[] Actual
 		{
 			get
 			{
-				var ret = new string[NumEntradasMostrar];
+				var ret = new IEntry[NumEntradasMostrar];
 				for (int i = 0; i < NumEntradasMostrar; i++)
 				{
 					ret [i] = Mostrables [(índiceActualString + i) % Mostrables.Count];
@@ -65,15 +124,13 @@ namespace KarTac.Cliente.Controls
 		public override void Dibujar (GameTime gameTime)
 		{
 			var bat = Screen.Batch;
-			var ht = Font.LineHeight + EspacioEntreLineas;
+			var ht = 0f;
 			var strs = Actual;
 			for (int i = 0; i < NumEntradasMostrar; i++)
 			{
-				bat.DrawString (Font,
-				                strs [i],
-				                Pos + new Vector2 (0, ht * i),
-				                Color);
-				
+				var entry = Actual [i];
+				entry.Dibujar (bat, Pos + new Vector2 (0, ht));
+				ht += entry.Altura + EspacioEntreLineas;
 			}
 		}
 
@@ -101,9 +158,9 @@ namespace KarTac.Cliente.Controls
 			// Altura
 			ht = NumEntradasMostrar * Font.LineHeight + (NumEntradasMostrar - 1) * EspacioEntreLineas;
 			// Grosor
-			foreach (var str in Actual)
+			foreach (var entry in Actual)
 			{
-				wd = Math.Max (wd, Font.GetStringRectangle (str, Vector2.Zero).Width);
+				wd = Math.Max (wd, entry.Largo);
 			}
 			return new Rectangle ((int)Pos.X, (int)Pos.Y, wd, ht);
 		}

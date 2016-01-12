@@ -20,7 +20,9 @@ namespace KarTac.Cliente.Controls
 			skillsList = new ContenedorBotón (screen);
 			skillsList.TipoOrden = ContenedorBotón.TipoOrdenEnum.ColumnaPrimero;
 			display = new RandomStringDisplay (screen);
-			descripDisplay = new RandomStringDisplay (screen, "UnitNameFont");
+			descripDisplay = new Label (screen);
+			descripDisplay.UseFont = "UnitNameFont";
+			descripDisplay.Texto = () => SkillSeleccionado.Descripción;
 		}
 
 		int índiceSkillSel;
@@ -38,7 +40,6 @@ namespace KarTac.Cliente.Controls
 				índiceSkillSel = nuevoInd;
 				skillsList.BotónEnÍndice (ÍndiceSkillSel).Color = 
 					getSkillColor (true, skillsList.BotónEnÍndice (ÍndiceSkillSel).Habilidato);
-				actualizaDesc ();
 			}
 		}
 
@@ -72,12 +73,7 @@ namespace KarTac.Cliente.Controls
 		/// <summary>
 		/// El control que se muestra bajo el nombre para mostrar atributos y recursos
 		/// </summary>
-		RandomStringDisplay descripDisplay;
-
-		void actualizaDesc ()
-		{
-			descripDisplay.Mostrables [0] = SkillSeleccionado.Descripción;
-		}
+		Label descripDisplay;
 
 		public override void Inicializar ()
 		{
@@ -85,18 +81,23 @@ namespace KarTac.Cliente.Controls
 			rehacerSkills ();
 
 			descripDisplay.Inicializar ();
-			descripDisplay.Mostrables.Add ("");
 
 			display.Inicializar ();
 			ÍndiceSkillSel = 0;
 			reposicionarControles ();
 
-			display.Color = Color.Green * 0.8f;
 			display.NumEntradasMostrar = 4;
 			display.TiempoEntreCambios = TimeSpan.FromMilliseconds (1500);
+			var font = Screen.Content.Load<BitmapFont> ("fonts");
 			foreach (var x in UnidadActual.AtributosActuales.Recs.Values)
 			{
-				display.Mostrables.Add (x.ToString ());
+				display.Mostrables.Add (new RandomStringDisplay.IconTextEntry (
+					font,
+					Screen.Content.Load<Texture2D> (x.Icono),
+					x.Nombre,
+					Color.Green * 0.8f,
+					Color.White
+				));
 			}
 
 			base.Inicializar ();
@@ -110,7 +111,7 @@ namespace KarTac.Cliente.Controls
 			);
 			display.Pos = new Vector2 (20, GetBounds ().Top + 50);
 
-			descripDisplay.Pos = new Vector2 (
+			descripDisplay.Posición = new Point (
 				skillsList.GetBounds ().Left - 300,
 				skillsList.GetBounds ().Top
 			);

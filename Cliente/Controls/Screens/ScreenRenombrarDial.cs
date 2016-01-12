@@ -6,7 +6,7 @@ namespace KarTac.Cliente.Controls.Screens
 	public class ScreenRenombrarDial : ScreenDial
 	{
 		readonly EntradaTexto input;
-		readonly RandomStringDisplay display;
+		readonly Label display;
 
 		public ScreenRenombrarDial (KarTacGame juego, IScreen screen)
 			: base (juego, screen)
@@ -14,9 +14,10 @@ namespace KarTac.Cliente.Controls.Screens
 			Bounds = new Rectangle (100, 100, 500, 400);
 			input = new EntradaTexto (this);
 			input.Bounds = new Rectangle (300, 200, 200, 40);
-			display = new RandomStringDisplay (this);
-			display.Mostrables.Add ("");
-			display.Pos = new Vector2 (110, 110);
+			display = new Label (this);
+			display.Posición = new Point (110, 110);
+			display.UseFont = "fonts";
+			display.Texto = () => TextoPreg;
 
 			input.Include ();
 			display.Include ();
@@ -26,17 +27,7 @@ namespace KarTac.Cliente.Controls.Screens
 		/// <summary>
 		/// Texto que aparece como título de la pregunta.
 		/// </summary>
-		public string TextoPreg
-		{
-			get
-			{
-				return display.Mostrables [0];
-			}
-			set
-			{
-				display.Mostrables [0] = value;
-			}
-		}
+		public string TextoPreg { get; set; }
 
 		/// <summary>
 		/// Límites de el área del rectángulo donde se muestra este "diálogo"
