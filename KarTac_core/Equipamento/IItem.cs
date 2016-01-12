@@ -28,13 +28,13 @@ namespace KarTac.Equipamento
 		}
 	}
 
-	public interface IItem : IGuardable, IEquatable<IItem>
+	public interface IItem : IGuardable
 	{
 		/// <summary>
 		/// Tags
 		/// </summary>
 		ISet<string> Tags { get; }
 
-		string Nombre { get; }
+		string Id { get; }
 	}
 }

@@ -9,6 +9,22 @@ namespace KarTac.Equipamento
 
 	public abstract class Equipamento : IEquipamento
 	{
+		string IItem.Id
+		{
+			get
+			{
+				return Id;
+			}
+		}
+
+		protected virtual string Id
+		{
+			get
+			{
+				return GetType ().FullName;
+			}
+		}
+
 		public event Action<ConjuntoEquipamento> AlEquipar;
 
 		public event Action<ConjuntoEquipamento> AlDesequipar;
@@ -156,9 +172,5 @@ namespace KarTac.Equipamento
 			}
 		}
 
-		public bool Equals (IItem other)
-		{
-			return ReferenceEquals (this, other);
-		}
 	}
 }
