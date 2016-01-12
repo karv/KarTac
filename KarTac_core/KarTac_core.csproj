@@ -8,6 +8,7 @@
     <RootNamespace>KarTac</RootNamespace>
     <AssemblyName>KarTac_core</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <ReleaseVersion>0.1.1</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -102,6 +103,7 @@
     <Compile Include="Equipamento\ConjuntoEquipamento.cs" />
     <Compile Include="Equipamento\EqEspada.cs" />
     <Compile Include="Recursos\Condición.cs" />
+    <Compile Include="Skills\LanzaRoca.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

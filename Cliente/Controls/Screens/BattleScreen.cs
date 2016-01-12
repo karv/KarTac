@@ -4,6 +4,7 @@ using KarTac.Cliente.Controls;
 using System;
 using Microsoft.Xna.Framework;
 using KarTac.Skills;
+using OpenTK.Input;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -23,9 +24,16 @@ namespace KarTac.Cliente.Controls.Screens
 			contadorTiempo.Color = Color.White;
 			contadorTiempo.Posición = new Point (0, 20);
 			contadorTiempo.Include ();
+			PendingPause = false;
 		}
 
 		Label contadorTiempo;
+
+		/// <summary>
+		/// Devuelve si hay pendiente una pausa del juego.
+		/// Cambiado por Pausar()
+		/// </summary>
+		public bool PendingPause { get; private set; }
 
 		public override Color BgColor
 		{
@@ -58,6 +66,30 @@ namespace KarTac.Cliente.Controls.Screens
 			{
 				CampoBatalla.Terminar ();
 			}
+
+			if (InputManager.FuePresionado (Key.Escape))
+				Pausar ();
+
+			if (PendingPause)
+				doPause ();
+		}
+
+		/// <summary>
+		/// Pide permiso de pausar
+		/// </summary>
+		public void Pausar ()
+		{
+			PendingPause = true;
+		}
+
+		/// <summary>
+		/// Pausea ahora.
+		/// </summary>
+		void doPause ()
+		{
+			var scr = new PauseScreen (Game, CampoBatalla);
+			scr.Ejecutar ();
+			PendingPause = false;
 		}
 
 		public override void Inicializar ()

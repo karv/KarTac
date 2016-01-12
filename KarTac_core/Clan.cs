@@ -4,6 +4,7 @@ using KarTac.IO;
 using KarTac.Recursos;
 using System.IO;
 using KarTac.Equipamento;
+using KarTac.Skills;
 
 namespace KarTac
 {
@@ -67,6 +68,9 @@ namespace KarTac
 				pj.Atributos.Condición.Max = 120;
 
 				pj.Nombre = "Persona " + i;
+
+				pj.InnerSkill.Add (new Golpe (pj));
+				pj.InnerSkill.Add (new LanzaRoca (pj));
 
 				var eq = new EqEspada ();
 				eq.EquiparEn (pj);
