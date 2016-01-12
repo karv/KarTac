@@ -164,6 +164,11 @@ namespace KarTac.Cliente.Controls.Screens
 			menú.Inicializar ();
 		}
 
+		public override void UnloadContent ()
+		{
+			menú.Unload ();
+		}
+
 		#region IInteractor
 
 		Unidad IInteractor.Unidad

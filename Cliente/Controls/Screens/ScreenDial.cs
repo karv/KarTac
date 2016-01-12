@@ -82,7 +82,7 @@ namespace KarTac.Cliente.Controls.Screens
 			Juego.CurrentScreen = this;
 		}
 
-		public void Salir ()
+		public virtual void Salir ()
 		{
 			#if DEBUG
 			System.Diagnostics.Debug.WriteLine ("\n\nEntrando a " + ScreenBase);
