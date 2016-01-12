@@ -21,6 +21,9 @@ namespace KarTac.Recursos
 				case "Maná":
 					ret = new Maná ();
 					break;
+				case "Condición":
+					ret = new Condición ();
+					break;
 				default:
 					ret = new AtributoGenérico (recNombre);
 					break;

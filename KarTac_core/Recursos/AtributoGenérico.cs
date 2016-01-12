@@ -30,7 +30,7 @@ namespace KarTac.Recursos
 		{
 			get
 			{
-				return "Rect"; //TODO
+				return @"Icons/Recursos/etc"; 
 			}
 		}
 
