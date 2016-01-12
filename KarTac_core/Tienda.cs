@@ -1,5 +1,6 @@
 ﻿using KarTac.Equipamento;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace KarTac
 {
@@ -10,7 +11,7 @@ namespace KarTac
 	{
 		public struct Entrada
 		{
-			public IItem Objeto;
+			public readonly IItem Objeto;
 			public int Cantidad;
 			public float Precio;
 
@@ -54,11 +55,17 @@ namespace KarTac
 			}
 		}
 
+		/// <summary>
+		/// Devuelve la primera entrada de un objeto en esta tienda.
+		/// Si no existe devuelve null
+		/// </summary>
+		/// <param name="key">Objeto</param>
 		public Entrada? this [IItem key]
 		{
 			get
 			{
-				return artículos.Find (x => key.Equals (x.Objeto));
+				var pret = artículos.Where (x => key.Equals (x.Objeto)).Cast<Entrada?> ();
+				return pret.FirstOrDefault ();
 			}
 		}
 	}
@@ -69,6 +76,8 @@ namespace KarTac
 	public class Compras
 	{
 		public Tienda Tienda { get; }
+
+
 
 	}
 }
