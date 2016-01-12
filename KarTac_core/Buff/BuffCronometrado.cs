@@ -45,10 +45,7 @@ namespace KarTac.Buff
 			Terminar ();
 		}
 
-		void Terminar ()
-		{
-			throw new NotImplementedException ();
-		}
+		protected abstract void Terminar ();
 
 		public void Update (GameTime gameTime)
 		{
