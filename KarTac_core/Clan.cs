@@ -106,7 +106,8 @@ namespace KarTac
 			var count = reader.ReadInt32 ();
 			for (int i = 0; i < count; i++)
 			{
-				IItem item;
+				IItem item = KarTac.Equipamento.Lector.Cargar (reader);
+				/*
 				var tipo = reader.ReadString ();
 				switch (tipo)
 				{
@@ -115,6 +116,7 @@ namespace KarTac
 						item = null;
 						break;
 				}
+				*/
 				Inventario.Add (item);
 			}
 			Personajes = new List<Personaje> ();

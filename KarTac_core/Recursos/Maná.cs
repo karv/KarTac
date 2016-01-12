@@ -12,7 +12,7 @@ namespace KarTac.Recursos
 
 		public override void CommitExp (double exp)
 		{
-			Max += (float)exp; //TODO Aquí no creo que termine siendo así de simple.
+			Max += (float)exp;
 			PeticiónExpAcumulada = 0;
 		}
 

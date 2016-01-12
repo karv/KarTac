@@ -56,8 +56,6 @@ namespace KarTac.Cliente.Controls.Screens
 				var skill = menú.SkillSeleccionado;
 				if (skill.Usable)
 				{
-					// Si tiene forma, usarla
-					// TODO hacerlo interface para no hacer que esta clase sea la única encargada de esto.
 					var skillForma = skill as SkillTresPasosShaped; 
 					Forma forma = null;
 					if (skillForma != null)
@@ -100,10 +98,12 @@ namespace KarTac.Cliente.Controls.Screens
 				var rng = (sk?.Rango ?? 40) * 0.9f;
 				IOrden orden;
 				// Si usa ctrl, se carga; si no, rodea
+				// Analysis disable ConvertIfStatementToConditionalTernaryExpression
 				if (InputManager.EstáPresionado (Key.ShiftLeft))
 					orden = new OrdenAtacar (UnidadActual, rng);
 				else
 					orden = new Rodear (UnidadActual, rng);
+				// Analysis restore ConvertIfStatementToConditionalTernaryExpression
 				UnidadActual.OrdenActual = orden;
 				Salir ();
 			}

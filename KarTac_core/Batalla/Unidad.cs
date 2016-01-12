@@ -187,11 +187,6 @@ namespace KarTac.Batalla
 			OrdenActual?.Update (time);
 		}
 
-		public void Mover (Vector2 dirección)
-		{
-			throw new NotImplementedException ();
-		}
-
 		Point IMóvil.Posición
 		{
 			get

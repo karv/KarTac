@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 
 namespace KarTac
 {
@@ -15,6 +16,6 @@ namespace KarTac
 		/// <summary>
 		/// Mueve el objeto hacia una dirección dada
 		/// </summary>
-		void Mover (Vector2 dirección);
+		void Mover (Vector2 dirección, TimeSpan tiempo);
 	}
 }

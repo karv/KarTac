@@ -87,7 +87,6 @@ namespace KarTac.Skills
 			TotalExp = reader.ReadDouble ();
 		}
 
-		// TODO: ¿debería mover esto a una clase estática separada?
 		public static SkillComún Cargar (BinaryReader reader, Personaje pj)
 		{
 			var tipo = reader.ReadString ();

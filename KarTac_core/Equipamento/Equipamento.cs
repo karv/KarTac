@@ -6,24 +6,6 @@ using System.IO;
 
 namespace KarTac.Equipamento
 {
-	public static class Lector
-	{
-		public static IEquipamento Cargar (BinaryReader reader)
-		{
-			IEquipamento ret;
-			var recNombre = reader.ReadString ();
-			switch (recNombre)
-			{
-				case "Espada":
-					ret = new EqEspada ();
-					break;
-				default:
-					throw new Exception ("No existe equipment " + recNombre);
-			}
-			ret.Cargar (reader);
-			return ret;
-		}
-	}
 
 	public abstract class Equipamento : IEquipamento
 	{
