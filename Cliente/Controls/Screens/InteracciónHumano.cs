@@ -77,6 +77,7 @@ namespace KarTac.Cliente.Controls.Screens
 						terminarDel = delegate
 						{
 							forma?.Exclude ();
+							forma = null;
 							skillForma.AlResponder -= terminarDel;
 							skillForma.AlMostrarLista -= iniciarDel;
 							skillForma.AlCancelar -= terminarDel;
@@ -102,14 +103,13 @@ namespace KarTac.Cliente.Controls.Screens
 					orden = new OrdenAtacar (UnidadActual, rng);
 				else
 					orden = new Rodear (UnidadActual, rng);
-				
 				UnidadActual.OrdenActual = orden;
 				Salir ();
 			}
 
 			if (InputManager.FuePresionado (Key.Tab)) // Huir
 			{
-				var orden = new Huir (UnidadActual, TimeSpan.FromSeconds (15));
+				var orden = new Huir (UnidadActual, TimeSpan.FromSeconds (5));
 				UnidadActual.OrdenActual = orden;
 				Salir ();
 			}
@@ -147,6 +147,14 @@ namespace KarTac.Cliente.Controls.Screens
 						return;
 					}
 				}
+			}
+
+			if (InputManager.FuePresionado (Key.Z))
+			{
+				var ordQuieto = new Sentinela (UnidadActual, TimeSpan.FromSeconds (3), 60);
+				UnidadActual.OrdenActual = ordQuieto;
+				Salir ();
+				return;
 			}
 		}
 
