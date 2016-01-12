@@ -72,6 +72,7 @@ namespace KarTac.Cliente.Controls.Screens
 						iniciarDel = delegate
 						{
 							forma.Include ();
+							CampoBatalla.RequiereInteracciónInmediata = true;
 						};
 
 						terminarDel = delegate
