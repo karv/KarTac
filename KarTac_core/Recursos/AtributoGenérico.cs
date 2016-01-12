@@ -6,9 +6,10 @@ namespace KarTac.Recursos
 {
 	public class AtributoGenérico : IRecurso
 	{
-		public AtributoGenérico (string nombre)
+		public AtributoGenérico (string nombre, bool visibleBatalla)
 		{
 			_nombre = nombre;
+			VisibleBatalla = visibleBatalla;
 		}
 
 		float _valor;
@@ -25,6 +26,8 @@ namespace KarTac.Recursos
 				AlCambiarValor?.Invoke ();
 			}
 		}
+
+		public bool VisibleBatalla { get; set; }
 
 		public float Inicial;
 
@@ -62,12 +65,13 @@ namespace KarTac.Recursos
 		{
 			writer.Write (Nombre);
 			writer.Write (Inicial);
-			// No es necesario escribir valor, no queremos guardar el estado de una batalla.
+			writer.Write (VisibleBatalla);
 		}
 
 		public void Cargar (System.IO.BinaryReader reader)
 		{
 			Inicial = reader.ReadSingle ();
+			VisibleBatalla = reader.ReadBoolean ();
 		}
 
 		public Color? ColorMostrarGanado

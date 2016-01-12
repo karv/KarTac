@@ -28,6 +28,14 @@ namespace KarTac.Recursos
 			}
 		}
 
+		public override bool VisibleBatalla
+		{
+			get
+			{
+				return true;
+			}
+		}
+
 		public override void CommitExp (double exp)
 		{
 			Max += (float)exp; //TODO Aquí no creo que termine siendo así de simple.

@@ -13,7 +13,7 @@ namespace KarTac.Recursos
 				IRecurso ret;
 				if (!TryGetValue (nombre, out ret))
 				{
-					ret = new AtributoGenérico (nombre);
+					ret = new AtributoGenérico (nombre, false);
 				}
 
 				return ret;

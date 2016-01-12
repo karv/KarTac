@@ -20,6 +20,8 @@ namespace KarTac.Recursos
 			}
 		}
 
+		public abstract bool VisibleBatalla { get; }
+
 		public void Reestablecer ()
 		{
 			Valor = Inicial;

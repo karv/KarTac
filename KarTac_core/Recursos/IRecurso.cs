@@ -25,7 +25,7 @@ namespace KarTac.Recursos
 					ret = new Condición ();
 					break;
 				default:
-					ret = new AtributoGenérico (recNombre);
+					ret = new AtributoGenérico (recNombre, false);
 					break;
 			}
 			ret.Cargar (reader);
@@ -44,6 +44,11 @@ namespace KarTac.Recursos
 		/// Valor actual del recurso
 		/// </summary>
 		float Valor { get; }
+
+		/// <summary>
+		/// Si el atributo es visible durante la batalla
+		/// </summary>
+		bool VisibleBatalla { get; }
 
 		/// <summary>
 		/// Ejecuta un tick de longitud dada

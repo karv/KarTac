@@ -90,7 +90,11 @@ namespace KarTac.Equipamento
 		{
 			// Agregar su atributo con la espada
 			if (!Portador.Atributos.Recs.ContainsKey ("Espada"))
-				Portador.Atributos.Recs.Add (new AtributoGenérico ("Espada"));
+				#if DEBUG
+				Portador.Atributos.Recs.Add (new AtributoGenérico ("Espada", true));
+			#else
+				Portador.Atributos.Recs.Add (new AtributoGenérico ("Espada", false));
+			#endif
 			base.OnEquipar (anterior);
 		}
 

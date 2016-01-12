@@ -96,7 +96,8 @@ namespace KarTac.Cliente.Controls
 			display.TiempoEntreCambios = TimeSpan.FromMilliseconds (1500);
 			foreach (var x in UnidadActual.AtributosActuales.Recs.Values)
 			{
-				display.Mostrables.Add (x.ToString ());
+				if (x.VisibleBatalla)
+					display.Mostrables.Add (x.ToString ());
 			}
 
 			base.Inicializar ();

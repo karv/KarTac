@@ -24,6 +24,14 @@ namespace KarTac.Recursos
 			}
 		}
 
+		public override bool VisibleBatalla
+		{
+			get
+			{
+				return true;
+			}
+		}
+
 		protected override void PedirExp (TimeSpan time, KarTac.Batalla.Campo campo)
 		{
 			var pct = Valor / Max;
