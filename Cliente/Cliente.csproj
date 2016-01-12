@@ -75,6 +75,7 @@
     <Compile Include="Controls\Screens\OutsideScreen.cs" />
     <Compile Include="Controls\EntradaTexto.cs" />
     <Compile Include="Controls\Screens\ScreenRenombrarDial.cs" />
+    <Compile Include="Controls\Screens\PauseScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
