@@ -48,6 +48,8 @@ namespace KarTac.Batalla
 			u.PersonajeBase.AlMorir += RevisarEquipoGanador;
 		}
 
+		public bool RequiereInteracciónInmediata = false;
+
 		public Campo (Point tamaño)
 		{
 			Unidades = new List<Unidad> ();
@@ -68,34 +70,40 @@ namespace KarTac.Batalla
 				AlRequerirOrdenAntes?.Invoke (turnoUnidad);
 				turnoUnidad.Interactor.Ejecutar ();
 				turnoUnidad.Interactor.AlTerminar += () => AlRequerirOrdenDespués?.Invoke (turnoUnidad);
-				realDelta = TimeSpan.Zero;
-				//return;
+				return;
 			}
 			else
 			{
 				realDelta = delta;
-			}
 
-			DuraciónBatalla += realDelta;
-			foreach (var x in UnidadesVivas)
-			{
-				x.OrdenActual?.Update (realDelta);
-			}
-
-			RecibirExp (realDelta);
-
-			foreach (var x in UnidadesVivas)
-			{
-				x.AcumularPetición (realDelta);
-				// Sus recursos
-				foreach (var y in x.AtributosActuales.Recs.Values)
+				// Lógica aquí
+				// No debe de haber cambios lógicos al menos que nadie requiera orden
+				DuraciónBatalla += realDelta;
+				foreach (var x in UnidadesVivas)
 				{
-					y.Tick (realDelta);
+					// Se supone que aquí cada unidad tiene una orden
+					x.OrdenActual.Update (realDelta);
+					if (RequiereInteracciónInmediata)
+						break;
 				}
+
+				RequiereInteracciónInmediata = false;
+				RecibirExp (realDelta);
+
+				foreach (var x in UnidadesVivas)
+				{
+					x.AcumularPetición (realDelta);
+					// Sus recursos
+					foreach (var y in x.AtributosActuales.Recs.Values)
+					{
+						y.Tick (realDelta);
+					}
+				}
+
+				// Empuje
+				Empujes (realDelta);
 			}
 
-			// Empuje
-			Empujes (realDelta);
 		}
 
 		public Unidad UnidadActual { get; private set; }
