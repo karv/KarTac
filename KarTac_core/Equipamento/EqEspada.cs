@@ -44,9 +44,9 @@ namespace KarTac.Equipamento
 			protected override ISkillReturnType EffectOnTarget (KarTac.Batalla.Unidad unid)
 			{
 				var dañoBloqueado = Math.Max (
-					                    UnidadUsuario.AtributosActuales.Recs ["Ataque"].Valor + UnidadUsuario.AtributosActuales.Recs ["espada"].Valor - unid.AtributosActuales.Recs ["Defensa"].Valor,
+					                    unid.AtributosActuales.Defensa.Valor - UnidadUsuario.AtributosActuales.Ataque.Valor - UnidadUsuario.AtributosActuales.Recs ["espada"].Valor,
 					                    0);
-				var daño = Math.Max (20 - dañoBloqueado, 1);
+				var daño = Math.Max (30 - dañoBloqueado, 1);
 
 				unid.AtributosActuales.HP.Valor -= daño;
 				System.Diagnostics.Debug.WriteLine (string.Format (
