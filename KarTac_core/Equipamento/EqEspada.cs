@@ -44,7 +44,7 @@ namespace KarTac.Equipamento
 			protected override ISkillReturnType EffectOnTarget (KarTac.Batalla.Unidad unid)
 			{
 				var dañoBloqueado = Math.Max (
-					                    unid.AtributosActuales.Defensa.Valor - UnidadUsuario.AtributosActuales.Ataque.Valor - UnidadUsuario.AtributosActuales.Recs ["espada"].Valor,
+					                    unid.AtributosActuales.Defensa.Valor - UnidadUsuario.AtributosActuales.Ataque.Valor - UnidadUsuario.AtributosActuales.Recs ["Espada"].Valor,
 					                    0);
 				var daño = Math.Max (30 - dañoBloqueado, 1);
 
@@ -57,7 +57,7 @@ namespace KarTac.Equipamento
 
 				PeticiónExpAcumulada += 1;
 				UnidadUsuario.PersonajeBase.Atributos.Ataque.PeticiónExpAcumulada += 0.3;
-				UnidadUsuario.PersonajeBase.Atributos.Recs ["espada"].PeticiónExpAcumulada += 0.3;
+				UnidadUsuario.PersonajeBase.Atributos.Recs ["Espada"].PeticiónExpAcumulada += 0.3;
 				unid.PersonajeBase.Atributos.Defensa.PeticiónExpAcumulada += 0.3;
 
 				LastReturn = new  SkillReturnType (
@@ -73,8 +73,8 @@ namespace KarTac.Equipamento
 		{
 			get
 			{
-				yield return "arma";
-				yield return "espada";
+				yield return "Arma";
+				yield return "Espada";
 			}
 		}
 
@@ -89,8 +89,8 @@ namespace KarTac.Equipamento
 		protected override void OnEquipar (ConjuntoEquipamento anterior)
 		{
 			// Agregar su atributo con la espada
-			if (!Portador.Atributos.Recs.ContainsKey ("espada"))
-				Portador.Atributos.Recs.Add (new AtributoGenérico ("espada"));
+			if (!Portador.Atributos.Recs.ContainsKey ("Espada"))
+				Portador.Atributos.Recs.Add (new AtributoGenérico ("Espada"));
 			base.OnEquipar (anterior);
 		}
 
