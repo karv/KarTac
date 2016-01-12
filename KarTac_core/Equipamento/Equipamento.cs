@@ -155,5 +155,10 @@ namespace KarTac.Equipamento
 				yield break;
 			}
 		}
+
+		public bool Equals (IItem other)
+		{
+			return ReferenceEquals (this, other);
+		}
 	}
 }

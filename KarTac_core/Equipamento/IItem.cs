@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using KarTac.IO;
 using System.IO;
+using System;
 
 namespace KarTac.Equipamento
 {
@@ -27,7 +28,7 @@ namespace KarTac.Equipamento
 		}
 	}
 
-	public interface IItem : IGuardable
+	public interface IItem : IGuardable, IEquatable<IItem>
 	{
 		/// <summary>
 		/// Tags
