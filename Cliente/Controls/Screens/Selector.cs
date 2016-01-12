@@ -47,13 +47,13 @@ namespace KarTac.Cliente.Controls.Screens
 					if (selección.Count == 0 && !PuedeSerVacío)
 						selección.Add (diálogo.ObjetoEnCursor);
 					AlResponder?.Invoke (new SelecciónRespuesta (selección));
-					Salir ();
 				}
 				else
 				{
 					AlCancelar?.Invoke ();
-					Salir ();
 				}
+				ClearStatus ();
+				Salir ();
 			};
 
 			diálogo.Ejecutar ();
@@ -91,6 +91,7 @@ namespace KarTac.Cliente.Controls.Screens
 		}
 
 		public event Action<SelecciónRespuesta> AlResponder;
+
 		public event Action AlCancelar;
 
 		public void ClearStatus ()

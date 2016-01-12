@@ -45,6 +45,24 @@ namespace KarTac.Recursos
 			}
 		}
 
+		#region IGuardable
+
+
+		public override void Guardar (System.IO.BinaryWriter writer)
+		{
+			base.Guardar (writer);
+			writer.Write (Regeneración);
+		}
+
+		public override void Cargar (System.IO.BinaryReader reader)
+		{
+			base.Cargar (reader);
+			Regeneración = reader.ReadSingle ();
+		}
+
+
+		#endregion
+
 		#if !DEBUG
 		public override string ToString ()
 		{

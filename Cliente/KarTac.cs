@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using KarTac.Cliente.Controls;
 using KarTac.Cliente.Controls.Screens;
 using System.IO;
+using System;
+
+#if DEBUG
+using OpenTK.Input;
+#endif
 
 #if DEBUG
 using OpenTK.Input;
@@ -51,6 +56,9 @@ namespace KarTac.Cliente
 			fpsLabel.Include ();
 			#endif
 			mouse.Include ();
+
+			TargetElapsedTime = TimeSpan.FromMilliseconds (7);
+			IsFixedTimeStep = false;
 
 		}
 
