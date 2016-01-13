@@ -38,6 +38,10 @@ namespace KarTac.Cliente.Controls.Screens
 			botónEquip.Color = Color.Yellow;
 			botónEquip.Textura = @"Icons/equipar";
 
+			botónTienda = new Botón (this, new Rectangle (630, 30, 30, 30));
+			botónTienda.Color = Color.Yellow;
+			botónTienda.Textura = @"Rect";
+
 			recargar ();
 			personajes.Include ();
 			botónIniciar.Include ();
@@ -45,6 +49,7 @@ namespace KarTac.Cliente.Controls.Screens
 			botónRenombrar.Include ();
 			botónSalir.Include ();
 			botónEquip.Include ();
+			botónTienda.Include ();
 
 			botónIniciar.AlClick += iniciarCombate;
 			botónGuardar.AlClick += guardarClan;
@@ -66,6 +71,12 @@ namespace KarTac.Cliente.Controls.Screens
 				var scr = new EquipScreen (Game, MyClan, personajes.ObjetoEnCursor);
 				scr.Ejecutar ();
 			};
+
+			botónTienda.AlClick += AbrirTienda;
+		}
+
+		void AbrirTienda ()
+		{
 		}
 
 		void SalirJuego ()
@@ -180,5 +191,7 @@ namespace KarTac.Cliente.Controls.Screens
 		Botón botónSalir { get; }
 
 		Botón botónEquip { get; }
+
+		Botón botónTienda { get; }
 	}
 }
