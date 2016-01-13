@@ -4,6 +4,7 @@ using KarTac.Batalla;
 using System;
 using OpenTK.Input;
 using KarTac.Cliente.Controls;
+using KarTac.Equipamento;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -38,7 +39,7 @@ namespace KarTac.Cliente.Controls.Screens
 			botónEquip.Color = Color.Yellow;
 			botónEquip.Textura = @"Icons/equipar";
 
-			botónTienda = new Botón (this, new Rectangle (630, 30, 30, 30));
+			botónTienda = new Botón (this, new Rectangle (675, 30, 30, 30));
 			botónTienda.Color = Color.Yellow;
 			botónTienda.Textura = @"Rect";
 
@@ -77,6 +78,11 @@ namespace KarTac.Cliente.Controls.Screens
 
 		void AbrirTienda ()
 		{
+			var t = new Tienda ();
+			t.Artículos.Add (new Tienda.Entrada (() => new Arco (), 10, 30, "Arco corto"));
+			t.Artículos.Add (new Tienda.Entrada (() => new EqEspada (), 10, 30, "Espada"));
+			var scr = new TiendaScreen (Game, t, MyClan.Inventario);
+			scr.Ejecutar ();
 		}
 
 		void SalirJuego ()

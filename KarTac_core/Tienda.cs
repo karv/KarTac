@@ -13,15 +13,25 @@ namespace KarTac
 	{
 		public struct Entrada
 		{
-			public readonly IItem Objeto;
+			public readonly Func <IItem> Objeto;
 			public int Cantidad;
 			public int Precio;
+			public string NombreMostrar;
 
-			public Entrada (Func <IItem> objetoCtor, int cantidad, int precio)
+			public Entrada (Func <IItem> objetoCtor,
+			                int cantidad,
+			                int precio,
+			                string nombre)
 			{
-				Objeto = objetoCtor ();
+				Objeto = objetoCtor;
 				Cantidad = cantidad;
 				Precio = precio;
+				NombreMostrar = nombre;
+			}
+
+			public override string ToString ()
+			{
+				return NombreMostrar;
 			}
 		}
 
@@ -31,11 +41,11 @@ namespace KarTac
 		/// Devuelve la lista de artículos ofrecidos
 		/// </summary>
 		/// <value>The ofrecidos.</value>
-		public ICollection<IItem> Ofrecidos
+		public ICollection<Func<IItem>> Ofrecidos
 		{
 			get
 			{
-				var ret = new List<IItem> ();
+				var ret = new List<Func<IItem>> ();
 				foreach (var item in artículos)
 				{
 					if (!ret.Contains (item.Objeto))
@@ -53,7 +63,7 @@ namespace KarTac
 		{
 			get
 			{
-				return artículos.AsReadOnly ();
+				return artículos;
 			}
 		}
 
@@ -62,7 +72,7 @@ namespace KarTac
 		/// Si no existe devuelve null
 		/// </summary>
 		/// <param name="key">Objeto</param>
-		public Entrada? this [IItem key]
+		public Entrada? this [Func <IItem> key]
 		{
 			get
 			{
@@ -77,6 +87,34 @@ namespace KarTac
 	/// </summary>
 	public class Compras
 	{
+		public struct EntradaUnificada
+		{
+			Tienda.Entrada BaseEntrada;
+
+			public int Marcadas { get; }
+
+			public string Nombre
+			{
+				get
+				{
+					return BaseEntrada.NombreMostrar;
+				}
+			}
+
+			public EntradaUnificada (Tienda.Entrada baseEntrada, int marcadas)
+			{
+				BaseEntrada = baseEntrada;
+				Marcadas = marcadas;
+			}
+		}
+
+		public Compras (Tienda tienda, InventarioClan inv)
+		{
+			Tienda = tienda;
+			InvTransferencia = inv;
+			comprasMarcadas = new Dictionary<Func<IItem>, int> ();
+		}
+
 		public Tienda Tienda { get; }
 
 		/// <summary>
@@ -84,16 +122,41 @@ namespace KarTac
 		/// </summary>
 		public InventarioClan InvTransferencia { get; }
 
-		Dictionary<IItem, int> comprasMarcadas { get; }
+		Dictionary<Func <IItem>, int> comprasMarcadas { get; }
 
 		/// <summary>
 		/// Objetos marcados para comprar
 		/// </summary>
-		public ReadOnlyDictionary<IItem, int> ComprasMarcadas
+		public ReadOnlyDictionary<Func <IItem>, int> ComprasMarcadas
 		{
 			get
 			{
-				return new ReadOnlyDictionary<IItem, int> (comprasMarcadas);
+				var ret = new Dictionary<Func<IItem>, int> ();
+				foreach (var x in Tienda.Ofrecidos)
+				{
+					int num;
+					comprasMarcadas.TryGetValue (x, out num);
+					ret.Add (x, num);
+				}
+				return new ReadOnlyDictionary<Func<IItem>, int> (ret);
+			}
+		}
+
+		public IReadOnlyCollection<EntradaUnificada> MisCompras
+		{
+			get
+			{
+				var ret = new List<EntradaUnificada> ();
+				foreach (var x in ComprasMarcadas)
+				{
+					var entrada = Tienda [x.Key];
+					if (entrada.HasValue)
+						ret.Add (new EntradaUnificada (
+							entrada.Value, x.Value));
+					else
+						throw new Exception ();
+				}
+				return ret.AsReadOnly ();
 			}
 		}
 
@@ -116,7 +179,7 @@ namespace KarTac
 		/// <summary>
 		/// Agrega items al carro
 		/// </summary>
-		public void Add (IItem item, int cantidad = 1)
+		public void Add (Func <IItem> item, int cantidad = 1)
 		{
 			if (Tienda [item].Value.Precio * cantidad > DineroDisponible)
 				throw new Exception ("Dinero disponible < Petición de compra.");
@@ -131,7 +194,7 @@ namespace KarTac
 		/// Devuelve el máximo número comprable para un objeto
 		/// Toma en cuenta el inventario de la tienda y el dinero restante.
 		/// </summary>
-		public int MáximoComprable (IItem item)
+		public int MáximoComprable (Func <IItem> item)
 		{
 			var entrada = Tienda [item].Value;
 			return Math.Min (entrada.Cantidad, DineroDisponible / entrada.Precio);
@@ -159,7 +222,7 @@ namespace KarTac
 			{
 				for (int i = 0; i < x.Value; i++)
 				{
-					InvTransferencia.Add (x.Key);
+					InvTransferencia.Add (x.Key ());
 				}
 			}
 			comprasMarcadas.Clear ();
