@@ -100,7 +100,9 @@ namespace KarTac.Cliente.Controls
 		{
 			get
 			{
-				return Objetos [CursorIndex].Objeto;
+				if (cursorIndex < Objetos.Count)
+					return Objetos [CursorIndex].Objeto;
+				throw new ArgumentOutOfRangeException ();
 			}
 		}
 

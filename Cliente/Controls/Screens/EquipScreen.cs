@@ -80,15 +80,21 @@ namespace KarTac.Cliente.Controls.Screens
 			{
 				if (ListaSeleccionada == InvEquips)
 				{
-					var equip = InvEquips.ObjetoEnCursor;
-					PersonajeSeleccionado.Equipamento.Equiparse (equip, ClanActual.Inventario);
+					if (InvEquips.Count > 0)
+					{
+						var equip = InvEquips.ObjetoEnCursor;
+						PersonajeSeleccionado.Equipamento.Equiparse (equip, ClanActual.Inventario);
+					}
 				}
 				else
 				if (ListaSeleccionada == Equiped)
 				{
-					var equip = Equiped.ObjetoEnCursor;
-					equip.Desequipar ();
-					ClanActual.Inventario.Add (equip);
+					if (Equiped.Count > 0)
+					{
+						var equip = Equiped.ObjetoEnCursor;
+						equip.Desequipar ();
+						ClanActual.Inventario.Add (equip);
+					}
 				}
 				else
 				{
@@ -116,6 +122,7 @@ namespace KarTac.Cliente.Controls.Screens
 				if (eq != null)
 					InvEquips.Add (eq);
 			}
+			InvEquips.CursorIndex = 0;
 		}
 
 		void buildEquiped (Personaje pj)
@@ -123,6 +130,7 @@ namespace KarTac.Cliente.Controls.Screens
 			Equiped.Clear ();
 			foreach (var eq in pj.Equipamento)
 				Equiped.Add (eq);
+			InvEquips.CursorIndex = 0;
 		}
 
 		void buildEquiped ()
