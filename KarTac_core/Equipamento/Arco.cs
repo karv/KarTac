@@ -119,7 +119,7 @@ namespace KarTac.Equipamento
 		protected override void OnEquipar (ConjuntoEquipamento anterior)
 		{
 			// Agregar su atributo con la espada
-			if (!Portador.Atributos.Recs.ContainsKey ("Espada"))
+			if (!Portador.Atributos.Recs.ContainsKey ("Arco"))
 				#if DEBUG
 				Portador.Atributos.Recs.Add (new AtributoGenérico ("Arco", true));
 			#else
