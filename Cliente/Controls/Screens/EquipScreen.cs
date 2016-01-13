@@ -44,6 +44,7 @@ namespace KarTac.Cliente.Controls.Screens
 			Equiped.Bounds = new Rectangle (0, 0, 290, 500);
 			Equiped.Stringificación = x => x.Nombre;
 			Equiped.InterceptarTeclado = false;
+			Equiped.ColorSel = Color.Green * 0.5f;
 
 			buildEquips ();
 			buildEquiped ();
@@ -58,10 +59,14 @@ namespace KarTac.Cliente.Controls.Screens
 			if (InputManager.FuePresionado (Key.Right))
 			{
 				ListaSeleccionada = InvEquips;
+				InvEquips.ColorSel = Color.Green * 0.5f;
+				Equiped.ColorSel = Color.White * 0.5f;
 			}
 			if (InputManager.FuePresionado (Key.Left))
 			{
 				ListaSeleccionada = Equiped;
+				InvEquips.ColorSel = Color.White * 0.5f;
+				Equiped.ColorSel = Color.Green * 0.5f;
 			}
 			if (InputManager.FuePresionado (Key.Up))
 			{

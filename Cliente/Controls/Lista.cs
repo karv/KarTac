@@ -45,6 +45,7 @@ namespace KarTac.Cliente.Controls
 		{
 			Objetos = new List<Entrada> ();
 			ColorBG = Color.Blue * 0.3f;
+			ColorSel = Color.White * 0.5f;
 		}
 
 		public override void Dibujar (GameTime gameTime)
@@ -66,7 +67,7 @@ namespace KarTac.Cliente.Controls
 				if (i == cursorIndex)
 				{
 					var rect = Fuente.GetStringRectangle (strTxt, currY);
-					bat.Draw (noTexture, rect, Color.White * 0.5f);
+					bat.Draw (noTexture, rect, ColorSel);
 				}
 				bat.DrawString (Fuente, strTxt, currY, x.Color);
 				currY.Y += Fuente.LineHeight;
@@ -107,7 +108,15 @@ namespace KarTac.Cliente.Controls
 
 		Texture2D noTexture { get; set; }
 
+		/// <summary>
+		/// Color del fondo del control
+		/// </summary>
 		public Color ColorBG { get; set; }
+
+		/// <summary>
+		/// Color del fondo del elemento seleccionado
+		/// </summary>
+		public Color ColorSel { get; set; }
 
 		public Rectangle Bounds { get; set; }
 
