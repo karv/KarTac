@@ -73,7 +73,7 @@ namespace KarTac.Equipamento
 		{
 			get
 			{
-				yield return "Arma";
+				yield return "arma";
 				yield return "Espada";
 			}
 		}

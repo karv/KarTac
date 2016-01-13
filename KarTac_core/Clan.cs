@@ -5,7 +5,6 @@ using KarTac.Recursos;
 using System.IO;
 using KarTac.Equipamento;
 using KarTac.Skills;
-using System.Threading;
 
 namespace KarTac
 {
@@ -73,18 +72,15 @@ namespace KarTac
 				pj.InnerSkill.Add (new Golpe (pj));
 				pj.InnerSkill.Add (new LanzaRoca (pj));
 
-				IEquipamento eq;
-				// Analysis disable ConvertIfStatementToConditionalTernaryExpression
-				if (i == 0)
-					eq = new Arco ();
-				else
-					eq = new EqEspada ();
-				// Analysis restore ConvertIfStatementToConditionalTernaryExpression
-
-				eq.EquiparEn (pj.Equipamento);
-
 				ret.Personajes.Add (pj);
 			}
+
+			var inv = ret.Inventario;
+
+			inv.Add (new Arco ());
+			inv.Add (new Arco ());
+			inv.Add (new EqEspada ());
+			inv.Add (new EqEspada ());
 
 			return ret;
 		}

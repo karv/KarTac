@@ -21,6 +21,8 @@ namespace KarTac.Equipamento
 		/// </summary>
 		void EquiparEn (ConjuntoEquipamento equips);
 
+		IEnumerable<IEquipamento> AutoRemove (ConjuntoEquipamento conj);
+
 		/// <summary>
 		/// Se desequipa
 		/// </summary>

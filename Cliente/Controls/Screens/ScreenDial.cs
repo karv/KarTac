@@ -35,7 +35,8 @@ namespace KarTac.Cliente.Controls.Screens
 
 		public virtual void Dibujar (GameTime gameTime)
 		{
-			ScreenBase.Dibujar (gameTime);
+			if (DibujarBase)
+				ScreenBase.Dibujar (gameTime);
 
 			Batch = GetNewBatch ();
 			Batch.Begin ();
@@ -97,7 +98,13 @@ namespace KarTac.Cliente.Controls.Screens
 			return ScreenBase.GetNewBatch ();
 		}
 
-		public abstract void Inicializar ();
+		public virtual void Inicializar ()
+		{
+			foreach (var x in Controles)
+			{
+				x.Inicializar ();
+			}
+		}
 
 		public ListaControl Controles { get; }
 
@@ -131,6 +138,8 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 			return string.Format ("[{0}]\nAnterior: {1}", GetType (), ScreenBase);
 		}
+
+		public abstract bool DibujarBase { get; }
 
 		public event Action AlTerminar;
 	}

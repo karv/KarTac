@@ -12,6 +12,14 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 		}
 
+		public override bool DibujarBase
+		{
+			get
+			{
+				return true;
+			}
+		}
+
 		/// <summary>
 		/// Revisa si es posible dar una salida con la función Selecciona
 		/// </summary>

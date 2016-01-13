@@ -24,6 +24,14 @@ namespace KarTac.Cliente.Controls.Screens
 			Unidades = new Lista<Unidad> (this);
 		}
 
+		public override bool DibujarBase
+		{
+			get
+			{
+				return true;
+			}
+		}
+
 		public Campo Campo { get; }
 
 		public Lista<Unidad> Unidades;

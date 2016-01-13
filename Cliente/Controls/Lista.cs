@@ -9,10 +9,19 @@ using OpenTK.Input;
 
 namespace KarTac.Cliente.Controls
 {
+	public interface IListaControl : IControl
+	{
+		object Seleccionado { get; }
+
+		void SeleccionaSiguiente ();
+
+		void SeleccionaAnterior ();
+	}
+
 	/// <summary>
 	/// Representa un control que muestra una lista
 	/// </summary>
-	public class Lista<TObj> : SBC, IList<TObj>
+	public class Lista<TObj> : SBC, IList<TObj>, IListaControl
 	{
 		public struct Entrada
 		{
@@ -36,6 +45,7 @@ namespace KarTac.Cliente.Controls
 		{
 			Objetos = new List<Entrada> ();
 			ColorBG = Color.Blue * 0.3f;
+			ColorSel = Color.White * 0.5f;
 		}
 
 		public override void Dibujar (GameTime gameTime)
@@ -57,7 +67,7 @@ namespace KarTac.Cliente.Controls
 				if (i == cursorIndex)
 				{
 					var rect = Fuente.GetStringRectangle (strTxt, currY);
-					bat.Draw (noTexture, rect, Color.White * 0.5f);
+					bat.Draw (noTexture, rect, ColorSel);
 				}
 				bat.DrawString (Fuente, strTxt, currY, x.Color);
 				currY.Y += Fuente.LineHeight;
@@ -90,7 +100,9 @@ namespace KarTac.Cliente.Controls
 		{
 			get
 			{
-				return Objetos [CursorIndex].Objeto;
+				if (cursorIndex < Objetos.Count)
+					return Objetos [CursorIndex].Objeto;
+				throw new ArgumentOutOfRangeException ();
 			}
 		}
 
@@ -98,7 +110,15 @@ namespace KarTac.Cliente.Controls
 
 		Texture2D noTexture { get; set; }
 
+		/// <summary>
+		/// Color del fondo del control
+		/// </summary>
 		public Color ColorBG { get; set; }
+
+		/// <summary>
+		/// Color del fondo del elemento seleccionado
+		/// </summary>
+		public Color ColorSel { get; set; }
 
 		public Rectangle Bounds { get; set; }
 
@@ -140,6 +160,28 @@ namespace KarTac.Cliente.Controls
 					CursorIndex--;
 			}
 		}
+
+		#region IListaControl
+
+		public void SeleccionaSiguiente ()
+		{
+			CursorIndex++;
+		}
+
+		public void SeleccionaAnterior ()
+		{
+			CursorIndex--;
+		}
+
+		public object Seleccionado
+		{
+			get
+			{
+				return ObjetoEnCursor;
+			}
+		}
+
+		#endregion
 
 		#region IList
 
