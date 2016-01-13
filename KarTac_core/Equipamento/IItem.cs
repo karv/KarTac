@@ -31,6 +31,6 @@ namespace KarTac.Equipamento
 		/// </summary>
 		ISet<string> Tags { get; }
 
-
+		string Nombre { get; }
 	}
 }

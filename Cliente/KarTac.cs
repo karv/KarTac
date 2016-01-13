@@ -5,6 +5,7 @@ using KarTac.Cliente.Controls;
 using KarTac.Cliente.Controls.Screens;
 using System.IO;
 using System;
+using KarTac.Equipamento;
 
 #if DEBUG
 using OpenTK.Input;
@@ -75,7 +76,11 @@ namespace KarTac.Cliente
 			else
 				unClan = Clan.BuildStartingClan ();
 
-			var scr = new OutsideScreen (this, unClan);
+			//var scr = new OutsideScreen (this, unClan);
+			unClan.Inventario.Add (new EqEspada ());
+			unClan.Inventario.Add (new EqEspada ());
+			unClan.Inventario.Add (new EqEspada ());
+			var scr = new EquipScreen (this, unClan);
 			CurrentScreen = scr;
 			scr.LoadContent ();
 

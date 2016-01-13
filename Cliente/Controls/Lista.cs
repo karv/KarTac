@@ -9,10 +9,19 @@ using OpenTK.Input;
 
 namespace KarTac.Cliente.Controls
 {
+	public interface IListaControl : IControl
+	{
+		object Seleccionado { get; }
+
+		void SeleccionaSiguiente ();
+
+		void SeleccionaAnterior ();
+	}
+
 	/// <summary>
 	/// Representa un control que muestra una lista
 	/// </summary>
-	public class Lista<TObj> : SBC, IList<TObj>
+	public class Lista<TObj> : SBC, IList<TObj>, IListaControl
 	{
 		public struct Entrada
 		{
@@ -140,6 +149,28 @@ namespace KarTac.Cliente.Controls
 					CursorIndex--;
 			}
 		}
+
+		#region IListaControl
+
+		public void SeleccionaSiguiente ()
+		{
+			CursorIndex++;
+		}
+
+		public void SeleccionaAnterior ()
+		{
+			CursorIndex--;
+		}
+
+		public object Seleccionado
+		{
+			get
+			{
+				return ObjetoEnCursor;
+			}
+		}
+
+		#endregion
 
 		#region IList
 
