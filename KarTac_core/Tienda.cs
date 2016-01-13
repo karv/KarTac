@@ -89,7 +89,7 @@ namespace KarTac
 	{
 		public struct EntradaUnificada
 		{
-			Tienda.Entrada BaseEntrada;
+			readonly Tienda.Entrada baseEntrada;
 
 			public int Marcadas { get; }
 
@@ -97,13 +97,37 @@ namespace KarTac
 			{
 				get
 				{
-					return BaseEntrada.NombreMostrar;
+					return baseEntrada.NombreMostrar;
+				}
+			}
+
+			public int PrecioUnitario
+			{
+				get
+				{
+					return baseEntrada.Precio;
+				}
+			}
+
+			public int Precio
+			{
+				get
+				{
+					return PrecioUnitario * Marcadas;
+				}
+			}
+
+			public Func<IItem> Objeto
+			{
+				get
+				{
+					return baseEntrada.Objeto;
 				}
 			}
 
 			public EntradaUnificada (Tienda.Entrada baseEntrada, int marcadas)
 			{
-				BaseEntrada = baseEntrada;
+				this.baseEntrada = baseEntrada;
 				Marcadas = marcadas;
 			}
 		}

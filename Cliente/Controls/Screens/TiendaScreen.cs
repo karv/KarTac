@@ -16,8 +16,12 @@ namespace KarTac.Cliente.Controls.Screens
 		public override void Inicializar ()
 		{
 			Mostrables = new Lista<Compras.EntradaUnificada> (this);
-			Mostrables.Bounds = new Rectangle (20, 20, 400, 200);
-			Mostrables.Stringificación = x => string.Format ("{0:000}x {1}", x.Marcadas, x.Nombre);
+			Mostrables.Bounds = new Rectangle (20, 20, 700, 200);
+			Mostrables.Stringificación = x => string.Format ("{0:000}x {1} ({2:C0})  = {3:C0}",
+			                                                 x.Marcadas,
+			                                                 x.Nombre,
+			                                                 x.PrecioUnitario,
+			                                                 x.Precio);
 
 			updateCompras ();
 
@@ -33,6 +37,10 @@ namespace KarTac.Cliente.Controls.Screens
 				Salir ();
 			if (InputManager.FuePresionado (Key.Enter))
 				Compras.Commit ();
+			if (InputManager.FuePresionado (Key.Right))
+				Compras.Add (Mostrables.ObjetoEnCursor.Objeto, 1);
+			if (InputManager.FuePresionado (Key.Right))
+				Compras.Add (Mostrables.ObjetoEnCursor.Objeto, -1);
 		}
 
 		void updateCompras ()
@@ -40,7 +48,7 @@ namespace KarTac.Cliente.Controls.Screens
 			Mostrables.Clear ();
 			foreach (var x in Compras.MisCompras)
 			{
-				
+				Mostrables.Add (x);
 			}
 		}
 
