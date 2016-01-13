@@ -108,6 +108,7 @@ namespace KarTac.Personajes
 			Atributos.Guardar (writer);
 			IOComún.Guardar (InnerSkill, writer);
 			IOComún.Guardar (Desbloqueables, writer);
+			IOComún.Guardar (Equipamento, writer);
 		}
 
 		public void Cargar (BinaryReader reader)
@@ -115,7 +116,7 @@ namespace KarTac.Personajes
 			Nombre = reader.ReadString ();
 			Atributos.Cargar (reader);
 
-			Skills.Clear ();
+			InnerSkill.Clear ();
 			Desbloqueables.Clear ();
 			int count = reader.ReadInt32 ();
 			for (int i = 0; i < count; i++)
@@ -126,6 +127,13 @@ namespace KarTac.Personajes
 			for (int i = 0; i < count; i++)
 			{
 				Desbloqueables.Add (SkillComún.Cargar (reader, this));
+			}
+			count = reader.ReadInt32 ();
+			for (int i = 0; i < count; i++)
+			{
+				var eq = Lector.Cargar (reader) as IEquipamento;
+				eq.EquiparEn (Equipamento);
+				//Equipamento.Add ();
 			}
 		}
 
