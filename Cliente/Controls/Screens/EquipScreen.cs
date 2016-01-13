@@ -35,6 +35,8 @@ namespace KarTac.Cliente.Controls.Screens
 
 		Botón botónOk { get; }
 
+		readonly Label labelNombrePj;
+
 		public IListaControl ListaSeleccionada { get; private set; }
 
 		public EquipScreen (KarTacGame game, Clan clan, Personaje pj)
@@ -64,12 +66,19 @@ namespace KarTac.Cliente.Controls.Screens
 				Salir ();
 			};
 
+			labelNombrePj = new Label (this);
+			labelNombrePj.Texto = () => pj.Nombre;
+			labelNombrePj.Posición = new Point (620, 30);
+			labelNombrePj.UseFont = "fonts";
+			labelNombrePj.Color = Color.White;
+
 			buildEquips ();
 			buildEquiped ();
 
 			InvEquips.Include ();
 			Equiped.Include ();
 			botónOk.Include ();
+			labelNombrePj.Include ();
 		}
 
 		public override void Update (GameTime gameTime)
