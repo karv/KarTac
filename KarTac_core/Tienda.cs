@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Collections.ObjectModel;
+using System.Runtime.CompilerServices;
 using System;
 
 namespace KarTac
@@ -104,7 +105,7 @@ namespace KarTac
 		{
 			get
 			{
-				int ret = 0;
+				int ret;
 				foreach (var x in ComprasMarcadas)
 				{
 					ret += x.Value * Tienda [x.Key].Value.Precio;
@@ -154,15 +155,8 @@ namespace KarTac
 		/// </summary>
 		public void Commit ()
 		{
-			var dineroRestante = DineroDisponible;
-			foreach (var x in ComprasMarcadas)
-			{
-				for (int i = 0; i < x.Value; i++)
-				{
-					InvTransferencia.Add (x.Key.Duplicar ());
-				}
-			}
-			InvTransferencia.Dinero = dineroRestante;
+			
 		}
+
 	}
 }
