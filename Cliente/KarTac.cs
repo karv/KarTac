@@ -78,11 +78,6 @@ namespace KarTac.Cliente
 
 			var scr = new OutsideScreen (this, unClan);
 
-			unClan.Inventario.Add (new EqEspada ());
-			unClan.Inventario.Add (new EqEspada ());
-			unClan.Inventario.Add (new Arco ());
-			unClan.Inventario.Add (new Arco ());
-			//var scr = new EquipScreen (this, unClan);
 			CurrentScreen = scr;
 			scr.LoadContent ();
 

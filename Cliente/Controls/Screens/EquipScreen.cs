@@ -58,7 +58,7 @@ namespace KarTac.Cliente.Controls.Screens
 
 			botónOk = new Botón (this, new Rectangle (30, 550, 30, 30));
 			botónOk.Color = Color.Yellow;
-			botónOk.Textura = "Rect";
+			botónOk.Textura = @"Icons/aceptar";
 			botónOk.AlClick += delegate
 			{
 				Salir ();

@@ -36,7 +36,7 @@ namespace KarTac.Cliente.Controls.Screens
 
 			botónEquip = new Botón (this, new Rectangle (640, 30, 30, 30));
 			botónEquip.Color = Color.Yellow;
-			botónEquip.Textura = @"Rect";
+			botónEquip.Textura = @"Icons/equipar";
 
 			recargar ();
 			personajes.Include ();
