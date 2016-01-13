@@ -5,6 +5,7 @@ using KarTac.Recursos;
 using System.IO;
 using KarTac.Equipamento;
 using KarTac.Skills;
+using System.Threading;
 
 namespace KarTac
 {
@@ -72,8 +73,15 @@ namespace KarTac
 				pj.InnerSkill.Add (new Golpe (pj));
 				pj.InnerSkill.Add (new LanzaRoca (pj));
 
-				var eq = new EqEspada ();
-				eq.EquiparEn (pj);
+				IEquipamento eq;
+				// Analysis disable ConvertIfStatementToConditionalTernaryExpression
+				if (i == 0)
+					eq = new Arco ();
+				else
+					eq = new EqEspada ();
+				// Analysis restore ConvertIfStatementToConditionalTernaryExpression
+
+				eq.EquiparEn (pj.Equipamento);
 
 				ret.Personajes.Add (pj);
 			}
@@ -103,23 +111,20 @@ namespace KarTac
 		public void Cargar (BinaryReader reader)
 		{
 			Dinero = reader.ReadInt32 ();
+			/*
 			var count = reader.ReadInt32 ();
 			for (int i = 0; i < count; i++)
 			{
 				IItem item = KarTac.Equipamento.Lector.Cargar (reader);
-				/*
-				var tipo = reader.ReadString ();
-				switch (tipo)
-				{
-					default:
-						// TODO: cargar por clase
-						item = null;
-						break;
-				}
-				*/
+
 				Inventario.Add (item);
 			}
+*/
 			Personajes = new List<Personaje> ();
+			IOComún.Cargar (
+				Inventario,
+				() => KarTac.Equipamento.Lector.Cargar (reader),
+				reader);
 			IOComún.Cargar (Personajes, () => new Personaje (), reader);
 		}
 

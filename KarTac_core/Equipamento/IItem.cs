@@ -16,8 +16,11 @@ namespace KarTac.Equipamento
 				case "Espada":
 					ret = new EqEspada ();
 					break;
+				case "Arco corto":
+					ret = new Arco ();
+					break;
 				default:
-					throw new IOException ();
+					throw new IOException (recNombre + " no es un item.");
 			}
 			ret.Cargar (reader);
 			return ret;

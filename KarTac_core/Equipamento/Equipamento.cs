@@ -117,7 +117,6 @@ namespace KarTac.Equipamento
 
 		public void Guardar (System.IO.BinaryWriter writer)
 		{
-			writer.Write (GetType ().Name);
 			writer.Write (Nombre);
 		}
 
