@@ -111,8 +111,8 @@ namespace KarTac.Cliente.Controls.Screens
 			};
 
 			var ClanEnemigo = Clan.BuildStartingClan ();
-			var equipoRojo = new Equipo (0, Color.Red, MyClan);
-			var equipoAmarillo = new Equipo (1, Color.Yellow, ClanEnemigo);
+			var equipoRojo = new Equipo (0, Color.Red, MyClan.Inventario);
+			var equipoAmarillo = new Equipo (1, Color.Yellow, ClanEnemigo.Inventario);
 
 			// Asignar a todas las unidades del clan al equipo rojo
 			foreach (var u in MyClan.Personajes)
