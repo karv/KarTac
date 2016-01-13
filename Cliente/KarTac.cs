@@ -76,11 +76,13 @@ namespace KarTac.Cliente
 			else
 				unClan = Clan.BuildStartingClan ();
 
-			//var scr = new OutsideScreen (this, unClan);
+			var scr = new OutsideScreen (this, unClan);
+
 			unClan.Inventario.Add (new EqEspada ());
 			unClan.Inventario.Add (new EqEspada ());
-			unClan.Inventario.Add (new EqEspada ());
-			var scr = new EquipScreen (this, unClan);
+			unClan.Inventario.Add (new Arco ());
+			unClan.Inventario.Add (new Arco ());
+			//var scr = new EquipScreen (this, unClan);
 			CurrentScreen = scr;
 			scr.LoadContent ();
 

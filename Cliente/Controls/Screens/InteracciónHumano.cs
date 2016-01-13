@@ -22,6 +22,14 @@ namespace KarTac.Cliente.Controls.Screens
 			}
 		}
 
+		public override bool DibujarBase
+		{
+			get
+			{
+				return true;
+			}
+		}
+
 		public Campo CampoBatalla
 		{
 			get

@@ -27,6 +27,14 @@ namespace KarTac.Cliente.Controls.Screens
 			public IEnumerable<TObj> Selección;
 		}
 
+		public override bool DibujarBase
+		{
+			get
+			{
+				return true;
+			}
+		}
+
 		public TipoSalida Salida { get; private set; }
 
 		const string fontTexture = "UnitNameFont";

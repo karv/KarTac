@@ -34,12 +34,17 @@ namespace KarTac.Cliente.Controls.Screens
 			botónSalir.Color = Color.Yellow;
 			botónSalir.Textura = @"Icons/salir";
 
+			botónEquip = new Botón (this, new Rectangle (640, 30, 30, 30));
+			botónEquip.Color = Color.Yellow;
+			botónEquip.Textura = @"Rect";
+
 			recargar ();
 			personajes.Include ();
 			botónIniciar.Include ();
 			botónGuardar.Include ();
 			botónRenombrar.Include ();
 			botónSalir.Include ();
+			botónEquip.Include ();
 
 			botónIniciar.AlClick += iniciarCombate;
 			botónGuardar.AlClick += guardarClan;
@@ -56,6 +61,11 @@ namespace KarTac.Cliente.Controls.Screens
 				dial.Ejecutar ();
 			};
 			botónSalir.AlClick += SalirJuego;
+			botónEquip.AlClick += delegate // Ventana equipo
+			{
+				var scr = new EquipScreen (Game, MyClan, personajes.ObjetoEnCursor);
+				scr.Ejecutar ();
+			};
 		}
 
 		void SalirJuego ()
@@ -168,5 +178,7 @@ namespace KarTac.Cliente.Controls.Screens
 		Botón botónRenombrar { get; }
 
 		Botón botónSalir { get; }
+
+		Botón botónEquip { get; }
 	}
 }

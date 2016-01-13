@@ -9,12 +9,20 @@ namespace KarTac.Cliente.Controls.Screens
 	/// <summary>
 	/// Pantalla para equiparse
 	/// </summary>
-	public class EquipScreen : Screen
+	public class EquipScreen : ScreenDial
 	{
 		/// <summary>
 		/// Devuelve el clan al que pertenece todo esto
 		/// </summary>
 		public Clan ClanActual { get; }
+
+		public override bool DibujarBase
+		{
+			get
+			{
+				return false;
+			}
+		}
 
 		/// <summary>
 		/// Devuelve el personaje seleccionado
@@ -25,13 +33,15 @@ namespace KarTac.Cliente.Controls.Screens
 
 		Lista<IEquipamento> Equiped { get; }
 
+		Botón botónOk { get; }
+
 		public IListaControl ListaSeleccionada { get; private set; }
 
-		public EquipScreen (KarTacGame game, Clan clan)
+		public EquipScreen (KarTacGame game, Clan clan, Personaje pj)
 			: base (game)
 		{
 			ClanActual = clan;
-			PersonajeSeleccionado = ClanActual.Personajes [0];
+			PersonajeSeleccionado = pj;
 
 			InvEquips = new Lista<IEquipamento> (this);
 			Equiped = new Lista<IEquipamento> (this);
@@ -46,11 +56,20 @@ namespace KarTac.Cliente.Controls.Screens
 			Equiped.InterceptarTeclado = false;
 			Equiped.ColorSel = Color.Green * 0.5f;
 
+			botónOk = new Botón (this, new Rectangle (30, 550, 30, 30));
+			botónOk.Color = Color.Yellow;
+			botónOk.Textura = "Rect";
+			botónOk.AlClick += delegate
+			{
+				Salir ();
+			};
+
 			buildEquips ();
 			buildEquiped ();
 
 			InvEquips.Include ();
 			Equiped.Include ();
+			botónOk.Include ();
 		}
 
 		public override void Update (GameTime gameTime)
