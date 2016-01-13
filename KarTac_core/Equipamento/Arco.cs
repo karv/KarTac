@@ -55,7 +55,7 @@ namespace KarTac.Equipamento
 				var dañoBloqueado = Math.Max (
 					                    unid.AtributosActuales.Defensa.Valor - UnidadUsuario.AtributosActuales.Ataque.Valor - UnidadUsuario.AtributosActuales.Recs ["Espada"].Valor,
 					                    0);
-				var daño = Math.Max (10 - dañoBloqueado, 1);
+				var daño = Math.Max (8 - dañoBloqueado, 1);
 
 				unid.AtributosActuales.HP.Valor -= daño;
 				System.Diagnostics.Debug.WriteLine (string.Format (
