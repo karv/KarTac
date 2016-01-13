@@ -81,8 +81,7 @@ namespace KarTac.Cliente.Controls.Screens
 				if (ListaSeleccionada == InvEquips)
 				{
 					var equip = InvEquips.ObjetoEnCursor;
-					equip.EquiparEn (PersonajeSeleccionado.Equipamento);
-					ClanActual.Inventario.Remove (equip);
+					PersonajeSeleccionado.Equipamento.Equiparse (equip, ClanActual.Inventario);
 				}
 				else
 				if (ListaSeleccionada == Equiped)

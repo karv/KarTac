@@ -28,5 +28,17 @@ namespace KarTac.Equipamento
 			}
 			return ret;
 		}
+
+		public void Equiparse (IEquipamento eq, InventarioClan salida)
+		{
+			var rem = new List<IEquipamento> (eq.AutoRemove (this));
+			foreach (var x in rem)
+			{
+				x.Desequipar ();
+				salida.Add (x);
+			}
+			eq.EquiparEn (this);
+			salida.Remove (eq);
+		}
 	}
 }

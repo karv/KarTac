@@ -27,10 +27,31 @@ namespace KarTac.Equipamento
 			OnEquipar (anterior);
 		}
 
+		public virtual IEnumerable<IEquipamento> AutoRemove (ConjuntoEquipamento conj)
+		{
+			yield break;
+		}
+
+		/// <summary>
+		/// Desequipa este objeto,
+		/// queda fuera de todo inventario
+		/// </summary>
 		public void Desequipar ()
 		{
 			var anterior = ConjEquipment;
 			conjEquipment?.Remove (this);
+			OnDesequipar (anterior);
+		}
+
+		/// <summary>
+		/// Desequipa este objeto,
+		/// lo mueve hacia un inventario de clan dado
+		/// </summary>
+		public void Desequipar (InventarioClan inv)
+		{
+			var anterior = ConjEquipment;
+			conjEquipment?.Remove (this);
+			inv.Add (this);
 			OnDesequipar (anterior);
 		}
 

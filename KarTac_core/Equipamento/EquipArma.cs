@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace KarTac.Equipamento
 {
@@ -14,20 +15,12 @@ namespace KarTac.Equipamento
 
 		public override void EquiparEn (KarTac.Personajes.Personaje personaje)
 		{
-			if (ConjEquipment != null)
-			{
-				foreach (var x in new List<IEquipamento> (ConjEquipment))
-				{
-					if (x.Tags.Contains ("arma"))
-						x.Desequipar ();
-				}
-			}
-			base.EquiparEn (personaje);
+			EquiparEn (personaje.Equipamento);
 		}
 
-		public override void EquiparEn (ConjuntoEquipamento conjEquip)
+		public override IEnumerable<IEquipamento> AutoRemove (ConjuntoEquipamento conj)
 		{
-			base.EquiparEn (conjEquip);
+			return conj.Where (x => x.Tags.Contains ("arma"));
 		}
 	}
 }
