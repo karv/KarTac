@@ -48,7 +48,7 @@ namespace KarTac.Equipamento
 			{
 				get
 				{
-					return "Rect"; //TODO
+					return ItemBase.IconContentString;
 				}
 			}
 
