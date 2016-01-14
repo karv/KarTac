@@ -20,6 +20,13 @@ namespace KarTac.Batalla.Orden
 			}
 		}
 
+		bool IOrden.EsCancelable
+		{
+			get
+			{
+				return true;
+			}
+		}
 
 		public abstract Vector2 VectorDeUnidad (Unidad unidad);
 
