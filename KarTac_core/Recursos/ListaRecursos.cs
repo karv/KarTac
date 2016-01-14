@@ -22,7 +22,7 @@ namespace KarTac.Recursos
 
 		public void Add (IRecurso rec)
 		{
-			if (!this.ContainsKey (rec.Nombre))
+			if (!ContainsKey (rec.Nombre))
 				Add (rec.Nombre, rec);
 		}
 
