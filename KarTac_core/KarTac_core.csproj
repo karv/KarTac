@@ -105,6 +105,7 @@
     <Compile Include="Recursos\Condición.cs" />
     <Compile Include="Skills\LanzaRoca.cs" />
     <Compile Include="Equipamento\Arco.cs" />
+    <Compile Include="Equipamento\HpPoción.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

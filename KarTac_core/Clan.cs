@@ -81,6 +81,7 @@ namespace KarTac
 			inv.Add (new Arco ());
 			inv.Add (new EqEspada ());
 			inv.Add (new EqEspada ());
+			inv.Add (new HpPoción ());
 
 			return ret;
 		}

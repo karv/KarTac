@@ -19,6 +19,9 @@ namespace KarTac.Equipamento
 				case "Arco corto":
 					ret = new Arco ();
 					break;
+				case "Poción":
+					ret = new HpPoción ();
+					break;
 				default:
 					throw new IOException (recNombre + " no es un item.");
 			}
