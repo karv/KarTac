@@ -57,7 +57,7 @@ namespace KarTac.Personajes
 			Equipamento = new ConjuntoEquipamento (this);
 
 			// Agregar defaults
-			Desbloqueables = new HashSet<ISkill> ();
+			Desbloqueables = new HashSet<ISkill> (new SkillComparer ());
 
 		}
 
