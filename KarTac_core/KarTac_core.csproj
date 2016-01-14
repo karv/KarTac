@@ -107,6 +107,7 @@
     <Compile Include="Tienda.cs" />
     <Compile Include="Equipamento\Arco.cs" />
     <Compile Include="Equipamento\HpPoción.cs" />
+    <Compile Include="IA\AIMeléBásico.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
@@ -133,6 +134,7 @@
     <Folder Include="Personajes\" />
     <Folder Include="IO\" />
     <Folder Include="Equipamento\" />
+    <Folder Include="IA\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OpenTK.dll.config" />
