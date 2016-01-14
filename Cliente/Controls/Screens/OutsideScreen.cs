@@ -4,6 +4,7 @@ using KarTac.Batalla;
 using System;
 using OpenTK.Input;
 using KarTac.Cliente.Controls;
+using KarTac.Equipamento;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -38,6 +39,10 @@ namespace KarTac.Cliente.Controls.Screens
 			botónEquip.Color = Color.Yellow;
 			botónEquip.Textura = @"Icons/equipar";
 
+			botónTienda = new Botón (this, new Rectangle (675, 30, 30, 30));
+			botónTienda.Color = Color.Yellow;
+			botónTienda.Textura = @"Icons/tienda";
+
 			recargar ();
 			personajes.Include ();
 			botónIniciar.Include ();
@@ -45,6 +50,7 @@ namespace KarTac.Cliente.Controls.Screens
 			botónRenombrar.Include ();
 			botónSalir.Include ();
 			botónEquip.Include ();
+			botónTienda.Include ();
 
 			botónIniciar.AlClick += iniciarCombate;
 			botónGuardar.AlClick += guardarClan;
@@ -66,6 +72,17 @@ namespace KarTac.Cliente.Controls.Screens
 				var scr = new EquipScreen (Game, MyClan, personajes.ObjetoEnCursor);
 				scr.Ejecutar ();
 			};
+
+			botónTienda.AlClick += AbrirTienda;
+		}
+
+		void AbrirTienda ()
+		{
+			var t = new Tienda ();
+			t.Artículos.Add (new Tienda.Entrada (() => new Arco (), 10, 30, "Arco corto"));
+			t.Artículos.Add (new Tienda.Entrada (() => new EqEspada (), 10, 30, "Espada"));
+			var scr = new TiendaScreen (Game, t, MyClan.Inventario);
+			scr.Ejecutar ();
 		}
 
 		void SalirJuego ()
@@ -111,8 +128,8 @@ namespace KarTac.Cliente.Controls.Screens
 			};
 
 			var ClanEnemigo = Clan.BuildStartingClan ();
-			var equipoRojo = new Equipo (0, Color.Red);
-			var equipoAmarillo = new Equipo (1, Color.Yellow);
+			var equipoRojo = new Equipo (0, Color.Red, MyClan.Inventario);
+			var equipoAmarillo = new Equipo (1, Color.Yellow, ClanEnemigo.Inventario);
 
 			// Asignar a todas las unidades del clan al equipo rojo
 			foreach (var u in MyClan.Personajes)
@@ -180,5 +197,7 @@ namespace KarTac.Cliente.Controls.Screens
 		Botón botónSalir { get; }
 
 		Botón botónEquip { get; }
+
+		Botón botónTienda { get; }
 	}
 }

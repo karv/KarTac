@@ -51,10 +51,10 @@ namespace KarTac.Cliente.Controls.Screens
 
 			// TODO cálculo independiente de resolución
 			InvEquips.Bounds = new Rectangle (300, 0, 300, 500);
-			InvEquips.Stringificación = x => x.Nombre;
+			InvEquips.Stringificación = x => x.NombreCorto;
 			InvEquips.InterceptarTeclado = false;
 			Equiped.Bounds = new Rectangle (0, 0, 290, 500);
-			Equiped.Stringificación = x => x.Nombre;
+			Equiped.Stringificación = x => x.NombreCorto;
 			Equiped.InterceptarTeclado = false;
 			Equiped.ColorSel = Color.Green * 0.5f;
 

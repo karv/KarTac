@@ -21,8 +21,8 @@ namespace KarTac.Cliente.Controls
 		public override void Dibujar (GameTime gameTime)
 		{
 			var bat = Screen.Batch;
-			bat.DrawString (font, Texto (), Posición.ToVector2 (), Color);
-
+			var txt = Texto ();
+			bat.DrawString (font, txt, Posición.ToVector2 (), Color);
 		}
 
 		public Point Posición { get; set; }
