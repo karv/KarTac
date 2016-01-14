@@ -1,6 +1,7 @@
 ﻿using KarTac.Recursos;
 using System.Collections.Generic;
 using KarTac.IO;
+using NUnit.Framework;
 
 namespace KarTac.Recursos
 {
@@ -22,7 +23,8 @@ namespace KarTac.Recursos
 
 		public void Add (IRecurso rec)
 		{
-			Add (rec.Nombre, rec);
+			if (!this.ContainsKey (rec.Nombre))
+				Add (rec.Nombre, rec);
 		}
 
 		public void Guardar (System.IO.BinaryWriter writer)
