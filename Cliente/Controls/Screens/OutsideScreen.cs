@@ -41,7 +41,7 @@ namespace KarTac.Cliente.Controls.Screens
 
 			botónTienda = new Botón (this, new Rectangle (675, 30, 30, 30));
 			botónTienda.Color = Color.Yellow;
-			botónTienda.Textura = @"Rect";
+			botónTienda.Textura = @"Icons/tienda";
 
 			recargar ();
 			personajes.Include ();
