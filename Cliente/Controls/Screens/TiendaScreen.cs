@@ -23,9 +23,16 @@ namespace KarTac.Cliente.Controls.Screens
 			                                                 x.PrecioUnitario,
 			                                                 x.Precio);
 
+			DineroDisponible = new Label (this);
+			DineroDisponible.Color = Color.White;
+			DineroDisponible.Posición = new Point (100, 250);
+			DineroDisponible.UseFont = "fonts";
+			DineroDisponible.Texto = Compras.DineroDisponible.ToString;
+
 			updateCompras ();
 
 			Mostrables.Include ();
+			DineroDisponible.Include ();
 
 			base.Inicializar ();
 		}
@@ -36,20 +43,31 @@ namespace KarTac.Cliente.Controls.Screens
 			if (InputManager.FuePresionado (Key.Escape))
 				Salir ();
 			if (InputManager.FuePresionado (Key.Enter))
+			{
 				Compras.Commit ();
+				updateCompras ();
+			}
 			if (InputManager.FuePresionado (Key.Right))
-				Compras.Add (Mostrables.ObjetoEnCursor.Objeto, 1);
-			if (InputManager.FuePresionado (Key.Right))
+			{
+				Compras.Add (Mostrables.ObjetoEnCursor.Objeto);
+				updateCompras ();
+			}
+			if (InputManager.FuePresionado (Key.Left))
+			{
 				Compras.Add (Mostrables.ObjetoEnCursor.Objeto, -1);
+				updateCompras ();
+			}
 		}
 
 		void updateCompras ()
 		{
 			Mostrables.Clear ();
-			foreach (var x in Compras.MisCompras)
+			//var z = Compras.MisCompras ();
+			foreach (var x in Compras.MisCompras())
 			{
 				Mostrables.Add (x);
 			}
+			DineroDisponible.Texto = Compras.DineroDisponible.ToString;
 		}
 
 
@@ -64,6 +82,7 @@ namespace KarTac.Cliente.Controls.Screens
 		public Compras Compras { get; }
 
 		Lista<Compras.EntradaUnificada> Mostrables;
+		Label DineroDisponible;
 
 		public override bool DibujarBase
 		{

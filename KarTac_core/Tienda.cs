@@ -166,22 +166,19 @@ namespace KarTac
 			}
 		}
 
-		public IReadOnlyCollection<EntradaUnificada> MisCompras
+		public IReadOnlyCollection<EntradaUnificada> MisCompras ()
 		{
-			get
+			var ret = new List<EntradaUnificada> ();
+			foreach (var x in ComprasMarcadas)
 			{
-				var ret = new List<EntradaUnificada> ();
-				foreach (var x in ComprasMarcadas)
-				{
-					var entrada = Tienda [x.Key];
-					if (entrada.HasValue)
-						ret.Add (new EntradaUnificada (
-							entrada.Value, x.Value));
-					else
-						throw new Exception ();
-				}
-				return ret.AsReadOnly ();
+				var entrada = Tienda [x.Key];
+				if (entrada.HasValue)
+					ret.Add (new EntradaUnificada (
+						entrada.Value, x.Value));
+				else
+					throw new Exception ();
 			}
+			return ret.AsReadOnly ();
 		}
 
 		/// <summary>
@@ -206,11 +203,12 @@ namespace KarTac
 		public void Add (Func <IItem> item, int cantidad = 1)
 		{
 			if (Tienda [item].Value.Precio * cantidad > DineroDisponible)
-				throw new Exception ("Dinero disponible < Petición de compra.");
+				return;
+			//throw new Exception ("Dinero disponible < Petición de compra.");
 			if (!comprasMarcadas.ContainsKey (item))
 				comprasMarcadas.Add (item, 0);
 			comprasMarcadas [item] += cantidad;
-			if (comprasMarcadas [item] == 0)
+			if (comprasMarcadas [item] <= 0)
 				comprasMarcadas.Remove (item);
 		}
 
