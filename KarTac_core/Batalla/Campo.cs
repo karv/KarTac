@@ -192,7 +192,7 @@ namespace KarTac.Batalla
 					if (sk.PuedeAprender ())
 					{
 						x.PersonajeBase.Desbloqueables.Remove (sk);
-						x.PersonajeBase.Skills.Add (sk);
+						x.PersonajeBase.InnerSkill.Add (sk);
 						sk.AlAprender ();
 					}
 				}

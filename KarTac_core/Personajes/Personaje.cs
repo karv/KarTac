@@ -71,7 +71,7 @@ namespace KarTac.Personajes
 		/// Todas las habilidades del personaje, incluyendo de armas
 		/// </summary>
 		/// <value>The skills.</value>
-		public IList<ISkill> Skills
+		public IReadOnlyList<ISkill> Skills
 		{
 			get
 			{
