@@ -128,7 +128,7 @@ namespace KarTac.Cliente.Controls.Screens
 				btScr.UnloadContent ();
 			};
 
-			var ClanEnemigo = Clan.BuildStartingClan ();
+			var ClanEnemigo = Clan.BuildStartingClan (8);
 			var equipoRojo = new Equipo (0, Color.Red, MyClan.Inventario);
 			var equipoAmarillo = new Equipo (1, Color.Yellow, ClanEnemigo.Inventario);
 

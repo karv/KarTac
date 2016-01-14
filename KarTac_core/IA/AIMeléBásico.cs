@@ -19,11 +19,7 @@ namespace KarTac.IA
 
 			public event Action<SelecciónRespuesta> AlResponder;
 
-			public event Action AlCancelar
-			{
-				add{}
-				remove{}
-			}
+			public event Action AlCancelar;
 
 			public bool Validar ()
 			{
@@ -32,16 +28,23 @@ namespace KarTac.IA
 
 			public void Selecciona (Unidad unidad)
 			{
-				var unid = unidad.CampoBatalla.UnidadesVivas.First (z => unidad.Equipo.EsEnemigo (z) && skill.GetÁrea ().Contiene (z.Pos));
-				var r = new Unidad[1];
-				r [0] = unid;
-				var resp = new SelecciónRespuesta (r);
-				AlResponder?.Invoke (resp);
+				var unid = unidad.CampoBatalla.UnidadesVivas.FirstOrDefault (z => unidad.Equipo.EsEnemigo (z) && skill.GetÁrea ().Contiene (z.Pos));
+				// Si al apsar el tiempo, la condición de poder atacar a alguien se violó, cancelar.
+				if (unid == null)
+					AlCancelar?.Invoke ();
+				else
+				{
+					var r = new Unidad[1];
+					r [0] = unid;
+					var resp = new SelecciónRespuesta (r);
+					AlResponder?.Invoke (resp);
+				}
 			}
 
 			public void ClearStatus ()
 			{
 				AlResponder = null;
+				AlCancelar = null;
 			}
 
 			public int MaxSelect { set; private get; }
