@@ -61,10 +61,7 @@ namespace KarTac.Cliente.Controls.Screens
 			botónOk = new Botón (this, new Rectangle (30, 550, 30, 30));
 			botónOk.Color = Color.Yellow;
 			botónOk.Textura = @"Icons/aceptar";
-			botónOk.AlClick += delegate
-			{
-				Salir ();
-			};
+			botónOk.AlClick += Salir;
 
 			labelNombrePj = new Label (this);
 			labelNombrePj.Texto = () => pj.Nombre;
@@ -97,13 +94,11 @@ namespace KarTac.Cliente.Controls.Screens
 				Equiped.ColorSel = Color.Green * 0.5f;
 			}
 			if (InputManager.FuePresionado (Key.Up))
-			{
 				ListaSeleccionada.SeleccionaAnterior ();
-			}
 			if (InputManager.FuePresionado (Key.Down))
-			{
 				ListaSeleccionada.SeleccionaSiguiente ();
-			}
+			if (InputManager.FuePresionado (Key.Escape))
+				Salir ();
 			if (InputManager.FuePresionado (Key.Enter))
 			{
 				if (ListaSeleccionada == InvEquips)
