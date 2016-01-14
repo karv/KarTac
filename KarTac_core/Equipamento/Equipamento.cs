@@ -25,6 +25,14 @@ namespace KarTac.Equipamento
 			}
 		}
 
+		string IItem.NombreCorto
+		{
+			get
+			{
+				return Nombre;
+			}
+		}
+
 		public event Action<ConjuntoEquipamento> AlEquipar;
 
 		public event Action<ConjuntoEquipamento> AlDesequipar;

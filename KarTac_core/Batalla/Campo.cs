@@ -45,8 +45,6 @@ namespace KarTac.Batalla
 		public void AñadirUnidad (Unidad u)
 		{
 			Unidades.Add (u);
-			if (!Equipos.Contains (u.Equipo))
-				Equipos.Add (u.Equipo);
 			u.PersonajeBase.AlMorir += RevisarEquipoGanador;
 		}
 
@@ -202,7 +200,7 @@ namespace KarTac.Batalla
 
 			// Pagar al clan ganador
 			var ganador = EquipoGanador.Value;
-			foreach (var x in Equipos)
+			foreach (var x in GetEquipos())
 			{
 				if (!ganador.Equals (x))
 				{
@@ -213,7 +211,16 @@ namespace KarTac.Batalla
 			AlTerminar?.Invoke ();
 		}
 
-		public ICollection<Equipo> Equipos { get; }
+		public ICollection<Equipo> GetEquipos ()
+		{
+			var ret = new List<Equipo> ();
+			foreach (var x in Unidades)
+			{
+				if (!ret.Contains (x.Equipo))
+					ret.Add (x.Equipo);
+			}
+			return ret;
+		}
 
 		public Unidad UnidadMásCercana (Vector2 pos)
 		{

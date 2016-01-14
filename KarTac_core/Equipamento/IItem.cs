@@ -36,5 +36,7 @@ namespace KarTac.Equipamento
 		ISet<string> Tags { get; }
 
 		string Id { get; }
+
+		string NombreCorto { get; }
 	}
 }
