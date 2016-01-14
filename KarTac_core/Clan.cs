@@ -74,7 +74,6 @@ namespace KarTac
 				pj.Nombre = "Persona " + i;
 
 				pj.InnerSkill.Add (new Golpe (pj));
-				pj.InnerSkill.Add (new LanzaRoca (pj));
 
 				ret.Personajes.Add (pj);
 			}
