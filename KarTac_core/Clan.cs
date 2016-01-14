@@ -41,13 +41,13 @@ namespace KarTac
 		/// <summary>
 		/// Devuelve un clan de estado inicial.
 		/// </summary>
-		public static Clan BuildStartingClan ()
+		public static Clan BuildStartingClan (int cant = 3)
 		{
 			var ret = new Clan ();
 			const int personajesIniciales = 3;
 			ret.Dinero = 100;
-			ret.Personajes = new List<Personaje> (personajesIniciales);
-			for (int i = 0; i < personajesIniciales; i++)
+			ret.Personajes = new List<Personaje> (cant);
+			for (int i = 0; i < cant; i++)
 			{
 				var pj = new Personaje ();
 				pj.Atributos.Recs.Add (new HP ());
