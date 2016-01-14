@@ -128,7 +128,7 @@ namespace KarTac.Cliente.Controls.Screens
 				btScr.UnloadContent ();
 			};
 
-			var ClanEnemigo = Clan.BuildStartingClan ();
+			var ClanEnemigo = Clan.BuildStartingClan (8);
 			var equipoRojo = new Equipo (0, Color.Red, MyClan.Inventario);
 			var equipoAmarillo = new Equipo (1, Color.Yellow, ClanEnemigo.Inventario);
 
@@ -150,7 +150,7 @@ namespace KarTac.Cliente.Controls.Screens
 				unid.Equipo = equipoAmarillo;
 				campoBatalla.AñadirUnidad (unid);
 
-				unid.Interactor = new InteracciónHumano (unid, Game);
+				unid.Interactor = new IA.AIMeléBásico (unid);
 			}
 
 			// Asignar posiciones
