@@ -82,7 +82,7 @@ namespace KarTac.Equipamento
 		{
 			get
 			{
-				return "Rect";
+				return @"Icons/Equip/poción";
 			}
 		}
 
