@@ -62,9 +62,13 @@ namespace KarTac
 				pj.Atributos.HP.Valor = 100;
 				pj.Atributos.HP.Regeneración = 60;
 				pj.Atributos.Ataque.Inicial = 10;
+				pj.Atributos.Ataque.CommitExpCoef = 0.3f;
 				pj.Atributos.Agilidad.Inicial = 10;
+				pj.Atributos.Agilidad.CommitExpCoef = 0.2f;
 				pj.Atributos.Defensa.Inicial = 10;
+				pj.Atributos.Defensa.CommitExpCoef = 0.35f;
 				pj.Atributos.Velocidad.Inicial = 50;
+				pj.Atributos.Velocidad.CommitExpCoef = 0.1f;
 				pj.Atributos.Condición.Max = 120;
 
 				pj.Nombre = "Persona " + i;
