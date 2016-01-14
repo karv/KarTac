@@ -29,7 +29,7 @@ namespace KarTac.IA
 			public void Selecciona (Unidad unidad)
 			{
 				var unid = unidad.CampoBatalla.UnidadesVivas.FirstOrDefault (z => unidad.Equipo.EsEnemigo (z) && skill.GetÁrea ().Contiene (z.Pos));
-				// Si al apsar el tiempo, la condición de poder atacar a alguien se violó, cancelar.
+				// Si al pasar el tiempo, la condición de poder atacar a alguien se violó, cancelar.
 				if (unid == null)
 					AlCancelar?.Invoke ();
 				else
@@ -69,6 +69,12 @@ namespace KarTac.IA
 				}
 			}
 			Selector = new SelectorTarget (golpeSkill);
+
+			unidad.AlSerBlanco += delegate
+			{
+				if (Unidad.OrdenActual.EsCancelable)
+					Unidad.OrdenActual = null;
+			};
 		}
 
 		Golpe golpeSkill { get; }
