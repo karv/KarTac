@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using KarTac.IO;
 using System.IO;
+using System;
 
 namespace KarTac.Equipamento
 {
@@ -37,6 +38,8 @@ namespace KarTac.Equipamento
 		/// </summary>
 		ISet<string> Tags { get; }
 
-		string Nombre { get; }
+		string Id { get; }
+
+		string NombreCorto { get; }
 	}
 }

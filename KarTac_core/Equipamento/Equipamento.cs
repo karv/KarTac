@@ -9,6 +9,30 @@ namespace KarTac.Equipamento
 
 	public abstract class Equipamento : IEquipamento
 	{
+		string IItem.Id
+		{
+			get
+			{
+				return Id;
+			}
+		}
+
+		protected virtual string Id
+		{
+			get
+			{
+				return GetType ().FullName;
+			}
+		}
+
+		string IItem.NombreCorto
+		{
+			get
+			{
+				return Nombre;
+			}
+		}
+
 		public event Action<ConjuntoEquipamento> AlEquipar;
 
 		public event Action<ConjuntoEquipamento> AlDesequipar;
@@ -155,5 +179,6 @@ namespace KarTac.Equipamento
 				yield break;
 			}
 		}
+
 	}
 }

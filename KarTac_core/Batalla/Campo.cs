@@ -198,7 +198,28 @@ namespace KarTac.Batalla
 				}
 			}
 
+			// Pagar al clan ganador
+			var ganador = EquipoGanador.Value;
+			foreach (var x in GetEquipos())
+			{
+				if (!ganador.Equals (x))
+				{
+					ganador.Drops.Dinero += x.Drops.Dinero;
+				}
+			}
+
 			AlTerminar?.Invoke ();
+		}
+
+		public ICollection<Equipo> GetEquipos ()
+		{
+			var ret = new List<Equipo> ();
+			foreach (var x in Unidades)
+			{
+				if (!ret.Contains (x.Equipo))
+					ret.Add (x.Equipo);
+			}
+			return ret;
 		}
 
 		public Unidad UnidadMásCercana (Vector2 pos)
