@@ -1,7 +1,6 @@
 ﻿using KarTac.Recursos;
 using System.Collections.Generic;
 using KarTac.IO;
-using NUnit.Framework;
 
 namespace KarTac.Recursos
 {
