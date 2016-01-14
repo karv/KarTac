@@ -19,6 +19,14 @@ namespace KarTac.Batalla.Orden
 			Unidad = unidad;
 		}
 
+		bool IOrden.EsCancelable
+		{
+			get
+			{
+				return false;
+			}
+		}
+
 		public virtual UpdateReturnType Update (TimeSpan time)
 		{
 			Duración -= time;

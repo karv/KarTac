@@ -18,6 +18,19 @@ namespace KarTac.Batalla.Orden
 			}
 		}
 
+		bool IOrden.EsCancelable
+		{
+			get
+			{
+				foreach (var z in Serie)
+				{
+					if (!z.EsCancelable)
+						return false;
+				}
+				return true;
+			}
+		}
+
 		public OrdenSerie (Unidad unidad)
 			: this (unidad, new IOrden[0])
 		{

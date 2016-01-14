@@ -16,6 +16,8 @@ namespace KarTac.Batalla.Orden
 		/// </summary>
 		UpdateReturnType Update (TimeSpan time);
 
+		bool EsCancelable { get; }
+
 		event Action AlTerminar;
 	}
 
@@ -70,7 +72,5 @@ namespace KarTac.Batalla.Orden
 		/// Tiempo que usó durante Update
 		/// </summary>
 		public TimeSpan TiempoUsado { get; }
-
-
 	}
 }
