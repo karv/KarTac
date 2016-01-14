@@ -31,17 +31,18 @@ namespace KarTac.Batalla.Orden
 		public override UpdateReturnType Update (TimeSpan time)
 		{
 			var másCercana = UnidadEnemigoMásCercana ();
-			var lastDistSq = (másCercana.PosPrecisa - Unidad.PosPrecisa).LengthSquared ();
-			if (lastDistSq < Distancia * Distancia)
-			{
-				OnTerminar ();
-				return new UpdateReturnType (time, TimeSpan.Zero);
-			}
 			if (másCercana != null)
+			{
+				var lastDistSq = (másCercana.PosPrecisa - Unidad.PosPrecisa).LengthSquared ();
+				if (lastDistSq < Distancia * Distancia)
+				{
+					OnTerminar ();
+					return new UpdateReturnType (time, TimeSpan.Zero);
+				}
 				Unidad.Mover (
 					másCercana.PosPrecisa - Unidad.PosPrecisa,
 					time);
-
+			}
 			return new UpdateReturnType (time);
 		}
 	}
