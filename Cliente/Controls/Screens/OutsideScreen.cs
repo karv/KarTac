@@ -150,7 +150,7 @@ namespace KarTac.Cliente.Controls.Screens
 				unid.Equipo = equipoAmarillo;
 				campoBatalla.AñadirUnidad (unid);
 
-				unid.Interactor = new InteracciónHumano (unid, Game);
+				unid.Interactor = new IA.AIMeléBásico (unid);
 			}
 
 			// Asignar posiciones

@@ -32,7 +32,7 @@ namespace KarTac.IA
 
 			public void Selecciona (Unidad unidad)
 			{
-				var unid = unidad.CampoBatalla.UnidadesVivas.First (z => skill.GetÁrea ().Contiene (z.Pos));
+				var unid = unidad.CampoBatalla.UnidadesVivas.First (z => unidad.Equipo.EsEnemigo (z) && skill.GetÁrea ().Contiene (z.Pos));
 				var r = new Unidad[1];
 				r [0] = unid;
 				var resp = new SelecciónRespuesta (r);
@@ -105,7 +105,7 @@ namespace KarTac.IA
 
 		bool alguienEnRango ()
 		{
-			return Campo.UnidadesVivas.Any (z => golpeSkill.GetÁrea ().Contiene (z.Pos));
+			return Campo.UnidadesVivas.Any (z => Unidad.Equipo.EsEnemigo (z) && golpeSkill.GetÁrea ().Contiene (z.Pos));
 		}
 
 		public ISelectorTarget Selector { get; }
