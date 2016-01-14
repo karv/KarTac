@@ -17,6 +17,11 @@ namespace KarTac.Skills
 		public override void AlAprender ()
 		{
 			Usuario.Atributos.Recs.Add (new Maná ());
+			UnidadUsuario.AtributosActuales.Recs.Add (
+				"Poder mágico",
+				new AtributoGenérico (
+					"Poder mágico",
+					true));			
 		}
 
 		Maná ManáRecurso
@@ -122,18 +127,20 @@ namespace KarTac.Skills
 		{
 			// usuario ataca a selección
 
-			const int daño = 10;
-
+			const int dañoBase = 18;
+			var atrMP = UnidadUsuario.AtributosActuales.Recs ["Poder mágico"];
+			float daño = dañoBase + (0.1f) * atrMP.Valor;
 			unid.AtributosActuales.HP.Valor -= daño;
 			System.Diagnostics.Debug.WriteLine (string.Format (
 				"{0} causa {1} daño HP a {2}",
 				UnidadUsuario,
-				daño,
+				dañoBase,
 				unid));
 
 			ManáRecurso.Valor -= UsaManá;
 
 			PeticiónExpAcumulada += 1.5;
+			atrMP.PeticiónExpAcumulada += 0.4f;
 			LastReturn = new SkillReturnType (
 				-daño,
 				unid.AtributosActuales.HP,
