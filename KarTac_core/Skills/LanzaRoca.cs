@@ -24,6 +24,11 @@ namespace KarTac.Skills
 			}
 		}
 
+		protected override bool SeleccionaTarget (KarTac.Batalla.Unidad u)
+		{
+			return base.SeleccionaTarget (u) && u.EstáVivo;
+		}
+
 		protected override TimeSpan CalcularTiempoPreparación ()
 		{
 			return TimeSpan.FromSeconds (6.0f / UnidadUsuario.AtributosActuales.Agilidad.Valor);
