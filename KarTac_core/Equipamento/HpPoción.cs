@@ -2,6 +2,7 @@
 using KarTac.Skills;
 using KarTac.Batalla.Orden;
 
+
 namespace KarTac.Equipamento
 {
 	public class HpPoción : Equipamento
@@ -33,6 +34,11 @@ namespace KarTac.Equipamento
 			{
 				UnidadUsuario.AtributosActuales.HP.Valor += 100;
 				UnidadUsuario.PersonajeBase.Equipamento.Remove (ItemBase);
+				var rt = new SkillReturnType (
+					         100,
+					         UnidadUsuario.AtributosActuales.HP,
+					         UnidadUsuario.Pos);
+				UnidadUsuario.OnSerBlanco (rt);
 				UnidadUsuario.OrdenActual = new Quieto (
 					UnidadUsuario,
 					TimeSpan.FromMilliseconds (120));
