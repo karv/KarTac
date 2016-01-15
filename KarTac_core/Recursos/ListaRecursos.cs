@@ -1,6 +1,7 @@
 ﻿using KarTac.Recursos;
 using System.Collections.Generic;
 using KarTac.IO;
+using System;
 
 namespace KarTac.Recursos
 {
@@ -17,6 +18,15 @@ namespace KarTac.Recursos
 				}
 
 				return ret;
+			}
+			set
+			{
+				if (nombre != value.Nombre)
+					throw new Exception ();
+				if (!ContainsKey (nombre))
+					Add (value);
+				else
+					base [nombre] = value;
 			}
 		}
 

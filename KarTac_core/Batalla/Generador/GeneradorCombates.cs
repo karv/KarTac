@@ -3,23 +3,27 @@ using KarTac.Personajes;
 using KarTac.Recursos;
 using KarTac.Skills;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using OpenTK.Platform.MacOS;
-using System.Threading;
 
 namespace KarTac.Batalla.Generador
 {
-	public class GeneradorCombates
+	public static class GeneradorCombates
 	{
-		/// <summary>
-		/// Experiencia que se le dará a todo el equipo
-		/// </summary>
-		public float TotalExp;
+		public static IEnumerable<Unidad> GenerarEquipoAleatorio (float totalExp, 
+		                                                          Campo campo,
+		                                                          params GeneradorUnidad.BuildOptions [] builds)
+		{
+			var numUnidades = builds.Length;
+			var restante = totalExp;
+			for (int i = numUnidades; i > 0; i--)
+			{
+				var usarExp = Utils.Randomize (restante / i, 0.3);
+				restante -= usarExp;
 
-		/// <summary>
-		/// Número de unidades que debe generar.
-		/// </summary>
-		public int NumUnidades = 3;
+				var gen = new GeneradorUnidad (builds [i - 1]);
+				var uni = gen.Generar (usarExp, campo);
+				yield return uni;
+			}
+		}
 	}
 
 	public class GeneradorUnidad
@@ -51,6 +55,8 @@ namespace KarTac.Batalla.Generador
 			pj.Nombre = "Persona";
 
 			pj.InnerSkill.Add (new Golpe (pj));
+
+			return pj;
 		}
 
 		/// <summary>
@@ -66,8 +72,6 @@ namespace KarTac.Batalla.Generador
 			foreach (var x in ExpDistr)
 			{
 				if (!pj.Atributos.Recs.ContainsKey (x.Key.Nombre))
-					pj.Atributos.Recs.Add (x.Key);
-				else
 					pj.Atributos.Recs [x.Key.Nombre] = x.Key;
 
 				pj.Atributos.Recs [x.Key.Nombre].CommitExp (exp * x.Value);
@@ -80,16 +84,18 @@ namespace KarTac.Batalla.Generador
 			var pers = generar (exp);
 			var unidad = pers.ConstruirUnidad (campo);
 			campo.AñadirUnidad (unidad);
-			unidad.Interactor = new IA.AIMeléBásico (unidad);
+			unidad.Interactor = Inter (unidad);
+			return unidad;
 		}
 
 		void normalizarDistr ()
 		{
 			float suma = 0;
+
 			foreach (var x in ExpDistr)
 				suma += x.Value;
-			foreach (var x in ExpDistr)
-				x.Value /= suma;
+			foreach (var x in new List<IRecurso> (ExpDistr.Keys))
+				ExpDistr [x] /= suma;
 		}
 
 		public GeneradorUnidad (BuildOptions opt)
@@ -125,8 +131,6 @@ namespace KarTac.Batalla.Generador
 				return new BuildOptions (ret, u => new IA.AIMeléBásico (u));
 			}
 		}
-
-
 
 		#endregion
 	}

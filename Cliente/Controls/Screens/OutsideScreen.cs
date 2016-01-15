@@ -5,6 +5,7 @@ using System;
 using OpenTK.Input;
 using KarTac.Cliente.Controls;
 using KarTac.Equipamento;
+using KarTac.Batalla.Generador;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -128,9 +129,16 @@ namespace KarTac.Cliente.Controls.Screens
 				btScr.UnloadContent ();
 			};
 
-			var ClanEnemigo = Clan.BuildStartingClan ();
+			//var ClanEnemigo = Clan.BuildStartingClan ();
 			var equipoRojo = new Equipo (0, Color.Red, MyClan.Inventario);
-			var equipoAmarillo = new Equipo (1, Color.Yellow, ClanEnemigo.Inventario);
+			var equipoAmarillo = new Equipo (1, Color.Yellow, Clan.BuildStartingClan ().Inventario);
+			var enemigo = GeneradorCombates.GenerarEquipoAleatorio (
+				              1000, 
+				              campoBatalla,
+				              GeneradorUnidad.Melee,
+				              GeneradorUnidad.Melee,
+				              GeneradorUnidad.Melee
+			              );
 
 			// Asignar a todas las unidades del clan al equipo rojo
 			foreach (var u in MyClan.Personajes)
@@ -144,15 +152,11 @@ namespace KarTac.Cliente.Controls.Screens
 			}
 
 			// Asignar a todas las unidades del clan enemigo al equipo amarillo
-			foreach (var u in ClanEnemigo.Personajes)
+			foreach (var u in enemigo)
 			{
-				var unid = u.ConstruirUnidad (campoBatalla);
-				unid.Equipo = equipoAmarillo;
-				campoBatalla.AñadirUnidad (unid);
-
-				unid.Interactor = new IA.AIMeléBásico (unid);
+				u.Equipo = equipoAmarillo;
+				u.AtributosActuales.Inicializar ();
 			}
-
 			// Asignar posiciones
 			foreach (var u in campoBatalla.Unidades)
 			{
