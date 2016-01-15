@@ -17,6 +17,14 @@ namespace KarTac.Equipamento
 			{
 			}
 
+			public override double Rango
+			{
+				get
+				{
+					return 50;
+				}
+			}
+
 			public override string Descripción
 			{
 				get
@@ -43,10 +51,11 @@ namespace KarTac.Equipamento
 
 			protected override ISkillReturnType EffectOnTarget (KarTac.Batalla.Unidad unid)
 			{
-				var dañoBloqueado = Math.Max (
-					                    unid.AtributosActuales.Defensa.Valor - UnidadUsuario.AtributosActuales.Ataque.Valor - UnidadUsuario.AtributosActuales.Recs ["Espada"].Valor,
-					                    0);
-				var daño = Math.Max (30 - dañoBloqueado, 1);
+				float daño = (float)DamageUtils.CalcularDaño (
+					             UnidadUsuario.AtributosActuales.Ataque.Valor +
+					             UnidadUsuario.PersonajeBase.Atributos.Recs ["Espada"].Valor,
+					             unid.AtributosActuales.Defensa.Valor,
+					             2);
 
 				unid.AtributosActuales.HP.Valor -= daño;
 				System.Diagnostics.Debug.WriteLine (string.Format (
@@ -56,7 +65,7 @@ namespace KarTac.Equipamento
 					unid));
 
 				PeticiónExpAcumulada += 1;
-				UnidadUsuario.PersonajeBase.Atributos.Ataque.PeticiónExpAcumulada += 0.3;
+				UnidadUsuario.PersonajeBase.Atributos.Ataque.PeticiónExpAcumulada += 0.1;
 				UnidadUsuario.PersonajeBase.Atributos.Recs ["Espada"].PeticiónExpAcumulada += 0.3;
 				unid.PersonajeBase.Atributos.Defensa.PeticiónExpAcumulada += 0.3;
 

@@ -125,16 +125,18 @@ namespace KarTac.Skills
 
 		protected override ISkillReturnType EffectOnTarget (Unidad unid)
 		{
-			// usuario ataca a selección
-
-			const int dañoBase = 8;
 			var atrMP = UnidadUsuario.AtributosActuales.Recs ["Poder mágico"];
-			float daño = dañoBase + (0.1f) * atrMP.Valor;
+			float daño = (float)DamageUtils.CalcularDaño (
+				             atrMP.Valor,
+				             unid.AtributosActuales.Defensa.Valor / 2,
+				             2);
+			
+
 			unid.AtributosActuales.HP.Valor -= daño;
 			System.Diagnostics.Debug.WriteLine (string.Format (
 				"{0} causa {1} daño HP a {2}",
 				UnidadUsuario,
-				dañoBase,
+				daño,
 				unid));
 
 			ManáRecurso.Valor -= UsaManá;
