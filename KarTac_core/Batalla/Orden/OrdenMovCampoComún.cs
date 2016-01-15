@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using KarTac.Batalla.Objetos;
 
 namespace KarTac.Batalla.Orden
 {
@@ -30,7 +31,7 @@ namespace KarTac.Batalla.Orden
 
 		public abstract Vector2 VectorDeUnidad (Unidad unidad);
 
-		public abstract Vector2 VectorDeMuro ();
+		public abstract Vector2 VectorDeMuro (Pared pared);
 
 		/// <summary>
 		/// Devuelve la suma de los vectores de unidad y de muro.
@@ -45,7 +46,10 @@ namespace KarTac.Batalla.Orden
 			}
 
 			// Sumar las paredes
-			vectorMov += VectorDeMuro ();
+			foreach (var pared in Unidad.CampoBatalla.Paredes)
+			{
+				vectorMov += VectorDeMuro (pared);
+			}
 
 			return vectorMov;
 		}

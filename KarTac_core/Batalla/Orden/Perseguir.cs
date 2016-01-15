@@ -20,7 +20,7 @@ namespace KarTac.Batalla.Orden
 			UnidadDestino = destino;
 		}
 
-		public override Vector2 VectorDeMuro ()
+		public override Vector2 VectorDeMuro (KarTac.Batalla.Objetos.Pared pared)
 		{
 			return Vector2.Zero;
 		}

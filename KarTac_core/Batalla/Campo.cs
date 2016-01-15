@@ -3,6 +3,8 @@ using System;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using KarTac.Skills;
+using KarTac.Batalla.Objetos;
+using NUnit.Framework;
 
 namespace KarTac.Batalla
 {
@@ -55,6 +57,27 @@ namespace KarTac.Batalla
 			Unidades = new List<Unidad> ();
 			Área = new Rectangle (Point.Zero, tamaño);
 			DuraciónBatalla = TimeSpan.Zero;
+			Paredes = new List<Pared> ();
+			Paredes.Add (new Pared (
+				this,
+				new Vector2 (0, 0),
+				new Vector2 (
+					Área.Width,
+					0)));
+			Paredes.Add (new Pared (
+				this,
+				new Vector2 (Área.Width, 0),
+				new Vector2 (
+					Área.Width,
+					Área.Height)));
+			Paredes.Add (new Pared (
+				this,
+				new Vector2 (Área.Width, Área.Height),
+				new Vector2 (0, Área.Height)));
+			Paredes.Add (new Pared (
+				this,
+				new Vector2 (0, Área.Height),
+				new Vector2 (0, 0)));
 		}
 
 		public Rectangle Área { get; private set; }
@@ -259,6 +282,8 @@ namespace KarTac.Batalla
 			}
 			return másCercana;
 		}
+
+		public ICollection<Pared> Paredes { get; }
 
 		public event Action<Unidad> AlRequerirOrdenAntes;
 		public event Action<Unidad> AlRequerirOrdenDespués;
