@@ -6,6 +6,7 @@ namespace KarTac.Batalla.Objetos
 	{
 		public readonly Vector2 P0;
 		public readonly Vector2 P1;
+		public float ImportanciaCoef = 1;
 
 		public Campo Campo { get; set; }
 

@@ -99,6 +99,19 @@ namespace KarTac
 
 		public InventarioClan Inventario { get; }
 
+		public float TotalExp
+		{
+			get
+			{
+				float ret = 0;
+				foreach (var u in Personajes)
+				{
+					ret += u.TotalExp;
+				}
+				return ret;
+			}
+		}
+
 		#region Guardable
 
 		public void Guardar (BinaryWriter writer)

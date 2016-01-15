@@ -19,7 +19,7 @@ namespace KarTac.Batalla.Orden
 		public override Vector2 VectorDeMuro (KarTac.Batalla.Objetos.Pared pared)
 		{
 			var norm = pared.Normal (Unidad.PosPrecisa);
-			return norm / norm.LengthSquared ();
+			return norm * pared.ImportanciaCoef / norm.LengthSquared ();
 		}
 
 		public override Vector2 VectorDeUnidad (Unidad unidad)

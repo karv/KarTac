@@ -118,10 +118,11 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 			var r = Utils.Rnd;
 			var campoBatalla = new Campo (new Point (GetDisplayMode.Width, GetDisplayMode.Height));
-			for (int i = 0; i < 3; i++)
+			for (int i = 0; i < 2; i++)
 			{
 				var p = new Pared (campoBatalla.Área.GetRandomPoint ().ToVector2 (),
 				                   campoBatalla.Área.GetRandomPoint ().ToVector2 ());
+				p.ImportanciaCoef = 0.2f;
 				campoBatalla.Paredes.Add (p);
 			}
 
@@ -140,7 +141,7 @@ namespace KarTac.Cliente.Controls.Screens
 			var equipoRojo = new Equipo (0, Color.Red, MyClan.Inventario);
 			var equipoAmarillo = new Equipo (1, Color.Yellow, Clan.BuildStartingClan ().Inventario);
 			var enemigo = GeneradorCombates.GenerarEquipoAleatorio (
-				              1000, 
+				              MyClan.TotalExp, 
 				              campoBatalla,
 				              GeneradorUnidad.Melee,
 				              GeneradorUnidad.Melee,
