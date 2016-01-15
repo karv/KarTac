@@ -2,6 +2,8 @@
 using NUnit.Framework;
 using KarTac.Recursos;
 using System;
+using KarTac.Batalla.Objetos;
+using Microsoft.Xna.Framework;
 
 namespace KarTac.Test
 {
@@ -29,6 +31,17 @@ namespace KarTac.Test
 			Assert.AreEqual (30, hp.Valor);
 			hp.Valor = -10;
 			Assert.AreEqual (0, hp.Valor);
+		}
+
+		[Test]
+		public void TestPared ()
+		{
+			var p = new Pared (
+				        new Vector2 (5, 5),
+				        new Vector2 (6, 5));
+
+			var n = p.Normal (new Vector2 (0, 5));
+			Console.WriteLine ((n));
 		}
 	}
 }

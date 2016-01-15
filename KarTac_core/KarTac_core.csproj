@@ -112,6 +112,8 @@
     <Compile Include="Skills\DamageUtils.cs" />
     <Compile Include="Batalla\Generador\GeneradorCombates.cs" />
     <Compile Include="Utils.cs" />
+    <Compile Include="Batalla\Objetos\Pared.cs" />
+    <Compile Include="Batalla\Objetos\IObjetoCampo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
@@ -140,6 +142,7 @@
     <Folder Include="Equipamento\" />
     <Folder Include="IA\" />
     <Folder Include="Batalla\Generador\" />
+    <Folder Include="Batalla\Objetos\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OpenTK.dll.config" />
