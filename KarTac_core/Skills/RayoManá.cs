@@ -72,7 +72,7 @@ namespace KarTac.Skills
 		{
 			get
 			{
-				return 350;
+				return 90;
 			}
 		}
 
@@ -83,13 +83,13 @@ namespace KarTac.Skills
 
 		protected override TimeSpan CalcularTiempoUso ()
 		{
-			return TimeSpan.FromSeconds (1);
+			return TimeSpan.FromSeconds (0.5);
 		}
 
 		protected override TimeSpan CalcularTiempoPreparación ()
 		{
 			//return TimeSpan.Zero;
-			return TimeSpan.FromSeconds (1);
+			return TimeSpan.FromSeconds (0.1);
 		}
 
 		protected override int MaxSelect
@@ -108,7 +108,7 @@ namespace KarTac.Skills
 			}
 		}
 
-		const float UsaManá = 5;
+		const float UsaManá = 1;
 
 		public override bool Usable
 		{
@@ -127,7 +127,7 @@ namespace KarTac.Skills
 		{
 			// usuario ataca a selección
 
-			const int dañoBase = 18;
+			const int dañoBase = 8;
 			var atrMP = UnidadUsuario.AtributosActuales.Recs ["Poder mágico"];
 			float daño = dañoBase + (0.1f) * atrMP.Valor;
 			unid.AtributosActuales.HP.Valor -= daño;
