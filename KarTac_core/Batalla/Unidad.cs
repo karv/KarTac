@@ -130,7 +130,7 @@ namespace KarTac.Batalla
 				}
 			}
 
-			PersonajeBase.TotalExp += BolsaExp;
+			PersonajeBase.TotalExp += (float)BolsaExp;
 			BolsaExp = 0;
 		}
 

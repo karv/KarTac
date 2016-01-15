@@ -110,7 +110,7 @@ namespace KarTac.Cliente.Controls.Screens
 				if (InputManager.EstáPresionado (Key.ShiftLeft))
 					orden = new OrdenAtacar (UnidadActual, rng);
 				else
-					orden = new Rodear (UnidadActual, rng);
+					orden = new MantenerDistancia (UnidadActual, rng * 0.7, rng * 0.9);
 				// Analysis restore ConvertIfStatementToConditionalTernaryExpression
 				UnidadActual.OrdenActual = orden;
 				Salir ();

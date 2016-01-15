@@ -108,6 +108,7 @@
     <Compile Include="Equipamento\Arco.cs" />
     <Compile Include="Equipamento\HpPoción.cs" />
     <Compile Include="IA\AIMeléBásico.cs" />
+    <Compile Include="Batalla\Orden\MantenerDistancia.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

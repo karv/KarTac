@@ -222,6 +222,28 @@ namespace KarTac.Batalla
 			return ret;
 		}
 
+		/// <summary>
+		/// Devuelve la unidad más cercana a una posición
+		/// </summary>
+		public Unidad UnidadMásCercana (Vector2 pos, Func<Unidad, bool> pred)
+		{
+			Unidad másCercana = null;
+			double lastDistSq = double.PositiveInfinity;
+			foreach (var x in UnidadesVivas.Where (pred))
+			{
+				var distSq = (x.PosPrecisa - pos).LengthSquared ();
+				if (distSq < lastDistSq)
+				{
+					lastDistSq = distSq;
+					másCercana = x;
+				}
+			}
+			return másCercana;
+		}
+
+		/// <summary>
+		/// Devuelve la unidad más cercana a una posición
+		/// </summary>
 		public Unidad UnidadMásCercana (Vector2 pos)
 		{
 			Unidad másCercana = null;

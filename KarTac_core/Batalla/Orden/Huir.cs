@@ -40,7 +40,7 @@ namespace KarTac.Batalla.Orden
 		public override UpdateReturnType Update (TimeSpan time)
 		{
 			DuraciónRestante -= time;
-			if (DuraciónRestante > TimeSpan.Zero)
+			if (DuraciónRestante >= TimeSpan.Zero)
 			{
 				EjecutarMov (time);
 				return new UpdateReturnType (time);
