@@ -5,6 +5,9 @@ using System;
 using Microsoft.Xna.Framework;
 using KarTac.Skills;
 using OpenTK.Input;
+using KarTac.Cliente.Controls.Primitivos;
+using KarTac.Batalla.Objetos;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -96,6 +99,12 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 			// Crear sprites de unidades
 			Unidades = new List<UnidadSprite> (CampoBatalla.Unidades.Count);
+			foreach (var pared in CampoBatalla.Paredes)
+			{
+				var controlPared = new ParedControl (pared, this);
+				controlPared.Include ();
+			}
+
 			LoadContent ();
 			foreach (var u in CampoBatalla.Unidades)
 			{
@@ -105,6 +114,7 @@ namespace KarTac.Cliente.Controls.Screens
 				sprite.Include ();
 				u.AlSerBlanco += x => HacerDamageInfoString (x);
 			}
+
 
 			base.Inicializar ();
 		}
@@ -124,5 +134,6 @@ namespace KarTac.Cliente.Controls.Screens
 			}
 			return null;
 		}
+
 	}
 }

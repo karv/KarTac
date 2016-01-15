@@ -2,7 +2,7 @@
 
 namespace KarTac.Batalla.Objetos
 {
-	public class Pared: IObjetoCampo
+	public class Pared : IObjetoCampo
 	{
 		public readonly Vector2 P0;
 		public readonly Vector2 P1;
