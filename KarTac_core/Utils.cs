@@ -25,7 +25,7 @@ namespace KarTac
 
 		public static float CoefProy (this Vector2 proyectando, Vector2 espacio)
 		{
-			return Vector2.Dot (proyectando, espacio);
+			return Vector2.Dot (proyectando, espacio) / espacio.Length ();
 		}
 
 		/// <summary>

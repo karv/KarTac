@@ -30,13 +30,13 @@ namespace KarTac.Batalla.Objetos
 		{
 			var rel_p = p - P0; // Punto relativo
 			var coef = rel_p.CoefProy (GetVector ());
-			if (coef > 1) // Usar a P1
+			if (coef > GetVector ().Length ()) // Usar a P1
 				return p - P1;
 			else if (coef < 0)
 			{
 				return p - P0;
 			}
-			return -rel_p.ProyOrto (GetVector ());
+			return rel_p.ProyOrto (GetVector ());
 		}
 	}
 }
