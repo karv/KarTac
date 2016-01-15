@@ -6,6 +6,7 @@ using OpenTK.Input;
 using KarTac.Cliente.Controls;
 using KarTac.Equipamento;
 using KarTac.Batalla.Generador;
+using KarTac.Batalla.Objetos;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -115,8 +116,14 @@ namespace KarTac.Cliente.Controls.Screens
 
 		void iniciarCombate ()
 		{
-			var r = new Random ();
+			var r = Utils.Rnd;
 			var campoBatalla = new Campo (new Point (GetDisplayMode.Width, GetDisplayMode.Height));
+			for (int i = 0; i < 3; i++)
+			{
+				var p = new Pared (campoBatalla.Área.GetRandomPoint ().ToVector2 (),
+				                   campoBatalla.Área.GetRandomPoint ().ToVector2 ());
+				campoBatalla.Paredes.Add (p);
+			}
 
 			var btScr = new BattleScreen (Game, campoBatalla);
 			Game.CurrentScreen = btScr;

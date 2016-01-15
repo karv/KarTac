@@ -18,7 +18,7 @@ namespace KarTac.Batalla.Orden
 		public double Distancia { get; set; }
 
 
-		public override Vector2 VectorDeMuro ()
+		public override Vector2 VectorDeMuro (KarTac.Batalla.Objetos.Pared pared)
 		{
 			return Vector2.Zero;
 		}

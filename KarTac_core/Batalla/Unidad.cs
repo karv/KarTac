@@ -145,10 +145,24 @@ namespace KarTac.Batalla
 			AtributosActuales.Condición.Valor -= (float)(time.TotalSeconds);
 			var rapidez = AtributosActuales.Velocidad.Valor * AtributosActuales.Condición.CoefVelocidad;
 			movDir *= (float)(rapidez * time.TotalSeconds);
-			PosPrecisa += movDir;
-
+			Mover (movDir);
 
 			AtributosActuales.Velocidad.PeticiónExpAcumulada += time.TotalSeconds * 0.05f;
+		}
+
+		/// <summary>
+		/// Mueve la unidad una dirección específica
+		/// </summary>
+		/// <param name="movDir">Dirección</param>
+		public void Mover (Vector2 movDir)
+		{
+			var segm = new Segmento (PosPrecisa, movDir);
+			foreach (var p in CampoBatalla.Paredes)
+			{
+				if (p.Corta (segm))
+					return;
+			}
+			PosPrecisa = segm.Final;
 		}
 
 		public void AcumularPetición (TimeSpan time)
