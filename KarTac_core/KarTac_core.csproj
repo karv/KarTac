@@ -110,6 +110,8 @@
     <Compile Include="IA\AIMeléBásico.cs" />
     <Compile Include="Batalla\Orden\MantenerDistancia.cs" />
     <Compile Include="Skills\DamageUtils.cs" />
+    <Compile Include="Batalla\Generador\GeneradorCombates.cs" />
+    <Compile Include="Utils.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
@@ -137,6 +139,7 @@
     <Folder Include="IO\" />
     <Folder Include="Equipamento\" />
     <Folder Include="IA\" />
+    <Folder Include="Batalla\Generador\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OpenTK.dll.config" />
