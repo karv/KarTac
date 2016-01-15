@@ -36,7 +36,7 @@ namespace KarTac.Recursos
 		{
 			var pct = Valor / Max;
 
-			PeticiónExpAcumulada += (1 - pct) * time.Minutes;
+			PeticiónExpAcumulada += (1 - pct) * time.TotalMinutes;
 		}
 
 		protected override float Regen
