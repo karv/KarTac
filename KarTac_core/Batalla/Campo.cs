@@ -14,7 +14,7 @@ namespace KarTac.Batalla
 		/// <summary>
 		/// Experiencia por minuto
 		/// </summary>
-		public float ExpPorMinuto = 60;
+		public float ExpPorMinuto = 5;
 
 		/// <summary>
 		/// Duración de la batalla (hasta este momento, si no ha terminado)
