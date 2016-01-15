@@ -116,12 +116,14 @@ namespace KarTac.Cliente.Controls.Screens
 
 		void iniciarCombate ()
 		{
-			var r = new Random ();
+			var r = Utils.Rnd;
 			var campoBatalla = new Campo (new Point (GetDisplayMode.Width, GetDisplayMode.Height));
-			campoBatalla.Paredes.Add (new Pared (new Vector2 (300, 0), new Vector2 (300, 600)));
-			campoBatalla.Paredes.Add (new Pared (new Vector2 (600, 200), new Vector2 (600, 1000)));
-			campoBatalla.Paredes.Add (new Pared (new Vector2 (900, 0), new Vector2 (900, 600)));
-			campoBatalla.Paredes.Add (new Pared (new Vector2 (1200, 200), new Vector2 (1200, 1000)));
+			for (int i = 0; i < 3; i++)
+			{
+				var p = new Pared (campoBatalla.Área.GetRandomPoint ().ToVector2 (),
+				                   campoBatalla.Área.GetRandomPoint ().ToVector2 ());
+				campoBatalla.Paredes.Add (p);
+			}
 
 			var btScr = new BattleScreen (Game, campoBatalla);
 			Game.CurrentScreen = btScr;

@@ -1,7 +1,5 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
 
 namespace KarTac
 {
@@ -13,6 +11,13 @@ namespace KarTac
 		{
 			var Coef = (float)(1 + (rnd.NextDouble () * (2 * varn) - varn));
 			return orig * Coef;
+		}
+
+		public static Point GetRandomPoint (this Rectangle rect)
+		{
+			return new Point (
+				Rnd.Next (rect.Left, rect.Right),
+				Rnd.Next (rect.Top, rect.Bottom));
 		}
 
 		public static float Randomize (float orig, double varn)
