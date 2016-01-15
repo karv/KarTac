@@ -58,8 +58,9 @@ namespace KarTac.Personajes
 
 			// Agregar defaults
 			Desbloqueables = new HashSet<ISkill> (new SkillComparer ());
-
 		}
+
+		public float TotalExp { get; set; }
 
 		/// <summary>
 		/// Habilidades inhatas del personaje
@@ -106,6 +107,7 @@ namespace KarTac.Personajes
 		{
 			writer.Write (Nombre);
 			Atributos.Guardar (writer);
+			writer.Write (TotalExp);
 			IOComún.Guardar (InnerSkill, writer);
 			IOComún.Guardar (Desbloqueables, writer);
 			IOComún.Guardar (Equipamento, writer);
@@ -115,7 +117,7 @@ namespace KarTac.Personajes
 		{
 			Nombre = reader.ReadString ();
 			Atributos.Cargar (reader);
-
+			TotalExp = reader.ReadSingle ();
 			InnerSkill.Clear ();
 			Desbloqueables.Clear ();
 			int count = reader.ReadInt32 ();
