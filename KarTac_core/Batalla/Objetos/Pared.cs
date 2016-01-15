@@ -20,6 +20,11 @@ namespace KarTac.Batalla.Objetos
 			return P1 - P0;
 		}
 
+		public Segmento AsSegment ()
+		{
+			return new Segmento (P0, P1 - P0);
+		}
+
 		public Pared (Campo campo, Vector2 p0, Vector2 p1)
 			: this (p0, p1)
 		{
@@ -37,6 +42,14 @@ namespace KarTac.Batalla.Objetos
 				return p - P0;
 			}
 			return rel_p.ProyOrto (GetVector ());
+		}
+
+		/// <summary>
+		/// Determina si un segmento corta esta pared
+		/// </summary>
+		public bool Corta (Segmento segm)
+		{
+			return Segmento.Intersecta (AsSegment (), segm);
 		}
 	}
 }

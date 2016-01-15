@@ -169,7 +169,7 @@ namespace KarTac.Batalla
 
 			var Fuerza = usarCoef / dist;
 			vect = vect * (Fuerza * (float)delta.TotalSeconds);
-			destino.PosPrecisa += vect;
+			destino.Mover (vect);
 		}
 
 		public Equipo? EquipoGanador { get; private set; }

@@ -42,6 +42,18 @@ namespace KarTac.Test
 
 			var n = p.Normal (new Vector2 (0, 5));
 			Console.WriteLine ((n));
+
+			Assert.IsTrue (p.Corta (new Segmento (
+				new Vector2 (5.5f, 0),
+				new Vector2 (
+					0,
+					10))));
+
+			Assert.IsTrue (!p.Corta (new Segmento (
+				new Vector2 (5.5f, 0),
+				new Vector2 (
+					0,
+					1))));
 		}
 	}
 }
