@@ -18,9 +18,17 @@ namespace KarTac.Cliente.Controls
 
 		Texture2D textura { get; set; }
 
+		ManejadorVP VP
+		{
+			get
+			{
+				return (Screen as BattleScreen).ManejadorVista;
+			}
+		}
+
 		public override void Dibujar (GameTime gameTime)
 		{
-			Formas.DrawLine (Screen.Batch, Pared.P0, Pared.P1, Color.Black, textura);
+			Formas.DrawLine (Screen.Batch, VP.CampoAPantalla (Pared.P0), VP.CampoAPantalla (Pared.P1), Color.Black, textura);
 		}
 
 		protected override void Dispose ()

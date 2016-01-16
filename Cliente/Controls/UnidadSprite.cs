@@ -161,7 +161,7 @@ namespace KarTac.Cliente.Controls
 			                Color.White);
 		}
 
-		public ManejdorVP VP
+		public ManejadorVP VP
 		{
 			get
 			{
@@ -175,6 +175,6 @@ namespace KarTac.Cliente.Controls
 		/// <summary>
 		/// El manejador de vista
 		/// </summary>
-		ManejdorVP VP { get; }
+		ManejadorVP VP { get; }
 	}
 }

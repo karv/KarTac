@@ -27,14 +27,14 @@ namespace KarTac.Cliente.Controls.Screens
 			contadorTiempo.Include ();
 			PendingPause = false;
 
-			ManejadorVista = new ManejdorVP ();
+			ManejadorVista = new ManejadorVP ();
 			ManejadorVista.ÁreaVisible = new Rectangle (Point.Zero, new Point (GetDisplayMode.Width, GetDisplayMode.Height));
 			ManejadorVista.BuenCentroRelTamaño = 0.8f;
 		}
 
 		Label contadorTiempo;
 
-		public ManejdorVP ManejadorVista;
+		public ManejadorVP ManejadorVista;
 
 		/// <summary>
 		/// Devuelve si hay pendiente una pausa del juego.
@@ -139,16 +139,12 @@ namespace KarTac.Cliente.Controls.Screens
 			return null;
 		}
 
-		public override void Dibujar (GameTime gameTime)
-		{
-			base.Dibujar (gameTime);
-		}
 	}
 
 	/// <summary>
 	/// Controla la parte visible del campo
 	/// </summary>
-	public class ManejdorVP
+	public class ManejadorVP
 	{
 		/// <summary>
 		/// Tamaño
