@@ -5,9 +5,7 @@ using System;
 using Microsoft.Xna.Framework;
 using KarTac.Skills;
 using OpenTK.Input;
-using KarTac.Cliente.Controls.Primitivos;
 using KarTac.Batalla.Objetos;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -28,9 +26,15 @@ namespace KarTac.Cliente.Controls.Screens
 			contadorTiempo.Posición = new Point (0, 20);
 			contadorTiempo.Include ();
 			PendingPause = false;
+
+			ManejadorVista = new ManejdorVP ();
+			ManejadorVista.ÁreaVisible = new Rectangle (Point.Zero, new Point (GetDisplayMode.Width, GetDisplayMode.Height));
+			ManejadorVista.BuenCentroRelTamaño = 0.8f;
 		}
 
 		Label contadorTiempo;
+
+		public ManejdorVP ManejadorVista;
 
 		/// <summary>
 		/// Devuelve si hay pendiente una pausa del juego.
@@ -135,12 +139,16 @@ namespace KarTac.Cliente.Controls.Screens
 			return null;
 		}
 
+		public override void Dibujar (GameTime gameTime)
+		{
+			base.Dibujar (gameTime);
+		}
 	}
 
 	/// <summary>
 	/// Controla la parte visible del campo
 	/// </summary>
-	public class VPManager
+	public class ManejdorVP
 	{
 		/// <summary>
 		/// Tamaño
@@ -157,6 +165,26 @@ namespace KarTac.Cliente.Controls.Screens
 		/// Área que se considera un buen lugar, un evento fuera de esta área requiere cenrtrar.
 		/// </summary>
 		public Rectangle BuenLugarCentro { get; set; }
+
+		/// <summary>
+		/// Establece el tamaño del buen centro\n
+		/// 1 => BuenLugarCentro == ÁreaVisible\n
+		/// 0 => BuenLugarCentro tiene área cero.
+		/// </summary>
+		public float BuenCentroRelTamaño
+		{
+			set
+			{
+				// 1 => 0 
+				// 0 => AreaVis / 2
+				var tl = ÁreaVisible.Center - new Point ((int)(ÁreaVisible.Size.X * value / 2),
+				                                         (int)(ÁreaVisible.Size.Y * value / 2));
+				// 0 => 0
+				// 1 => AreaVis
+				var tamaño = new Point ((int)(ÁreaVisible.Size.X * value), (int)(ÁreaVisible.Size.Y * value));
+				BuenLugarCentro = new Rectangle (tl, tamaño);
+			}
+		}
 
 		/// <summary>
 		/// Área del campo que se muestra
@@ -191,15 +219,52 @@ namespace KarTac.Cliente.Controls.Screens
 			}
 		}
 
+		/// <summary>
+		/// Convierte un punto relativo de un campo a uno de pantalla
+		/// </summary>
 		public Point CampoAPantalla (Point p)
 		{
 			return p - ÁreaVisible.Location;
 		}
 
+		/// <summary>
+		/// Convierte un punto relativo de pantalla a uno de campo
+		/// </summary>
 		public Point PantallaACampo (Point p)
 		{
 			return p + ÁreaVisible.Location;
 		}
 
+		/// <summary>
+		/// Convierte un punto relativo de un campo a uno de pantalla
+		/// </summary>
+		public Vector2 CampoAPantalla (Vector2 p)
+		{
+			return p - ÁreaVisible.Location.ToVector2 ();
+		}
+
+		/// <summary>
+		/// Convierte un punto relativo de pantalla a uno de campo
+		/// </summary>
+		public Vector2 PantallaACampo (Vector2 p)
+		{
+			return p + ÁreaVisible.Location.ToVector2 ();
+		}
+
+		/// <summary>
+		/// Convierte un rectángulo relativo de un campo a uno de pantalla
+		/// </summary>
+		public Rectangle CampoAPantalla (Rectangle rect)
+		{
+			return new Rectangle (CampoAPantalla (rect.Location), rect.Size);
+		}
+
+		/// <summary>
+		/// Convierte un rectángulo relativo de pantalla a uno de campo
+		/// </summary>
+		public Rectangle PantallaACampo (Rectangle rect)
+		{
+			return new Rectangle (PantallaACampo (rect.Location), rect.Size);
+		}
 	}
 }

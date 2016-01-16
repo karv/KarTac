@@ -8,7 +8,7 @@ using KarTac.Cliente.Controls.Primitivos;
 
 namespace KarTac.Cliente.Controls
 {
-	public class UnidadSprite: SBC
+	public class UnidadSprite: SBC, ISpriteCampo
 	{
 		public UnidadSprite (IScreen screen, KarTac.Batalla.Unidad unid)
 			: base (screen)
@@ -26,7 +26,7 @@ namespace KarTac.Cliente.Controls
 		{
 			get
 			{
-				return new Point (UnidadBase.Pos.X - tamaño.X / 2, UnidadBase.Pos.Y - tamaño.Y / 2);
+				return VP.CampoAPantalla (new Point (UnidadBase.Pos.X - tamaño.X / 2, UnidadBase.Pos.Y - tamaño.Y / 2));
 			}
 		}
 
@@ -146,7 +146,6 @@ namespace KarTac.Cliente.Controls
 			if (Marcado)
 			{
 				// Dibujar un rectángulo alrededor
-				//bat.Draw (texturaRect, GetBounds (), Color.Yellow * 0.7f);
 				Formas.DrawRectangle (bat, GetBounds (), Color.Yellow * 0.8f, texturaRect);
 			}
 
@@ -161,5 +160,21 @@ namespace KarTac.Cliente.Controls
 			                new Vector2 (área.Center.X - hSize / 2, área.Top - ySize - 2),
 			                Color.White);
 		}
+
+		public ManejdorVP VP
+		{
+			get
+			{
+				return (Screen as BattleScreen).ManejadorVista;
+			}
+		}
+	}
+
+	public interface ISpriteCampo
+	{
+		/// <summary>
+		/// El manejador de vista
+		/// </summary>
+		ManejdorVP VP { get; }
 	}
 }
