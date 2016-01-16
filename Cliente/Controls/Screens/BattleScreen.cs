@@ -136,4 +136,70 @@ namespace KarTac.Cliente.Controls.Screens
 		}
 
 	}
+
+	/// <summary>
+	/// Controla la parte visible del campo
+	/// </summary>
+	public class VPManager
+	{
+		/// <summary>
+		/// Tamaño
+		/// </summary>
+		public Point Tamaño
+		{
+			get
+			{
+				return ÁreaVisible.Size;
+			}
+		}
+
+		/// <summary>
+		/// Área que se considera un buen lugar, un evento fuera de esta área requiere cenrtrar.
+		/// </summary>
+		public Rectangle BuenLugarCentro { get; set; }
+
+		/// <summary>
+		/// Área del campo que se muestra
+		/// </summary>
+		public Rectangle ÁreaVisible { get; set; }
+
+		/// <summary>
+		/// Centra el área visible en un punto específico
+		/// </summary>
+		/// <param name="p">Punto del campo doónde centrar</param>
+		/// <param name="forzar">Si debe centrar aunque ya esté en el buen lugar</param>
+		public void CentrarEn (Point p, bool forzar = false)
+		{
+			bool centrar = forzar || !BuenLugarCentroRelativo.Contains (p);
+			if (centrar)
+			{
+				var topLeft = new Point (p.X - Tamaño.X / 2, p.Y - Tamaño.Y / 2);
+				ÁreaVisible = new Rectangle (topLeft, Tamaño);
+			}
+		}
+
+		/// <summary>
+		/// Devuelve el BuenLugarCentro relativo al campo, NO a pantala
+		/// </summary>
+		public Rectangle BuenLugarCentroRelativo
+		{
+			get
+			{
+				var ret = BuenLugarCentro;
+				ret.Location += ÁreaVisible.Location;
+				return ret;
+			}
+		}
+
+		public Point CampoAPantalla (Point p)
+		{
+			return p - ÁreaVisible.Location;
+		}
+
+		public Point PantallaACampo (Point p)
+		{
+			return p + ÁreaVisible.Location;
+		}
+
+	}
 }
