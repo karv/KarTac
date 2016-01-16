@@ -8,7 +8,7 @@ using KarTac.Cliente.Controls.Primitivos;
 
 namespace KarTac.Cliente.Controls
 {
-	public class UnidadSprite: SBC, ISpriteCampo
+	public class UnidadSprite: SBC
 	{
 		public UnidadSprite (IScreen screen, KarTac.Batalla.Unidad unid)
 			: base (screen)
@@ -168,13 +168,5 @@ namespace KarTac.Cliente.Controls
 				return (Screen as BattleScreen).ManejadorVista;
 			}
 		}
-	}
-
-	public interface ISpriteCampo
-	{
-		/// <summary>
-		/// El manejador de vista
-		/// </summary>
-		ManejadorVP VP { get; }
 	}
 }
