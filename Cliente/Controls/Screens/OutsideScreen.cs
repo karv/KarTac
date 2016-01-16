@@ -118,7 +118,7 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 			var r = Utils.Rnd;
 			//var campoBatalla = new Campo (new Point (GetDisplayMode.Width, GetDisplayMode.Height));
-			var campoBatalla = new Campo (new Point (1500, 800));
+			var campoBatalla = new Campo (new Point (5000, 1200));
 			for (int i = 0; i < 2; i++)
 			{
 				var p = new Pared (campoBatalla.Área.GetRandomPoint ().ToVector2 (),
