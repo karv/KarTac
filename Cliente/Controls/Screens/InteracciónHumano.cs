@@ -78,6 +78,7 @@ namespace KarTac.Cliente.Controls.Screens
 						iniciarDel = delegate
 						{
 							forma.Include ();
+							VP.CentrarEn (UnidadActual.Pos);
 							CampoBatalla.RequiereInteracciónInmediata = true;
 						};
 
