@@ -132,7 +132,7 @@ namespace KarTac.Cliente.Controls.Screens
 				var mostrarDaño = new VanishingString (Game, texto, TimeSpan.FromSeconds (1));
 				mostrarDaño.LoadContent ();
 				mostrarDaño.ColorInicial = sklRet.Color.Value;
-				mostrarDaño.Centro = sklRet.Loc.ToVector2 ();
+				mostrarDaño.Centro = this.ManejadorVista.CampoAPantalla (sklRet.Loc.ToVector2 ());
 				mostrarDaño.Include ();
 				return mostrarDaño;
 			}
