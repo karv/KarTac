@@ -128,7 +128,7 @@ namespace KarTac.Skills
 			var atrMP = UnidadUsuario.AtributosActuales.Recs ["Poder mágico"];
 			float daño = (float)DamageUtils.CalcularDaño (
 				             atrMP.Valor,
-				             unid.AtributosActuales.Defensa.Valor / 2,
+				             unid.AtributosActuales.Defensa.Valor / 10,
 				             2);
 			
 
