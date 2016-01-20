@@ -55,7 +55,7 @@ namespace KarTac.Cliente.Controls
 				v += new Vector2 (0, 1);
 
 			if (v != Vector2.Zero)
-				AlHacerPresión?.Invoke (v * gameTime.ElapsedGameTime.TotalMilliseconds);
+				AlHacerPresión?.Invoke (v * (float)gameTime.ElapsedGameTime.TotalMilliseconds);
 		}
 
 		public void LoadContent ()
