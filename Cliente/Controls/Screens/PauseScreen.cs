@@ -55,7 +55,7 @@ namespace KarTac.Cliente.Controls.Screens
 			if (InputManager.FuePresionado (Key.Enter))
 			{
 				var uni = Unidades.ObjetoEnCursor;
-				if (uni.OrdenActual.EsCancelable)
+				if (uni.OrdenActual?.EsCancelable ?? false)
 					uni.OrdenActual = null;
 				AlCancelarOrden?.Invoke (uni);
 			}
