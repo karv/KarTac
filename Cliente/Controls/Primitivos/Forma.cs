@@ -57,12 +57,20 @@ namespace KarTac.Cliente.Controls.Primitivos
 		public override void Dibujar (GameTime gameTime)
 		{
 			var bat = Screen.Batch;
-			bat.Draw (texture, bounds, Color);
+			bat.Draw (texture, VP.CampoAPantalla (bounds), Color);
 		}
 
 		public override Rectangle GetBounds ()
 		{
 			return bounds;
+		}
+
+		ManejadorVP VP
+		{
+			get
+			{
+				return (Screen as BattleScreen).ManejadorVista;
+			}
 		}
 	}
 }
