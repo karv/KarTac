@@ -32,6 +32,7 @@ namespace KarTac.Equipamento
 		}
 
 		float deltaDef;
+		float deltaAgil;
 
 		public override System.Collections.Generic.IEnumerable<IEquipamento> AutoRemove (ConjuntoEquipamento conj)
 		{
@@ -45,13 +46,18 @@ namespace KarTac.Equipamento
 					"armadura ligera",
 					false));
 			deltaDef = 3 + Portador.Atributos.Recs ["armadura ligera"].Valor;
+			deltaAgil = -5 / Portador.Atributos.Recs ["armadura ligera"].Valor;
 			Portador.Atributos.Defensa.Inicial += deltaDef;
+			Portador.Atributos.Agilidad.Inicial += deltaAgil;
 		}
 
 		protected override void OnDesequipar (ConjuntoEquipamento anterior)
 		{
 			if (Portador != null)
+			{
 				Portador.Atributos.Defensa.Inicial -= deltaDef;
+				Portador.Atributos.Agilidad.Inicial += deltaAgil;
+			}
 		}
 
 		public override void BattleUpdate (System.TimeSpan time)
