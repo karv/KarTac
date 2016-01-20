@@ -116,10 +116,17 @@ namespace KarTac.Batalla
 				foreach (var x in UnidadesVivas)
 				{
 					x.AcumularPetición (realDelta);
+
 					// Sus recursos
 					foreach (var y in x.AtributosActuales.Recs.Values)
 					{
 						y.Tick (realDelta);
+					}
+
+					// Experiencia por equipment
+					foreach (var y in x.PersonajeBase.Equipamento)
+					{
+						y.BattleUpdate (realDelta);
 					}
 				}
 

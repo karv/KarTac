@@ -17,6 +17,10 @@ namespace KarTac.Equipamento
 			}
 		}
 
+		public virtual void BattleUpdate (TimeSpan time)
+		{
+		}
+
 		protected virtual string Id
 		{
 			get
@@ -83,7 +87,7 @@ namespace KarTac.Equipamento
 		{
 			get
 			{
-				return ConjEquipment.Portador;
+				return ConjEquipment?.Portador;
 			}
 		}
 

@@ -114,6 +114,7 @@
     <Compile Include="Utils.cs" />
     <Compile Include="Batalla\Objetos\Pared.cs" />
     <Compile Include="Batalla\Objetos\IObjetoCampo.cs" />
+    <Compile Include="Equipamento\ArmaduraCuero.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
