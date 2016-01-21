@@ -32,6 +32,12 @@ namespace KarTac.Equipamento
 				case "Bastón":
 					ret = new Bastón ();
 					break;
+				case "Lanza":
+					ret = new Lanza ();
+					break;
+				case "Hacha":
+					ret = new Hacha ();
+					break;
 				default:
 					throw new IOException (recNombre + " no es un item.");
 			}

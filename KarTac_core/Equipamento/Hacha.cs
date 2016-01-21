@@ -4,31 +4,23 @@ using KarTac.Personajes;
 
 namespace KarTac.Equipamento
 {
-	public class EqEspada : EquipArma
+	public class Hacha : EquipArma
 	{
 		/// <summary>
 		/// La habilidad otorgada por esta arma
 		/// </summary>
-		class Skill : Golpe
+		class Hacha_skill : Golpe
 		{
-			public Skill (Personaje pj)
+			public Hacha_skill (Personaje pj)
 				: base (pj)
 			{
-			}
-
-			public override double Rango
-			{
-				get
-				{
-					return 50;
-				}
 			}
 
 			public override string Descripción
 			{
 				get
 				{
-					return "Da un golpe con la espada";
+					return "Da un golpe con el hacha";
 				}
 			}
 
@@ -36,7 +28,7 @@ namespace KarTac.Equipamento
 			{
 				get
 				{
-					return "Espadazo";
+					return "Hacha";
 				}
 			}
 
@@ -44,6 +36,7 @@ namespace KarTac.Equipamento
 			{
 				get
 				{
+					//TODO
 					return @"Icons/Equip/broadsword";
 				}
 			}
@@ -52,9 +45,9 @@ namespace KarTac.Equipamento
 			{
 				float daño = (float)DamageUtils.CalcularDaño (
 					             UnidadUsuario.AtributosActuales.Ataque.Valor +
-					             UnidadUsuario.PersonajeBase.Atributos.Recs ["Espada"].Valor,
+					             UnidadUsuario.PersonajeBase.Atributos.Recs ["Hacha"].Valor,
 					             unid.AtributosActuales.Defensa.Valor,
-					             2);
+					             2.2);
 
 				unid.AtributosActuales.HP.Valor -= daño;
 				System.Diagnostics.Debug.WriteLine (string.Format (
@@ -63,9 +56,8 @@ namespace KarTac.Equipamento
 					daño,
 					unid));
 
-				PeticiónExpAcumulada += 1;
 				UnidadUsuario.PersonajeBase.Atributos.Ataque.PeticiónExpAcumulada += 0.1;
-				UnidadUsuario.PersonajeBase.Atributos.Recs ["Espada"].PeticiónExpAcumulada += 0.3;
+				UnidadUsuario.PersonajeBase.Atributos.Recs ["Hacha"].PeticiónExpAcumulada += 0.3;
 				unid.PersonajeBase.Atributos.Defensa.PeticiónExpAcumulada += 0.3;
 
 				LastReturn = new  SkillReturnType (
@@ -82,7 +74,7 @@ namespace KarTac.Equipamento
 			get
 			{
 				yield return "arma";
-				yield return "Espada";
+				yield return "Hacha";
 			}
 		}
 
@@ -90,18 +82,17 @@ namespace KarTac.Equipamento
 		{
 			get
 			{
-				yield return new Skill (Portador);
+				yield return new Hacha_skill (Portador);
 			}
 		}
 
 		protected override void OnEquipar (ConjuntoEquipamento anterior)
 		{
 			// Agregar su atributo con la espada
-			if (!Portador.Atributos.Recs.ContainsKey ("Espada"))
-				#if DEBUG
-				Portador.Atributos.Recs.Add (new AtributoGenérico ("Espada", true));
+			#if DEBUG
+			Portador.Atributos.Recs.Add (new AtributoGenérico ("Espada", true));
 			#else
-				Portador.Atributos.Recs.Add (new AtributoGenérico ("Espada", false));
+			Portador.Atributos.Recs.Add (new AtributoGenérico ("Espada", false));
 			#endif
 			base.OnEquipar (anterior);
 		}
@@ -110,6 +101,7 @@ namespace KarTac.Equipamento
 		{
 			get
 			{
+				//TODO
 				return @"Icons/Equip/broadsword";
 			}
 		}
@@ -118,7 +110,7 @@ namespace KarTac.Equipamento
 		{
 			get
 			{
-				return "Espada";
+				return "Hacha";
 			}
 		}
 	}

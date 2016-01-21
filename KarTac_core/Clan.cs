@@ -81,8 +81,8 @@ namespace KarTac
 			var inv = ret.Inventario;
 
 			inv.Add (new Arco ());
-			inv.Add (new Arco ());
-			inv.Add (new EqEspada ());
+			inv.Add (new Hacha ());
+			inv.Add (new Lanza ());
 			inv.Add (new EqEspada ());
 			inv.Add (new HpPoción ());
 

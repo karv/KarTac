@@ -1,5 +1,4 @@
-﻿using System;
-using KarTac.Recursos;
+﻿using KarTac.Recursos;
 
 namespace KarTac.Equipamento
 {

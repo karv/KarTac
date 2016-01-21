@@ -1,6 +1,7 @@
 ﻿using KarTac.Batalla;
 using System;
 using Microsoft.Xna.Framework;
+using System.Diagnostics;
 
 namespace KarTac.Recursos
 {
@@ -23,6 +24,10 @@ namespace KarTac.Recursos
 			set
 			{
 				_valor = value;
+				#if DEBUG
+				if (_valor < 0)
+					Debug.WriteLine (string.Format ("{0} con valor {1}", Nombre, _valor));
+				#endif
 				AlCambiarValor?.Invoke ();
 			}
 		}
