@@ -60,7 +60,9 @@ namespace KarTac.Cliente.Controls
 
 			// TODO: Que no se me salga el texto.
 			var currY = Bounds.Location.ToVector2 ();
-			for (int i = 0; i < Objetos.Count; i++)
+			var inic = PrimerVisible;
+			var final = Math.Min (Objetos.Count, inic + MaxVisible);
+			for (int i = inic; i < final; i++)
 			{
 				var x = Objetos [i];
 				var strTxt = Stringificación (x.Objeto);
@@ -73,6 +75,24 @@ namespace KarTac.Cliente.Controls
 				currY.Y += Fuente.LineHeight;
 			}
 		}
+
+		/// <summary>
+		/// Devuelve el número de entradas que son visibles, a lo más
+		/// </summary>
+		/// <value>The max visible.</value>
+		public int MaxVisible
+		{
+			get
+			{
+				return Bounds.Height / Fuente.LineHeight;
+			}
+		}
+
+		/// <summary>
+		/// Devuelve el primer elemento visible en la lista
+		/// </summary>
+		/// <value>The primer visible.</value>
+		protected int PrimerVisible { get; set; }
 
 		public List<Entrada> Objetos { get; }
 
@@ -155,9 +175,9 @@ namespace KarTac.Cliente.Controls
 			{
 
 				if (InputManager.FuePresionado (AbajoKey))
-					CursorIndex++;
+					SeleccionaSiguiente ();
 				if (InputManager.FuePresionado (ArribaKey))
-					CursorIndex--;
+					SeleccionaAnterior ();
 			}
 		}
 
@@ -166,11 +186,15 @@ namespace KarTac.Cliente.Controls
 		public void SeleccionaSiguiente ()
 		{
 			CursorIndex++;
+			if (cursorIndex >= PrimerVisible + MaxVisible)
+				PrimerVisible++;
 		}
 
 		public void SeleccionaAnterior ()
 		{
 			CursorIndex--;
+			if (cursorIndex < PrimerVisible)
+				PrimerVisible--;
 		}
 
 		public object Seleccionado
