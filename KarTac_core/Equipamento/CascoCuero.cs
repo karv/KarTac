@@ -58,6 +58,8 @@ namespace KarTac.Equipamento
 				Portador.Atributos.Defensa.Inicial -= deltaDef;
 				Portador.Atributos.Agilidad.Inicial -= deltaAgil;
 			}
+			deltaDef = 0;
+			deltaAgil = 0;
 		}
 
 		public override void BattleUpdate (System.TimeSpan time)
