@@ -73,7 +73,10 @@ namespace KarTac.Cliente
 				unClan.Cargar (FileName);
 			}
 			else
+			{
 				unClan = Clan.BuildStartingClan ();
+				unClan.Dinero = 100000;
+			}
 
 			var scr = new OutsideScreen (this, unClan);
 

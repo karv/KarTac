@@ -31,8 +31,8 @@ namespace KarTac.Equipamento
 			}
 		}
 
-		float deltaDef;
-		float deltaAgil;
+		float deltaDef = 0;
+		float deltaAgil = 0;
 
 		public override System.Collections.Generic.IEnumerable<IEquipamento> AutoRemove (ConjuntoEquipamento conj)
 		{
@@ -46,7 +46,7 @@ namespace KarTac.Equipamento
 					"armadura ligera",
 					false));
 			deltaDef = 3 + Portador.Atributos.Recs ["armadura ligera"].Valor;
-			deltaAgil = -5 / Portador.Atributos.Recs ["armadura ligera"].Valor;
+			deltaAgil = -2 / (Portador.Atributos.Recs ["armadura ligera"].Valor + 1);
 			Portador.Atributos.Defensa.Inicial += deltaDef;
 			Portador.Atributos.Agilidad.Inicial += deltaAgil;
 		}
@@ -64,6 +64,19 @@ namespace KarTac.Equipamento
 		{
 			Portador.Atributos.Recs ["armadura ligera"].PeticiónExpAcumulada += time.TotalSeconds / 10;
 		}
-	
+
+		public override void Cargar (System.IO.BinaryReader reader)
+		{
+			deltaDef = reader.ReadSingle ();
+			deltaAgil = reader.ReadSingle ();
+		}
+
+		public override void Guardar (System.IO.BinaryWriter writer)
+		{
+			base.Guardar (writer);
+			writer.Write (deltaDef);
+			writer.Write (deltaAgil);
+		}
+
 	}
 }

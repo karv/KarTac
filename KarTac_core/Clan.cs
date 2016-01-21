@@ -138,7 +138,7 @@ namespace KarTac
 				Inventario,
 				() => KarTac.Equipamento.Lector.Cargar (reader),
 				reader);
-			IOComún.Cargar (Personajes, () => new Personaje (), reader);
+			IOComún.Cargar (Personajes, () => Personaje.CargarReader (reader), reader);
 		}
 
 		public void Guardar (string archivo)

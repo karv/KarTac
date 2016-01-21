@@ -143,7 +143,7 @@ namespace KarTac.Equipamento
 
 		public abstract string IconContentString { get; }
 
-		public void Guardar (System.IO.BinaryWriter writer)
+		public virtual void Guardar (BinaryWriter writer)
 		{
 			writer.Write (Nombre);
 		}
