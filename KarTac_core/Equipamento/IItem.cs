@@ -29,6 +29,9 @@ namespace KarTac.Equipamento
 				case "Casco de cuero":
 					ret = new CascoCuero ();
 					break;
+				case "Bastón":
+					ret = new Bastón ();
+					break;
 				default:
 					throw new IOException (recNombre + " no es un item.");
 			}

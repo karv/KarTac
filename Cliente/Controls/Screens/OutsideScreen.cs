@@ -86,6 +86,7 @@ namespace KarTac.Cliente.Controls.Screens
 			t.Artículos.Add (new Tienda.Entrada (() => new HpPoción (), 10, 50, "Poción"));
 			t.Artículos.Add (new Tienda.Entrada (() => new ArmaduraCuero (), 10, 120, "Armadura"));
 			t.Artículos.Add (new Tienda.Entrada (() => new CascoCuero (), 10, 120, "Casco"));
+			t.Artículos.Add (new Tienda.Entrada (() => new Bastón (), 10, 125, "Bastón"));
 			var scr = new TiendaScreen (Game, t, MyClan.Inventario);
 			scr.Ejecutar ();
 		}
