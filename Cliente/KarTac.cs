@@ -7,6 +7,7 @@ using System.IO;
 using System;
 
 #if DEBUG
+// Para usar Ctrl + Esc = salida rápida en cualquier pantalla
 using OpenTK.Input;
 #endif
 
@@ -30,7 +31,7 @@ namespace KarTac.Cliente
 
 		public IScreen CurrentScreen;
 
-		public List<IScreen> Screens { get; }
+		//public List<IScreen> Screens { get; }
 
 		readonly GraphicsDeviceManager graphics;
 
@@ -39,7 +40,7 @@ namespace KarTac.Cliente
 		public KarTacGame ()
 		{
 			ControlesUniversales = new ListaControl ();
-			Screens = new List<IScreen> ();
+			//Screens = new List<IScreen> ();
 			graphics = new GraphicsDeviceManager (this);
 			Content.RootDirectory = "Content";
 			graphics.IsFullScreen = true;
@@ -81,7 +82,6 @@ namespace KarTac.Cliente
 			var scr = new OutsideScreen (this, unClan);
 
 			CurrentScreen = scr;
-			scr.LoadContent ();
 
 			base.Initialize ();
 		}
@@ -96,11 +96,7 @@ namespace KarTac.Cliente
 			Batch = new SpriteBatch (GraphicsDevice);
 			//spriteBatch.DrawString(new SpriteFont)
 
-			foreach (var x in Screens)
-			{
-				x.LoadContent ();
-			}
-
+			CurrentScreen?.LoadContent ();
 			foreach (var x in ControlesUniversales)
 			{
 				x.LoadContent ();
