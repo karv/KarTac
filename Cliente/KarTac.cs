@@ -125,6 +125,11 @@ namespace KarTac.Cliente
 			InputManager.Update ();
 		}
 
+		protected override void OnExiting (object sender, EventArgs args)
+		{
+			base.OnExiting (sender, args);
+			((IScreen)this).UnloadContent ();
+		}
 
 		/// <summary>
 		/// This is called when the game should draw itself.
@@ -213,6 +218,11 @@ namespace KarTac.Cliente
 
 		void IScreen.UnloadContent ()
 		{
+			foreach (var cu in  ControlesUniversales.Clonar())
+			{
+				cu.Dispose ();
+			}
+			CurrentScreen.UnloadContent ();
 		}
 
 		public DisplayMode GetDisplayMode
