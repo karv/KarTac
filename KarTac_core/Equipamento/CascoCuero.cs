@@ -45,7 +45,7 @@ namespace KarTac.Equipamento
 				Portador.Atributos.Recs.Add (new AtributoGenérico (
 					"armadura ligera",
 					false));
-			deltaDef = 3 + Portador.Atributos.Recs ["armadura ligera"].Valor;
+			deltaDef = 1 + Portador.Atributos.Recs ["armadura ligera"].Valor;
 			deltaAgil = -1 / (Portador.Atributos.Recs ["armadura ligera"].Valor + 1);
 			Portador.Atributos.Defensa.Inicial += deltaDef;
 			Portador.Atributos.Agilidad.Inicial += deltaAgil;
