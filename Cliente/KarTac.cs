@@ -122,7 +122,7 @@ namespace KarTac.Cliente
 			CurrentScreen.Update (gameTime);
 			(this as IScreen).Update (gameTime);
 
-			InputManager.Update ();
+			InputManager.Update (gameTime.ElapsedGameTime);
 		}
 
 		protected override void OnExiting (object sender, EventArgs args)

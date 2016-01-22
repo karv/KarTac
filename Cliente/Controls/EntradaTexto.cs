@@ -83,37 +83,44 @@ namespace KarTac.Cliente.Controls
 			fontTexture = Screen.Content.Load<BitmapFont> ("fonts");
 		}
 
-		public IDictionary<Key, string> TeclasPermitidas { get; set; }
-
-		public override void Update (GameTime gameTime)
+		public override void Include ()
 		{
-			base.Update (gameTime);
+			base.Include ();
+			InputManager.AlSerActivado += InputManager_AlSerActivado;
+		}
 
+		protected override void Dispose ()
+		{
+			base.Dispose ();
+			InputManager.AlSerActivado -= InputManager_AlSerActivado;
+		}
+
+		void InputManager_AlSerActivado (Key key)
+		{
 			if (CatchKeys)
 			{
-				foreach (var k in TeclasPermitidas)
+				if (TeclasPermitidas.ContainsKey (key))
 				{
-					if (InputManager.FuePresionado (k.Key))
-					{
-						var tx = k.Value;
-						if (!InputManager.EstadoActualTeclado.IsKeyDown (Key.ShiftLeft) && !InputManager.EstadoActualTeclado.IsKeyDown (Key.ShiftRight))
-						{
-							tx = tx.ToLower ();
-						}
-						Texto += tx;
-					}
+					var tx = TeclasPermitidas [key];
+					if (!InputManager.EstadoActualTeclado.IsKeyDown (Key.ShiftLeft) && !InputManager.EstadoActualTeclado.IsKeyDown (Key.ShiftRight))
+						tx = tx.ToLower ();
+					Texto += tx;
 				}
-				if (InputManager.FuePresionado (Key.Space))
+
+				if (key == Key.Space)
 				{
 					Texto += " ";
 				}
-				if (InputManager.FuePresionado (Key.Back))
+				if (key == Key.Back)
 				{
 					if (Texto.Length > 0)
 						Texto = Texto.Remove (Texto.Length - 1);
 				}
 			}
+
 		}
+
+		public IDictionary<Key, string> TeclasPermitidas { get; set; }
 
 		public override Rectangle GetBounds ()
 		{
