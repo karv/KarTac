@@ -1,4 +1,5 @@
 ﻿using KarTac.Recursos;
+using KarTac.Skills;
 
 namespace KarTac.Equipamento
 {
@@ -27,6 +28,15 @@ namespace KarTac.Equipamento
 
 			deltaPM = 1 + Portador.Atributos.Recs ["Bastón"].Valor;
 			Portador.Atributos.Recs ["Poder mágico"].Valor += deltaPM;
+			Portador.Atributos.Recs.Add (new Maná ()); // Dárselo si no lo tiene
+		}
+
+		protected override System.Collections.Generic.IEnumerable<ISkill> Skills
+		{
+			get
+			{
+				yield return new RayoManá (Portador);
+			}
 		}
 
 		protected override void OnDesequipar (ConjuntoEquipamento anterior)
