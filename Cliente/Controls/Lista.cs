@@ -116,6 +116,23 @@ namespace KarTac.Cliente.Controls
 			}
 		}
 
+		public override void Include ()
+		{
+			base.Include ();
+			InputManager.AlSerActivado += InputManager_AlSerActivado;
+		}
+
+		void InputManager_AlSerActivado (Key obj)
+		{
+			if (InterceptarTeclado)
+			{
+				if (obj == AbajoKey)
+					SeleccionaSiguiente ();
+				if (obj == ArribaKey)
+					SeleccionaAnterior ();
+			}
+		}
+
 		public TObj ObjetoEnCursor
 		{
 			get
@@ -162,24 +179,12 @@ namespace KarTac.Cliente.Controls
 		{
 			Fuente = null;
 			noTexture = null;
+			InputManager.AlSerActivado -= InputManager_AlSerActivado;
 			base.Dispose ();
 		}
 
 		public Key AbajoKey = Key.Down;
 		public Key ArribaKey = Key.Up;
-
-		public override void Update (GameTime gameTime)
-		{
-			base.Update (gameTime);
-			if (InterceptarTeclado)
-			{
-
-				if (InputManager.FuePresionado (AbajoKey))
-					SeleccionaSiguiente ();
-				if (InputManager.FuePresionado (ArribaKey))
-					SeleccionaAnterior ();
-			}
-		}
 
 		#region IListaControl
 
