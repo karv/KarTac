@@ -17,7 +17,7 @@ namespace KarTac.Cliente.Controls
 		{
 			Prioridad = -20;
 			TiempoCambioLado = TimeSpan.FromMilliseconds (700);
-			skillsList = new ContenedorBotón (screen);
+			skillsList = new ListaSkills (screen);
 			skillsList.TipoOrden = ContenedorBotón.TipoOrdenEnum.ColumnaPrimero;
 			display = new RandomStringDisplay (screen);
 			descripDisplay = new Label (screen);
@@ -25,54 +25,14 @@ namespace KarTac.Cliente.Controls
 			descripDisplay.Texto = () => SkillSeleccionado.Descripción;
 		}
 
-		int índiceSkillSel;
-
 		public TimeSpan TiempoCambioLado;
-
-		public int ÍndiceSkillSel
-		{
-			get{ return índiceSkillSel; }
-			set
-			{
-				var nuevoInd = Math.Min (Math.Max (value, 0), skillsList.Count - 1);
-				skillsList.BotónEnÍndice (ÍndiceSkillSel).Color = 
-					getSkillColor (false, skillsList.BotónEnÍndice (ÍndiceSkillSel).Habilidato);
-				índiceSkillSel = nuevoInd;
-				skillsList.BotónEnÍndice (ÍndiceSkillSel).Color = 
-					getSkillColor (true, skillsList.BotónEnÍndice (ÍndiceSkillSel).Habilidato);
-			}
-		}
-
-		public void Unload ()
-		{
-			skillsList.Clear ();
-		}
-
-		static Color getSkillColor (bool selected, bool habil)
-		{
-			var ret = selected ? skillSelColor : skillNoSelColor;
-			if (!habil)
-				ret = new Color (ret.R / 2 + 128, ret.G / 2 + 128, ret.B / 2 + 128, ret.A);
-			//ret += Color.Gray * 0.4f;
-			return ret;
-		}
 
 		public ISkill SkillSeleccionado
 		{
 			get
 			{
-				return UnidadActual.PersonajeBase.Skills [ÍndiceSkillSel];
+				return skillsList.SkillSeleccionado;
 			}
-		}
-
-		static Color skillNoSelColor
-		{
-			get{ return Color.Red; }
-		}
-
-		static Color skillSelColor
-		{
-			get{ return Color.Green; }
 		}
 
 		/// <summary>
@@ -87,10 +47,22 @@ namespace KarTac.Cliente.Controls
 			descripDisplay.Texto = () => SkillSeleccionado.Descripción;
 		}
 
+		public int ÍndiceSkillSel
+		{
+			get
+			{
+				return skillsList.ÍndiceSkillSel;
+			}
+			set
+			{
+				skillsList.ÍndiceSkillSel = value;
+			}
+		}
+
 		public override void Inicializar ()
 		{
 			LoadContent ();
-			rehacerSkills ();
+			skillsList.Populate (UnidadActual.PersonajeBase);
 
 			descripDisplay.Inicializar ();
 
@@ -143,33 +115,10 @@ namespace KarTac.Cliente.Controls
 			{
 				unidadActual = value;
 				if (inicializado)
-					rehacerSkills ();
+					skillsList.Populate (UnidadActual.PersonajeBase);
 			}
 		}
 
-		void rehacerSkills ()
-		{
-			// Actualizar skills
-			skillsList.Clear ();
-			var numUsables = 0;
-
-			foreach (var sk in UnidadActual.PersonajeBase.Skills)
-			{
-				Botón bt;
-				if (sk.Usable)
-				{
-					bt = skillsList.Add (numUsables++);
-					bt.Color = Color.Red;
-				}
-				else
-				{
-					bt = skillsList.Add ();
-					bt.Habilidato = false;
-					bt.Color = Color.Gray;
-				}
-				bt.Textura = sk.IconTextureName;
-			}
-		}
 
 		public int TamañoY = 200;
 
@@ -177,7 +126,7 @@ namespace KarTac.Cliente.Controls
 		BitmapFont InfoFont;
 		public Color BgColor = Color.Blue * 0.4f;
 
-		ContenedorBotón skillsList { get; }
+		ListaSkills skillsList { get; }
 
 		RandomStringDisplay display { get; }
 
@@ -188,6 +137,11 @@ namespace KarTac.Cliente.Controls
 			skillsList.LoadContent ();
 			display.LoadContent ();
 			descripDisplay.LoadContent ();
+		}
+
+		public void Unload ()
+		{
+			skillsList.Clear ();
 		}
 
 		protected override void Dispose ()
