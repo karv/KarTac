@@ -18,7 +18,6 @@ namespace KarTac.Skills
 		{
 			Usuario.Atributos.Recs.Add (new Maná ());
 			UnidadUsuario.AtributosActuales.Recs.Add (
-				"Poder mágico",
 				new AtributoGenérico (
 					"Poder mágico",
 					true));	
