@@ -18,10 +18,9 @@ namespace KarTac.Skills
 		{
 			Usuario.Atributos.Recs.Add (new Maná ());
 			UnidadUsuario.AtributosActuales.Recs.Add (
-				"Poder mágico",
 				new AtributoGenérico (
 					"Poder mágico",
-					true));			
+					true));	
 		}
 
 		Maná ManáRecurso
@@ -128,8 +127,8 @@ namespace KarTac.Skills
 			var atrMP = UnidadUsuario.AtributosActuales.Recs ["Poder mágico"];
 			float daño = (float)DamageUtils.CalcularDaño (
 				             atrMP.Valor,
-				             unid.AtributosActuales.Defensa.Valor / 2,
-				             2);
+				             unid.AtributosActuales.Defensa.Valor / 10,
+				             10);
 			
 
 			unid.AtributosActuales.HP.Valor -= daño;

@@ -13,20 +13,20 @@ namespace KarTac.Recursos
 			VisibleBatalla = visibleBatalla;
 		}
 
-		float _valor;
+		//float _valor;
 
 		public float Valor
 		{
 			get
 			{
-				return _valor;
+				return Inicial;
 			}
 			set
 			{
-				_valor = value;
+				Inicial = value;
 				#if DEBUG
-				if (_valor < 0)
-					Debug.WriteLine (string.Format ("{0} con valor {1}", Nombre, _valor));
+				if (Valor < 0)
+					Debug.WriteLine (string.Format ("{0} con valor {1}", Nombre, Valor));
 				#endif
 				AlCambiarValor?.Invoke ();
 			}
