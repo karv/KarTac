@@ -40,7 +40,7 @@ namespace KarTac.IO
 			for (int i = 0; i < count; i++)
 			{
 				var ob = ctor.Invoke ();
-				ob.Cargar (reader);
+				//ob.Cargar (reader);
 				coll.Add (ob);
 			}
 		}

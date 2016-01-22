@@ -17,6 +17,10 @@ namespace KarTac.Equipamento
 			}
 		}
 
+		public virtual void BattleUpdate (TimeSpan time)
+		{
+		}
+
 		protected virtual string Id
 		{
 			get
@@ -83,7 +87,7 @@ namespace KarTac.Equipamento
 		{
 			get
 			{
-				return ConjEquipment.Portador;
+				return ConjEquipment?.Portador;
 			}
 		}
 
@@ -139,7 +143,7 @@ namespace KarTac.Equipamento
 
 		public abstract string IconContentString { get; }
 
-		public void Guardar (System.IO.BinaryWriter writer)
+		public virtual void Guardar (BinaryWriter writer)
 		{
 			writer.Write (Nombre);
 		}

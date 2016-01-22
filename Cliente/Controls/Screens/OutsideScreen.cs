@@ -82,8 +82,13 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 			var t = new Tienda ();
 			t.Artículos.Add (new Tienda.Entrada (() => new Arco (), 10, 110, "Arco corto"));
-			t.Artículos.Add (new Tienda.Entrada (() => new EqEspada (), 10, 800, "Espada"));
+			t.Artículos.Add (new Tienda.Entrada (() => new EqEspada (), 10, 150, "Espada"));
 			t.Artículos.Add (new Tienda.Entrada (() => new HpPoción (), 10, 50, "Poción"));
+			t.Artículos.Add (new Tienda.Entrada (() => new ArmaduraCuero (), 10, 120, "Armadura"));
+			t.Artículos.Add (new Tienda.Entrada (() => new CascoCuero (), 10, 120, "Casco"));
+			t.Artículos.Add (new Tienda.Entrada (() => new Bastón (), 10, 125, "Bastón"));
+			t.Artículos.Add (new Tienda.Entrada (() => new Hacha (), 10, 125, "Hacha"));
+			t.Artículos.Add (new Tienda.Entrada (() => new Lanza (), 10, 125, "Lanza"));
 			var scr = new TiendaScreen (Game, t, MyClan.Inventario);
 			scr.Ejecutar ();
 		}
@@ -119,6 +124,7 @@ namespace KarTac.Cliente.Controls.Screens
 			var r = Utils.Rnd;
 			//var campoBatalla = new Campo (new Point (GetDisplayMode.Width, GetDisplayMode.Height));
 			var campoBatalla = new Campo (new Point (5000, 1200));
+			Clan enemClan;
 			for (int i = 0; i < 2; i++)
 			{
 				var p = new Pared (campoBatalla.Área.GetRandomPoint ().ToVector2 (),
@@ -139,8 +145,9 @@ namespace KarTac.Cliente.Controls.Screens
 			};
 
 			//var ClanEnemigo = Clan.BuildStartingClan ();
+			enemClan = Clan.BuildStartingClan ();
 			var equipoRojo = new Equipo (0, Color.Red, MyClan.Inventario);
-			var equipoAmarillo = new Equipo (1, Color.Yellow, Clan.BuildStartingClan ().Inventario);
+			var equipoAmarillo = new Equipo (1, Color.Yellow, enemClan.Inventario);
 			var enemigo = GeneradorCombates.GenerarEquipoAleatorio (
 				              MyClan.TotalExp, 
 				              campoBatalla,
@@ -172,6 +179,9 @@ namespace KarTac.Cliente.Controls.Screens
 				u.PersonajeBase.Atributos.Inicializar ();
 				u.PosPrecisa = randomPointInRectangle (campoBatalla.Área, r);
 			}
+
+			MyClan.Reestablecer ();
+			enemClan.Reestablecer ();
 
 			btScr.Inicializar ();
 		}

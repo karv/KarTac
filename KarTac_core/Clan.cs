@@ -81,8 +81,8 @@ namespace KarTac
 			var inv = ret.Inventario;
 
 			inv.Add (new Arco ());
-			inv.Add (new Arco ());
-			inv.Add (new EqEspada ());
+			inv.Add (new Hacha ());
+			inv.Add (new Lanza ());
 			inv.Add (new EqEspada ());
 			inv.Add (new HpPoción ());
 
@@ -138,7 +138,7 @@ namespace KarTac
 				Inventario,
 				() => KarTac.Equipamento.Lector.Cargar (reader),
 				reader);
-			IOComún.Cargar (Personajes, () => new Personaje (), reader);
+			IOComún.Cargar (Personajes, () => Personaje.CargarReader (reader), reader);
 		}
 
 		public void Guardar (string archivo)

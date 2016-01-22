@@ -1,5 +1,4 @@
 ﻿using System;
-using KarTac.Personajes;
 using System.Collections.Generic;
 using KarTac.Skills;
 
@@ -33,6 +32,11 @@ namespace KarTac.Equipamento
 		/// </summary>
 		/// <value>The skills.</value>
 		IEnumerable<ISkill> Skills { get; }
+
+		/// <summary>
+		/// Se ejecuta continuamente para todas las unidades durante una batalla.
+		/// </summary>
+		void BattleUpdate (TimeSpan time);
 
 		/// <summary>
 		/// Ocurre al equiparse.

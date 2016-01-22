@@ -139,6 +139,13 @@ namespace KarTac.Personajes
 			}
 		}
 
+		public static Personaje CargarReader (BinaryReader reader)
+		{
+			var ret = new Personaje ();
+			ret.Cargar (reader);
+			return ret;
+		}
+
 		#endregion
 	}
 }

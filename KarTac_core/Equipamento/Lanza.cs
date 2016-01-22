@@ -4,7 +4,7 @@ using KarTac.Personajes;
 
 namespace KarTac.Equipamento
 {
-	public class EqEspada : EquipArma
+	public class Lanza : EquipArma
 	{
 		/// <summary>
 		/// La habilidad otorgada por esta arma
@@ -20,7 +20,7 @@ namespace KarTac.Equipamento
 			{
 				get
 				{
-					return 50;
+					return 65;
 				}
 			}
 
@@ -28,7 +28,7 @@ namespace KarTac.Equipamento
 			{
 				get
 				{
-					return "Da un golpe con la espada";
+					return "Da un golpe con su lanza";
 				}
 			}
 
@@ -36,7 +36,7 @@ namespace KarTac.Equipamento
 			{
 				get
 				{
-					return "Espadazo";
+					return "Lanza";
 				}
 			}
 
@@ -52,9 +52,9 @@ namespace KarTac.Equipamento
 			{
 				float daño = (float)DamageUtils.CalcularDaño (
 					             UnidadUsuario.AtributosActuales.Ataque.Valor +
-					             UnidadUsuario.PersonajeBase.Atributos.Recs ["Espada"].Valor,
-					             unid.AtributosActuales.Defensa.Valor,
-					             2);
+					             UnidadUsuario.PersonajeBase.Atributos.Recs ["Lanza"].Valor,
+					             unid.AtributosActuales.Defensa.Valor / 2,
+					             1);
 
 				unid.AtributosActuales.HP.Valor -= daño;
 				System.Diagnostics.Debug.WriteLine (string.Format (
@@ -63,9 +63,8 @@ namespace KarTac.Equipamento
 					daño,
 					unid));
 
-				PeticiónExpAcumulada += 1;
 				UnidadUsuario.PersonajeBase.Atributos.Ataque.PeticiónExpAcumulada += 0.1;
-				UnidadUsuario.PersonajeBase.Atributos.Recs ["Espada"].PeticiónExpAcumulada += 0.3;
+				UnidadUsuario.PersonajeBase.Atributos.Recs ["Lanza"].PeticiónExpAcumulada += 0.3;
 				unid.PersonajeBase.Atributos.Defensa.PeticiónExpAcumulada += 0.3;
 
 				LastReturn = new  SkillReturnType (
@@ -82,7 +81,7 @@ namespace KarTac.Equipamento
 			get
 			{
 				yield return "arma";
-				yield return "Espada";
+				yield return "Lanza";
 			}
 		}
 
@@ -96,12 +95,10 @@ namespace KarTac.Equipamento
 
 		protected override void OnEquipar (ConjuntoEquipamento anterior)
 		{
-			// Agregar su atributo con la espada
-			if (!Portador.Atributos.Recs.ContainsKey ("Espada"))
-				#if DEBUG
-				Portador.Atributos.Recs.Add (new AtributoGenérico ("Espada", true));
+			#if DEBUG
+			Portador.Atributos.Recs.Add (new AtributoGenérico ("Lanza", true));
 			#else
-				Portador.Atributos.Recs.Add (new AtributoGenérico ("Espada", false));
+			Portador.Atributos.Recs.Add (new AtributoGenérico ("Lanza", false));
 			#endif
 			base.OnEquipar (anterior);
 		}
@@ -110,6 +107,7 @@ namespace KarTac.Equipamento
 		{
 			get
 			{
+				// TODO
 				return @"Icons/Equip/broadsword";
 			}
 		}
@@ -118,7 +116,7 @@ namespace KarTac.Equipamento
 		{
 			get
 			{
-				return "Espada";
+				return "Lanza";
 			}
 		}
 	}

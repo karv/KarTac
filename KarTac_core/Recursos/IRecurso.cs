@@ -43,7 +43,7 @@ namespace KarTac.Recursos
 		/// <summary>
 		/// Valor actual del recurso
 		/// </summary>
-		float Valor { get; }
+		float Valor { get; set; }
 
 		/// <summary>
 		/// Si el atributo es visible durante la batalla
