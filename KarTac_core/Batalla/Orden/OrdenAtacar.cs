@@ -18,7 +18,7 @@ namespace KarTac.Batalla.Orden
 		public double Distancia { get; set; }
 
 
-		public override Vector2 VectorDeMuro ()
+		public override Vector2 VectorDeMuro (KarTac.Batalla.Objetos.Pared pared)
 		{
 			return Vector2.Zero;
 		}
@@ -31,17 +31,18 @@ namespace KarTac.Batalla.Orden
 		public override UpdateReturnType Update (TimeSpan time)
 		{
 			var másCercana = UnidadEnemigoMásCercana ();
-			var lastDistSq = (másCercana.PosPrecisa - Unidad.PosPrecisa).LengthSquared ();
-			if (lastDistSq < Distancia * Distancia)
-			{
-				OnTerminar ();
-				return new UpdateReturnType (time, TimeSpan.Zero);
-			}
 			if (másCercana != null)
+			{
+				var lastDistSq = (másCercana.PosPrecisa - Unidad.PosPrecisa).LengthSquared ();
+				if (lastDistSq < Distancia * Distancia)
+				{
+					OnTerminar ();
+					return new UpdateReturnType (time, TimeSpan.Zero);
+				}
 				Unidad.Mover (
 					másCercana.PosPrecisa - Unidad.PosPrecisa,
 					time);
-
+			}
 			return new UpdateReturnType (time);
 		}
 	}

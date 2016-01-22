@@ -3,6 +3,8 @@ using System;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using KarTac.Skills;
+using KarTac.Batalla.Objetos;
+using NUnit.Framework;
 
 namespace KarTac.Batalla
 {
@@ -14,7 +16,7 @@ namespace KarTac.Batalla
 		/// <summary>
 		/// Experiencia por minuto
 		/// </summary>
-		public float ExpPorMinuto = 60;
+		public float ExpPorMinuto = 5;
 
 		/// <summary>
 		/// Duración de la batalla (hasta este momento, si no ha terminado)
@@ -55,6 +57,27 @@ namespace KarTac.Batalla
 			Unidades = new List<Unidad> ();
 			Área = new Rectangle (Point.Zero, tamaño);
 			DuraciónBatalla = TimeSpan.Zero;
+			Paredes = new List<Pared> ();
+			Paredes.Add (new Pared (
+				this,
+				new Vector2 (0, 0),
+				new Vector2 (
+					Área.Width,
+					0)));
+			Paredes.Add (new Pared (
+				this,
+				new Vector2 (Área.Width, 0),
+				new Vector2 (
+					Área.Width,
+					Área.Height)));
+			Paredes.Add (new Pared (
+				this,
+				new Vector2 (Área.Width, Área.Height),
+				new Vector2 (0, Área.Height)));
+			Paredes.Add (new Pared (
+				this,
+				new Vector2 (0, Área.Height),
+				new Vector2 (0, 0)));
 		}
 
 		public Rectangle Área { get; private set; }
@@ -93,10 +116,17 @@ namespace KarTac.Batalla
 				foreach (var x in UnidadesVivas)
 				{
 					x.AcumularPetición (realDelta);
+
 					// Sus recursos
 					foreach (var y in x.AtributosActuales.Recs.Values)
 					{
 						y.Tick (realDelta);
+					}
+
+					// Experiencia por equipment
+					foreach (var y in x.PersonajeBase.Equipamento)
+					{
+						y.BattleUpdate (realDelta);
 					}
 				}
 
@@ -146,7 +176,7 @@ namespace KarTac.Batalla
 
 			var Fuerza = usarCoef / dist;
 			vect = vect * (Fuerza * (float)delta.TotalSeconds);
-			destino.PosPrecisa += vect;
+			destino.Mover (vect);
 		}
 
 		public Equipo? EquipoGanador { get; private set; }
@@ -192,15 +222,58 @@ namespace KarTac.Batalla
 					if (sk.PuedeAprender ())
 					{
 						x.PersonajeBase.Desbloqueables.Remove (sk);
-						x.PersonajeBase.Skills.Add (sk);
+						x.PersonajeBase.InnerSkill.Add (sk);
 						sk.AlAprender ();
 					}
+				}
+			}
+
+			// Pagar al clan ganador
+			var ganador = EquipoGanador.Value;
+			foreach (var x in GetEquipos())
+			{
+				if (!ganador.Equals (x))
+				{
+					ganador.Drops.Dinero += x.Drops.Dinero;
 				}
 			}
 
 			AlTerminar?.Invoke ();
 		}
 
+		public ICollection<Equipo> GetEquipos ()
+		{
+			var ret = new List<Equipo> ();
+			foreach (var x in Unidades)
+			{
+				if (!ret.Contains (x.Equipo))
+					ret.Add (x.Equipo);
+			}
+			return ret;
+		}
+
+		/// <summary>
+		/// Devuelve la unidad más cercana a una posición
+		/// </summary>
+		public Unidad UnidadMásCercana (Vector2 pos, Func<Unidad, bool> pred)
+		{
+			Unidad másCercana = null;
+			double lastDistSq = double.PositiveInfinity;
+			foreach (var x in UnidadesVivas.Where (pred))
+			{
+				var distSq = (x.PosPrecisa - pos).LengthSquared ();
+				if (distSq < lastDistSq)
+				{
+					lastDistSq = distSq;
+					másCercana = x;
+				}
+			}
+			return másCercana;
+		}
+
+		/// <summary>
+		/// Devuelve la unidad más cercana a una posición
+		/// </summary>
 		public Unidad UnidadMásCercana (Vector2 pos)
 		{
 			Unidad másCercana = null;
@@ -216,6 +289,8 @@ namespace KarTac.Batalla
 			}
 			return másCercana;
 		}
+
+		public ICollection<Pared> Paredes { get; }
 
 		public event Action<Unidad> AlRequerirOrdenAntes;
 		public event Action<Unidad> AlRequerirOrdenDespués;

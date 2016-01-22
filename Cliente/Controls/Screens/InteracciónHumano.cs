@@ -22,6 +22,14 @@ namespace KarTac.Cliente.Controls.Screens
 			}
 		}
 
+		public override bool DibujarBase
+		{
+			get
+			{
+				return true;
+			}
+		}
+
 		public Campo CampoBatalla
 		{
 			get
@@ -56,8 +64,6 @@ namespace KarTac.Cliente.Controls.Screens
 				var skill = menú.SkillSeleccionado;
 				if (skill.Usable)
 				{
-					// Si tiene forma, usarla
-					// TODO hacerlo interface para no hacer que esta clase sea la única encargada de esto.
 					var skillForma = skill as SkillTresPasosShaped; 
 					Forma forma = null;
 					if (skillForma != null)
@@ -72,6 +78,7 @@ namespace KarTac.Cliente.Controls.Screens
 						iniciarDel = delegate
 						{
 							forma.Include ();
+							VP.CentrarEn (UnidadActual.Pos);
 							CampoBatalla.RequiereInteracciónInmediata = true;
 						};
 
@@ -100,10 +107,12 @@ namespace KarTac.Cliente.Controls.Screens
 				var rng = (sk?.Rango ?? 40) * 0.9f;
 				IOrden orden;
 				// Si usa ctrl, se carga; si no, rodea
+				// Analysis disable ConvertIfStatementToConditionalTernaryExpression
 				if (InputManager.EstáPresionado (Key.ShiftLeft))
 					orden = new OrdenAtacar (UnidadActual, rng);
 				else
-					orden = new Rodear (UnidadActual, rng);
+					orden = new MantenerDistancia (UnidadActual, rng * 0.7, rng * 0.9);
+				// Analysis restore ConvertIfStatementToConditionalTernaryExpression
 				UnidadActual.OrdenActual = orden;
 				Salir ();
 			}
@@ -122,23 +131,25 @@ namespace KarTac.Cliente.Controls.Screens
 
 			if (InputManager.FuePresionado (MouseButton.Left))
 			{
+				var relClickPos = VP.PantallaACampo (new Point (InputManager.EstadoActualMouse.X,
+				                                                InputManager.EstadoActualMouse.Y));
 				var ordMov = new Movimiento (UnidadActual);
-				ordMov.Destino = new Point (InputManager.EstadoActualMouse.X,
-				                            InputManager.EstadoActualMouse.Y);
+				ordMov.Destino = relClickPos;
 				UnidadActual.OrdenActual = ordMov;
 				Salir (); // Devuelve el control a la pantalla anterior
 			}
 
 			if (InputManager.FuePresionado (MouseButton.Right))
 			{
-				var clickLoc = new Vector2 (InputManager.EstadoActualMouse.X,
-				                            InputManager.EstadoActualMouse.Y);
+				var relClickPos = VP.PantallaACampo (new Point (InputManager.EstadoActualMouse.X,
+				                                                InputManager.EstadoActualMouse.Y));
+				
 				// Ver si una unidad está cerca
 				foreach (var x in CampoBatalla.Unidades)
 				{
 					var selSkill = menú.SkillSeleccionado;
 					double rang = (selSkill as IRangedSkill)?.Rango * 0.9 ?? 40;
-					var vectorDist = x.PosPrecisa - clickLoc;
+					var vectorDist = x.PosPrecisa - relClickPos.ToVector2 ();
 					if (vectorDist.Length () < rang && x != UnidadActual)
 					{
 						var ord = new Perseguir (UnidadActual);
@@ -159,9 +170,23 @@ namespace KarTac.Cliente.Controls.Screens
 			}
 		}
 
+		ManejadorVP VP
+		{
+			get
+			{
+				return (ScreenBase as BattleScreen).ManejadorVista;
+			}
+		}
+
 		public override void Inicializar ()
 		{
 			menú.Inicializar ();
+			VP.CentrarEn (UnidadActual.Pos);
+		}
+
+		public override void UnloadContent ()
+		{
+			menú.Unload ();
 		}
 
 		#region IInteractor

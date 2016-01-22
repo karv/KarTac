@@ -57,9 +57,10 @@ namespace KarTac.Personajes
 			Equipamento = new ConjuntoEquipamento (this);
 
 			// Agregar defaults
-			Desbloqueables = new HashSet<ISkill> ();
-
+			Desbloqueables = new HashSet<ISkill> (new SkillComparer ());
 		}
+
+		public float TotalExp { get; set; }
 
 		/// <summary>
 		/// Habilidades inhatas del personaje
@@ -71,7 +72,7 @@ namespace KarTac.Personajes
 		/// Todas las habilidades del personaje, incluyendo de armas
 		/// </summary>
 		/// <value>The skills.</value>
-		public IList<ISkill> Skills
+		public IReadOnlyList<ISkill> Skills
 		{
 			get
 			{
@@ -106,16 +107,18 @@ namespace KarTac.Personajes
 		{
 			writer.Write (Nombre);
 			Atributos.Guardar (writer);
+			writer.Write (TotalExp);
 			IOComún.Guardar (InnerSkill, writer);
 			IOComún.Guardar (Desbloqueables, writer);
+			IOComún.Guardar (Equipamento, writer);
 		}
 
 		public void Cargar (BinaryReader reader)
 		{
 			Nombre = reader.ReadString ();
 			Atributos.Cargar (reader);
-
-			Skills.Clear ();
+			TotalExp = reader.ReadSingle ();
+			InnerSkill.Clear ();
 			Desbloqueables.Clear ();
 			int count = reader.ReadInt32 ();
 			for (int i = 0; i < count; i++)
@@ -127,6 +130,20 @@ namespace KarTac.Personajes
 			{
 				Desbloqueables.Add (SkillComún.Cargar (reader, this));
 			}
+			count = reader.ReadInt32 ();
+			for (int i = 0; i < count; i++)
+			{
+				var eq = Lector.Cargar (reader) as IEquipamento;
+				eq.EquiparEn (Equipamento);
+				//Equipamento.Add ();
+			}
+		}
+
+		public static Personaje CargarReader (BinaryReader reader)
+		{
+			var ret = new Personaje ();
+			ret.Cargar (reader);
+			return ret;
 		}
 
 		#endregion

@@ -17,6 +17,11 @@ namespace KarTac.Skills
 		public override void AlAprender ()
 		{
 			Usuario.Atributos.Recs.Add (new Maná ());
+			UnidadUsuario.AtributosActuales.Recs.Add (
+				"Poder mágico",
+				new AtributoGenérico (
+					"Poder mágico",
+					true));			
 		}
 
 		Maná ManáRecurso
@@ -67,7 +72,7 @@ namespace KarTac.Skills
 		{
 			get
 			{
-				return 350;
+				return 90;
 			}
 		}
 
@@ -78,13 +83,13 @@ namespace KarTac.Skills
 
 		protected override TimeSpan CalcularTiempoUso ()
 		{
-			return TimeSpan.FromSeconds (1);
+			return TimeSpan.FromSeconds (0.5);
 		}
 
 		protected override TimeSpan CalcularTiempoPreparación ()
 		{
 			//return TimeSpan.Zero;
-			return TimeSpan.FromSeconds (1);
+			return TimeSpan.FromSeconds (0.1);
 		}
 
 		protected override int MaxSelect
@@ -103,7 +108,7 @@ namespace KarTac.Skills
 			}
 		}
 
-		const float UsaManá = 5;
+		const float UsaManá = 1;
 
 		public override bool Usable
 		{
@@ -120,9 +125,12 @@ namespace KarTac.Skills
 
 		protected override ISkillReturnType EffectOnTarget (Unidad unid)
 		{
-			// usuario ataca a selección
-
-			const int daño = 10;
+			var atrMP = UnidadUsuario.AtributosActuales.Recs ["Poder mágico"];
+			float daño = (float)DamageUtils.CalcularDaño (
+				             atrMP.Valor,
+				             unid.AtributosActuales.Defensa.Valor / 2,
+				             2);
+			
 
 			unid.AtributosActuales.HP.Valor -= daño;
 			System.Diagnostics.Debug.WriteLine (string.Format (
@@ -134,6 +142,7 @@ namespace KarTac.Skills
 			ManáRecurso.Valor -= UsaManá;
 
 			PeticiónExpAcumulada += 1.5;
+			atrMP.PeticiónExpAcumulada += 0.4f;
 			LastReturn = new SkillReturnType (
 				-daño,
 				unid.AtributosActuales.HP,

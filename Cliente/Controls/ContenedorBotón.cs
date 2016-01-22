@@ -186,7 +186,6 @@ namespace KarTac.Cliente.Controls
 			{
 				x.Exclude ();
 			}
-
 			base.Exclude ();
 		}
 

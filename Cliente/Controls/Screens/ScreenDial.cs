@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using System;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -35,7 +36,8 @@ namespace KarTac.Cliente.Controls.Screens
 
 		public virtual void Dibujar (GameTime gameTime)
 		{
-			ScreenBase.Dibujar (gameTime);
+			if (DibujarBase)
+				ScreenBase.Dibujar (gameTime);
 
 			Batch = GetNewBatch ();
 			Batch.Begin ();
@@ -70,6 +72,11 @@ namespace KarTac.Cliente.Controls.Screens
 
 		public virtual void UnloadContent ()
 		{
+			foreach (var x in new List<IControl>(Controles))
+			{
+				x.Exclude ();
+				x.Dispose ();
+			}
 		}
 
 		public virtual void Ejecutar ()
@@ -82,7 +89,7 @@ namespace KarTac.Cliente.Controls.Screens
 			Juego.CurrentScreen = this;
 		}
 
-		public void Salir ()
+		public virtual void Salir ()
 		{
 			#if DEBUG
 			System.Diagnostics.Debug.WriteLine ("\n\nEntrando a " + ScreenBase);
@@ -97,7 +104,13 @@ namespace KarTac.Cliente.Controls.Screens
 			return ScreenBase.GetNewBatch ();
 		}
 
-		public abstract void Inicializar ();
+		public virtual void Inicializar ()
+		{
+			foreach (var x in Controles)
+			{
+				x.Inicializar ();
+			}
+		}
 
 		public ListaControl Controles { get; }
 
@@ -131,6 +144,8 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 			return string.Format ("[{0}]\nAnterior: {1}", GetType (), ScreenBase);
 		}
+
+		public abstract bool DibujarBase { get; }
 
 		public event Action AlTerminar;
 	}

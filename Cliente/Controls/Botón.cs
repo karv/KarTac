@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using KarTac.Cliente.Controls.Screens;
+using System;
 
 namespace KarTac.Cliente.Controls
 {
@@ -28,6 +29,8 @@ namespace KarTac.Cliente.Controls
 
 		public override void Dibujar (GameTime gameTime)
 		{
+			if (Bounds.Left == 0)
+				Console.WriteLine ();
 			Screen.Batch.Draw (TexturaInstancia, Bounds, Color);
 		}
 
@@ -45,5 +48,10 @@ namespace KarTac.Cliente.Controls
 		}
 
 		public bool Habilidato { get; set; }
+
+		public override string ToString ()
+		{
+			return string.Format ("{0}{1}", Habilidato ? "[H]" : "", Textura);
+		}
 	}
 }

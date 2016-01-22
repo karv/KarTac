@@ -24,6 +24,14 @@ namespace KarTac.Cliente.Controls.Screens
 
 		}
 
+		public override bool DibujarBase
+		{
+			get
+			{
+				return true;
+			}
+		}
+
 		/// <summary>
 		/// Texto que aparece como título de la pregunta.
 		/// </summary>

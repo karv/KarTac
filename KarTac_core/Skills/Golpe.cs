@@ -95,10 +95,10 @@ namespace KarTac.Skills
 
 		protected override ISkillReturnType EffectOnTarget (Unidad unid)
 		{
-			var dañoBloqueado = Math.Max (
-				                    unid.AtributosActuales.Recs ["Defensa"].Valor - UnidadUsuario.AtributosActuales.Recs ["Ataque"].Valor,
-				                    0);
-			var daño = Math.Max (20 - dañoBloqueado, 1);
+			float daño = (float)DamageUtils.CalcularDaño (
+				             UnidadUsuario.AtributosActuales.Ataque.Valor,
+				             unid.AtributosActuales.Defensa.Valor,
+				             2);
 
 			unid.AtributosActuales.HP.Valor -= daño;
 			System.Diagnostics.Debug.WriteLine (string.Format (

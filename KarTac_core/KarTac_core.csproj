@@ -104,6 +104,21 @@
     <Compile Include="Equipamento\EqEspada.cs" />
     <Compile Include="Recursos\Condición.cs" />
     <Compile Include="Skills\LanzaRoca.cs" />
+    <Compile Include="Tienda.cs" />
+    <Compile Include="Equipamento\Arco.cs" />
+    <Compile Include="Equipamento\HpPoción.cs" />
+    <Compile Include="IA\AIMeléBásico.cs" />
+    <Compile Include="Batalla\Orden\MantenerDistancia.cs" />
+    <Compile Include="Skills\DamageUtils.cs" />
+    <Compile Include="Batalla\Generador\GeneradorCombates.cs" />
+    <Compile Include="Utils.cs" />
+    <Compile Include="Batalla\Objetos\Pared.cs" />
+    <Compile Include="Batalla\Objetos\IObjetoCampo.cs" />
+    <Compile Include="Equipamento\ArmaduraCuero.cs" />
+    <Compile Include="Equipamento\CascoCuero.cs" />
+    <Compile Include="Equipamento\Bastón.cs" />
+    <Compile Include="Equipamento\Hacha.cs" />
+    <Compile Include="Equipamento\Lanza.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
@@ -130,6 +145,9 @@
     <Folder Include="Personajes\" />
     <Folder Include="IO\" />
     <Folder Include="Equipamento\" />
+    <Folder Include="IA\" />
+    <Folder Include="Batalla\Generador\" />
+    <Folder Include="Batalla\Objetos\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OpenTK.dll.config" />

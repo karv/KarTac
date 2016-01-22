@@ -9,6 +9,14 @@ namespace KarTac.Batalla.Orden
 			Unidad = unidad;
 		}
 
+		bool IOrden.EsCancelable
+		{
+			get
+			{
+				return false;
+			}
+		}
+
 		public event Action AlMostrarLista;
 
 		public bool FueRespondido { get; private set; }

@@ -5,6 +5,7 @@ using System;
 using Microsoft.Xna.Framework;
 using KarTac.Skills;
 using OpenTK.Input;
+using KarTac.Batalla.Objetos;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -25,9 +26,30 @@ namespace KarTac.Cliente.Controls.Screens
 			contadorTiempo.Posición = new Point (0, 20);
 			contadorTiempo.Include ();
 			PendingPause = false;
+
+			ManejadorVista = new ManejadorVP ();
+			ManejadorVista.ÁreaVisible = new Rectangle (Point.Zero, new Point (GetDisplayMode.Width, GetDisplayMode.Height));
+			ManejadorVista.BuenCentroRelTamaño = 0.8f;
+
+			sense = new SensorialExtremos (this);
+			sense.AlHacerPresión += moverPantalla;
+			sense.Include ();
+		}
+
+		void moverPantalla (Vector2 obj)
+		{
+			Point mv = obj.ToPoint ();
+			ManejadorVista.ÁreaVisible = new Rectangle (ManejadorVista.ÁreaVisible.Left + mv.X,
+			                                            ManejadorVista.ÁreaVisible.Top + mv.Y,
+			                                            ManejadorVista.ÁreaVisible.Width,
+			                                            ManejadorVista.ÁreaVisible.Height);
 		}
 
 		Label contadorTiempo;
+
+		SensorialExtremos sense;
+
+		public ManejadorVP ManejadorVista;
 
 		/// <summary>
 		/// Devuelve si hay pendiente una pausa del juego.
@@ -96,6 +118,12 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 			// Crear sprites de unidades
 			Unidades = new List<UnidadSprite> (CampoBatalla.Unidades.Count);
+			foreach (var pared in CampoBatalla.Paredes)
+			{
+				var controlPared = new ParedControl (pared, this);
+				controlPared.Include ();
+			}
+
 			LoadContent ();
 			foreach (var u in CampoBatalla.Unidades)
 			{
@@ -105,6 +133,7 @@ namespace KarTac.Cliente.Controls.Screens
 				sprite.Include ();
 				u.AlSerBlanco += x => HacerDamageInfoString (x);
 			}
+
 
 			base.Inicializar ();
 		}
@@ -118,11 +147,135 @@ namespace KarTac.Cliente.Controls.Screens
 				var mostrarDaño = new VanishingString (Game, texto, TimeSpan.FromSeconds (1));
 				mostrarDaño.LoadContent ();
 				mostrarDaño.ColorInicial = sklRet.Color.Value;
-				mostrarDaño.Centro = sklRet.Loc.ToVector2 ();
+				mostrarDaño.Centro = this.ManejadorVista.CampoAPantalla (sklRet.Loc.ToVector2 ());
 				mostrarDaño.Include ();
 				return mostrarDaño;
 			}
 			return null;
+		}
+
+	}
+
+	/// <summary>
+	/// Controla la parte visible del campo
+	/// </summary>
+	public class ManejadorVP
+	{
+		/// <summary>
+		/// Tamaño
+		/// </summary>
+		public Point Tamaño
+		{
+			get
+			{
+				return ÁreaVisible.Size;
+			}
+		}
+
+		/// <summary>
+		/// Área que se considera un buen lugar, un evento fuera de esta área requiere cenrtrar.
+		/// </summary>
+		public Rectangle BuenLugarCentro { get; set; }
+
+		/// <summary>
+		/// Establece el tamaño del buen centro\n
+		/// 1 => BuenLugarCentro == ÁreaVisible\n
+		/// 0 => BuenLugarCentro tiene área cero.
+		/// </summary>
+		public float BuenCentroRelTamaño
+		{
+			set
+			{
+				// 1 => 0 
+				// 0 => AreaVis / 2
+				var tl = ÁreaVisible.Center - new Point ((int)(ÁreaVisible.Size.X * value / 2),
+				                                         (int)(ÁreaVisible.Size.Y * value / 2));
+				// 0 => 0
+				// 1 => AreaVis
+				var tamaño = new Point ((int)(ÁreaVisible.Size.X * value), (int)(ÁreaVisible.Size.Y * value));
+				BuenLugarCentro = new Rectangle (tl, tamaño);
+			}
+		}
+
+		/// <summary>
+		/// Área del campo que se muestra
+		/// </summary>
+		public Rectangle ÁreaVisible { get; set; }
+
+		/// <summary>
+		/// Centra el área visible en un punto específico
+		/// </summary>
+		/// <param name="p">Punto del campo doónde centrar</param>
+		/// <param name="forzar">Si debe centrar aunque ya esté en el buen lugar</param>
+		public void CentrarEn (Point p, bool forzar = false)
+		{
+			bool centrar = forzar || !BuenLugarCentroRelativo.Contains (p);
+			if (centrar)
+			{
+				var topLeft = new Point (p.X - Tamaño.X / 2, p.Y - Tamaño.Y / 2);
+				ÁreaVisible = new Rectangle (topLeft, Tamaño);
+			}
+		}
+
+		/// <summary>
+		/// Devuelve el BuenLugarCentro relativo al campo, NO a pantala
+		/// </summary>
+		public Rectangle BuenLugarCentroRelativo
+		{
+			get
+			{
+				var ret = BuenLugarCentro;
+				ret.Location += ÁreaVisible.Location;
+				return ret;
+			}
+		}
+
+		/// <summary>
+		/// Convierte un punto relativo de un campo a uno de pantalla
+		/// </summary>
+		public Point CampoAPantalla (Point p)
+		{
+			return p - ÁreaVisible.Location;
+		}
+
+		/// <summary>
+		/// Convierte un punto relativo de pantalla a uno de campo
+		/// </summary>
+		public Point PantallaACampo (Point p)
+		{
+			return p + ÁreaVisible.Location;
+		}
+
+		/// <summary>
+		/// Convierte un punto relativo de un campo a uno de pantalla
+		/// </summary>
+		public Vector2 CampoAPantalla (Vector2 p)
+		{
+			return p - ÁreaVisible.Location.ToVector2 ();
+		}
+
+		/// <summary>
+		/// Convierte un punto relativo de pantalla a uno de campo
+		/// </summary>
+		public Vector2 PantallaACampo (Vector2 p)
+		{
+			return p + ÁreaVisible.Location.ToVector2 ();
+		}
+
+		/// <summary>
+		/// Convierte un rectángulo relativo de un campo a uno de pantalla
+		/// </summary>
+		public Rectangle CampoAPantalla (Rectangle rect)
+		{
+			return new Rectangle (CampoAPantalla (rect.Location), rect.Size);
+		}
+
+		/// <summary>
+		/// Convierte un rectángulo relativo de pantalla a uno de campo
+		/// </summary>
+		public Rectangle PantallaACampo (Rectangle rect)
+		{
+			return new Rectangle (PantallaACampo (rect.Location), rect.Size);
 		}
 	}
 }

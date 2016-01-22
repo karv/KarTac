@@ -9,10 +9,19 @@ using OpenTK.Input;
 
 namespace KarTac.Cliente.Controls
 {
+	public interface IListaControl : IControl
+	{
+		object Seleccionado { get; }
+
+		void SeleccionaSiguiente ();
+
+		void SeleccionaAnterior ();
+	}
+
 	/// <summary>
 	/// Representa un control que muestra una lista
 	/// </summary>
-	public class Lista<TObj> : SBC, IList<TObj>
+	public class Lista<TObj> : SBC, IList<TObj>, IListaControl
 	{
 		public struct Entrada
 		{
@@ -36,6 +45,7 @@ namespace KarTac.Cliente.Controls
 		{
 			Objetos = new List<Entrada> ();
 			ColorBG = Color.Blue * 0.3f;
+			ColorSel = Color.White * 0.5f;
 		}
 
 		public override void Dibujar (GameTime gameTime)
@@ -50,19 +60,39 @@ namespace KarTac.Cliente.Controls
 
 			// TODO: Que no se me salga el texto.
 			var currY = Bounds.Location.ToVector2 ();
-			for (int i = 0; i < Objetos.Count; i++)
+			var inic = PrimerVisible;
+			var final = Math.Min (Objetos.Count, inic + MaxVisible);
+			for (int i = inic; i < final; i++)
 			{
 				var x = Objetos [i];
 				var strTxt = Stringificación (x.Objeto);
 				if (i == cursorIndex)
 				{
 					var rect = Fuente.GetStringRectangle (strTxt, currY);
-					bat.Draw (noTexture, rect, Color.White * 0.5f);
+					bat.Draw (noTexture, rect, ColorSel);
 				}
 				bat.DrawString (Fuente, strTxt, currY, x.Color);
 				currY.Y += Fuente.LineHeight;
 			}
 		}
+
+		/// <summary>
+		/// Devuelve el número de entradas que son visibles, a lo más
+		/// </summary>
+		/// <value>The max visible.</value>
+		public int MaxVisible
+		{
+			get
+			{
+				return Bounds.Height / Fuente.LineHeight;
+			}
+		}
+
+		/// <summary>
+		/// Devuelve el primer elemento visible en la lista
+		/// </summary>
+		/// <value>The primer visible.</value>
+		protected int PrimerVisible { get; set; }
 
 		public List<Entrada> Objetos { get; }
 
@@ -86,11 +116,30 @@ namespace KarTac.Cliente.Controls
 			}
 		}
 
+		public override void Include ()
+		{
+			base.Include ();
+			InputManager.AlSerActivado += InputManager_AlSerActivado;
+		}
+
+		void InputManager_AlSerActivado (Key obj)
+		{
+			if (InterceptarTeclado)
+			{
+				if (obj == AbajoKey)
+					SeleccionaSiguiente ();
+				if (obj == ArribaKey)
+					SeleccionaAnterior ();
+			}
+		}
+
 		public TObj ObjetoEnCursor
 		{
 			get
 			{
-				return Objetos [CursorIndex].Objeto;
+				if (cursorIndex < Objetos.Count)
+					return Objetos [CursorIndex].Objeto;
+				throw new ArgumentOutOfRangeException ();
 			}
 		}
 
@@ -98,7 +147,15 @@ namespace KarTac.Cliente.Controls
 
 		Texture2D noTexture { get; set; }
 
+		/// <summary>
+		/// Color del fondo del control
+		/// </summary>
 		public Color ColorBG { get; set; }
+
+		/// <summary>
+		/// Color del fondo del elemento seleccionado
+		/// </summary>
+		public Color ColorSel { get; set; }
 
 		public Rectangle Bounds { get; set; }
 
@@ -122,24 +179,38 @@ namespace KarTac.Cliente.Controls
 		{
 			Fuente = null;
 			noTexture = null;
+			InputManager.AlSerActivado -= InputManager_AlSerActivado;
 			base.Dispose ();
 		}
 
 		public Key AbajoKey = Key.Down;
 		public Key ArribaKey = Key.Up;
 
-		public override void Update (GameTime gameTime)
-		{
-			base.Update (gameTime);
-			if (InterceptarTeclado)
-			{
+		#region IListaControl
 
-				if (InputManager.FuePresionado (AbajoKey))
-					CursorIndex++;
-				if (InputManager.FuePresionado (ArribaKey))
-					CursorIndex--;
+		public void SeleccionaSiguiente ()
+		{
+			CursorIndex++;
+			if (cursorIndex >= PrimerVisible + MaxVisible)
+				PrimerVisible++;
+		}
+
+		public void SeleccionaAnterior ()
+		{
+			CursorIndex--;
+			if (cursorIndex < PrimerVisible)
+				PrimerVisible--;
+		}
+
+		public object Seleccionado
+		{
+			get
+			{
+				return ObjetoEnCursor;
 			}
 		}
+
+		#endregion
 
 		#region IList
 

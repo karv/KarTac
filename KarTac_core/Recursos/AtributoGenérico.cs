@@ -1,14 +1,16 @@
 ﻿using KarTac.Batalla;
 using System;
 using Microsoft.Xna.Framework;
+using System.Diagnostics;
 
 namespace KarTac.Recursos
 {
 	public class AtributoGenérico : IRecurso
 	{
-		public AtributoGenérico (string nombre)
+		public AtributoGenérico (string nombre, bool visibleBatalla)
 		{
 			_nombre = nombre;
+			VisibleBatalla = visibleBatalla;
 		}
 
 		float _valor;
@@ -22,6 +24,10 @@ namespace KarTac.Recursos
 			set
 			{
 				_valor = value;
+				#if DEBUG
+				if (_valor < 0)
+					Debug.WriteLine (string.Format ("{0} con valor {1}", Nombre, _valor));
+				#endif
 				AlCambiarValor?.Invoke ();
 			}
 		}
@@ -34,12 +40,16 @@ namespace KarTac.Recursos
 			}
 		}
 
+		public bool VisibleBatalla { get; set; }
+
 		public float Inicial;
 
 		public void CommitExp (double exp)
 		{
-			Inicial += (float)exp;
+			Inicial += (float)exp * CommitExpCoef;
 		}
+
+		public float CommitExpCoef = 1;
 
 		string _nombre;
 
@@ -70,12 +80,13 @@ namespace KarTac.Recursos
 		{
 			writer.Write (Nombre);
 			writer.Write (Inicial);
-			// No es necesario escribir valor, no queremos guardar el estado de una batalla.
+			writer.Write (VisibleBatalla);
 		}
 
 		public void Cargar (System.IO.BinaryReader reader)
 		{
 			Inicial = reader.ReadSingle ();
+			VisibleBatalla = reader.ReadBoolean ();
 		}
 
 		public Color? ColorMostrarGanado

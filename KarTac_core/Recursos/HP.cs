@@ -27,7 +27,7 @@ namespace KarTac.Recursos
 				return Regeneración;
 			}
 		}
-
+		
 		public override string Icono
 		{
 			get
@@ -36,9 +36,18 @@ namespace KarTac.Recursos
 			}
 		}
 
+		
+		public override bool VisibleBatalla
+		{
+			get
+			{
+				return true;
+			}
+		}
+
 		public override void CommitExp (double exp)
 		{
-			Max += (float)exp; //TODO Aquí no creo que termine siendo así de simple.
+			Max += (float)exp * 100f; 
 			PeticiónExpAcumulada = 0;
 		}
 
@@ -46,7 +55,7 @@ namespace KarTac.Recursos
 		{
 			var pct = Valor / Max;
 
-			PeticiónExpAcumulada += (1 - pct) * time.Minutes;
+			PeticiónExpAcumulada += (1 - pct) * time.TotalMinutes;
 		}
 
 		public override Color? ColorMostrarGanado

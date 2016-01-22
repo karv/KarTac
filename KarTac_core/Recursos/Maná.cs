@@ -20,7 +20,7 @@ namespace KarTac.Recursos
 
 		public override void CommitExp (double exp)
 		{
-			Max += (float)exp; //TODO Aquí no creo que termine siendo así de simple.
+			Max += (float)exp;
 			PeticiónExpAcumulada = 0;
 		}
 
@@ -32,11 +32,19 @@ namespace KarTac.Recursos
 			}
 		}
 
+		public override bool VisibleBatalla
+		{
+			get
+			{
+				return true;
+			}
+		}
+
 		protected override void PedirExp (TimeSpan time, KarTac.Batalla.Campo campo)
 		{
 			var pct = Valor / Max;
 
-			PeticiónExpAcumulada += (1 - pct) * time.Minutes;
+			PeticiónExpAcumulada += (1 - pct) * time.TotalMinutes;
 		}
 
 		protected override float Regen

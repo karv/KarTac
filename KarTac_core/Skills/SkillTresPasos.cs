@@ -47,7 +47,7 @@ namespace KarTac.Skills
 			inter.Selector.IgualdadEstricta = IgualdadEstricta;
 			inter.Selector.PosiblesBlancos = new List<Unidad> (CampoBatalla.Unidades.Where (SeleccionaTarget).OrderBy (x => UnidadUsuario.Equipo.EsAliado (x)));
 
-			inter.Selector.AlResponder += delegate(SelecciónRespuesta obj) //TODO: No llamar muchas veces
+			inter.Selector.AlResponder += delegate(SelecciónRespuesta obj)
 			{
 				foreach (var x in obj.Selección)
 				{

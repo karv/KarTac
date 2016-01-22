@@ -6,27 +6,37 @@ using System.IO;
 
 namespace KarTac.Equipamento
 {
-	public static class Lector
-	{
-		public static IEquipamento Cargar (BinaryReader reader)
-		{
-			IEquipamento ret;
-			var recNombre = reader.ReadString ();
-			switch (recNombre)
-			{
-				case "Espada":
-					ret = new EqEspada ();
-					break;
-				default:
-					throw new Exception ("No existe equipment " + recNombre);
-			}
-			ret.Cargar (reader);
-			return ret;
-		}
-	}
 
 	public abstract class Equipamento : IEquipamento
 	{
+		string IItem.Id
+		{
+			get
+			{
+				return Id;
+			}
+		}
+
+		public virtual void BattleUpdate (TimeSpan time)
+		{
+		}
+
+		protected virtual string Id
+		{
+			get
+			{
+				return GetType ().FullName;
+			}
+		}
+
+		string IItem.NombreCorto
+		{
+			get
+			{
+				return Nombre;
+			}
+		}
+
 		public event Action<ConjuntoEquipamento> AlEquipar;
 
 		public event Action<ConjuntoEquipamento> AlDesequipar;
@@ -45,6 +55,15 @@ namespace KarTac.Equipamento
 			OnEquipar (anterior);
 		}
 
+		public virtual IEnumerable<IEquipamento> AutoRemove (ConjuntoEquipamento conj)
+		{
+			yield break;
+		}
+
+		/// <summary>
+		/// Desequipa este objeto,
+		/// queda fuera de todo inventario
+		/// </summary>
 		public void Desequipar ()
 		{
 			var anterior = ConjEquipment;
@@ -52,11 +71,23 @@ namespace KarTac.Equipamento
 			OnDesequipar (anterior);
 		}
 
+		/// <summary>
+		/// Desequipa este objeto,
+		/// lo mueve hacia un inventario de clan dado
+		/// </summary>
+		public void Desequipar (InventarioClan inv)
+		{
+			var anterior = ConjEquipment;
+			conjEquipment?.Remove (this);
+			inv.Add (this);
+			OnDesequipar (anterior);
+		}
+
 		public Personaje Portador
 		{
 			get
 			{
-				return ConjEquipment.Portador;
+				return ConjEquipment?.Portador;
 			}
 		}
 
@@ -112,9 +143,8 @@ namespace KarTac.Equipamento
 
 		public abstract string IconContentString { get; }
 
-		public void Guardar (System.IO.BinaryWriter writer)
+		public virtual void Guardar (BinaryWriter writer)
 		{
-			writer.Write (GetType ().Name);
 			writer.Write (Nombre);
 		}
 
@@ -153,5 +183,6 @@ namespace KarTac.Equipamento
 				yield break;
 			}
 		}
+
 	}
 }

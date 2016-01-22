@@ -125,10 +125,12 @@ namespace KarTac.Batalla
 			{
 				foreach (var petit in Expables)
 				{
-					petit.CommitExp (BolsaExp / suma);
+					petit.CommitExp (petit.PeticiónExpAcumulada * BolsaExp / suma);
+					petit.PeticiónExpAcumulada = 0;
 				}
 			}
 
+			PersonajeBase.TotalExp += (float)BolsaExp;
 			BolsaExp = 0;
 		}
 
@@ -143,10 +145,24 @@ namespace KarTac.Batalla
 			AtributosActuales.Condición.Valor -= (float)(time.TotalSeconds);
 			var rapidez = AtributosActuales.Velocidad.Valor * AtributosActuales.Condición.CoefVelocidad;
 			movDir *= (float)(rapidez * time.TotalSeconds);
-			PosPrecisa += movDir;
+			Mover (movDir);
 
+			AtributosActuales.Velocidad.PeticiónExpAcumulada += time.TotalSeconds * 0.05f;
+		}
 
-			AtributosActuales.Velocidad.PeticiónExpAcumulada += time.TotalSeconds * 1;
+		/// <summary>
+		/// Mueve la unidad una dirección específica
+		/// </summary>
+		/// <param name="movDir">Dirección</param>
+		public void Mover (Vector2 movDir)
+		{
+			var segm = new Segmento (PosPrecisa, movDir);
+			foreach (var p in CampoBatalla.Paredes)
+			{
+				if (p.Corta (segm))
+					return;
+			}
+			PosPrecisa = segm.Final;
 		}
 
 		public void AcumularPetición (TimeSpan time)
@@ -185,11 +201,6 @@ namespace KarTac.Batalla
 		public void AvanzarTiempo (TimeSpan time)
 		{
 			OrdenActual?.Update (time);
-		}
-
-		public void Mover (Vector2 dirección)
-		{
-			throw new NotImplementedException ();
 		}
 
 		Point IMóvil.Posición

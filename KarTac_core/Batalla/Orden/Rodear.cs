@@ -16,15 +16,10 @@ namespace KarTac.Batalla.Orden
 		/// </summary>
 		public double Distancia { get; set; }
 
-		public override Vector2 VectorDeMuro ()
+		public override Vector2 VectorDeMuro (KarTac.Batalla.Objetos.Pared pared)
 		{
-			var ret = new Vector2 ();
-			ret += new Vector2 (1 / (Unidad.PosPrecisa.X - Tamaño.Left), 0);
-			ret += new Vector2 (1 / (Unidad.PosPrecisa.X - Tamaño.Right), 0);
-			ret += new Vector2 (0, 1 / (Unidad.PosPrecisa.Y - Tamaño.Top));
-			ret += new Vector2 (0, 1 / (Unidad.PosPrecisa.Y - Tamaño.Bottom));
-
-			return ret;
+			var norm = pared.Normal (Unidad.PosPrecisa);
+			return norm * pared.ImportanciaCoef / norm.LengthSquared ();
 		}
 
 		public override Vector2 VectorDeUnidad (Unidad unidad)

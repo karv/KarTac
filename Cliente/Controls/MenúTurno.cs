@@ -43,6 +43,11 @@ namespace KarTac.Cliente.Controls
 			}
 		}
 
+		public void Unload ()
+		{
+			skillsList.Clear ();
+		}
+
 		static Color getSkillColor (bool selected, bool habil)
 		{
 			var ret = selected ? skillSelColor : skillNoSelColor;
@@ -75,6 +80,13 @@ namespace KarTac.Cliente.Controls
 		/// </summary>
 		Label descripDisplay;
 
+		bool inicializado;
+
+		void actualizaDesc ()
+		{
+			descripDisplay.Texto = () => SkillSeleccionado.Descripción;
+		}
+
 		public override void Inicializar ()
 		{
 			LoadContent ();
@@ -101,6 +113,8 @@ namespace KarTac.Cliente.Controls
 			}
 
 			base.Inicializar ();
+
+			inicializado = true;
 		}
 
 		void reposicionarControles ()
@@ -128,7 +142,8 @@ namespace KarTac.Cliente.Controls
 			set
 			{
 				unidadActual = value;
-				rehacerSkills ();
+				if (inicializado)
+					rehacerSkills ();
 			}
 		}
 

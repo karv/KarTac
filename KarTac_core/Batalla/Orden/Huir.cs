@@ -13,15 +13,10 @@ namespace KarTac.Batalla.Orden
 			DuraciónRestante = duración;
 		}
 
-		public override Vector2 VectorDeMuro ()
+		public override Vector2 VectorDeMuro (KarTac.Batalla.Objetos.Pared pared)
 		{
-			var ret = new Vector2 ();
-			ret += new Vector2 (1 / (Unidad.PosPrecisa.X - Tamaño.Left), 0);
-			ret += new Vector2 (1 / (Unidad.PosPrecisa.X - Tamaño.Right), 0);
-			ret += new Vector2 (0, 1 / (Unidad.PosPrecisa.Y - Tamaño.Top));
-			ret += new Vector2 (0, 1 / (Unidad.PosPrecisa.Y - Tamaño.Bottom));
-
-			return ret;
+			var norm = pared.Normal (Unidad.PosPrecisa);
+			return norm * pared.ImportanciaCoef / norm.LengthSquared ();
 		}
 
 		public override Vector2 VectorDeUnidad (Unidad unidad)
@@ -40,7 +35,7 @@ namespace KarTac.Batalla.Orden
 		public override UpdateReturnType Update (TimeSpan time)
 		{
 			DuraciónRestante -= time;
-			if (DuraciónRestante > TimeSpan.Zero)
+			if (DuraciónRestante >= TimeSpan.Zero)
 			{
 				EjecutarMov (time);
 				return new UpdateReturnType (time);

@@ -1,6 +1,5 @@
 ﻿using KarTac.Skills;
 using KarTac.Recursos;
-using System;
 using KarTac.Personajes;
 
 namespace KarTac.Equipamento
@@ -10,11 +9,19 @@ namespace KarTac.Equipamento
 		/// <summary>
 		/// La habilidad otorgada por esta arma
 		/// </summary>
-		class Espadazo : Golpe
+		class Skill : Golpe
 		{
-			public Espadazo (Personaje pj)
+			public Skill (Personaje pj)
 				: base (pj)
 			{
+			}
+
+			public override double Rango
+			{
+				get
+				{
+					return 50;
+				}
 			}
 
 			public override string Descripción
@@ -43,10 +50,11 @@ namespace KarTac.Equipamento
 
 			protected override ISkillReturnType EffectOnTarget (KarTac.Batalla.Unidad unid)
 			{
-				var dañoBloqueado = Math.Max (
-					                    UnidadUsuario.AtributosActuales.Recs ["Ataque"].Valor + UnidadUsuario.AtributosActuales.Recs ["espada"].Valor - unid.AtributosActuales.Recs ["Defensa"].Valor,
-					                    0);
-				var daño = Math.Max (20 - dañoBloqueado, 1);
+				float daño = (float)DamageUtils.CalcularDaño (
+					             UnidadUsuario.AtributosActuales.Ataque.Valor +
+					             UnidadUsuario.PersonajeBase.Atributos.Recs ["Espada"].Valor,
+					             unid.AtributosActuales.Defensa.Valor,
+					             2);
 
 				unid.AtributosActuales.HP.Valor -= daño;
 				System.Diagnostics.Debug.WriteLine (string.Format (
@@ -56,8 +64,8 @@ namespace KarTac.Equipamento
 					unid));
 
 				PeticiónExpAcumulada += 1;
-				UnidadUsuario.PersonajeBase.Atributos.Ataque.PeticiónExpAcumulada += 0.3;
-				UnidadUsuario.PersonajeBase.Atributos.Recs ["espada"].PeticiónExpAcumulada += 0.3;
+				UnidadUsuario.PersonajeBase.Atributos.Ataque.PeticiónExpAcumulada += 0.1;
+				UnidadUsuario.PersonajeBase.Atributos.Recs ["Espada"].PeticiónExpAcumulada += 0.3;
 				unid.PersonajeBase.Atributos.Defensa.PeticiónExpAcumulada += 0.3;
 
 				LastReturn = new  SkillReturnType (
@@ -74,7 +82,7 @@ namespace KarTac.Equipamento
 			get
 			{
 				yield return "arma";
-				yield return "espada";
+				yield return "Espada";
 			}
 		}
 
@@ -82,15 +90,19 @@ namespace KarTac.Equipamento
 		{
 			get
 			{
-				yield return new Espadazo (Portador);
+				yield return new Skill (Portador);
 			}
 		}
 
 		protected override void OnEquipar (ConjuntoEquipamento anterior)
 		{
 			// Agregar su atributo con la espada
-			if (!Portador.Atributos.Recs.ContainsKey ("espada"))
-				Portador.Atributos.Recs.Add (new AtributoGenérico ("espada"));
+			if (!Portador.Atributos.Recs.ContainsKey ("Espada"))
+				#if DEBUG
+				Portador.Atributos.Recs.Add (new AtributoGenérico ("Espada", true));
+			#else
+				Portador.Atributos.Recs.Add (new AtributoGenérico ("Espada", false));
+			#endif
 			base.OnEquipar (anterior);
 		}
 

@@ -17,6 +17,14 @@ namespace KarTac.Batalla.Orden
 
 		public Unidad Unidad { get; }
 
+		bool IOrden.EsCancelable
+		{
+			get
+			{
+				return true;
+			}
+		}
+
 		public Movimiento (Unidad unidad)
 		{
 			Unidad = unidad;

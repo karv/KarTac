@@ -31,5 +31,10 @@ namespace KarTac.Cliente.Controls
 			var ad = base.Add (control);
 			return ad;
 		}
+
+		public List<IControl> Clonar ()
+		{
+			return new List<IControl> (this);
+		}
 	}
 }

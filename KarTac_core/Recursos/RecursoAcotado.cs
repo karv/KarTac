@@ -21,6 +21,8 @@ namespace KarTac.Recursos
 		}
 
 		public abstract string Icono { get; }
+		
+		public abstract bool VisibleBatalla { get; }
 
 		public void Reestablecer ()
 		{
