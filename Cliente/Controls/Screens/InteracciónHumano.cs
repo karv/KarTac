@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using System;
 using KarTac.Cliente.Controls.Primitivos;
 using KarTac.Skills;
+using System.ComponentModel.Design;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -186,6 +187,7 @@ namespace KarTac.Cliente.Controls.Screens
 
 		public override void UnloadContent ()
 		{
+			//((IDisposable)menú).Dispose ();
 			menú.Unload ();
 		}
 

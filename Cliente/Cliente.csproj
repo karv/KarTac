@@ -80,6 +80,7 @@
     <Compile Include="Controls\Screens\TiendaScreen.cs" />
     <Compile Include="Controls\ParedControl.cs" />
     <Compile Include="Controls\SensorialExtremos.cs" />
+    <Compile Include="Controls\ListaSkills.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

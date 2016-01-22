@@ -9,6 +9,9 @@ using OpenTK.Input;
 
 namespace KarTac.Cliente.Controls
 {
+	/// <summary>
+	/// Representa un control con forma de lista
+	/// </summary>
 	public interface IListaControl : IControl
 	{
 		object Seleccionado { get; }
