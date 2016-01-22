@@ -27,7 +27,16 @@ namespace KarTac.Recursos
 				return Regeneración;
 			}
 		}
+		
+		public override string Icono
+		{
+			get
+			{
+				return @"Icons/Recursos/HP"; 
+			}
+		}
 
+		
 		public override bool VisibleBatalla
 		{
 			get

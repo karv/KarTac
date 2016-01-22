@@ -21,7 +21,7 @@ namespace KarTac.Recursos
 				case "Maná":
 					ret = new Maná ();
 					break;
-				case  "Condición":
+				case "Condición":
 					ret = new Condición ();
 					break;
 				default:
@@ -49,6 +49,11 @@ namespace KarTac.Recursos
 		/// Si el atributo es visible durante la batalla
 		/// </summary>
 		bool VisibleBatalla { get; }
+
+		/// <summary>
+		/// El icono que se usará para mostrarse
+		/// </summary>
+		string Icono { get; }
 
 		/// <summary>
 		/// Ejecuta un tick de longitud dada

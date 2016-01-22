@@ -10,6 +10,14 @@ namespace KarTac.Recursos
 			Valor = Max;
 		}
 
+		public override string Icono
+		{
+			get
+			{
+				return @"Icons/Recursos/Maná"; 
+			}
+		}
+
 		public override void CommitExp (double exp)
 		{
 			Max += (float)exp;

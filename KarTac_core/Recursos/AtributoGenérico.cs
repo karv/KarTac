@@ -32,6 +32,14 @@ namespace KarTac.Recursos
 			}
 		}
 
+		public string Icono
+		{
+			get
+			{
+				return @"Icons/Recursos/etc"; 
+			}
+		}
+
 		public bool VisibleBatalla { get; set; }
 
 		public float Inicial;
