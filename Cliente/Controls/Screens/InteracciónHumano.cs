@@ -50,22 +50,19 @@ namespace KarTac.Cliente.Controls.Screens
 			sense.Include ();
 		}
 
-		SensorialExtremos sense;
-
-		public override void Update (GameTime gameTime)
+		void InputManager_AlSerPresionado (Key key)
 		{
-			base.Update (gameTime);
-
-			if (InputManager.FuePresionado (Key.Down))
+			IOrden orden;
+			switch (key)
 			{
+			case Key.Down:
 				menú.ÍndiceSkillSel++;
-			}
-			if (InputManager.FuePresionado (Key.Up))
-			{
+				return;
+			case Key.Up:
 				menú.ÍndiceSkillSel--;
-			}
-			if (InputManager.FuePresionado (Key.Enter))
-			{
+				return;
+			case Key.Enter:
+			case Key.KeypadEnter:
 				var skill = menú.SkillSeleccionado;
 				if (skill.Usable)
 				{
@@ -104,13 +101,11 @@ namespace KarTac.Cliente.Controls.Screens
 					skill.Ejecutar ();
 					Salir ();
 				}
-			}
-
-			if (InputManager.FuePresionado (Key.Space)) // A la carga
-			{
+				return;
+			case Key.Space:
 				var sk = menú.SkillSeleccionado as IRangedSkill;
 				var rng = (sk?.Rango ?? 40) * 0.9f;
-				IOrden orden;
+
 				// Si usa ctrl, se carga; si no, rodea
 				// Analysis disable ConvertIfStatementToConditionalTernaryExpression
 				if (InputManager.EstáPresionado (Key.ShiftLeft))
@@ -120,20 +115,42 @@ namespace KarTac.Cliente.Controls.Screens
 				// Analysis restore ConvertIfStatementToConditionalTernaryExpression
 				UnidadActual.OrdenActual = orden;
 				Salir ();
-			}
-
-			if (InputManager.FuePresionado (Key.Tab)) // Huir
-			{
-				var orden = new Huir (UnidadActual, TimeSpan.FromSeconds (5));
+				return;
+			case Key.Tab:
+				orden = new Huir (UnidadActual, TimeSpan.FromSeconds (5));
 				UnidadActual.OrdenActual = orden;
 				Salir ();
-			}
-
-			if (InputManager.FuePresionado (Key.Escape)) // Pausar
-			{
+				return;
+			case Key.Escape:
 				(ScreenBase as BattleScreen)?.Pausar ();
+				return;
+			case Key.Z:
+				var ordQuieto = new Sentinela (UnidadActual, TimeSpan.FromSeconds (3), 60);
+				UnidadActual.OrdenActual = ordQuieto;
+				Salir ();
+				return;
+			default:
+				return;
 			}
+		}
 
+		public override void Ejecutar ()
+		{
+			InputManager.AlSerPresionado += InputManager_AlSerPresionado;
+			base.Ejecutar ();
+		}
+
+		public override void Salir ()
+		{
+			InputManager.AlSerPresionado -= InputManager_AlSerPresionado;
+			base.Salir ();
+		}
+
+		SensorialExtremos sense;
+
+		public override void Update (GameTime gameTime)
+		{
+			base.Update (gameTime);
 			if (InputManager.FuePresionado (MouseButton.Left))
 			{
 				var relClickPos = VP.PantallaACampo (new Point (InputManager.EstadoActualMouse.X,
@@ -148,7 +165,7 @@ namespace KarTac.Cliente.Controls.Screens
 			{
 				var relClickPos = VP.PantallaACampo (new Point (InputManager.EstadoActualMouse.X,
 				                                                InputManager.EstadoActualMouse.Y));
-				
+
 				// Ver si una unidad está cerca
 				foreach (var x in CampoBatalla.Unidades)
 				{
@@ -164,14 +181,6 @@ namespace KarTac.Cliente.Controls.Screens
 						return;
 					}
 				}
-			}
-
-			if (InputManager.FuePresionado (Key.Z))
-			{
-				var ordQuieto = new Sentinela (UnidadActual, TimeSpan.FromSeconds (3), 60);
-				UnidadActual.OrdenActual = ordQuieto;
-				Salir ();
-				return;
 			}
 		}
 
@@ -194,6 +203,7 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 			//((IDisposable)menú).Dispose ();
 			menú.Unload ();
+
 		}
 
 		#region IInteractor
