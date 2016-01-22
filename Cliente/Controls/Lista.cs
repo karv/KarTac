@@ -131,7 +131,6 @@ namespace KarTac.Cliente.Controls
 				if (obj == ArribaKey)
 					SeleccionaAnterior ();
 			}
-
 		}
 
 		public TObj ObjetoEnCursor

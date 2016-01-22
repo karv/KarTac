@@ -34,12 +34,10 @@ namespace KarTac.Cliente
 				revisar_repetición (time);
 		}
 
-
-
 		#region Teclado
 
-		public static TimeSpan TiempoRepeticiónInicial = TimeSpan.FromMilliseconds (1000);
-		public static TimeSpan TiempoReiteración = TimeSpan.FromMilliseconds (300);
+		public static TimeSpan TiempoRepeticiónInicial = TimeSpan.FromMilliseconds (300);
+		public static TimeSpan TiempoReiteración = TimeSpan.FromMilliseconds (80);
 
 		static TimeSpan contadorActual { get; set; }
 
