@@ -5,7 +5,6 @@ using Microsoft.Xna.Framework;
 using System;
 using KarTac.Cliente.Controls.Primitivos;
 using KarTac.Skills;
-using System.ComponentModel.Design;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -46,7 +45,12 @@ namespace KarTac.Cliente.Controls.Screens
 			menú = new MenúTurno (this);
 			menú.UnidadActual = unid;
 			menú.Include ();
+			sense = new SensorialExtremos (this);
+			sense.AlHacerPresión += VP.Mover;
+			sense.Include ();
 		}
+
+		SensorialExtremos sense;
 
 		public override void Update (GameTime gameTime)
 		{
@@ -183,6 +187,7 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 			menú.Inicializar ();
 			VP.CentrarEn (UnidadActual.Pos);
+			sense.Inicializar ();
 		}
 
 		public override void UnloadContent ()

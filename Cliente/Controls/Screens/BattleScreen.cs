@@ -32,17 +32,8 @@ namespace KarTac.Cliente.Controls.Screens
 			ManejadorVista.BuenCentroRelTamaño = 0.8f;
 
 			sense = new SensorialExtremos (this);
-			sense.AlHacerPresión += moverPantalla;
+			sense.AlHacerPresión += ManejadorVista.Mover;
 			sense.Include ();
-		}
-
-		void moverPantalla (Vector2 obj)
-		{
-			Point mv = obj.ToPoint ();
-			ManejadorVista.ÁreaVisible = new Rectangle (ManejadorVista.ÁreaVisible.Left + mv.X,
-			                                            ManejadorVista.ÁreaVisible.Top + mv.Y,
-			                                            ManejadorVista.ÁreaVisible.Width,
-			                                            ManejadorVista.ÁreaVisible.Height);
 		}
 
 		Label contadorTiempo;
@@ -276,6 +267,15 @@ namespace KarTac.Cliente.Controls.Screens
 		public Rectangle PantallaACampo (Rectangle rect)
 		{
 			return new Rectangle (PantallaACampo (rect.Location), rect.Size);
+		}
+
+		public void Mover (Vector2 dir)
+		{
+			Point mv = dir.ToPoint ();
+			ÁreaVisible = new Rectangle (ÁreaVisible.Left + mv.X,
+			                             ÁreaVisible.Top + mv.Y,
+			                             ÁreaVisible.Width,
+			                             ÁreaVisible.Height);
 		}
 	}
 }
