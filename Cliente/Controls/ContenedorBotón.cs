@@ -121,7 +121,7 @@ namespace KarTac.Cliente.Controls
 
 		public Botón Add ()
 		{
-			return Add (Count - 1);
+			return Add (Count);
 		}
 
 		public Botón Add (int índice)
