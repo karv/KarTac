@@ -138,7 +138,6 @@ namespace KarTac.Cliente.Controls
 			foreach (var x in controles)
 			{
 				x.Exclude ();
-				((IDisposable)x).Dispose ();
 			}
 			controles.Clear ();
 		}
@@ -232,6 +231,7 @@ namespace KarTac.Cliente.Controls
 			{
 				x.Dispose ();
 			}
+			Clear ();
 			base.Dispose ();
 		}
 	}
