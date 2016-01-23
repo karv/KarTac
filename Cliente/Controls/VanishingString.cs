@@ -138,12 +138,21 @@ namespace KarTac.Cliente.Controls
 			Restante -= gameTime.ElapsedGameTime;
 			TopLeft += Velocidad * (float)gameTime.ElapsedGameTime.TotalSeconds;
 			if (Restante < TimeSpan.Zero)
-				Exclude ();
+				OnTerminar ();
+		}
+
+		protected void OnTerminar ()
+		{
+			Dispose ();
+			AlTerminar?.Invoke ();
+			AlTerminar = null;
 		}
 
 		public override void Inicializar ()
 		{
 			calcularBounds ();
 		}
+
+		public event Action AlTerminar;
 	}
 }
