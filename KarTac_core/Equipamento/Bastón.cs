@@ -46,6 +46,12 @@ namespace KarTac.Equipamento
 			deltaPM = 0;
 		}
 
+		public override void BattleUpdate (System.TimeSpan time)
+		{
+			base.BattleUpdate (time);
+			Portador.Atributos.Recs ["Bastón"].PeticiónExpAcumulada += time.TotalSeconds / 6;
+		}
+
 		public override string IconContentString
 		{
 			get
