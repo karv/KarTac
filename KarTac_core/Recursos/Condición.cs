@@ -14,7 +14,7 @@ namespace KarTac.Recursos
 		{
 			get
 			{
-				return Valor / Max;
+				return (1 + Valor) / (2 * Max);
 			}
 		}
 
