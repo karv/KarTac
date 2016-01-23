@@ -75,13 +75,14 @@ namespace KarTac.Cliente.Controls
 			var font = Screen.Content.Load<BitmapFont> ("fonts");
 			foreach (var x in UnidadActual.AtributosActuales.Recs.Values)
 			{
-				display.Mostrables.Add (new RandomStringDisplay.IconTextEntry (
-					font,
-					Screen.Content.Load<Texture2D> (x.Icono),
-					x.Nombre,
-					Color.Green * 0.8f,
-					Color.White
-				));
+				if (x.VisibleBatalla)
+					display.Mostrables.Add (new RandomStringDisplay.IconTextEntry (
+						font,
+						Screen.Content.Load<Texture2D> (x.Icono),
+						x.ToString (),
+						Color.Green * 0.8f,
+						Color.White
+					));
 			}
 
 			base.Inicializar ();
