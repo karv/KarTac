@@ -59,7 +59,7 @@ namespace KarTac.Skills
 
 		public override IEnumerable<ISkill> DesbloquearSkills ()
 		{
-			return new ISkill[0]; // Regresa vacío, por ahora.
+			yield return new Curación (Usuario);
 		}
 
 		public override bool PuedeAprender ()
