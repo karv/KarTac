@@ -210,7 +210,7 @@ namespace KarTac.Batalla
 			foreach (var x in Unidades)
 			{
 				x.CommitExp ();
-				foreach (var s in x.PersonajeBase.Skills)
+				foreach (var s in x.PersonajeBase.InnerSkill)
 				{
 					x.PersonajeBase.Desbloqueables.UnionWith (s.DesbloquearSkills ());
 					x.PersonajeBase.Desbloqueables.ExceptWith (x.PersonajeBase.InnerSkill); // No agregar cosas que ya sé.
