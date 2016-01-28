@@ -102,6 +102,9 @@ namespace KarTac.Skills
 				case "LanzaRoca":
 					ret = new LanzaRoca (pj);
 					break;
+				case "Curación":
+					ret = new Curación (pj);
+					break;
 				default:
 					throw new Exception ("No se reconoce tipo de skill " + tipo);
 			}
