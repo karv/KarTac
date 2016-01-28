@@ -124,10 +124,10 @@ namespace KarTac.Skills
 
 		protected override ISkillReturnType EffectOnTarget (Unidad unid)
 		{
-			var atrMP = UnidadUsuario.AtributosActuales.Recs ["Poder mágico"];
+			var atrPM = UnidadUsuario.AtributosActuales.Recs ["Poder mágico"];
 			var coef = 8 + 2 * TotalExp;
 			float daño = (float)DamageUtils.CalcularDaño (
-				             atrMP.Valor,
+				             atrPM.Valor,
 				             unid.AtributosActuales.Defensa.Valor / 10,
 				             coef);
 
@@ -141,7 +141,7 @@ namespace KarTac.Skills
 			ManáRecurso.Valor -= UsaManá;
 
 			PeticiónExpAcumulada += 1.5;
-			atrMP.PeticiónExpAcumulada += 0.4f;
+			atrPM.PeticiónExpAcumulada += 0.4f;
 			LastReturn = new SkillReturnType (
 				-daño,
 				unid.AtributosActuales.HP,
