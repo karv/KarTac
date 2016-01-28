@@ -46,10 +46,11 @@ namespace KarTac.Skills
 
 		protected override ISkillReturnType EffectOnTarget (KarTac.Batalla.Unidad unid)
 		{
+			var coef = 1 + TotalExp;
 			float cura = (float)DamageUtils.CalcularDaño (
-				             UnidadUsuario.AtributosActuales.Recs ["Poder mágico"].Valor / 3,
+				             UnidadUsuario.AtributosActuales.Recs ["Poder mágico"].Valor,
 				             0,
-				             1);
+				             coef);
 
 			unid.AtributosActuales.HP.Valor += cura;
 			System.Diagnostics.Debug.WriteLine (string.Format (

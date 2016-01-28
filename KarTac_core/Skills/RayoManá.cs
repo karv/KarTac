@@ -125,11 +125,11 @@ namespace KarTac.Skills
 		protected override ISkillReturnType EffectOnTarget (Unidad unid)
 		{
 			var atrMP = UnidadUsuario.AtributosActuales.Recs ["Poder mágico"];
+			var coef = 8 + 2 * TotalExp;
 			float daño = (float)DamageUtils.CalcularDaño (
 				             atrMP.Valor,
 				             unid.AtributosActuales.Defensa.Valor / 10,
-				             10);
-			
+				             coef);
 
 			unid.AtributosActuales.HP.Valor -= daño;
 			System.Diagnostics.Debug.WriteLine (string.Format (
@@ -146,8 +146,8 @@ namespace KarTac.Skills
 				-daño,
 				unid.AtributosActuales.HP,
 				unid.Pos);
-
 			return LastReturn;
 		}
+
 	}
 }
