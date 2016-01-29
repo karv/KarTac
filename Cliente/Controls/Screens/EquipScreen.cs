@@ -37,6 +37,10 @@ namespace KarTac.Cliente.Controls.Screens
 
 		readonly Label labelNombrePj;
 
+		public override void EscuchadorTeclado (Key obj)
+		{
+		}
+
 		public IListaControl ListaSeleccionada { get; private set; }
 
 		public EquipScreen (KarTacGame game, Clan clan, Personaje pj)

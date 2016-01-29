@@ -71,6 +71,10 @@ namespace KarTac.Cliente.Controls.Screens
 			diálogo.Ejecutar ();
 		}
 
+		public override void EscuchadorTeclado (OpenTK.Input.Key obj)
+		{
+		}
+
 
 		/// <summary>
 		/// Espablece el máximo número

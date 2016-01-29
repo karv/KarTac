@@ -49,10 +49,9 @@ namespace KarTac.Cliente.Controls.Screens
 			ListaComponente.Stringificación = x => x.ToString ();
 			ListaComponente.InterceptarTeclado = true;
 			SelecciónActual = new List<TObj> ();
-			InputManager.AlSerActivado += teclaPresionada;
 		}
 
-		void teclaPresionada (Key obj)
+		public override void EscuchadorTeclado (Key obj)
 		{
 			switch (obj)
 			{
@@ -98,12 +97,6 @@ namespace KarTac.Cliente.Controls.Screens
 
 		public override void Inicializar ()
 		{
-		}
-
-		public override void Salir ()
-		{
-			InputManager.AlSerActivado -= teclaPresionada;
-			base.Salir ();
 		}
 
 	}

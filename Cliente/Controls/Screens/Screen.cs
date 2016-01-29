@@ -23,6 +23,25 @@ namespace KarTac.Cliente.Controls.Screens
 			Controles = new ListaControl ();
 		}
 
+		void TeclaPresionada (OpenTK.Input.Key key)
+		{
+			foreach (var x in Controles)
+			{
+				x.CatchKey (key);
+			}
+		}
+
+		public bool Escuchando
+		{
+			set
+			{
+				if (value)
+					InputManager.AlSerActivado += TeclaPresionada;
+				else
+					InputManager.AlSerActivado -= TeclaPresionada;
+			}
+		}
+
 		public virtual Color BgColor
 		{
 			get
@@ -37,6 +56,7 @@ namespace KarTac.Cliente.Controls.Screens
 			{
 				x.Inicializar ();
 			}
+			InputManager.AlSerActivado += TeclaPresionada;
 		}
 
 		public virtual void Dibujar (GameTime gameTime)
@@ -69,9 +89,7 @@ namespace KarTac.Cliente.Controls.Screens
 		public virtual void Update (GameTime gameTime)
 		{
 			foreach (var x in new List<IControl> (Controles))
-			{
 				x.Update (gameTime);
-			}
 		}
 
 		public void UnloadContent ()
@@ -80,6 +98,7 @@ namespace KarTac.Cliente.Controls.Screens
 			{
 				x.Dispose ();
 			}
+			InputManager.AlSerActivado -= TeclaPresionada;
 		}
 
 		public ContentManager Content

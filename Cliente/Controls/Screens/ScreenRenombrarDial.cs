@@ -24,6 +24,10 @@ namespace KarTac.Cliente.Controls.Screens
 
 		}
 
+		public override void EscuchadorTeclado (OpenTK.Input.Key obj)
+		{
+		}
+
 		public override bool DibujarBase
 		{
 			get

@@ -42,6 +42,8 @@ namespace KarTac.Cliente.Controls.Screens
 		/// <value>The content.</value>
 		ContentManager Content { get; }
 
+		bool Escuchando { set; }
+
 		#region hardware
 
 		/// <summary>

@@ -1,8 +1,7 @@
 ﻿using System;
 using KarTac.Cliente.Controls.Screens;
-using System.Security.Cryptography;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
+
 
 namespace KarTac.Cliente.Controls
 {
@@ -68,6 +67,10 @@ namespace KarTac.Cliente.Controls
 		}
 
 		public void Dispose ()
+		{
+		}
+
+		void IControl.CatchKey (OpenTK.Input.Key key)
 		{
 		}
 

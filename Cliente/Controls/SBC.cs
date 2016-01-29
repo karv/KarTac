@@ -97,6 +97,10 @@ namespace KarTac.Cliente.Controls
 			Exclude ();
 		}
 
+		public virtual void CatchKey (Key key)
+		{
+		}
+
 		public event Action AlClick;
 		public event Action AlClickDerecho;
 	}

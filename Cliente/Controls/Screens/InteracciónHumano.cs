@@ -50,7 +50,7 @@ namespace KarTac.Cliente.Controls.Screens
 			sense.Include ();
 		}
 
-		void InputManager_AlSerPresionado (Key key)
+		public override void EscuchadorTeclado (Key key)
 		{
 			IOrden orden;
 			switch (key)
@@ -132,18 +132,6 @@ namespace KarTac.Cliente.Controls.Screens
 			default:
 				return;
 			}
-		}
-
-		public override void Ejecutar ()
-		{
-			InputManager.AlSerPresionado += InputManager_AlSerPresionado;
-			base.Ejecutar ();
-		}
-
-		public override void Salir ()
-		{
-			InputManager.AlSerPresionado -= InputManager_AlSerPresionado;
-			base.Salir ();
 		}
 
 		SensorialExtremos sense;
