@@ -50,7 +50,7 @@ namespace KarTac.Skills
 			float cura = (float)DamageUtils.CalcularDaño (
 				             UnidadUsuario.AtributosActuales.Recs ["Poder mágico"].Valor,
 				             0,
-				             coef);
+				             coef) + 20;
 
 			unid.AtributosActuales.HP.Valor += cura;
 			System.Diagnostics.Debug.WriteLine (string.Format (
