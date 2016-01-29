@@ -1,6 +1,7 @@
 ﻿using KarTac.Cliente.Controls.Screens;
 using Microsoft.Xna.Framework;
 using System;
+using OpenTK.Input;
 
 namespace KarTac.Cliente.Controls
 {
@@ -43,5 +44,7 @@ namespace KarTac.Cliente.Controls
 		/// Se ejecuta antes del ciclo, pero después de saber un poco sobre los controladores
 		/// </summary>
 		void Inicializar ();
+
+		void CatchKey (Key key);
 	}
 }

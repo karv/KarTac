@@ -84,9 +84,22 @@ namespace KarTac.Cliente.Controls.Screens
 			#if DEBUG
 			System.Diagnostics.Debug.WriteLine ("\n\nEntrando a " + this);
 			#endif
+			Juego.CurrentScreen.Escuchando = false;
 			Inicializar ();
 			LoadContent ();
 			Juego.CurrentScreen = this;
+			Escuchando = true;
+		}
+
+		public bool Escuchando
+		{
+			set
+			{
+				if (value)
+					InputManager.AlSerActivado += EscuchadorTeclado;
+				else
+					InputManager.AlSerActivado -= EscuchadorTeclado;
+			}
 		}
 
 		public virtual void Salir ()
@@ -94,8 +107,11 @@ namespace KarTac.Cliente.Controls.Screens
 			#if DEBUG
 			System.Diagnostics.Debug.WriteLine ("\n\nEntrando a " + ScreenBase);
 			#endif
+			Escuchando = false;
 			Juego.CurrentScreen = ScreenBase;
+			Juego.CurrentScreen.Escuchando = true;
 			AlTerminar?.Invoke ();
+
 			UnloadContent ();
 		}
 
@@ -109,6 +125,14 @@ namespace KarTac.Cliente.Controls.Screens
 			foreach (var x in Controles)
 			{
 				x.Inicializar ();
+			}
+		}
+
+		public virtual void EscuchadorTeclado (OpenTK.Input.Key key)
+		{
+			foreach (var x in Controles)
+			{
+				x.CatchKey (key);
 			}
 		}
 

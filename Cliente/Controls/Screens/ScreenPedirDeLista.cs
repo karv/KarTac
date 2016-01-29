@@ -45,9 +45,34 @@ namespace KarTac.Cliente.Controls.Screens
 			ListaComponente = new Lista<TObj> (this);
 			ListaComponente.Bounds = new Rectangle (0, 0, GetDisplayMode.Width, GetDisplayMode.Height);
 			ListaComponente.ColorBG = Color.Blue * 0.4f;
-			Controles.Add (ListaComponente);
+			ListaComponente.Include ();
 			ListaComponente.Stringificación = x => x.ToString ();
+			ListaComponente.InterceptarTeclado = true;
 			SelecciónActual = new List<TObj> ();
+		}
+
+		public override void EscuchadorTeclado (Key obj)
+		{
+			switch (obj)
+			{
+			case Key.Escape:
+				Salida = new TipoSalida (TipoSalida.EnumTipoSalida.Cancelación, SelecciónActual);
+				Salir ();
+				return;
+			case Key.Space:
+				var curObj = ObjetoEnCursor;
+				if (SelecciónActual.Contains (curObj))
+					SelecciónActual.Remove (curObj);
+				else
+					SelecciónActual.Add (curObj);
+				return;
+			case Key.Enter:
+				Salida = new TipoSalida (TipoSalida.EnumTipoSalida.Aceptación, SelecciónActual);
+				Salir ();
+				return;
+			default:
+				return;
+			}
 		}
 
 		public TObj ObjetoEnCursor
@@ -74,30 +99,5 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 		}
 
-		public override void Update (GameTime gameTime)
-		{
-			if (InputManager.FuePresionado (Key.Escape))
-			{
-				Salida = new TipoSalida (TipoSalida.EnumTipoSalida.Cancelación, SelecciónActual);
-				Salir ();
-			}
-
-			if (InputManager.FuePresionado (Key.Space))
-			{
-				var curObj = ObjetoEnCursor;
-				if (SelecciónActual.Contains (curObj))
-					SelecciónActual.Remove (curObj);
-				else
-					SelecciónActual.Add (curObj);
-			}
-
-			if (InputManager.FuePresionado (Key.Enter))
-			{
-				Salida = new TipoSalida (TipoSalida.EnumTipoSalida.Aceptación, SelecciónActual);
-				Salir ();
-			}
-				
-			base.Update (gameTime);
-		}
 	}
 }

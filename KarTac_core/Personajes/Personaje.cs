@@ -5,6 +5,7 @@ using KarTac.Batalla;
 using KarTac.IO;
 using System.IO;
 using KarTac.Equipamento;
+using System.Linq;
 
 namespace KarTac.Personajes
 {
@@ -76,7 +77,12 @@ namespace KarTac.Personajes
 		{
 			get
 			{
-				var ret = new List<ISkill> (Equipamento.GetSkills ());
+				var ret = new List<ISkill> ();
+				foreach (var x in Equipamento.GetSkills ())
+				{
+					if (InnerSkill.All (y => y.Nombre != x.Nombre)) // Evitar duplicados
+						ret.Add (x);
+				}
 				foreach (var x in InnerSkill)
 				{
 					ret.Add (x);

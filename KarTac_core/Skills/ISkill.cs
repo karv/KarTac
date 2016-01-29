@@ -44,8 +44,15 @@ namespace KarTac.Skills
 
 	public interface ISkill: IExp, IGuardable
 	{
+		/// <summary>
+		/// Devuelve el nombre (único) del skill.
+		/// Sirve como identificador
+		/// </summary>
 		string Nombre { get; }
 
+		/// <summary>
+		/// Descripción del skill.
+		/// </summary>
 		string Descripción { get; }
 
 		Personaje Usuario { get; }

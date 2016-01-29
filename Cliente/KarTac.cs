@@ -27,6 +27,11 @@ namespace KarTac.Cliente
 		readonly Label fpsLabel;
 		#endif
 
+		public bool Escuchando
+		{
+			set{ }
+		}
+
 		public ListaControl ControlesUniversales { get; }
 
 		public IScreen CurrentScreen;

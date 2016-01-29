@@ -10,6 +10,10 @@ using KarTac.Batalla.Objetos;
 
 namespace KarTac.Cliente.Controls.Screens
 {
+	/// <summary>
+	/// Pantalla entre turnos.
+	/// Note que esta pantalla nunca se libera.
+	/// </summary>
 	public class OutsideScreen: Screen
 	{
 		public Clan MyClan { get; }
@@ -121,9 +125,10 @@ namespace KarTac.Cliente.Controls.Screens
 
 		void iniciarCombate ()
 		{
+			personajes.InterceptarTeclado = false;
 			var r = Utils.Rnd;
 			//var campoBatalla = new Campo (new Point (GetDisplayMode.Width, GetDisplayMode.Height));
-			var campoBatalla = new Campo (new Point (Utils.Rnd.Next (400, 5000), Utils.Rnd.Next (100, 1200)));
+			var campoBatalla = new Campo (new Point (Utils.Rnd.Next (100, 1000), Utils.Rnd.Next (100, 1000)));
 			Clan enemClan;
 			for (int i = 0; i < 2; i++)
 			{
@@ -142,6 +147,7 @@ namespace KarTac.Cliente.Controls.Screens
 				recargar ();
 				Game.CurrentScreen = this;
 				btScr.UnloadContent ();
+				personajes.InterceptarTeclado = true;
 			};
 
 			//var ClanEnemigo = Clan.BuildStartingClan ();

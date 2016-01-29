@@ -5,6 +5,9 @@ using Microsoft.Xna.Framework;
 
 namespace KarTac.Cliente.Controls.Screens
 {
+	/// <summary>
+	/// Selector de blanco de skills
+	/// </summary>
 	public class Selector : ScreenDial, ISelectorTarget
 	{
 		public Selector (KarTacGame game, IScreen screenBase)
@@ -34,6 +37,7 @@ namespace KarTac.Cliente.Controls.Screens
 		public void Selecciona (Unidad unid)
 		{
 			var diálogo = new ScreenPedirDeLista<Unidad> (Juego);
+			//diálogo.ListaComponente.InterceptarTeclado = true;
 
 			var lista = diálogo.ListaComponente;
 
@@ -65,6 +69,10 @@ namespace KarTac.Cliente.Controls.Screens
 			};
 
 			diálogo.Ejecutar ();
+		}
+
+		public override void EscuchadorTeclado (OpenTK.Input.Key obj)
+		{
 		}
 
 

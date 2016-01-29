@@ -15,6 +15,7 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 			Campo = campo;
 			Unidades = new Lista<Unidad> (this);
+			Unidades.InterceptarTeclado = false;
 		}
 
 		public PauseScreen (KarTacGame game, IScreen scr, Campo campo)
@@ -22,6 +23,7 @@ namespace KarTac.Cliente.Controls.Screens
 		{
 			Campo = campo;
 			Unidades = new Lista<Unidad> (this);
+			Unidades.InterceptarTeclado = false;
 		}
 
 		public override bool DibujarBase
@@ -49,18 +51,26 @@ namespace KarTac.Cliente.Controls.Screens
 			Unidades.Inicializar ();
 		}
 
-		public override void Update (GameTime gameTime)
+		public override void EscuchadorTeclado (Key obj)
 		{
-			base.Update (gameTime);
-			if (InputManager.FuePresionado (Key.Enter))
+			switch (obj)
 			{
+			case Key.Enter:
 				var uni = Unidades.ObjetoEnCursor;
 				if (uni.OrdenActual?.EsCancelable ?? false)
 					uni.OrdenActual = null;
 				AlCancelarOrden?.Invoke (uni);
-			}
-			if (InputManager.FuePresionado (Key.Escape))
+				return;
+			case Key.Escape:
 				Salir ();
+				return;
+			case Key.Down:
+				Unidades.SeleccionaSiguiente ();
+				return;
+			case Key.Up:
+				Unidades.SeleccionaAnterior ();
+				return;
+			}
 		}
 
 		/// <summary>

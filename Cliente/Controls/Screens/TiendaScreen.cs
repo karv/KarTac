@@ -59,6 +59,11 @@ namespace KarTac.Cliente.Controls.Screens
 			}
 		}
 
+		public override void EscuchadorTeclado (Key obj)
+		{
+			// TODO: Pasar Update para acá
+		}
+
 		void updateCompras ()
 		{
 			Mostrables.Clear ();

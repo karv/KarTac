@@ -56,7 +56,7 @@ namespace KarTac.Equipamento
 			{
 				get
 				{
-					throw new NotImplementedException ();
+					return "Poción HP";
 				}
 			}
 

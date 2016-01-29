@@ -59,7 +59,7 @@ namespace KarTac.Skills
 
 		public override IEnumerable<ISkill> DesbloquearSkills ()
 		{
-			return new ISkill[0]; // Regresa vacío, por ahora.
+			yield return new Curación (Usuario);
 		}
 
 		public override bool PuedeAprender ()
@@ -124,12 +124,12 @@ namespace KarTac.Skills
 
 		protected override ISkillReturnType EffectOnTarget (Unidad unid)
 		{
-			var atrMP = UnidadUsuario.AtributosActuales.Recs ["Poder mágico"];
+			var atrPM = UnidadUsuario.AtributosActuales.Recs ["Poder mágico"];
+			var coef = 8 + 2 * TotalExp;
 			float daño = (float)DamageUtils.CalcularDaño (
-				             atrMP.Valor,
+				             atrPM.Valor,
 				             unid.AtributosActuales.Defensa.Valor / 10,
-				             10);
-			
+				             coef);
 
 			unid.AtributosActuales.HP.Valor -= daño;
 			System.Diagnostics.Debug.WriteLine (string.Format (
@@ -141,13 +141,13 @@ namespace KarTac.Skills
 			ManáRecurso.Valor -= UsaManá;
 
 			PeticiónExpAcumulada += 1.5;
-			atrMP.PeticiónExpAcumulada += 0.4f;
+			atrPM.PeticiónExpAcumulada += 0.4f;
 			LastReturn = new SkillReturnType (
 				-daño,
 				unid.AtributosActuales.HP,
 				unid.Pos);
-
 			return LastReturn;
 		}
+
 	}
 }

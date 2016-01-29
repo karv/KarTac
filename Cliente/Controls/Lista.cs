@@ -49,6 +49,7 @@ namespace KarTac.Cliente.Controls
 			Objetos = new List<Entrada> ();
 			ColorBG = Color.Blue * 0.3f;
 			ColorSel = Color.White * 0.5f;
+			InterceptarTeclado = true;
 		}
 
 		public override void Dibujar (GameTime gameTime)
@@ -67,9 +68,10 @@ namespace KarTac.Cliente.Controls
 			var final = Math.Min (Objetos.Count, inic + MaxVisible);
 			for (int i = inic; i < final; i++)
 			{
+
 				var x = Objetos [i];
 				var strTxt = Stringificación (x.Objeto);
-				if (i == cursorIndex)
+				if (i == CursorIndex)
 				{
 					var rect = Fuente.GetStringRectangle (strTxt, currY);
 					bat.Draw (noTexture, rect, ColorSel);
@@ -134,13 +136,17 @@ namespace KarTac.Cliente.Controls
 				if (obj == ArribaKey)
 					SeleccionaAnterior ();
 			}
+			else
+			{
+				Console.WriteLine ();
+			}
 		}
 
 		public TObj ObjetoEnCursor
 		{
 			get
 			{
-				if (cursorIndex < Objetos.Count)
+				if (CursorIndex < Objetos.Count)
 					return Objetos [CursorIndex].Objeto;
 				throw new ArgumentOutOfRangeException ();
 			}
@@ -170,7 +176,7 @@ namespace KarTac.Cliente.Controls
 		/// <summary>
 		/// Devuelve o establece si este control puede interactuar por sí mismo con el teclado
 		/// </summary>
-		public bool InterceptarTeclado = true;
+		public bool InterceptarTeclado { get; set; }
 
 		public override void LoadContent ()
 		{
@@ -189,19 +195,28 @@ namespace KarTac.Cliente.Controls
 		public Key AbajoKey = Key.Down;
 		public Key ArribaKey = Key.Up;
 
+		public override void CatchKey (Key key)
+		{
+			if (!InterceptarTeclado)
+				return;
+			if (key == AbajoKey)
+				SeleccionaSiguiente ();
+			else
+			if (key == ArribaKey)
+				SeleccionaAnterior ();
+		}
+
 		#region IListaControl
 
 		public void SeleccionaSiguiente ()
 		{
-			CursorIndex++;
-			if (cursorIndex >= PrimerVisible + MaxVisible)
+			if (++CursorIndex >= PrimerVisible + MaxVisible)
 				PrimerVisible++;
 		}
 
 		public void SeleccionaAnterior ()
 		{
-			CursorIndex--;
-			if (cursorIndex < PrimerVisible)
+			if (--CursorIndex < PrimerVisible)
 				PrimerVisible--;
 		}
 

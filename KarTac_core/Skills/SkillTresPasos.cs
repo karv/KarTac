@@ -26,6 +26,7 @@ namespace KarTac.Skills
 			ords [1] = ConstruirEjecución ();
 			ords [2] = ConstruirTerminal ();
 			AlIniciarPreparación?.Invoke ();
+			ords [2].AlTerminar += Terminar;
 			UnidadUsuario.OrdenActual = new OrdenSerie (UnidadUsuario, ords);
 		}
 
@@ -37,6 +38,11 @@ namespace KarTac.Skills
 				AlIniciarEjecución?.Invoke ();
 			};
 			return ret;
+		}
+
+		void Terminar ()
+		{
+			OnTerminar (LastReturn);
 		}
 
 		protected virtual IOrden ConstruirEjecución ()
