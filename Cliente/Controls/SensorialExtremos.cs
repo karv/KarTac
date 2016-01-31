@@ -1,6 +1,8 @@
 ﻿using System;
-using KarTac.Cliente.Controls.Screens;
 using Microsoft.Xna.Framework;
+using Moggle.Controles;
+using Moggle.Screens;
+using Moggle.IO;
 
 
 namespace KarTac.Cliente.Controls
@@ -8,7 +10,7 @@ namespace KarTac.Cliente.Controls
 	/// <summary>
 	/// Representa un objeto que mantiene el control sobre la cercanía y presión del cursor del ratón a los extremos de la pantalla
 	/// </summary>
-	public class SensorialExtremos : IControl
+	public class SensorialExtremos : IControl/// 
 	{
 		public SensorialExtremos (IScreen screen)
 		{

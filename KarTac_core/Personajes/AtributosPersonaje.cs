@@ -56,7 +56,8 @@ namespace KarTac.Personajes
 		{
 			get
 			{
-				return Recs ["Condición"] as Condición;
+				var ret = Recs ["Condición"] as Condición;
+				return ret;
 			}
 		}
 

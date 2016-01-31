@@ -7,6 +7,9 @@ using KarTac.Cliente.Controls;
 using KarTac.Equipamento;
 using KarTac.Batalla.Generador;
 using KarTac.Batalla.Objetos;
+using Moggle.Screens;
+using Moggle.Controles.Listas;
+using Moggle.Controles;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -62,7 +65,7 @@ namespace KarTac.Cliente.Controls.Screens
 			botónGuardar.AlClick += guardarClan;
 			botónRenombrar.AlClick += delegate // Renombrar
 			{
-				var dial = new ScreenRenombrarDial (juego, this);
+				var dial = new RenombrarDialScreen (juego, this);
 				dial.TextoPreg = "Renombrar a " + personajes.ObjetoEnCursor.Nombre;
 				dial.AlTerminar += delegate
 				{
@@ -75,7 +78,7 @@ namespace KarTac.Cliente.Controls.Screens
 			botónSalir.AlClick += SalirJuego;
 			botónEquip.AlClick += delegate // Ventana equipo
 			{
-				var scr = new EquipScreen (Game, MyClan, personajes.ObjetoEnCursor);
+				var scr = new EquipScreen (Juego, MyClan, personajes.ObjetoEnCursor);
 				scr.Ejecutar ();
 			};
 
@@ -93,13 +96,13 @@ namespace KarTac.Cliente.Controls.Screens
 			t.Artículos.Add (new Tienda.Entrada (() => new Bastón (), 10, 125, "Bastón"));
 			t.Artículos.Add (new Tienda.Entrada (() => new Hacha (), 10, 125, "Hacha"));
 			t.Artículos.Add (new Tienda.Entrada (() => new Lanza (), 10, 125, "Lanza"));
-			var scr = new TiendaScreen (Game, t, MyClan.Inventario);
+			var scr = new TiendaScreen (Juego, t, MyClan.Inventario);
 			scr.Ejecutar ();
 		}
 
 		void SalirJuego ()
 		{
-			Game.Exit ();
+			Juego.Exit ();
 		}
 
 		void guardarClan ()
@@ -138,20 +141,23 @@ namespace KarTac.Cliente.Controls.Screens
 				campoBatalla.Paredes.Add (p);
 			}
 
-			var btScr = new BattleScreen (Game, campoBatalla);
-			Game.CurrentScreen = btScr;
+			enemClan = Clan.BuildStartingClan ();
+
+			MyClan.Reestablecer ();
+
+			var btScr = new BattleScreen (Juego, campoBatalla);
+			btScr.Ejecutar ();
 
 			campoBatalla.AlTerminar += delegate
 			{
 				MyClan.Reestablecer ();
 				recargar ();
-				Game.CurrentScreen = this;
+				Ejecutar ();
 				btScr.UnloadContent ();
 				personajes.InterceptarTeclado = true;
 			};
 
 			//var ClanEnemigo = Clan.BuildStartingClan ();
-			enemClan = Clan.BuildStartingClan ();
 			var equipoRojo = new Equipo (0, Color.Red, MyClan.Inventario);
 			var equipoAmarillo = new Equipo (1, Color.Yellow, enemClan.Inventario);
 			var enemigo = GeneradorCombates.GenerarEquipoAleatorio (
@@ -169,7 +175,7 @@ namespace KarTac.Cliente.Controls.Screens
 				unid.Equipo = equipoRojo;
 				campoBatalla.AñadirUnidad (unid);
 
-				unid.Interactor = new InteracciónHumano (unid, Game);
+				unid.Interactor = new InteracciónHumano (unid, Juego);
 
 			}
 
@@ -182,14 +188,26 @@ namespace KarTac.Cliente.Controls.Screens
 			// Asignar posiciones
 			foreach (var u in campoBatalla.Unidades)
 			{
-				u.PersonajeBase.Atributos.Inicializar ();
 				u.PosPrecisa = randomPointInRectangle (campoBatalla.Área, r);
 			}
 
-			MyClan.Reestablecer ();
-			enemClan.Reestablecer ();
+			foreach (var u in campoBatalla.Unidades)
+			{
+				if (u != u.PersonajeBase.Unidad)
+					Console.WriteLine ();
+			}
+
 
 			btScr.Inicializar ();
+
+		}
+
+		public static void MostrarAtrs (string atr, Campo c)
+		{
+			foreach (var x in c.Unidades)
+			{
+				Console.WriteLine (string.Format ("{0} - {1}", x.PersonajeBase.Nombre, x.AtributosActuales.Recs [atr].ToString ()));
+			}
 		}
 
 		static Vector2 randomPointInRectangle (Rectangle rect, Random r)
@@ -209,10 +227,10 @@ namespace KarTac.Cliente.Controls.Screens
 			}
 		}
 
-		public override void Update (GameTime gameTime)
+		protected override void TeclaPresionada (Key key)
 		{
-			base.Update (gameTime);
-			if (InputManager.FuePresionado (Key.Enter))
+			base.TeclaPresionada (key);
+			if (key == Key.Enter)
 				iniciarCombate ();
 		}
 

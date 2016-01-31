@@ -5,10 +5,12 @@ using Microsoft.Xna.Framework;
 using System;
 using KarTac.Cliente.Controls.Primitivos;
 using KarTac.Skills;
+using Moggle.Screens;
+using Moggle.IO;
 
 namespace KarTac.Cliente.Controls.Screens
 {
-	public class InteracciónHumano : ScreenDial, IInteractor
+	public class InteracciónHumano : DialScreen, IInteractor
 	{
 		MenúTurno menú { get; }
 
@@ -38,7 +40,7 @@ namespace KarTac.Cliente.Controls.Screens
 			}
 		}
 
-		public InteracciónHumano (Unidad unid, KarTacGame game)
+		public InteracciónHumano (Unidad unid, Moggle.Game game)
 			: base (game)
 		{
 			Selector = new Selector (game, game.CurrentScreen);
@@ -50,8 +52,9 @@ namespace KarTac.Cliente.Controls.Screens
 			sense.Include ();
 		}
 
-		public override void EscuchadorTeclado (Key key)
+		protected override void TeclaPresionada (Key key)
 		{
+			base.TeclaPresionada (key);
 			IOrden orden;
 			switch (key)
 			{

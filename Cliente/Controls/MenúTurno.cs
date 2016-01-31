@@ -4,6 +4,8 @@ using KarTac.Cliente.Controls.Screens;
 using MonoGame.Extended.BitmapFonts;
 using System;
 using KarTac.Skills;
+using Moggle.Controles;
+using Moggle.Screens;
 
 namespace KarTac.Cliente.Controls
 {
@@ -19,8 +21,8 @@ namespace KarTac.Cliente.Controls
 			TiempoCambioLado = TimeSpan.FromMilliseconds (700);
 			skillsList = new ListaSkills (screen);
 			skillsList.TipoOrden = ContenedorBotón.TipoOrdenEnum.ColumnaPrimero;
-			display = new RandomStringDisplay (screen);
-			descripDisplay = new Label (screen);
+			display = new MultiEtiqueta (screen);
+			descripDisplay = new Etiqueta (screen);
 			descripDisplay.UseFont = "UnitNameFont";
 			descripDisplay.Texto = () => SkillSeleccionado.Descripción;
 		}
@@ -38,7 +40,7 @@ namespace KarTac.Cliente.Controls
 		/// <summary>
 		/// El control que se muestra bajo el nombre para mostrar atributos y recursos
 		/// </summary>
-		Label descripDisplay;
+		Etiqueta descripDisplay;
 
 		bool inicializado;
 
@@ -76,7 +78,7 @@ namespace KarTac.Cliente.Controls
 			foreach (var x in UnidadActual.AtributosActuales.Recs.Values)
 			{
 				if (x.VisibleBatalla)
-					display.Mostrables.Add (new RandomStringDisplay.IconTextEntry (
+					display.Mostrables.Add (new MultiEtiqueta.IconTextEntry (
 						font,
 						Screen.Content.Load<Texture2D> (x.Icono),
 						x.ToString (),
@@ -129,7 +131,7 @@ namespace KarTac.Cliente.Controls
 
 		ListaSkills skillsList { get; }
 
-		RandomStringDisplay display { get; }
+		MultiEtiqueta display { get; }
 
 		public override void LoadContent ()
 		{

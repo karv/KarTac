@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Moggle.Screens;
 
 namespace KarTac.Cliente.Controls.Screens
 {
 	/// <summary>
 	/// Selector de blanco de skills
 	/// </summary>
-	public class Selector : ScreenDial, ISelectorTarget
+	public class Selector : DialScreen, ISelectorTarget
 	{
-		public Selector (KarTacGame game, IScreen screenBase)
+		public Selector (Moggle.Game game, IScreen screenBase)
 			: base (game, screenBase)
 		{
 		}
@@ -36,7 +37,7 @@ namespace KarTac.Cliente.Controls.Screens
 		/// </summary>
 		public void Selecciona (Unidad unid)
 		{
-			var diálogo = new ScreenPedirDeLista<Unidad> (Juego);
+			var diálogo = new MostrarListaScreen<Unidad> (Juego);
 			//diálogo.ListaComponente.InterceptarTeclado = true;
 
 			var lista = diálogo.ListaComponente;
@@ -53,7 +54,7 @@ namespace KarTac.Cliente.Controls.Screens
 			diálogo.AlTerminar += delegate
 			{
 				var sel = diálogo.Salida;
-				if (sel.Tipo == ScreenPedirDeLista<Unidad>.TipoSalida.EnumTipoSalida.Aceptación)
+				if (sel.Tipo == MostrarListaScreen<Unidad>.TipoSalida.EnumTipoSalida.Aceptación)
 				{
 					var selección = new List<Unidad> (sel.Selección);
 					if (selección.Count == 0 && !PuedeSerVacío)
@@ -70,11 +71,6 @@ namespace KarTac.Cliente.Controls.Screens
 
 			diálogo.Ejecutar ();
 		}
-
-		public override void EscuchadorTeclado (OpenTK.Input.Key obj)
-		{
-		}
-
 
 		/// <summary>
 		/// Espablece el máximo número

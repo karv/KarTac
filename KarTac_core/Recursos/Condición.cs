@@ -14,7 +14,7 @@ namespace KarTac.Recursos
 		{
 			get
 			{
-				return (1 + Valor) / (2 * Max);
+				return 0.5 + Valor / (2 * Max);
 			}
 		}
 
@@ -57,7 +57,7 @@ namespace KarTac.Recursos
 		{
 			get
 			{
-				return CoefVelocidad < 0.5 ? Regeneración / 2 : Regeneración;
+				return Valor * 2 < Max ? Regeneración / 2 : Regeneración;
 			}
 		}
 
@@ -85,6 +85,7 @@ namespace KarTac.Recursos
 			return string.Format ("Condición: {0:P2}", CoefVelocidad);
 		}
 		#endif
+
 	}
 }
 

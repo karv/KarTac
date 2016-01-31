@@ -2,15 +2,17 @@
 using Microsoft.Xna.Framework;
 using OpenTK.Input;
 using System;
+using Moggle.Screens;
+using Moggle.Controles.Listas;
 
 namespace KarTac.Cliente.Controls.Screens
 {
 	/// <summary>
 	/// Pantalla de pausa en BattleScreen
 	/// </summary>
-	public class PauseScreen : ScreenDial
+	public class PauseScreen : DialScreen
 	{
-		public PauseScreen (KarTacGame game, Campo campo)
+		public PauseScreen (Moggle.Game game, Campo campo)
 			: base (game)
 		{
 			Campo = campo;
@@ -51,9 +53,10 @@ namespace KarTac.Cliente.Controls.Screens
 			Unidades.Inicializar ();
 		}
 
-		public override void EscuchadorTeclado (Key obj)
+		protected override void TeclaPresionada (Key key)
 		{
-			switch (obj)
+			base.TeclaPresionada (key);
+			switch (key)
 			{
 			case Key.Enter:
 				var uni = Unidades.ObjetoEnCursor;

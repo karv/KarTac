@@ -2,12 +2,15 @@
 using KarTac.Equipamento;
 using Microsoft.Xna.Framework;
 using OpenTK.Input;
+using Moggle.Screens;
+using Moggle.Controles.Listas;
+using Moggle.Controles;
 
 namespace KarTac.Cliente.Controls.Screens
 {
-	public class TiendaScreen : ScreenDial
+	public class TiendaScreen : DialScreen
 	{
-		public TiendaScreen (KarTacGame juego, Tienda tienda, InventarioClan inv)
+		public TiendaScreen (Moggle.Game juego, Tienda tienda, InventarioClan inv)
 			: base (juego)
 		{
 			Compras = new Compras (tienda, inv);
@@ -23,7 +26,7 @@ namespace KarTac.Cliente.Controls.Screens
 			                                                 x.PrecioUnitario,
 			                                                 x.Precio);
 
-			DineroDisponible = new Label (this);
+			DineroDisponible = new Etiqueta (this);
 			DineroDisponible.Color = Color.White;
 			DineroDisponible.Posición = new Point (100, 250);
 			DineroDisponible.UseFont = "fonts";
@@ -37,31 +40,26 @@ namespace KarTac.Cliente.Controls.Screens
 			base.Inicializar ();
 		}
 
-		public override void Update (GameTime gameTime)
+		protected override void TeclaPresionada (Key key)
 		{
-			base.Update (gameTime);
-			if (InputManager.FuePresionado (Key.Escape))
+			base.TeclaPresionada (key);
+			if (key == Key.Escape)
 				Salir ();
-			if (InputManager.FuePresionado (Key.Enter))
+			if (key == Key.Enter)
 			{
 				Compras.Commit ();
 				updateCompras ();
 			}
-			if (InputManager.FuePresionado (Key.Right))
+			if (key == Key.Right)
 			{
 				Compras.Add (Mostrables.ObjetoEnCursor.Objeto);
 				updateCompras ();
 			}
-			if (InputManager.FuePresionado (Key.Left))
+			if (key == Key.Left)
 			{
 				Compras.Add (Mostrables.ObjetoEnCursor.Objeto, -1);
 				updateCompras ();
 			}
-		}
-
-		public override void EscuchadorTeclado (Key obj)
-		{
-			// TODO: Pasar Update para acá
 		}
 
 		void updateCompras ()
@@ -87,7 +85,7 @@ namespace KarTac.Cliente.Controls.Screens
 		public Compras Compras { get; }
 
 		Lista<Compras.EntradaUnificada> Mostrables;
-		Label DineroDisponible;
+		Etiqueta DineroDisponible;
 
 		public override bool DibujarBase
 		{

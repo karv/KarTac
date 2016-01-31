@@ -1,0 +1,3 @@
+[submodule "Moggle"]
+	path = Moggle
+	url = https://github.com/karv/Moggle.git

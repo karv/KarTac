@@ -3,13 +3,16 @@ using KarTac.Personajes;
 using Microsoft.Xna.Framework;
 using OpenTK.Input;
 using System;
+using Moggle.Screens;
+using Moggle.Controles.Listas;
+using Moggle.Controles;
 
 namespace KarTac.Cliente.Controls.Screens
 {
 	/// <summary>
 	/// Pantalla para equiparse
 	/// </summary>
-	public class EquipScreen : ScreenDial
+	public class EquipScreen : DialScreen
 	{
 		/// <summary>
 		/// Devuelve el clan al que pertenece todo esto
@@ -35,15 +38,11 @@ namespace KarTac.Cliente.Controls.Screens
 
 		Botón botónOk { get; }
 
-		readonly Label labelNombrePj;
-
-		public override void EscuchadorTeclado (Key obj)
-		{
-		}
+		readonly Etiqueta labelNombrePj;
 
 		public IListaControl ListaSeleccionada { get; private set; }
 
-		public EquipScreen (KarTacGame game, Clan clan, Personaje pj)
+		public EquipScreen (Moggle.Game game, Clan clan, Personaje pj)
 			: base (game)
 		{
 			ClanActual = clan;
@@ -67,7 +66,7 @@ namespace KarTac.Cliente.Controls.Screens
 			botónOk.Textura = @"Icons/aceptar";
 			botónOk.AlClick += Salir;
 
-			labelNombrePj = new Label (this);
+			labelNombrePj = new Etiqueta (this);
 			labelNombrePj.Texto = () => pj.Nombre;
 			labelNombrePj.Posición = new Point (620, 30);
 			labelNombrePj.UseFont = "fonts";
@@ -82,28 +81,28 @@ namespace KarTac.Cliente.Controls.Screens
 			labelNombrePj.Include ();
 		}
 
-		public override void Update (GameTime gameTime)
+		protected override void TeclaPresionada (Key key)
 		{
-			base.Update (gameTime);
-			if (InputManager.FuePresionado (Key.Right))
+			base.TeclaPresionada (key);
+			if (key == Key.Right)
 			{
 				ListaSeleccionada = InvEquips;
 				InvEquips.ColorSel = Color.Green * 0.5f;
 				Equiped.ColorSel = Color.White * 0.5f;
 			}
-			if (InputManager.FuePresionado (Key.Left))
+			if (key == Key.Left)
 			{
 				ListaSeleccionada = Equiped;
 				InvEquips.ColorSel = Color.White * 0.5f;
 				Equiped.ColorSel = Color.Green * 0.5f;
 			}
-			if (InputManager.FuePresionado (Key.Up))
+			if (key == Key.Up)
 				ListaSeleccionada.SeleccionaAnterior ();
-			if (InputManager.FuePresionado (Key.Down))
+			if (key == Key.Down)
 				ListaSeleccionada.SeleccionaSiguiente ();
-			if (InputManager.FuePresionado (Key.Escape))
+			if (key == Key.Escape)
 				Salir ();
-			if (InputManager.FuePresionado (Key.Enter))
+			if (key == Key.Enter)
 			{
 				if (ListaSeleccionada == InvEquips)
 				{
@@ -130,6 +129,7 @@ namespace KarTac.Cliente.Controls.Screens
 				buildEquips ();
 				buildEquiped ();
 			}
+
 		}
 
 		public override Color BgColor

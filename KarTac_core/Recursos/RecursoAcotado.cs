@@ -21,7 +21,7 @@ namespace KarTac.Recursos
 		}
 
 		public abstract string Icono { get; }
-		
+
 		public abstract bool VisibleBatalla { get; }
 
 		public void Reestablecer ()
@@ -31,7 +31,7 @@ namespace KarTac.Recursos
 
 		public double PeticiónExpAcumulada { get; set; }
 
-		public float Max
+		public virtual float Max
 		{
 			get
 			{
@@ -45,11 +45,11 @@ namespace KarTac.Recursos
 						Max,
 						"Max no puede ser negativo.");
 				_max = value;
-				Valor = Math.Min (_actual, value);
+				Valor = Math.Min (_actual, Valor);
 			}
 		}
 
-		public float Valor
+		public virtual float Valor
 		{
 			get
 			{
@@ -61,6 +61,8 @@ namespace KarTac.Recursos
 
 				if (_actual <= 0)
 					AlValorCero?.Invoke ();
+				if (_actual == _max)
+					AlValorMáximo?.Invoke ();
 				AlCambiarValor?.Invoke ();
 			}
 		}
@@ -100,6 +102,11 @@ namespace KarTac.Recursos
 				return null;
 			}
 		}
+
+		/// <summary>
+		/// Ocurre cuando se alcanza el vamor máximo
+		/// </summary>
+		public event Action AlValorMáximo;
 
 		/// <summary>
 		/// Ocurre cuando HP no es positivo

@@ -6,6 +6,8 @@ using Microsoft.Xna.Framework;
 using KarTac.Skills;
 using OpenTK.Input;
 using KarTac.Batalla.Objetos;
+using Moggle.Screens;
+using Moggle.Controles;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -15,11 +17,11 @@ namespace KarTac.Cliente.Controls.Screens
 
 		public Campo CampoBatalla { get; }
 
-		public BattleScreen (KarTacGame juego, Campo campo)
+		public BattleScreen (Moggle.Game juego, Campo campo)
 			: base (juego)
 		{
 			CampoBatalla = campo;
-			contadorTiempo = new Label (this);
+			contadorTiempo = new Etiqueta (this);
 			contadorTiempo.Texto = () => CampoBatalla.DuraciónBatalla.ToString ("ss\\.fff");
 			contadorTiempo.UseFont = @"UnitNameFont";
 			contadorTiempo.Color = Color.White;
@@ -36,7 +38,7 @@ namespace KarTac.Cliente.Controls.Screens
 			sense.Include ();
 		}
 
-		Label contadorTiempo;
+		Etiqueta contadorTiempo;
 
 		SensorialExtremos sense;
 
@@ -69,6 +71,13 @@ namespace KarTac.Cliente.Controls.Screens
 			return ret;
 		}
 
+		protected override void TeclaPresionada (Key key)
+		{
+			base.TeclaPresionada (key);
+			if (key == Key.Escape)
+				Pausar ();
+		}
+
 		public override void Update (GameTime gameTime)
 		{
 			base.Update (gameTime);
@@ -79,9 +88,6 @@ namespace KarTac.Cliente.Controls.Screens
 			{
 				CampoBatalla.Terminar ();
 			}
-
-			if (InputManager.FuePresionado (Key.Escape))
-				Pausar ();
 
 			if (PendingPause)
 				doPause ();
@@ -100,7 +106,7 @@ namespace KarTac.Cliente.Controls.Screens
 		/// </summary>
 		void doPause ()
 		{
-			var scr = new PauseScreen (Game, CampoBatalla);
+			var scr = new PauseScreen (Juego, CampoBatalla);
 			scr.Ejecutar ();
 			PendingPause = false;
 		}
@@ -135,7 +141,7 @@ namespace KarTac.Cliente.Controls.Screens
 			{
 				var texto = string.Format ("{0:f2}", Math.Abs (sklRet.Delta));
 
-				var mostrarDaño = new VanishingString (Game, texto, TimeSpan.FromSeconds (1));
+				var mostrarDaño = new VanishingString (Juego, texto, TimeSpan.FromSeconds (1));
 				mostrarDaño.LoadContent ();
 				mostrarDaño.ColorInicial = sklRet.Color.Value;
 				mostrarDaño.Centro = this.ManejadorVista.CampoAPantalla (sklRet.Loc.ToVector2 ());

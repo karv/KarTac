@@ -2,6 +2,8 @@
 using KarTac.Batalla.Shape;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Moggle.Controles;
+using Moggle.Screens;
 
 namespace KarTac.Cliente.Controls.Primitivos
 {

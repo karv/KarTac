@@ -2,7 +2,9 @@
 using KarTac.Cliente.Controls.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using KarTac.Cliente.Controls.Primitivos;
+using Moggle.Controles;
+using Moggle.Screens;
+using Moggle;
 
 namespace KarTac.Cliente.Controls
 {
@@ -28,7 +30,11 @@ namespace KarTac.Cliente.Controls
 
 		public override void Dibujar (GameTime gameTime)
 		{
-			Formas.DrawLine (Screen.Batch, VP.CampoAPantalla (Pared.P0), VP.CampoAPantalla (Pared.P1), Color.Black, textura);
+			Moggle.Primitivos.DrawLine (Screen.Batch,
+			                            VP.CampoAPantalla (Pared.P0),
+			                            VP.CampoAPantalla (Pared.P1),
+			                            Color.Black,
+			                            textura);
 		}
 
 		protected override void Dispose ()

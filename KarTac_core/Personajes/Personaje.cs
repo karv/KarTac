@@ -40,6 +40,8 @@ namespace KarTac.Personajes
 
 		public Unidad ConstruirUnidad (Campo campoBatalla)
 		{
+			if (Unidad != null)
+				throw new Exception ("Este personaje ya tiene una unidad asignada.");
 			var ret = new Unidad (this, campoBatalla);
 			Unidad = ret;
 			return ret;

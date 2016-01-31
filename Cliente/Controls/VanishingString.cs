@@ -1,7 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended.BitmapFonts;
-using KarTac.Cliente.Controls.Screens;
+using Moggle.Controles;
+using Moggle.Screens;
 
 namespace KarTac.Cliente.Controls
 {
@@ -119,7 +120,8 @@ namespace KarTac.Cliente.Controls
 
 		public override void Dibujar (GameTime gameTime)
 		{
-			Screen.Batch.DrawString (Font, Texto, TopLeft, ColorActual);
+			if (Font != null)
+				Screen.Batch.DrawString (Font, Texto, TopLeft, ColorActual);
 		}
 
 		public override void LoadContent ()
@@ -136,9 +138,10 @@ namespace KarTac.Cliente.Controls
 		public override void Update (GameTime gameTime)
 		{
 			Restante -= gameTime.ElapsedGameTime;
-			TopLeft += Velocidad * (float)gameTime.ElapsedGameTime.TotalSeconds;
 			if (Restante < TimeSpan.Zero)
 				OnTerminar ();
+			else
+				TopLeft += Velocidad * (float)gameTime.ElapsedGameTime.TotalSeconds;
 		}
 
 		protected void OnTerminar ()

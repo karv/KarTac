@@ -4,7 +4,9 @@ using Microsoft.Xna.Framework.Content;
 using MonoGame.Extended.BitmapFonts;
 using System;
 using KarTac.Cliente.Controls.Screens;
-using KarTac.Cliente.Controls.Primitivos;
+using Moggle.Controles;
+using Moggle.Screens;
+using Moggle;
 
 namespace KarTac.Cliente.Controls
 {
@@ -146,7 +148,7 @@ namespace KarTac.Cliente.Controls
 			if (Marcado)
 			{
 				// Dibujar un rectángulo alrededor
-				Formas.DrawRectangle (bat, GetBounds (), Color.Yellow * 0.8f, texturaRect);
+				Moggle.Primitivos.DrawRectangle (bat, GetBounds (), Color.Yellow * 0.8f, texturaRect);
 			}
 
 			// Nombre

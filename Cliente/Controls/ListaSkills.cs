@@ -3,12 +3,15 @@ using KarTac.Skills;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using KarTac.Personajes;
+using Moggle.Controles;
+using Moggle.Controles.Listas;
+using Moggle.Screens;
 
 namespace KarTac.Cliente.Controls
 {
 	public class ListaSkills : ContenedorBotón, IListaControl
 	{
-		public ListaSkills (KarTac.Cliente.Controls.Screens.IScreen screen)
+		public ListaSkills (IScreen screen)
 			: base (screen)
 		{
 		}

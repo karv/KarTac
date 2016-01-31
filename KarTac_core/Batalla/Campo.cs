@@ -4,7 +4,6 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using KarTac.Skills;
 using KarTac.Batalla.Objetos;
-using NUnit.Framework;
 
 namespace KarTac.Batalla
 {

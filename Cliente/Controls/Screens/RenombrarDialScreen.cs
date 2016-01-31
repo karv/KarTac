@@ -1,20 +1,22 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Moggle.Screens;
+using Moggle.Controles;
 
 namespace KarTac.Cliente.Controls.Screens
 {
-	public class ScreenRenombrarDial : ScreenDial
+	public class RenombrarDialScreen : DialScreen
 	{
 		readonly EntradaTexto input;
-		readonly Label display;
+		readonly Etiqueta display;
 
-		public ScreenRenombrarDial (KarTacGame juego, IScreen screen)
+		public RenombrarDialScreen (KarTacGame juego, IScreen screen)
 			: base (juego, screen)
 		{
 			Bounds = new Rectangle (100, 100, 500, 400);
 			input = new EntradaTexto (this);
 			input.Bounds = new Rectangle (300, 200, 200, 40);
-			display = new Label (this);
+			display = new Etiqueta (this);
 			display.Posición = new Point (110, 110);
 			display.UseFont = "fonts";
 			display.Texto = () => TextoPreg;
@@ -22,10 +24,6 @@ namespace KarTac.Cliente.Controls.Screens
 			input.Include ();
 			display.Include ();
 
-		}
-
-		public override void EscuchadorTeclado (OpenTK.Input.Key obj)
-		{
 		}
 
 		public override bool DibujarBase
@@ -54,14 +52,14 @@ namespace KarTac.Cliente.Controls.Screens
 		Texture2D bgTexture;
 		Color boxColor = Color.Gray;
 
-		public override void Update (GameTime gameTime)
+		protected override void TeclaPresionada (OpenTK.Input.Key key)
 		{
-			if (InputManager.FuePresionado (OpenTK.Input.Key.Enter))
+			base.TeclaPresionada (key);
+			if (key == OpenTK.Input.Key.Enter)
 			{
 				Texto = input.Texto;
 				Salir ();
 			}
-			base.Update (gameTime);
 		}
 
 		public override void LoadContent ()
@@ -70,9 +68,10 @@ namespace KarTac.Cliente.Controls.Screens
 			bgTexture = Content.Load<Texture2D> ("Rect");
 		}
 
-		public override void Dibujar (GameTime gametime, SpriteBatch bat)
+		protected override void EntreBatches (GameTime gameTime)
 		{
-			bat.Draw (bgTexture, Bounds, boxColor);
+			Batch.Draw (bgTexture, Bounds, boxColor);
+			base.EntreBatches (gameTime);
 		}
 
 		public override void UnloadContent ()
