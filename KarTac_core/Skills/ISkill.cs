@@ -82,6 +82,8 @@ namespace KarTac.Skills
 		/// </summary>
 		void AlAprender ();
 
+		double TotalExp { get; }
+
 		/// <summary>
 		/// Ocurre al terminar completamente el procedumiento de este ISkill
 		/// </summary>
