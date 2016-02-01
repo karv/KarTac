@@ -23,10 +23,7 @@ namespace KarTac.Equipamento
 			#endif
 			Portador.Atributos.Add (new AtributoGenérico ("Bastón", visible));
 			Portador.Atributos.Add (new AtributoGenérico ("Poder mágico", visible));
-
-			//deltaPM = 1 + Portador.Atributos.Recs ["Bastón"].Valor;
-			//Portador.Atributos.Recs ["Poder mágico"].Valor += deltaPM;
-			Portador.Atributos.Add (new Maná ()); // Dárselo si no lo tiene
+			Portador.Atributos.Add (new Maná ()); // Dárselos si no los tiene
 		}
 
 		protected override System.Collections.Generic.IEnumerable<ISkill> Skills
@@ -37,10 +34,14 @@ namespace KarTac.Equipamento
 			}
 		}
 
-		protected override void OnDesequipar (ConjuntoEquipamento anterior)
+		public override System.Collections.Generic.IEnumerable<IModificador> Modificadores
 		{
-//			if (Portador != null)
-//				Portador.Atributos.Recs ["Poder mágico"].Valor += deltaPM;
+			get
+			{
+				yield return new KarTac.Personajes.ModificadorAtributo (
+					"Poder mágico",
+					1 + Portador.Atributos.GetRecursoBase ("Bastón").Valor);
+			}
 		}
 
 		public override void BattleUpdate (System.TimeSpan time)

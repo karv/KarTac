@@ -94,7 +94,7 @@ namespace KarTac.Equipamento
 			#else
 			const bool _visible = false;
 			#endif
-			Portador.Atributos.Add (new AtributoGenérico ("Espada", _visible));
+			Portador.Atributos.Add (new AtributoGenérico ("Hacha", _visible));
 			base.OnEquipar (anterior);
 		}
 

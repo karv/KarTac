@@ -72,10 +72,6 @@ namespace KarTac.Equipamento
 					return true;
 				}
 			}
-
-
-
-			
 		}
 
 		public override string IconContentString

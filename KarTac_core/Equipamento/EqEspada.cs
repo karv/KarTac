@@ -1,6 +1,7 @@
 ﻿using KarTac.Skills;
 using KarTac.Recursos;
 using KarTac.Personajes;
+using System.Collections.Generic;
 
 namespace KarTac.Equipamento
 {
@@ -77,7 +78,7 @@ namespace KarTac.Equipamento
 			}
 		}
 
-		public override System.Collections.Generic.IEnumerable<string> Tags
+		public override IEnumerable<string> Tags
 		{
 			get
 			{
@@ -86,7 +87,7 @@ namespace KarTac.Equipamento
 			}
 		}
 
-		protected override System.Collections.Generic.IEnumerable<ISkill> Skills
+		protected override IEnumerable<ISkill> Skills
 		{
 			get
 			{
