@@ -225,6 +225,7 @@ namespace KarTac.Batalla
 						sk.AlAprender ();
 					}
 				}
+				x.PersonajeBase.LimpiarUnidad ();
 			}
 
 			// Pagar al clan ganador
