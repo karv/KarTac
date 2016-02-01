@@ -6,6 +6,19 @@ namespace KarTac.Personajes
 {
 	public class AtributosPersonaje : IGuardable
 	{
+		AtributosPersonaje ()
+		{
+			Recs = new ListaRecursos ();
+		}
+
+		public AtributosPersonaje (Personaje pj)
+			: this ()
+		{
+			Personaje = pj;
+		}
+
+		public readonly Personaje Personaje;
+
 		public Empuje Empuje
 		{
 			get
@@ -85,11 +98,6 @@ namespace KarTac.Personajes
 		/// <value>The recursos.</value>
 		Dictionary<string, IRecurso> Recs { get; }
 
-		public AtributosPersonaje ()
-		{
-			Recs = new ListaRecursos ();
-		}
-
 		/// <summary>
 		/// Reestablece los atributos a sus valores default
 		/// </summary>
@@ -101,7 +109,23 @@ namespace KarTac.Personajes
 			}
 		}
 
-		public readonly HashSet<IModificador> Mods = new HashSet<IModificador> ();
+		/// <summary>
+		/// Devuelve los modificadores de atributos asociados a éste.
+		/// </summary>
+		public IEnumerable<IModificador> Mods
+		{
+			get
+			{
+				// Los equips
+				foreach (var x in Personaje.Equipamento)
+				{
+					foreach (var y in x.Modificadores)
+					{
+						yield return y;
+					}
+				}
+			}
+		}
 
 		/// <summary>
 		/// Devuelve el valor (ya modificados) de un atributo.

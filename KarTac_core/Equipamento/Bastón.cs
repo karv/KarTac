@@ -14,8 +14,6 @@ namespace KarTac.Equipamento
 			}
 		}
 
-		float deltaPM = 0;
-
 		protected override void OnEquipar (ConjuntoEquipamento anterior)
 		{
 			#if DEBUG
@@ -43,7 +41,6 @@ namespace KarTac.Equipamento
 		{
 //			if (Portador != null)
 //				Portador.Atributos.Recs ["Poder mágico"].Valor += deltaPM;
-			deltaPM = 0;
 		}
 
 		public override void BattleUpdate (System.TimeSpan time)
