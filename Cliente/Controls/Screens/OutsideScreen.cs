@@ -10,6 +10,7 @@ using KarTac.Batalla.Objetos;
 using Moggle.Screens;
 using Moggle.Controles.Listas;
 using Moggle.Controles;
+using Moggle.IO;
 
 namespace KarTac.Cliente.Controls.Screens
 {
@@ -232,6 +233,8 @@ namespace KarTac.Cliente.Controls.Screens
 			base.TeclaPresionada (key);
 			if (key == Key.Enter)
 				iniciarCombate ();
+			if (key == Key.S && (InputManager.EstáPresionado (Key.ControlLeft) || InputManager.EstáPresionado (Key.ControlRight)))
+				guardarClan ();
 		}
 
 		Lista<Personaje> personajes { get; }
