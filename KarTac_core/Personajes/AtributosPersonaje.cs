@@ -1,14 +1,27 @@
 ﻿using KarTac.Recursos;
 using KarTac.IO;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using NUnit.Framework;
 
 namespace KarTac.Personajes
 {
 	public class AtributosPersonaje : IGuardable
 	{
-		public Empuje Empuje { get; set; }
+		public Empuje Empuje
+		{
+			get
+			{
+				return new Empuje (
+					this ["empuje_enemigo"],
+					this ["empuje_aliado"],
+					this ["empuje_masa"]);
+			}
+			set
+			{
+				this ["empuje_enemigo"] = value.HaciaEnemigo;
+				this ["empuje_aliado"] = value.HaciaAliado;
+				this ["empuje_masa"] = value.Masa;
+			}
+		}
 
 		#region Atributos
 
@@ -91,7 +104,8 @@ namespace KarTac.Personajes
 		public readonly HashSet<IModificador> Mods = new HashSet<IModificador> ();
 
 		/// <summary>
-		/// Devuelve el valor (ya modificados) de un atributo
+		/// Devuelve el valor (ya modificados) de un atributo.
+		/// No usar set con += o -= etc.
 		/// </summary>
 		/// <param name="key">Key.</param>
 		public float this [string key]
@@ -105,6 +119,11 @@ namespace KarTac.Personajes
 						ret += x.Delta;
 				}
 				return ret;
+			}
+			private set
+			{
+				var rec = GetRecursoBase (key);
+				rec.Valor = value;
 			}
 		}
 
@@ -161,13 +180,11 @@ namespace KarTac.Personajes
 
 		public void Guardar (System.IO.BinaryWriter writer)
 		{
-			Empuje.Guardar (writer);
 			IOComún.Guardar (new List<IRecurso> (Enumerar), writer);
 		}
 
 		public void Cargar (System.IO.BinaryReader reader)
 		{
-			Empuje.Cargar (reader);
 			int count = reader.ReadInt32 ();
 			for (int i = 0; i < count; i++)
 			{
