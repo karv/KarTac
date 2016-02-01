@@ -52,7 +52,7 @@ namespace KarTac.Equipamento
 			{
 				float daño = (float)DamageUtils.CalcularDaño (
 					             UnidadUsuario.AtributosActuales.Ataque.Valor +
-					             UnidadUsuario.PersonajeBase.Atributos.Recs ["Lanza"].Valor,
+					             UnidadUsuario.PersonajeBase.Atributos ["Lanza"],
 					             unid.AtributosActuales.Defensa.Valor / 2,
 					             1);
 
@@ -64,7 +64,7 @@ namespace KarTac.Equipamento
 					unid));
 
 				UnidadUsuario.PersonajeBase.Atributos.Ataque.PeticiónExpAcumulada += 0.1;
-				UnidadUsuario.PersonajeBase.Atributos.Recs ["Lanza"].PeticiónExpAcumulada += 0.3;
+				UnidadUsuario.PersonajeBase.Atributos.GetRecursoBase ("Lanza").PeticiónExpAcumulada += 0.3;
 				unid.PersonajeBase.Atributos.Defensa.PeticiónExpAcumulada += 0.3;
 
 				LastReturn = new  SkillReturnType (
@@ -96,10 +96,12 @@ namespace KarTac.Equipamento
 		protected override void OnEquipar (ConjuntoEquipamento anterior)
 		{
 			#if DEBUG
-			Portador.Atributos.Recs.Add (new AtributoGenérico ("Lanza", true));
+			const bool _visible = true;
 			#else
-			Portador.Atributos.Recs.Add (new AtributoGenérico ("Lanza", false));
+			const bool _visible = false;
 			#endif
+
+			Portador.Atributos.Add (new AtributoGenérico ("Lanza", _visible));
 			base.OnEquipar (anterior);
 		}
 

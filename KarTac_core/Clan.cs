@@ -50,13 +50,13 @@ namespace KarTac
 			for (int i = 0; i < cant; i++)
 			{
 				var pj = new Personaje ();
-				pj.Atributos.Recs.Add (new HP ());
+				pj.Atributos.Add (new HP ());
 
-				pj.Atributos.Recs.Add (new AtributoGenérico ("Ataque", true));
-				pj.Atributos.Recs.Add (new AtributoGenérico ("Defensa", true));
-				pj.Atributos.Recs.Add (new AtributoGenérico ("Velocidad", true));
-				pj.Atributos.Recs.Add (new AtributoGenérico ("Agilidad", true));
-				pj.Atributos.Recs.Add (new Condición ());
+				pj.Atributos.Add (new AtributoGenérico ("Ataque", true));
+				pj.Atributos.Add (new AtributoGenérico ("Defensa", true));
+				pj.Atributos.Add (new AtributoGenérico ("Velocidad", true));
+				pj.Atributos.Add (new AtributoGenérico ("Agilidad", true));
+				pj.Atributos.Add (new Condición ());
 
 				pj.Atributos.HP.Max = 100;
 				pj.Atributos.HP.Valor = 100;

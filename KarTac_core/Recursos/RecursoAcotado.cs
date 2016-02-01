@@ -12,6 +12,8 @@ namespace KarTac.Recursos
 		float _max;
 		float _actual;
 
+		public KarTac.Personajes.AtributosPersonaje ConjAtrib { get; set; }
+
 		protected virtual float Inicial
 		{
 			get

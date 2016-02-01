@@ -16,19 +16,11 @@ namespace KarTac.Skills
 
 		public override void AlAprender ()
 		{
-			Usuario.Atributos.Recs.Add (new Maná ());
-			UnidadUsuario.AtributosActuales.Recs.Add (
+			Usuario.Atributos.Add (new Maná ());
+			UnidadUsuario.AtributosActuales.Add (
 				new AtributoGenérico (
 					"Poder mágico",
 					true));	
-		}
-
-		Maná ManáRecurso
-		{
-			get
-			{
-				return UnidadUsuario.AtributosActuales.Recs ["Maná"] as Maná;
-			}
 		}
 
 		protected override ISkillReturnType LastReturn { get; set; }
@@ -113,7 +105,7 @@ namespace KarTac.Skills
 		{
 			get
 			{
-				return ManáRecurso.Valor >= UsaManá;
+				return UnidadUsuario.AtributosActuales ["Maná"] >= UsaManá;
 			}
 		}
 
@@ -124,10 +116,9 @@ namespace KarTac.Skills
 
 		protected override ISkillReturnType EffectOnTarget (Unidad unid)
 		{
-			var atrPM = UnidadUsuario.AtributosActuales.Recs ["Poder mágico"];
 			var coef = 8 + 2 * TotalExp;
 			float daño = (float)DamageUtils.CalcularDaño (
-				             atrPM.Valor,
+				             UnidadUsuario.AtributosActuales ["Poder mágico"],
 				             unid.AtributosActuales.Defensa.Valor / 10,
 				             coef);
 
@@ -138,10 +129,10 @@ namespace KarTac.Skills
 				daño,
 				unid));
 
-			ManáRecurso.Valor -= UsaManá;
+			UnidadUsuario.AtributosActuales.GetRecursoBase ("Maná").Valor -= UsaManá;
 
 			PeticiónExpAcumulada += 1.5;
-			atrPM.PeticiónExpAcumulada += 0.4f;
+			UnidadUsuario.AtributosActuales.GetRecursoBase ("Maná").PeticiónExpAcumulada += 0.4f;
 			LastReturn = new SkillReturnType (
 				-daño,
 				unid.AtributosActuales.HP,

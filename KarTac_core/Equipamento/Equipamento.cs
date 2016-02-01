@@ -9,6 +9,11 @@ namespace KarTac.Equipamento
 
 	public abstract class Equipamento : IEquipamento
 	{
+		protected Equipamento ()
+		{
+			Modificadores = new List<IModificador> ();
+		}
+
 		string IItem.Id
 		{
 			get
@@ -184,5 +189,15 @@ namespace KarTac.Equipamento
 			}
 		}
 
+
+		public List<IModificador> Modificadores { get; }
+
+		IEnumerable<IModificador> IEquipamento.Modificadores
+		{
+			get
+			{
+				return Modificadores;
+			}
+		}
 	}
 }

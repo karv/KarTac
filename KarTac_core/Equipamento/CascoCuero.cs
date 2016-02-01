@@ -41,12 +41,12 @@ namespace KarTac.Equipamento
 
 		protected override void OnEquipar (ConjuntoEquipamento anterior)
 		{
-			if (!Portador.Atributos.Recs.ContainsKey ("armadura ligera"))
-				Portador.Atributos.Recs.Add (new AtributoGenérico (
+			if (!Portador.Atributos.TieneAtributo ("armadura ligera"))
+				Portador.Atributos.Add (new AtributoGenérico (
 					"armadura ligera",
 					false));
-			deltaDef = 1 + Portador.Atributos.Recs ["armadura ligera"].Valor;
-			deltaAgil = -1 / (Portador.Atributos.Recs ["armadura ligera"].Valor + 1);
+			//deltaDef = 1 + Portador.Atributos.Recs ["armadura ligera"].Valor;
+			//deltaAgil = -1 / (Portador.Atributos.Recs ["armadura ligera"].Valor + 1);
 			Portador.Atributos.Defensa.Inicial += deltaDef;
 			Portador.Atributos.Agilidad.Inicial += deltaAgil;
 		}
@@ -64,7 +64,7 @@ namespace KarTac.Equipamento
 
 		public override void BattleUpdate (System.TimeSpan time)
 		{
-			Portador.Atributos.Recs ["armadura ligera"].PeticiónExpAcumulada += time.TotalSeconds / 10;
+			Portador.Atributos.GetRecursoBase ("armadura ligera").PeticiónExpAcumulada += time.TotalSeconds / 10;
 		}
 
 		public override void Cargar (System.IO.BinaryReader reader)

@@ -31,13 +31,13 @@ namespace KarTac.Batalla.Generador
 		static Personaje generar ()
 		{
 			var pj = new Personaje ();
-			pj.Atributos.Recs.Add (new HP ());
+			pj.Atributos.Add (new HP ());
 
-			pj.Atributos.Recs.Add (new AtributoGenérico ("Ataque", true));
-			pj.Atributos.Recs.Add (new AtributoGenérico ("Defensa", true));
-			pj.Atributos.Recs.Add (new AtributoGenérico ("Velocidad", true));
-			pj.Atributos.Recs.Add (new AtributoGenérico ("Agilidad", true));
-			pj.Atributos.Recs.Add (new Condición ());
+			pj.Atributos.Add (new AtributoGenérico ("Ataque", true));
+			pj.Atributos.Add (new AtributoGenérico ("Defensa", true));
+			pj.Atributos.Add (new AtributoGenérico ("Velocidad", true));
+			pj.Atributos.Add (new AtributoGenérico ("Agilidad", true));
+			pj.Atributos.Add (new Condición ());
 
 			pj.Atributos.HP.Max = 100;
 			pj.Atributos.HP.Valor = 100;
@@ -71,10 +71,9 @@ namespace KarTac.Batalla.Generador
 			normalizarDistr ();
 			foreach (var x in ExpDistr)
 			{
-				if (!pj.Atributos.Recs.ContainsKey (x.Key.Nombre))
-					pj.Atributos.Recs [x.Key.Nombre] = x.Key;
-
-				pj.Atributos.Recs [x.Key.Nombre].CommitExp (exp * x.Value);
+				if (!pj.Atributos.TieneAtributo (x.Key.Nombre))
+					pj.Atributos.Add (x.Key);
+				pj.Atributos.GetRecursoBase (x.Key.Nombre).CommitExp (exp * x.Value);
 			}
 			return pj;
 		}

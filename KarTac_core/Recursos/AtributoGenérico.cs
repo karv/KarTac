@@ -13,7 +13,7 @@ namespace KarTac.Recursos
 			VisibleBatalla = visibleBatalla;
 		}
 
-		//float _valor;
+		public KarTac.Personajes.AtributosPersonaje ConjAtrib { get; set; }
 
 		public float Valor
 		{

@@ -117,7 +117,7 @@ namespace KarTac.Batalla
 					x.AcumularPetición (realDelta);
 
 					// Sus recursos
-					foreach (var y in x.AtributosActuales.Recs.Values)
+					foreach (var y in x.AtributosActuales.Enumerar)
 					{
 						y.Tick (realDelta);
 					}

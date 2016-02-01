@@ -43,7 +43,7 @@ namespace KarTac.Batalla
 				{
 					yield return x;
 				}
-				foreach (var x in AtributosActuales.Recs.Values)
+				foreach (var x in AtributosActuales.Enumerar)
 				{
 					yield return x;
 				}
@@ -167,7 +167,7 @@ namespace KarTac.Batalla
 
 		public void AcumularPetición (TimeSpan time)
 		{
-			foreach (var x in PersonajeBase.Atributos.Recs.Values)
+			foreach (var x in PersonajeBase.Atributos.Enumerar)
 			{
 				x.PedirExp (time, CampoBatalla);
 			}
@@ -183,7 +183,7 @@ namespace KarTac.Batalla
 
 			// Los IExp son ISkill y IRecurso
 			ret.Add (PersonajeBase.Atributos.HP);
-			foreach (var x in PersonajeBase.Atributos.Recs.Values)
+			foreach (var x in PersonajeBase.Atributos.Enumerar)
 			{
 				ret.Add (x);
 			}

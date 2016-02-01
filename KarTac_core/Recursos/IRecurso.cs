@@ -4,6 +4,7 @@ using KarTac.Batalla;
 using KarTac.Batalla.Exp;
 using KarTac.IO;
 using System.IO;
+using KarTac.Personajes;
 
 namespace KarTac.Recursos
 {
@@ -54,6 +55,11 @@ namespace KarTac.Recursos
 		/// El icono que se usará para mostrarse
 		/// </summary>
 		string Icono { get; }
+
+		/// <summary>
+		/// Conjunto de atributos al que pertenece.
+		/// </summary>
+		AtributosPersonaje ConjAtrib { get; set; }
 
 		/// <summary>
 		/// Ejecuta un tick de longitud dada
