@@ -183,7 +183,7 @@ namespace KarTac.Personajes
 		/// </summary>
 		public void Add (IRecurso recurso)
 		{
-			if (!Recs.ContainsValue (recurso))
+			if (!Recs.ContainsKey (recurso.Nombre))
 			{
 				Recs.Add (recurso.Nombre, recurso);
 				recurso.ConjAtrib = this;
