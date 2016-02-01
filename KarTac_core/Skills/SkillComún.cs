@@ -115,6 +115,9 @@ namespace KarTac.Skills
 				case "Curación":
 					ret = new Curación (pj);
 					break;
+				case "Llamas":
+					ret = new Llamas (pj);
+					break;
 				default:
 					throw new Exception ("No se reconoce tipo de skill " + tipo);
 			}
