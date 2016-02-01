@@ -52,6 +52,7 @@ namespace KarTac.Skills
 		public override IEnumerable<ISkill> DesbloquearSkills ()
 		{
 			yield return new Curación (Usuario);
+			yield return new Llamas (Usuario);
 		}
 
 		public override bool PuedeAprender ()
@@ -79,7 +80,6 @@ namespace KarTac.Skills
 
 		protected override TimeSpan CalcularTiempoPreparación ()
 		{
-			//return TimeSpan.Zero;
 			return TimeSpan.FromSeconds (0.1);
 		}
 
