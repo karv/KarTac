@@ -173,6 +173,7 @@ namespace KarTac.Personajes
 			if (!Recs.TryGetValue (nombre, out ret))
 			{
 				ret = new AtributoGenérico (nombre, false);
+				Add (ret);
 			}
 
 			return ret;
