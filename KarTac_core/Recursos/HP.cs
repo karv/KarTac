@@ -78,6 +78,8 @@ namespace KarTac.Recursos
 			var pct = Valor / Max;
 
 			PeticiónExpAcumulada += (1 - pct) * time.TotalMinutes;
+			if (pct < 0.4)
+				RecBase.Recursos [1].AcumularExp ((1 - pct) * time.TotalMinutes);
 		}
 
 		public override Color? ColorMostrarGanado
