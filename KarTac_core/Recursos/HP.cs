@@ -6,6 +6,18 @@ namespace KarTac.Recursos
 {
 	public class HP : RecursoAcotadoRegenerativo
 	{
+		public static IMultiRecurso BuildMulti ()
+		{
+			var ret = new MultiRecurso ();
+			var hp = new HP ();
+			hp.RecBase = ret;
+			ret.Recursos.Add (hp);
+			ret.Recursos.Add (new AtributoGenérico ("regen", false));
+
+			return ret;
+		}
+
+		public MultiRecurso RecBase;
 
 		public override string Nombre
 		{
@@ -18,7 +30,17 @@ namespace KarTac.Recursos
 		/// <summary>
 		/// Regeneración constante por minuto
 		/// </summary>
-		public float Regeneración { get; set; }
+		public float Regeneración
+		{
+			get
+			{
+				return RecBase.Recursos [1].Valor;
+			}
+			set
+			{
+				RecBase.Recursos [1].Valor = value;
+			}
+		}
 
 		protected override float Regen
 		{
@@ -27,7 +49,7 @@ namespace KarTac.Recursos
 				return Regeneración;
 			}
 		}
-		
+
 		public override string Icono
 		{
 			get
@@ -56,6 +78,8 @@ namespace KarTac.Recursos
 			var pct = Valor / Max;
 
 			PeticiónExpAcumulada += (1 - pct) * time.TotalMinutes;
+			if (pct < 0.4)
+				RecBase.Recursos [1].AcumularExp ((1 - pct) * time.TotalMinutes);
 		}
 
 		public override Color? ColorMostrarGanado
@@ -73,21 +97,5 @@ namespace KarTac.Recursos
 				return Color.Red;
 			}
 		}
-
-		#region Guardable
-
-		public override void Guardar (System.IO.BinaryWriter writer)
-		{
-			base.Guardar (writer);
-			writer.Write (Regeneración);
-		}
-
-		public override void Cargar (System.IO.BinaryReader reader)
-		{
-			base.Cargar (reader);
-			Regeneración = reader.ReadSingle ();
-		}
-
-		#endregion
 	}
 }

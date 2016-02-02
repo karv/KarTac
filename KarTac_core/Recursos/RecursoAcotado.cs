@@ -1,5 +1,6 @@
 ﻿using System;
 using KarTac.Batalla;
+using KarTac.Personajes;
 
 namespace KarTac.Recursos
 {
@@ -11,6 +12,35 @@ namespace KarTac.Recursos
 
 		float _max;
 		float _actual;
+
+		AtributosPersonaje _conjAtrib;
+
+		public AtributosPersonaje ConjAtrib
+		{
+			get
+			{
+				return _conjAtrib;
+			}
+			set
+			{
+				_conjAtrib = value;
+				OnAsignarConjAtrib ();
+			}
+		}
+
+		protected virtual void OnAsignarConjAtrib ()
+		{
+		}
+
+		public void AcumularExp (double exp)
+		{
+			PeticiónExpAcumulada += exp;
+		}
+
+		public void ResetExp ()
+		{
+			PeticiónExpAcumulada = 0;
+		}
 
 		protected virtual float Inicial
 		{

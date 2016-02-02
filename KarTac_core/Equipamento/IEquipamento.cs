@@ -6,6 +6,7 @@ namespace KarTac.Equipamento
 {
 	public interface IEquipamento : IItem
 	{
+		IEnumerable<IModificador> Modificadores { get; }
 
 		/// <summary>
 		/// Personaje que porta este equipamento,

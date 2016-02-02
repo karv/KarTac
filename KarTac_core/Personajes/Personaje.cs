@@ -54,7 +54,7 @@ namespace KarTac.Personajes
 
 		public Personaje ()
 		{
-			Atributos = new AtributosPersonaje ();
+			Atributos = new AtributosPersonaje (this);
 			Atributos.Empuje = new Empuje (300, 100, 30);
 			InnerSkill = new List<ISkill> ();
 			Equipamento = new ConjuntoEquipamento (this);

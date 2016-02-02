@@ -4,6 +4,8 @@ using KarTac.Batalla;
 using KarTac.Batalla.Exp;
 using KarTac.IO;
 using System.IO;
+using KarTac.Personajes;
+using OpenTK.Graphics.OpenGL;
 
 namespace KarTac.Recursos
 {
@@ -23,6 +25,9 @@ namespace KarTac.Recursos
 					break;
 				case "Condición":
 					ret = new Condición ();
+					break;
+				case "Multi":
+					ret = new MultiRecurso ();
 					break;
 				default:
 					ret = new AtributoGenérico (recNombre, false);
@@ -54,6 +59,11 @@ namespace KarTac.Recursos
 		/// El icono que se usará para mostrarse
 		/// </summary>
 		string Icono { get; }
+
+		/// <summary>
+		/// Conjunto de atributos al que pertenece.
+		/// </summary>
+		AtributosPersonaje ConjAtrib { get; set; }
 
 		/// <summary>
 		/// Ejecuta un tick de longitud dada

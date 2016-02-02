@@ -48,7 +48,7 @@ namespace KarTac.Skills
 		{
 			var coef = 1 + TotalExp;
 			float cura = (float)DamageUtils.CalcularDaño (
-				             UnidadUsuario.AtributosActuales.Recs ["Poder mágico"].Valor,
+				             UnidadUsuario.AtributosActuales ["Poder mágico"],
 				             0,
 				             coef) + 20;
 
@@ -118,20 +118,20 @@ namespace KarTac.Skills
 
 		public override bool PuedeAprender ()
 		{
-			return Usuario.Atributos.Recs ["Poder mágico"].Valor >= 1;
+			return Usuario.Atributos ["Poder mágico"] >= 1;
 		}
 
 		public override bool Usable
 		{
 			get
 			{
-				return Usuario.Atributos.Recs ["Maná"].Valor >= uso_maná;
+				return Usuario.Atributos ["Maná"] >= uso_maná;
 			}
 		}
 
 		protected override void OnTerminar (ISkillReturnType returnInfo)
 		{
-			Usuario.Atributos.Recs ["Maná"].Valor -= uso_maná;
+			Usuario.Atributos.GetRecursoBase ("Maná").Valor -= uso_maná;
 			base.OnTerminar (returnInfo);
 		}
 

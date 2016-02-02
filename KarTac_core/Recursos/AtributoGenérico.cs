@@ -13,7 +13,7 @@ namespace KarTac.Recursos
 			VisibleBatalla = visibleBatalla;
 		}
 
-		//float _valor;
+		public KarTac.Personajes.AtributosPersonaje ConjAtrib { get; set; }
 
 		public float Valor
 		{
@@ -30,6 +30,16 @@ namespace KarTac.Recursos
 				#endif
 				AlCambiarValor?.Invoke ();
 			}
+		}
+
+		public void AcumularExp (double exp)
+		{
+			PeticiónExpAcumulada += exp;
+		}
+
+		public void ResetExp ()
+		{
+			PeticiónExpAcumulada = 0;
 		}
 
 		public string Icono

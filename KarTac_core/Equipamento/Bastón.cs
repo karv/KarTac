@@ -14,21 +14,16 @@ namespace KarTac.Equipamento
 			}
 		}
 
-		float deltaPM = 0;
-
 		protected override void OnEquipar (ConjuntoEquipamento anterior)
 		{
 			#if DEBUG
-			Portador.Atributos.Recs.Add (new AtributoGenérico ("Bastón", true));
-			Portador.Atributos.Recs.Add (new AtributoGenérico ("Poder mágico", true));
+			const bool visible = true;
 			#else
-			Portador.Atributos.Recs.Add (new AtributoGenérico ("Bastón", false));
-			Portador.Atributos.Recs.Add (new AtributoGenérico ("Poder mágico", false));
+			const bool visible = false;
 			#endif
-
-			deltaPM = 1 + Portador.Atributos.Recs ["Bastón"].Valor;
-			Portador.Atributos.Recs ["Poder mágico"].Valor += deltaPM;
-			Portador.Atributos.Recs.Add (new Maná ()); // Dárselo si no lo tiene
+			Portador.Atributos.Add (new AtributoGenérico ("Bastón", visible));
+			Portador.Atributos.Add (new AtributoGenérico ("Poder mágico", visible));
+			Portador.Atributos.Add (new Maná ()); // Dárselos si no los tiene
 		}
 
 		protected override System.Collections.Generic.IEnumerable<ISkill> Skills
@@ -39,17 +34,20 @@ namespace KarTac.Equipamento
 			}
 		}
 
-		protected override void OnDesequipar (ConjuntoEquipamento anterior)
+		public override System.Collections.Generic.IEnumerable<IModificador> Modificadores
 		{
-			if (Portador != null)
-				Portador.Atributos.Recs ["Poder mágico"].Valor += deltaPM;
-			deltaPM = 0;
+			get
+			{
+				yield return new KarTac.Personajes.ModificadorAtributo (
+					"Poder mágico",
+					1 + Portador.Atributos.GetRecursoBase ("Bastón").Valor);
+			}
 		}
 
 		public override void BattleUpdate (System.TimeSpan time)
 		{
 			base.BattleUpdate (time);
-			Portador.Atributos.Recs ["Bastón"].PeticiónExpAcumulada += time.TotalSeconds / 6;
+			Portador.Atributos.GetRecursoBase ("Bastón").AcumularExp (time.TotalSeconds / 6);
 		}
 
 		public override string IconContentString

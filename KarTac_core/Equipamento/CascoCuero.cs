@@ -31,9 +31,6 @@ namespace KarTac.Equipamento
 			}
 		}
 
-		float deltaDef;
-		float deltaAgil;
-
 		public override System.Collections.Generic.IEnumerable<IEquipamento> AutoRemove (ConjuntoEquipamento conj)
 		{
 			return conj.Where (x => x.Tags.Contains ("cabeza"));
@@ -41,45 +38,29 @@ namespace KarTac.Equipamento
 
 		protected override void OnEquipar (ConjuntoEquipamento anterior)
 		{
-			if (!Portador.Atributos.Recs.ContainsKey ("armadura ligera"))
-				Portador.Atributos.Recs.Add (new AtributoGenérico (
+			if (!Portador.Atributos.TieneAtributo ("armadura ligera"))
+				Portador.Atributos.Add (new AtributoGenérico (
 					"armadura ligera",
 					false));
-			deltaDef = 1 + Portador.Atributos.Recs ["armadura ligera"].Valor;
-			deltaAgil = -1 / (Portador.Atributos.Recs ["armadura ligera"].Valor + 1);
-			Portador.Atributos.Defensa.Inicial += deltaDef;
-			Portador.Atributos.Agilidad.Inicial += deltaAgil;
 		}
 
-		protected override void OnDesequipar (ConjuntoEquipamento anterior)
+		public override System.Collections.Generic.IEnumerable<IModificador> Modificadores
 		{
-			if (Portador != null)
+			get
 			{
-				Portador.Atributos.Defensa.Inicial -= deltaDef;
-				Portador.Atributos.Agilidad.Inicial -= deltaAgil;
+				yield return new KarTac.Personajes.ModificadorAtributo (
+					"Defensa",
+					1 + Portador.Atributos.GetRecursoBase ("armadura ligera").Valor);
+
+				yield return new KarTac.Personajes.ModificadorAtributo (
+					"Agilidad",
+					-1 / (Portador.Atributos.GetRecursoBase ("armadura ligera").Valor + 1));
 			}
-			deltaDef = 0;
-			deltaAgil = 0;
 		}
 
 		public override void BattleUpdate (System.TimeSpan time)
 		{
-			Portador.Atributos.Recs ["armadura ligera"].PeticiónExpAcumulada += time.TotalSeconds / 10;
+			Portador.Atributos.GetRecursoBase ("armadura ligera").AcumularExp (time.TotalSeconds / 10);
 		}
-
-		public override void Cargar (System.IO.BinaryReader reader)
-		{
-			base.Cargar (reader);
-			deltaDef = reader.ReadSingle ();
-			deltaAgil = reader.ReadSingle ();
-		}
-
-		public override void Guardar (System.IO.BinaryWriter writer)
-		{
-			base.Guardar (writer);
-			writer.Write (deltaDef);
-			writer.Write (deltaAgil);
-		}
-
 	}
 }

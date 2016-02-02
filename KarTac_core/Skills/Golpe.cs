@@ -62,7 +62,7 @@ namespace KarTac.Skills
 
 		protected override TimeSpan CalcularTiempoUso ()
 		{
-			return TimeSpan.FromSeconds (6.0f / UnidadUsuario.AtributosActuales.Recs ["Agilidad"].Valor);
+			return TimeSpan.FromSeconds (6.0f / UnidadUsuario.AtributosActuales ["Agilidad"]);
 		}
 
 		public override IShape GetÁrea ()
@@ -107,7 +107,7 @@ namespace KarTac.Skills
 				daño,
 				unid));
 
-			PeticiónExpAcumulada += 1;
+			AcumularExp (1);
 			UnidadUsuario.PersonajeBase.Atributos.Ataque.PeticiónExpAcumulada += 0.3;
 			unid.PersonajeBase.Atributos.Defensa.PeticiónExpAcumulada += 0.3;
 

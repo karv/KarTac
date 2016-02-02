@@ -184,5 +184,12 @@ namespace KarTac.Equipamento
 			}
 		}
 
+		public virtual IEnumerable<IModificador> Modificadores
+		{
+			get
+			{
+				yield break;
+			}
+		}
 	}
 }

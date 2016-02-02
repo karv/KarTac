@@ -31,9 +31,6 @@ namespace KarTac.Equipamento
 			}
 		}
 
-		float deltaDef = 0;
-		float deltaAgil = 0;
-
 		public override System.Collections.Generic.IEnumerable<IEquipamento> AutoRemove (ConjuntoEquipamento conj)
 		{
 			return conj.Where (x => x.Tags.Contains ("cuerpo"));
@@ -41,42 +38,28 @@ namespace KarTac.Equipamento
 
 		protected override void OnEquipar (ConjuntoEquipamento anterior)
 		{
-			if (!Portador.Atributos.Recs.ContainsKey ("armadura ligera"))
-				Portador.Atributos.Recs.Add (new AtributoGenérico (
-					"armadura ligera",
-					false));
-			deltaDef = 2 + Portador.Atributos.Recs ["armadura ligera"].Valor;
-			deltaAgil = -2 / (Portador.Atributos.Recs ["armadura ligera"].Valor + 1);
-			Portador.Atributos.Defensa.Inicial += deltaDef;
-			Portador.Atributos.Agilidad.Inicial += deltaAgil;
-		}
-
-		protected override void OnDesequipar (ConjuntoEquipamento anterior)
-		{
-			if (Portador != null)
-			{
-				Portador.Atributos.Defensa.Inicial -= deltaDef;
-				Portador.Atributos.Agilidad.Inicial += deltaAgil;
-			}
+			Portador.Atributos.Add (new AtributoGenérico (
+				"armadura ligera",
+				false));
 		}
 
 		public override void BattleUpdate (System.TimeSpan time)
 		{
-			Portador.Atributos.Recs ["armadura ligera"].PeticiónExpAcumulada += time.TotalSeconds / 10;
+			Portador.Atributos.GetRecursoBase ("armadura ligera").AcumularExp (time.TotalSeconds / 10);
 		}
 
-		public override void Cargar (System.IO.BinaryReader reader)
+		public override System.Collections.Generic.IEnumerable<IModificador> Modificadores
 		{
-			deltaDef = reader.ReadSingle ();
-			deltaAgil = reader.ReadSingle ();
-		}
+			get
+			{
+				yield return new KarTac.Personajes.ModificadorAtributo (
+					"Defensa",
+					2 + Portador.Atributos.GetRecursoBase ("armadura ligera").Valor);
 
-		public override void Guardar (System.IO.BinaryWriter writer)
-		{
-			base.Guardar (writer);
-			writer.Write (deltaDef);
-			writer.Write (deltaAgil);
+				yield return new KarTac.Personajes.ModificadorAtributo (
+					"Agilidad",
+					-2 / (Portador.Atributos.GetRecursoBase ("armadura ligera").Valor + 1));
+			}
 		}
-
 	}
 }

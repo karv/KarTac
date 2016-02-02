@@ -1,6 +1,7 @@
 ﻿using KarTac.Skills;
 using KarTac.Recursos;
 using KarTac.Personajes;
+using System.Collections.Generic;
 
 namespace KarTac.Equipamento
 {
@@ -52,7 +53,7 @@ namespace KarTac.Equipamento
 			{
 				float daño = (float)DamageUtils.CalcularDaño (
 					             UnidadUsuario.AtributosActuales.Ataque.Valor +
-					             UnidadUsuario.PersonajeBase.Atributos.Recs ["Espada"].Valor,
+					             UnidadUsuario.PersonajeBase.Atributos ["Espada"],
 					             unid.AtributosActuales.Defensa.Valor,
 					             2);
 
@@ -65,7 +66,7 @@ namespace KarTac.Equipamento
 
 				PeticiónExpAcumulada += 1;
 				UnidadUsuario.PersonajeBase.Atributos.Ataque.PeticiónExpAcumulada += 0.1;
-				UnidadUsuario.PersonajeBase.Atributos.Recs ["Espada"].PeticiónExpAcumulada += 0.3;
+				UnidadUsuario.PersonajeBase.Atributos.GetRecursoBase ("Espada").AcumularExp (0.3);
 				unid.PersonajeBase.Atributos.Defensa.PeticiónExpAcumulada += 0.3;
 
 				LastReturn = new  SkillReturnType (
@@ -77,7 +78,7 @@ namespace KarTac.Equipamento
 			}
 		}
 
-		public override System.Collections.Generic.IEnumerable<string> Tags
+		public override IEnumerable<string> Tags
 		{
 			get
 			{
@@ -86,7 +87,7 @@ namespace KarTac.Equipamento
 			}
 		}
 
-		protected override System.Collections.Generic.IEnumerable<ISkill> Skills
+		protected override IEnumerable<ISkill> Skills
 		{
 			get
 			{
@@ -96,10 +97,8 @@ namespace KarTac.Equipamento
 
 		protected override void OnEquipar (ConjuntoEquipamento anterior)
 		{
-			// Agregar su atributo con la espada
-			if (!Portador.Atributos.Recs.ContainsKey ("Espada"))
-				#if DEBUG
-				Portador.Atributos.Recs.Add (new AtributoGenérico ("Espada", true));
+			#if DEBUG
+			Portador.Atributos.Add (new AtributoGenérico ("Espada", true));
 			#else
 				Portador.Atributos.Recs.Add (new AtributoGenérico ("Espada", false));
 			#endif

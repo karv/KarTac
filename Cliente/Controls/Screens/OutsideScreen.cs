@@ -197,18 +197,7 @@ namespace KarTac.Cliente.Controls.Screens
 				if (u != u.PersonajeBase.Unidad)
 					Console.WriteLine ();
 			}
-
-
 			btScr.Inicializar ();
-
-		}
-
-		public static void MostrarAtrs (string atr, Campo c)
-		{
-			foreach (var x in c.Unidades)
-			{
-				Console.WriteLine (string.Format ("{0} - {1}", x.PersonajeBase.Nombre, x.AtributosActuales.Recs [atr].ToString ()));
-			}
 		}
 
 		static Vector2 randomPointInRectangle (Rectangle rect, Random r)
