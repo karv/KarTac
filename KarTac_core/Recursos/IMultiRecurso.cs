@@ -12,7 +12,11 @@ namespace KarTac.Recursos
 	{
 		public List<IRecurso> Recursos = new List<IRecurso> ();
 
-		public event System.Action AlCambiarValor;
+		event System.Action IRecurso.AlCambiarValor
+		{
+			add{}
+			remove{}
+		}
 
 		public void Tick (System.TimeSpan delta)
 		{
