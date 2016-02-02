@@ -100,7 +100,7 @@ namespace KarTac.Equipamento
 			#if DEBUG
 			Portador.Atributos.Add (new AtributoGenérico ("Espada", true));
 			#else
-				Portador.Atributos.Recs.Add (new AtributoGenérico ("Espada", false));
+			Portador.Atributos.Add (new AtributoGenérico ("Espada", false));
 			#endif
 			base.OnEquipar (anterior);
 		}
