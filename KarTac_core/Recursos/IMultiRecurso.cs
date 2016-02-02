@@ -50,7 +50,11 @@ namespace KarTac.Recursos
 			int count = reader.ReadInt32 ();
 			for (int i = 0; i < count; i++)
 			{
-				Recursos.Add (Lector.Cargar (reader));
+				var ad = Lector.Cargar (reader);
+				var hp = ad as HP;
+				if (hp != null)
+					hp.RecBase = this;
+				Recursos.Add (ad);
 			}
 		}
 

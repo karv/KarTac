@@ -9,11 +9,15 @@ namespace KarTac.Recursos
 		public static IMultiRecurso BuildMulti ()
 		{
 			var ret = new MultiRecurso ();
-			ret.Recursos.Add (new HP ());
+			var hp = new HP ();
+			hp.RecBase = ret;
+			ret.Recursos.Add (hp);
 			ret.Recursos.Add (new AtributoGenérico ("regen", false));
 
 			return ret;
 		}
+
+		public MultiRecurso RecBase;
 
 		public override string Nombre
 		{
@@ -26,7 +30,17 @@ namespace KarTac.Recursos
 		/// <summary>
 		/// Regeneración constante por minuto
 		/// </summary>
-		public float Regeneración { get; set; }
+		public float Regeneración
+		{
+			get
+			{
+				return RecBase.Recursos [1].Valor;
+			}
+			set
+			{
+				RecBase.Recursos [1].Valor = value;
+			}
+		}
 
 		protected override float Regen
 		{
@@ -81,19 +95,5 @@ namespace KarTac.Recursos
 				return Color.Red;
 			}
 		}
-
-		#region Guardable
-
-		public override void Guardar (System.IO.BinaryWriter writer)
-		{
-			base.Guardar (writer);
-		}
-
-		public override void Cargar (System.IO.BinaryReader reader)
-		{
-			base.Cargar (reader);
-		}
-
-		#endregion
 	}
 }

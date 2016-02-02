@@ -5,6 +5,7 @@ using KarTac.Batalla.Exp;
 using KarTac.IO;
 using System.IO;
 using KarTac.Personajes;
+using OpenTK.Graphics.OpenGL;
 
 namespace KarTac.Recursos
 {
