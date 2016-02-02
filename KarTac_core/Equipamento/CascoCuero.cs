@@ -54,7 +54,7 @@ namespace KarTac.Equipamento
 
 				yield return new KarTac.Personajes.ModificadorAtributo (
 					"Agilidad",
-					-1 + Portador.Atributos.GetRecursoBase ("armadura ligera").Valor);
+					-1 / Portador.Atributos.GetRecursoBase ("armadura ligera").Valor);
 			}
 		}
 
