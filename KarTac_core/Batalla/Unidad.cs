@@ -126,7 +126,7 @@ namespace KarTac.Batalla
 				foreach (var petit in Expables)
 				{
 					petit.CommitExp (petit.PeticiónExpAcumulada * BolsaExp / suma);
-					petit.PeticiónExpAcumulada = 0;
+					petit.ResetExp ();
 				}
 			}
 

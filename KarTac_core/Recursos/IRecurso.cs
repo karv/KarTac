@@ -25,6 +25,9 @@ namespace KarTac.Recursos
 				case "Condición":
 					ret = new Condición ();
 					break;
+				case "Multi":
+					ret = new MultiRecurso ();
+					break;
 				default:
 					ret = new AtributoGenérico (recNombre, false);
 					break;

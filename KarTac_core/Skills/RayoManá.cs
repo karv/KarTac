@@ -132,7 +132,7 @@ namespace KarTac.Skills
 			UnidadUsuario.AtributosActuales.GetRecursoBase ("Maná").Valor -= UsaManá;
 
 			PeticiónExpAcumulada += 1.5;
-			UnidadUsuario.AtributosActuales.GetRecursoBase ("Maná").PeticiónExpAcumulada += 0.4f;
+			UnidadUsuario.AtributosActuales.GetRecursoBase ("Maná").AcumularExp (0.4f);
 			LastReturn = new SkillReturnType (
 				-daño,
 				unid.AtributosActuales.HP,

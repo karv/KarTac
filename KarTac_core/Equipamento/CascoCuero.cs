@@ -60,7 +60,7 @@ namespace KarTac.Equipamento
 
 		public override void BattleUpdate (System.TimeSpan time)
 		{
-			Portador.Atributos.GetRecursoBase ("armadura ligera").PeticiónExpAcumulada += time.TotalSeconds / 10;
+			Portador.Atributos.GetRecursoBase ("armadura ligera").AcumularExp (time.TotalSeconds / 10);
 		}
 	}
 }

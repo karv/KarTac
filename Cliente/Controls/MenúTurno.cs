@@ -75,13 +75,13 @@ namespace KarTac.Cliente.Controls
 			display.NumEntradasMostrar = 4;
 			display.TiempoEntreCambios = TimeSpan.FromMilliseconds (1500);
 			var font = Screen.Content.Load<BitmapFont> ("fonts");
-			foreach (var x in UnidadActual.AtributosActuales.Enumerar)
+			foreach (var x in UnidadActual.AtributosActuales.GetModifiedAtribs())
 			{
-				if (x.VisibleBatalla)
+				if (x.Key.VisibleBatalla)
 					display.Mostrables.Add (new MultiEtiqueta.IconTextEntry (
 						font,
-						Screen.Content.Load<Texture2D> (x.Icono),
-						x.ToString (),
+						Screen.Content.Load<Texture2D> (x.Key.Icono),
+						string.Format ("{0}: {1}", x.Key.Nombre, x.Value),
 						Color.Green * 0.8f,
 						Color.White
 					));

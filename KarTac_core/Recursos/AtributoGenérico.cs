@@ -32,6 +32,16 @@ namespace KarTac.Recursos
 			}
 		}
 
+		public void AcumularExp (double exp)
+		{
+			PeticiónExpAcumulada += exp;
+		}
+
+		public void ResetExp ()
+		{
+			PeticiónExpAcumulada = 0;
+		}
+
 		public string Icono
 		{
 			get

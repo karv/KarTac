@@ -67,7 +67,7 @@ namespace KarTac.Equipamento
 
 				PeticiónExpAcumulada += 1;
 				UnidadUsuario.PersonajeBase.Atributos.Ataque.PeticiónExpAcumulada += 0.1;
-				UnidadUsuario.PersonajeBase.Atributos.GetRecursoBase ("Arco").PeticiónExpAcumulada += 0.3;
+				UnidadUsuario.PersonajeBase.Atributos.GetRecursoBase ("Arco").AcumularExp (0.3);
 				unid.PersonajeBase.Atributos.Defensa.PeticiónExpAcumulada += 0.3;
 
 				LastReturn = new  SkillReturnType (

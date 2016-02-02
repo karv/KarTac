@@ -107,7 +107,7 @@ namespace KarTac.Skills
 				daño,
 				unid));
 
-			PeticiónExpAcumulada += 1;
+			AcumularExp (1);
 			UnidadUsuario.PersonajeBase.Atributos.Ataque.PeticiónExpAcumulada += 0.3;
 			unid.PersonajeBase.Atributos.Defensa.PeticiónExpAcumulada += 0.3;
 

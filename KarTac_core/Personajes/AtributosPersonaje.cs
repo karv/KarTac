@@ -1,6 +1,7 @@
 ﻿using KarTac.Recursos;
 using KarTac.IO;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace KarTac.Personajes
 {
@@ -45,7 +46,7 @@ namespace KarTac.Personajes
 		{
 			get
 			{
-				return Recs ["HP"] as HP;
+				return (Recs ["HP"] as MultiRecurso).Recursos [0] as HP;
 			}
 		}
 
@@ -162,6 +163,14 @@ namespace KarTac.Personajes
 			{
 				return Recs.Values;
 			}
+		}
+
+		public ReadOnlyDictionary<IRecurso, float> GetModifiedAtribs ()
+		{
+			var ret = new Dictionary<IRecurso, float> ();
+			foreach (var x in Enumerar)
+				ret.Add (x, this [x.Nombre]);
+			return new ReadOnlyDictionary<IRecurso, float> (ret);
 		}
 
 		/// <summary>

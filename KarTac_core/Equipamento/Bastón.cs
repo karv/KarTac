@@ -47,7 +47,7 @@ namespace KarTac.Equipamento
 		public override void BattleUpdate (System.TimeSpan time)
 		{
 			base.BattleUpdate (time);
-			Portador.Atributos.GetRecursoBase ("Bastón").PeticiónExpAcumulada += time.TotalSeconds / 6;
+			Portador.Atributos.GetRecursoBase ("Bastón").AcumularExp (time.TotalSeconds / 6);
 		}
 
 		public override string IconContentString

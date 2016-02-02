@@ -122,6 +122,7 @@
     <Compile Include="Skills\Curación.cs" />
     <Compile Include="IModificador.cs" />
     <Compile Include="Personajes\ModificadorAtributo.cs" />
+    <Compile Include="Recursos\IMultiRecurso.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

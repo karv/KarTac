@@ -31,7 +31,7 @@ namespace KarTac.Batalla.Generador
 		static Personaje generar ()
 		{
 			var pj = new Personaje ();
-			pj.Atributos.Add (new HP ());
+			pj.Atributos.Add (HP.BuildMulti ());
 
 			pj.Atributos.Add (new AtributoGenérico ("Ataque", true));
 			pj.Atributos.Add (new AtributoGenérico ("Defensa", true));

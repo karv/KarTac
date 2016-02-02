@@ -50,7 +50,7 @@ namespace KarTac
 			for (int i = 0; i < cant; i++)
 			{
 				var pj = new Personaje ();
-				pj.Atributos.Add (new HP ());
+				pj.Atributos.Add (HP.BuildMulti ());
 
 				pj.Atributos.Add (new AtributoGenérico ("Ataque", true));
 				pj.Atributos.Add (new AtributoGenérico ("Defensa", true));

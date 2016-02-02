@@ -6,6 +6,14 @@ namespace KarTac.Recursos
 {
 	public class HP : RecursoAcotadoRegenerativo
 	{
+		public static IMultiRecurso BuildMulti ()
+		{
+			var ret = new MultiRecurso ();
+			ret.Recursos.Add (new HP ());
+			ret.Recursos.Add (new AtributoGenérico ("regen", false));
+
+			return ret;
+		}
 
 		public override string Nombre
 		{
@@ -27,7 +35,7 @@ namespace KarTac.Recursos
 				return Regeneración;
 			}
 		}
-		
+
 		public override string Icono
 		{
 			get
@@ -79,13 +87,11 @@ namespace KarTac.Recursos
 		public override void Guardar (System.IO.BinaryWriter writer)
 		{
 			base.Guardar (writer);
-			writer.Write (Regeneración);
 		}
 
 		public override void Cargar (System.IO.BinaryReader reader)
 		{
 			base.Cargar (reader);
-			Regeneración = reader.ReadSingle ();
 		}
 
 		#endregion
