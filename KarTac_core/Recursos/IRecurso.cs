@@ -5,7 +5,6 @@ using KarTac.Batalla.Exp;
 using KarTac.IO;
 using System.IO;
 using KarTac.Personajes;
-using OpenTK.Graphics.OpenGL;
 
 namespace KarTac.Recursos
 {
@@ -81,7 +80,7 @@ namespace KarTac.Recursos
 		/// <summary>
 		/// Ocurre cuando cambia el valor actual
 		/// </summary>
-		event Action AlCambiarValor;
+		//event Action AlCambiarValor;
 
 		/// <summary>
 		/// Color a mostrar si se aumenta este recurso
