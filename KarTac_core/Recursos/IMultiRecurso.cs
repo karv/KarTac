@@ -12,8 +12,6 @@ namespace KarTac.Recursos
 	{
 		public List<IRecurso> Recursos = new List<IRecurso> ();
 
-		public event System.Action AlCambiarValor;
-
 		public void Tick (System.TimeSpan delta)
 		{
 			foreach (var x in Recursos)
