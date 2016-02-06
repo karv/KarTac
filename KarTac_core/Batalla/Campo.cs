@@ -28,6 +28,16 @@ namespace KarTac.Batalla
 		/// <value>The unidades.</value>
 		public ICollection<Unidad> Unidades { get; }
 
+		List<IObjeto> objetos = new List<IObjeto> ();
+
+		public IReadOnlyCollection<IObjeto> Objetos
+		{
+			get
+			{
+				return objetos.AsReadOnly ();
+			}
+		}
+
 		/// <summary>
 		/// Devuelve una copia enumerable de las unidades vivas
 		/// </summary>
@@ -127,10 +137,17 @@ namespace KarTac.Batalla
 					{
 						y.BattleUpdate (realDelta);
 					}
+
+					// Empuje
+					Empujes (realDelta);
+
+					// IObjetos
+					foreach (var o in Objetos)
+					{
+						o.Update (realDelta);
+					}
 				}
 
-				// Empuje
-				Empujes (realDelta);
 			}
 
 		}

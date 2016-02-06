@@ -150,7 +150,6 @@ namespace KarTac.Cliente.Controls.Screens
 			}
 			return null;
 		}
-
 	}
 
 	/// <summary>

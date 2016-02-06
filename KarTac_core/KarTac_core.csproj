@@ -124,7 +124,6 @@
     <Compile Include="Personajes\ModificadorAtributo.cs" />
     <Compile Include="Recursos\IMultiRecurso.cs" />
     <Compile Include="Skills\Llamas.cs" />
-    <Compile Include="Batalla\Objetos\ÁreaEfecto.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
