@@ -1,7 +1,8 @@
 ﻿using KarTac.Recursos;
 using System.Collections.Generic;
+using KarTac.Core.Personajes;
 
-namespace KarTac.Recursos
+namespace KarTac.Core.Recursos
 {
 	public interface IMultiRecurso : IRecurso
 	{
@@ -121,7 +122,7 @@ namespace KarTac.Recursos
 			}
 		}
 
-		public KarTac.Personajes.AtributosPersonaje ConjAtrib
+		public AtributosPersonaje ConjAtrib
 		{
 			get
 			{

@@ -6,6 +6,7 @@ using KarTac.Batalla.Orden;
 using KarTac.Personajes;
 using KarTac.Batalla.Exp;
 using KarTac.Skills;
+using KarTac.Core.Personajes;
 
 namespace KarTac.Batalla
 {

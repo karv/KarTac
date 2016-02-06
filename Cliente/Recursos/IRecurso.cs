@@ -2,9 +2,10 @@
 using Microsoft.Xna.Framework;
 using KarTac.Batalla;
 using KarTac.Batalla.Exp;
-using KarTac.IO;
 using System.IO;
-using KarTac.Personajes;
+using KarTac.IO;
+using KarTac.Core.Personajes;
+using KarTac.Core.Recursos;
 
 namespace KarTac.Recursos
 {
@@ -16,21 +17,21 @@ namespace KarTac.Recursos
 			var recNombre = reader.ReadString ();
 			switch (recNombre)
 			{
-				case "HP":
-					ret = new HP ();
-					break;
-				case "Maná":
-					ret = new Maná ();
-					break;
-				case "Condición":
-					ret = new Condición ();
-					break;
-				case "Multi":
-					ret = new MultiRecurso ();
-					break;
-				default:
-					ret = new AtributoGenérico (recNombre, false);
-					break;
+			case "HP":
+				ret = new HP ();
+				break;
+			case "Maná":
+				ret = new Maná ();
+				break;
+			case "Condición":
+				ret = new Condición ();
+				break;
+			case "Multi":
+				ret = new MultiRecurso ();
+				break;
+			default:
+				ret = new AtributoGenérico (recNombre, false);
+				break;
 			}
 			ret.Cargar (reader);
 			return ret;

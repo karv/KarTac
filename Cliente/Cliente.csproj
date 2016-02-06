@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{48B06E79-A028-4708-96BC-9B0D34933873}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>KarTac.Cliente</RootNamespace>
+    <RootNamespace>KarTac</RootNamespace>
     <AssemblyName>Cliente</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <ReleaseVersion>0.1.1</ReleaseVersion>
@@ -65,11 +65,90 @@
     <Compile Include="Controls\Screens\RenombrarDialScreen.cs" />
     <Compile Include="Controls\Objetos\ÁreaEfecto.cs" />
     <Compile Include="Controls\Objetos\EfectoDaño.cs" />
+    <Compile Include="Clan.cs" />
+    <Compile Include="IAccionable.cs" />
+    <Compile Include="IModificador.cs" />
+    <Compile Include="IMóvil.cs" />
+    <Compile Include="IObjetivo.cs" />
+    <Compile Include="Tienda.cs" />
+    <Compile Include="Utils.cs" />
+    <Compile Include="Batalla\Campo.cs" />
+    <Compile Include="Batalla\Equipo.cs" />
+    <Compile Include="Batalla\Exp\DictionaryTag.cs" />
+    <Compile Include="Batalla\Exp\IExp.cs" />
+    <Compile Include="Batalla\Exp\ITagging.cs" />
+    <Compile Include="Batalla\Exp\TotalExp.cs" />
+    <Compile Include="Batalla\Generador\GeneradorCombates.cs" />
+    <Compile Include="Batalla\IEquipoSelector.cs" />
+    <Compile Include="Batalla\IInteractor.cs" />
+    <Compile Include="Batalla\ISelectorTarget.cs" />
+    <Compile Include="Batalla\Objetos\IObjetoCampo.cs" />
+    <Compile Include="Batalla\Objetos\Pared.cs" />
+    <Compile Include="Batalla\Orden\Huir.cs" />
+    <Compile Include="Batalla\Orden\IOrden.cs" />
+    <Compile Include="Batalla\Orden\MantenerDistancia.cs" />
+    <Compile Include="Batalla\Orden\Movimiento.cs" />
+    <Compile Include="Batalla\Orden\OrdenAtacar.cs" />
+    <Compile Include="Batalla\Orden\OrdenMovCampoComún.cs" />
+    <Compile Include="Batalla\Orden\OrdenPedirTarget.cs" />
+    <Compile Include="Batalla\Orden\OrdenSerie.cs" />
+    <Compile Include="Batalla\Orden\Perseguir.cs" />
+    <Compile Include="Batalla\Orden\Quieto.cs" />
+    <Compile Include="Batalla\Orden\Rodear.cs" />
+    <Compile Include="Batalla\Orden\Sentinela.cs" />
+    <Compile Include="Batalla\Shape\Círculo.cs" />
+    <Compile Include="Batalla\Shape\IShape.cs" />
+    <Compile Include="Batalla\Shape\Rectángulo.cs" />
+    <Compile Include="Batalla\Unidad.cs" />
+    <Compile Include="Buff\BuffCronometrado.cs" />
+    <Compile Include="Buff\IBuff.cs" />
+    <Compile Include="Equipamento\Arco.cs" />
+    <Compile Include="Equipamento\ArmaduraCuero.cs" />
+    <Compile Include="Equipamento\Bastón.cs" />
+    <Compile Include="Equipamento\CascoCuero.cs" />
+    <Compile Include="Equipamento\ConjuntoEquipamento.cs" />
+    <Compile Include="Equipamento\EqEspada.cs" />
+    <Compile Include="Equipamento\Equipamento.cs" />
+    <Compile Include="Equipamento\EquipArma.cs" />
+    <Compile Include="Equipamento\Hacha.cs" />
+    <Compile Include="Equipamento\HpPoción.cs" />
+    <Compile Include="Equipamento\IEquipamento.cs" />
+    <Compile Include="Equipamento\IItem.cs" />
+    <Compile Include="Equipamento\InventarioClan.cs" />
+    <Compile Include="Equipamento\Lanza.cs" />
+    <Compile Include="IA\AIMeléBásico.cs" />
+    <Compile Include="IO\IGuardable.cs" />
+    <Compile Include="IO\IOComún.cs" />
+    <Compile Include="Personajes\AtributosPersonaje.cs" />
+    <Compile Include="Personajes\Empuje.cs" />
+    <Compile Include="Personajes\ModificadorAtributo.cs" />
+    <Compile Include="Personajes\Personaje.cs" />
+    <Compile Include="Recursos\AtributoGenérico.cs" />
+    <Compile Include="Recursos\Condición.cs" />
+    <Compile Include="Recursos\HP.cs" />
+    <Compile Include="Recursos\IMultiRecurso.cs" />
+    <Compile Include="Recursos\IRecurso.cs" />
+    <Compile Include="Recursos\ListaRecursos.cs" />
+    <Compile Include="Recursos\Maná.cs" />
+    <Compile Include="Recursos\RecursoAcotado.cs" />
+    <Compile Include="Recursos\RecursoAcotadoRegenerativo.cs" />
+    <Compile Include="Skills\Curación.cs" />
+    <Compile Include="Skills\DamageUtils.cs" />
+    <Compile Include="Skills\Golpe.cs" />
+    <Compile Include="Skills\IRangedSkill.cs" />
+    <Compile Include="Skills\ISkill.cs" />
+    <Compile Include="Skills\LanzaRoca.cs" />
+    <Compile Include="Skills\Llamas.cs" />
+    <Compile Include="Skills\RayoManá.cs" />
+    <Compile Include="Skills\SkillComún.cs" />
+    <Compile Include="Skills\SkillTresPasos.cs" />
+    <Compile Include="Skills\SkillTresPasosShaped.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="OpenTK.dll.config" />
     <None Include="Tao.Sdl.dll.config" />
+    <None Include="Core\Tao.Sdl.dll.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
@@ -93,6 +172,15 @@
     <Folder Include="Content\Icons\" />
     <Folder Include="Content\Icons\Skills\" />
     <Folder Include="Controls\Objetos\" />
+    <Folder Include="Core\" />
+    <Folder Include="Batalla\" />
+    <Folder Include="Buff\" />
+    <Folder Include="Equipamento\" />
+    <Folder Include="IA\" />
+    <Folder Include="IO\" />
+    <Folder Include="Personajes\" />
+    <Folder Include="Recursos\" />
+    <Folder Include="Skills\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\**\*.fnt">
@@ -104,10 +192,6 @@
     <Content Include="Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KarTac_core\KarTac_core.csproj">
-      <Project>{7C3501FD-3912-4B74-9A43-552962281096}</Project>
-      <Name>KarTac_core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Moggle\Controles_Moggle.csproj">
       <Project>{63EB1C06-BE20-4A59-B879-C9E52DA53204}</Project>
       <Name>Controles_Moggle</Name>

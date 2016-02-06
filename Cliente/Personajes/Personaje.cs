@@ -6,6 +6,7 @@ using KarTac.IO;
 using System.IO;
 using KarTac.Equipamento;
 using System.Linq;
+using KarTac.Core.Personajes;
 
 namespace KarTac.Personajes
 {
@@ -103,8 +104,7 @@ namespace KarTac.Personajes
 			{
 				Atributos.HP.AlValorCero += value;
 			}
-			remove
-			{
+			remove {
 				Atributos.HP.AlValorCero -= value;
 			}
 		}

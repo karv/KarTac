@@ -2,6 +2,7 @@
 using System;
 using Microsoft.Xna.Framework;
 using System.Diagnostics;
+using KarTac.Core.Personajes;
 
 namespace KarTac.Recursos
 {
@@ -13,7 +14,7 @@ namespace KarTac.Recursos
 			VisibleBatalla = visibleBatalla;
 		}
 
-		public KarTac.Personajes.AtributosPersonaje ConjAtrib { get; set; }
+		public AtributosPersonaje ConjAtrib { get; set; }
 
 		public float Valor
 		{

@@ -1,9 +1,11 @@
 ﻿using KarTac.Recursos;
-using KarTac.IO;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using KarTac.IO;
+using KarTac.Personajes;
+using KarTac.Core.Recursos;
 
-namespace KarTac.Personajes
+namespace KarTac.Core.Personajes
 {
 	public class AtributosPersonaje : IGuardable
 	{

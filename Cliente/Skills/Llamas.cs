@@ -60,6 +60,8 @@ namespace KarTac.Skills
 			var atrFuego = UnidadUsuario.AtributosActuales ["Poder fuego"];
 			var atrDefFuego = unid.AtributosActuales ["Defensa fuego"];
 			var coef = 8 + 2 * TotalExp;
+
+
 			float daño = (float)DamageUtils.CalcularDaño (
 				             atrPM + atrFuego,
 				             atrDefFuego,

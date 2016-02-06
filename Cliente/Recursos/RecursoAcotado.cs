@@ -1,6 +1,6 @@
 ﻿using System;
 using KarTac.Batalla;
-using KarTac.Personajes;
+using KarTac.Core.Personajes;
 
 namespace KarTac.Recursos
 {
