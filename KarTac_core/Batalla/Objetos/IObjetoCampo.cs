@@ -15,6 +15,6 @@ namespace KarTac.Batalla.Objetos
 	{
 		void Dibujar ();
 
-		void Update (TimeSpan tme);
+		void Update (TimeSpan time);
 	}
 }
