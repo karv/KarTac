@@ -22,9 +22,9 @@ namespace KarTac.Cliente.Controls.Objetos
 
 		public TimeSpan DuraciónRestante { get; set; }
 
-		public override void EfectoEn (Unidad u)
+		public override void EfectoEn (Unidad u, TimeSpan time)
 		{
-			var daño = KarTac.Skills.DamageUtils.CalcularDaño (PoderDaño, PoderDefensivo (u), Coef);
+			var daño = KarTac.Skills.DamageUtils.CalcularDaño (PoderDaño, PoderDefensivo (u), Coef * time.TotalSeconds);
 			u.AtributosActuales.HP.Valor -= (float)daño;
 			u.PersonajeBase.Atributos.Defensa.PeticiónExpAcumulada += 0.3;
 		}

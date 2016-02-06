@@ -30,7 +30,7 @@ namespace KarTac.Cliente.Controls.Objetos
 			{
 				if ((Forma?.Contiene (x.Pos) ?? true) && Selector (x))
 				{
-					EfectoEn (x);
+					EfectoEn (x, time);
 				}
 			}
 		}
@@ -40,7 +40,7 @@ namespace KarTac.Cliente.Controls.Objetos
 			Update (gameTime.ElapsedGameTime);
 		}
 
-		public abstract void EfectoEn (Unidad u);
+		public abstract void EfectoEn (Unidad u, TimeSpan time);
 
 		/// <summary>
 		/// Selecciona qué unidades pueden (además de estar en Forma).
