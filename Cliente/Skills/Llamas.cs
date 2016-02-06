@@ -65,9 +65,9 @@ namespace KarTac.Skills
 			// TODO: No hacer que esta clase herede a SkillTresPasos, esos son sólo para targets unidad
 			var ef = new EfectoDaño (CampoBatalla.BattleScreen);
 			ef.Centro = unid.Pos;
-			ef.Radio = 100;
-			ef.PoderDaño = atrPM + atrFuego;
-			ef.DuraciónRestante = TimeSpan.FromSeconds (5);
+			ef.Radio = 30;
+			ef.PoderDaño = 1 + atrFuego;
+			ef.DuraciónRestante = TimeSpan.FromSeconds (atrPM);
 			ef.Coef = coef;
 			ef.PoderDefensivo = u => u.AtributosActuales ["Defensa fuego"];
 			ef.Include ();
