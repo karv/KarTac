@@ -2,17 +2,19 @@
 using KarTac.Batalla.Shape;
 using Moggle.Controles;
 using KarTac.Batalla;
+using KarTac.Batalla.Objetos;
 using Moggle.Screens;
 using Microsoft.Xna.Framework;
+using KarTac.Cliente.Controls.Screens;
 
 namespace KarTac.Cliente.Controls.Objetos
 {
 	public abstract class ÁreaEfecto : SBC, IObjeto
 	{
-		protected ÁreaEfecto (Campo campo, IScreen scr)
+		protected ÁreaEfecto (BattleScreen scr)
 			: base (scr)
 		{
-			Campo = campo;
+			Campo = scr.CampoBatalla;
 		}
 
 		void IObjeto.Dibujar ()

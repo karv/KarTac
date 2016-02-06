@@ -64,6 +64,7 @@
     <Compile Include="Controls\ListaSkills.cs" />
     <Compile Include="Controls\Screens\RenombrarDialScreen.cs" />
     <Compile Include="Controls\Objetos\ÁreaEfecto.cs" />
+    <Compile Include="Controls\Objetos\EfectoDaño.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
