@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using KarTac.Cliente.Controls.Screens;
+using KarTac.Controls.Screens;
 using System.IO;
 using Moggle.IO;
 
@@ -8,7 +8,7 @@ using Moggle.IO;
 using OpenTK.Input;
 #endif
 
-namespace KarTac.Cliente
+namespace KarTac
 {
 	/// <summary>
 	/// This is the main type for your game.

@@ -5,9 +5,9 @@ using KarTac.Batalla;
 using KarTac.Batalla.Objetos;
 using Moggle.Screens;
 using Microsoft.Xna.Framework;
-using KarTac.Cliente.Controls.Screens;
+using KarTac.Controls.Screens;
 
-namespace KarTac.Cliente.Controls.Objetos
+namespace KarTac.Controls.Objetos
 {
 	public abstract class ÁreaEfecto : SBC, IObjeto
 	{

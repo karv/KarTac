@@ -5,7 +5,7 @@ using System;
 using Moggle.Screens;
 using Moggle.Controles.Listas;
 
-namespace KarTac.Cliente.Controls.Screens
+namespace KarTac.Controls.Screens
 {
 	/// <summary>
 	/// Pantalla de pausa en BattleScreen

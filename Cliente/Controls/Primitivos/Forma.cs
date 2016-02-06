@@ -1,11 +1,11 @@
-﻿using KarTac.Cliente.Controls.Screens;
+﻿using KarTac.Controls.Screens;
 using KarTac.Batalla.Shape;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Moggle.Controles;
 using Moggle.Screens;
 
-namespace KarTac.Cliente.Controls.Primitivos
+namespace KarTac.Controls.Primitivos
 {
 	public class Forma : SBC
 	{

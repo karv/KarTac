@@ -5,7 +5,7 @@ using Moggle.Screens;
 using Moggle.IO;
 
 
-namespace KarTac.Cliente.Controls
+namespace KarTac.Controls
 {
 	/// <summary>
 	/// Representa un objeto que mantiene el control sobre la cercanía y presión del cursor del ratón a los extremos de la pantalla

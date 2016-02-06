@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Moggle.Screens;
 using Moggle.Controles;
 
-namespace KarTac.Cliente.Controls.Screens
+namespace KarTac.Controls.Screens
 {
 	public class RenombrarDialScreen : DialScreen
 	{

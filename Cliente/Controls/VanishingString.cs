@@ -4,7 +4,7 @@ using MonoGame.Extended.BitmapFonts;
 using Moggle.Controles;
 using Moggle.Screens;
 
-namespace KarTac.Cliente.Controls
+namespace KarTac.Controls
 {
 	public class VanishingString : SBC
 	{

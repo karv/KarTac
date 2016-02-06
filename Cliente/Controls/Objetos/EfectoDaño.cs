@@ -1,10 +1,10 @@
-﻿using KarTac.Cliente.Controls.Screens;
+﻿using KarTac.Controls.Screens;
 using System;
 using KarTac.Batalla;
 using Moggle;
 using Microsoft.Xna.Framework;
 
-namespace KarTac.Cliente.Controls.Objetos
+namespace KarTac.Controls.Objetos
 {
 	public class EfectoDaño : ÁreaEfecto
 	{

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using KarTac.Batalla;
-using KarTac.Cliente.Controls;
+using KarTac.Controls;
 using System;
 using Microsoft.Xna.Framework;
 using KarTac.Skills;
@@ -9,7 +9,7 @@ using KarTac.Batalla.Objetos;
 using Moggle.Screens;
 using Moggle.Controles;
 
-namespace KarTac.Cliente.Controls.Screens
+namespace KarTac.Controls.Screens
 {
 	public class BattleScreen : Screen
 	{

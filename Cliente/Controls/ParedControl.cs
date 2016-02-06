@@ -1,12 +1,12 @@
 ﻿using KarTac.Batalla.Objetos;
-using KarTac.Cliente.Controls.Screens;
+using KarTac.Controls.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Moggle.Controles;
 using Moggle.Screens;
 using Moggle;
 
-namespace KarTac.Cliente.Controls
+namespace KarTac.Controls
 {
 	public class ParedControl : SBC
 	{

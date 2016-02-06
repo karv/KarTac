@@ -3,12 +3,12 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using MonoGame.Extended.BitmapFonts;
 using System;
-using KarTac.Cliente.Controls.Screens;
+using KarTac.Controls.Screens;
 using Moggle.Controles;
 using Moggle.Screens;
 using Moggle;
 
-namespace KarTac.Cliente.Controls
+namespace KarTac.Controls
 {
 	public class UnidadSprite: SBC
 	{

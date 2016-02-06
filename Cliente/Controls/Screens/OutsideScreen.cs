@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework;
 using KarTac.Batalla;
 using System;
 using OpenTK.Input;
-using KarTac.Cliente.Controls;
 using KarTac.Equipamento;
 using KarTac.Batalla.Generador;
 using KarTac.Batalla.Objetos;
@@ -12,7 +11,7 @@ using Moggle.Controles.Listas;
 using Moggle.Controles;
 using Moggle.IO;
 
-namespace KarTac.Cliente.Controls.Screens
+namespace KarTac.Controls.Screens
 {
 	/// <summary>
 	/// Pantalla entre turnos.

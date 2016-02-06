@@ -3,12 +3,12 @@ using KarTac.Batalla.Orden;
 using OpenTK.Input;
 using Microsoft.Xna.Framework;
 using System;
-using KarTac.Cliente.Controls.Primitivos;
+using KarTac.Controls.Primitivos;
 using KarTac.Skills;
 using Moggle.Screens;
 using Moggle.IO;
 
-namespace KarTac.Cliente.Controls.Screens
+namespace KarTac.Controls.Screens
 {
 	public class InteracciónHumano : DialScreen, IInteractor
 	{

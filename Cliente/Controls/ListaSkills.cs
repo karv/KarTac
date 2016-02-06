@@ -7,7 +7,7 @@ using Moggle.Controles;
 using Moggle.Controles.Listas;
 using Moggle.Screens;
 
-namespace KarTac.Cliente.Controls
+namespace KarTac.Controls
 {
 	public class ListaSkills : ContenedorBotón, IListaControl
 	{

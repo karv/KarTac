@@ -137,7 +137,7 @@ namespace KarTac.Skills
 
 		public override bool PuedeAprender ()
 		{
-			return UnidadUsuario.AtributosActuales ["Poder mágico"] > 2 && ManáRecurso.Max > 7;
+			return UnidadUsuario.AtributosActuales ["Poder mágico"] > 2 && ManáRecurso.Max > 5;
 		}
 
 		Maná ManáRecurso

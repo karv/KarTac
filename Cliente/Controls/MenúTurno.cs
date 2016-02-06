@@ -1,13 +1,13 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using KarTac.Cliente.Controls.Screens;
+using KarTac.Controls.Screens;
 using MonoGame.Extended.BitmapFonts;
 using System;
 using KarTac.Skills;
 using Moggle.Controles;
 using Moggle.Screens;
 
-namespace KarTac.Cliente.Controls
+namespace KarTac.Controls
 {
 	/// <summary>
 	/// El menú "en pausa"
@@ -24,7 +24,9 @@ namespace KarTac.Cliente.Controls
 			display = new MultiEtiqueta (screen);
 			descripDisplay = new Etiqueta (screen);
 			descripDisplay.UseFont = "UnitNameFont";
-			descripDisplay.Texto = () => SkillSeleccionado.Descripción;
+			descripDisplay.Texto = () => string.Format ("{0}\n\nExp: {1}",
+			                                            SkillSeleccionado.Descripción,
+			                                            SkillSeleccionado.TotalExp);
 		}
 
 		public TimeSpan TiempoCambioLado;

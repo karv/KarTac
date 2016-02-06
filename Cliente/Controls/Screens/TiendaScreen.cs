@@ -6,7 +6,7 @@ using Moggle.Screens;
 using Moggle.Controles.Listas;
 using Moggle.Controles;
 
-namespace KarTac.Cliente.Controls.Screens
+namespace KarTac.Controls.Screens
 {
 	public class TiendaScreen : DialScreen
 	{
