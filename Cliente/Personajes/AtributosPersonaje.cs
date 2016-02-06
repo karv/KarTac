@@ -139,6 +139,8 @@ namespace KarTac.Core.Personajes
 		{
 			get
 			{
+				if (!Recs.ContainsKey (key))
+					Recs.Add (key, new AtributoGenérico (key, true));
 				float ret = Recs [key].Valor;
 				foreach (var x in Mods)
 				{

@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using KarTac.Controls.Screens;
 using MonoGame.Extended.BitmapFonts;
 using System;
 using KarTac.Skills;
@@ -121,6 +120,7 @@ namespace KarTac.Controls
 				unidadActual = value;
 				if (inicializado)
 					skillsList.Populate (UnidadActual.PersonajeBase);
+				// TODO: ¿No requiere eliminar de Screen la lista anterior?
 			}
 		}
 
