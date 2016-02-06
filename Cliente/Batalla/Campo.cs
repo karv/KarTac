@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using KarTac.Skills;
 using KarTac.Batalla.Objetos;
+using KarTac.Controls.Screens;
 
 namespace KarTac.Batalla
 {
@@ -16,6 +17,8 @@ namespace KarTac.Batalla
 		/// Experiencia por minuto
 		/// </summary>
 		public float ExpPorMinuto = 5;
+
+		public BattleScreen BattleScreen;
 
 		/// <summary>
 		/// Duración de la batalla (hasta este momento, si no ha terminado)

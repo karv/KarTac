@@ -3,6 +3,7 @@ using System;
 using KarTac.Batalla;
 using Moggle;
 using Microsoft.Xna.Framework;
+using KarTac.Batalla.Shape;
 
 namespace KarTac.Controls.Objetos
 {
@@ -11,14 +12,44 @@ namespace KarTac.Controls.Objetos
 		public EfectoDaño (BattleScreen scr)
 			: base (scr)
 		{
+			Forma = new Círculo (Point.Zero, 0);
+		}
+
+		Círculo formaCirc
+		{
+			get
+			{
+				return Forma as Círculo;
+			}
 		}
 
 		public double PoderDaño;
 		public Func<Unidad, double> PoderDefensivo;
 		public double Coef;
 
-		public Point Centro;
-		public float Radio;
+		public Point Centro
+		{
+			set
+			{
+				formaCirc.Centro = value;
+			}
+			get
+			{
+				return formaCirc.Centro;
+			}
+		}
+
+		public float Radio
+		{
+			get
+			{
+				return formaCirc.Radio;
+			}
+			set
+			{
+				formaCirc.Radio = value;
+			}
+		}
 
 		public TimeSpan DuraciónRestante { get; set; }
 
@@ -26,13 +57,13 @@ namespace KarTac.Controls.Objetos
 		{
 			var daño = KarTac.Skills.DamageUtils.CalcularDaño (PoderDaño, PoderDefensivo (u), Coef * time.TotalSeconds);
 			u.AtributosActuales.HP.Valor -= (float)daño;
-			u.PersonajeBase.Atributos.Defensa.PeticiónExpAcumulada += 0.3;
+			u.PersonajeBase.Atributos.Defensa.PeticiónExpAcumulada += 0.5 * time.TotalSeconds;
 		}
 
 		public override void Update (TimeSpan time)
 		{
 			base.Update (time);
-			DuraciónRestante = -time;
+			DuraciónRestante -= time;
 			if (DuraciónRestante <= TimeSpan.Zero)
 			{
 				Dispose ();
@@ -46,7 +77,8 @@ namespace KarTac.Controls.Objetos
 
 		public override void Dibujar (GameTime gameTime)
 		{
-			Screen.Batch.DrawCircle (Centro.ToVector2 (), Radio, 20, Color.White);
+			var centro = VP.CampoAPantalla (Centro);
+			Screen.Batch.DrawCircle (centro.ToVector2 (), Radio, 20, Color.White);
 		}
 
 		public override Rectangle GetBounds ()

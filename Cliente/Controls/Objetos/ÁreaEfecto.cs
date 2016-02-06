@@ -48,5 +48,14 @@ namespace KarTac.Controls.Objetos
 		protected abstract bool Selector (Unidad unidad);
 
 		public IShape Forma { get; set; }
+
+		protected ManejadorVP VP
+		{
+			get
+			{
+				return (Screen as BattleScreen).ManejadorVista;
+			}
+		}
+
 	}
 }

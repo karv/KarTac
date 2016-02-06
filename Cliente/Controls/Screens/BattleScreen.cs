@@ -21,6 +21,7 @@ namespace KarTac.Controls.Screens
 			: base (juego)
 		{
 			CampoBatalla = campo;
+			campo.BattleScreen = this;
 			contadorTiempo = new Etiqueta (this);
 			contadorTiempo.Texto = () => CampoBatalla.DuraciónBatalla.ToString ("ss\\.fff");
 			contadorTiempo.UseFont = @"UnitNameFont";
@@ -144,7 +145,7 @@ namespace KarTac.Controls.Screens
 				var mostrarDaño = new VanishingString (Juego, texto, TimeSpan.FromSeconds (1));
 				mostrarDaño.LoadContent ();
 				mostrarDaño.ColorInicial = sklRet.Color.Value;
-				mostrarDaño.Centro = this.ManejadorVista.CampoAPantalla (sklRet.Loc.ToVector2 ());
+				mostrarDaño.Centro = ManejadorVista.CampoAPantalla (sklRet.Loc.ToVector2 ());
 				mostrarDaño.Include ();
 				return mostrarDaño;
 			}

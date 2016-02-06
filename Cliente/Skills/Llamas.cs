@@ -2,6 +2,8 @@
 using KarTac.Batalla.Shape;
 using KarTac.Batalla;
 using KarTac.Recursos;
+using KarTac.Controls.Objetos;
+using Moggle.Controles;
 
 namespace KarTac.Skills
 {
@@ -58,34 +60,22 @@ namespace KarTac.Skills
 		{
 			var atrPM = UnidadUsuario.AtributosActuales ["Poder mágico"];
 			var atrFuego = UnidadUsuario.AtributosActuales ["Poder fuego"];
-			var atrDefFuego = unid.AtributosActuales ["Defensa fuego"];
 			var coef = 8 + 2 * TotalExp;
 
-
-			float daño = (float)DamageUtils.CalcularDaño (
-				             atrPM + atrFuego,
-				             atrDefFuego,
-				             coef);
-
-			unid.AtributosActuales.HP.Valor -= daño;
-			System.Diagnostics.Debug.WriteLine (string.Format (
-				"{0} causa {1} daño HP a {2}",
-				UnidadUsuario,
-				daño,
-				unid));
-
-			ManáRecurso.Valor -= UsaManá;
-
-			PeticiónExpAcumulada += 1;
-			UnidadUsuario.AtributosActuales.GetRecursoBase ("Poder mágico").AcumularExp (0.4);
-			UnidadUsuario.AtributosActuales.GetRecursoBase ("Poder fuego").AcumularExp (0.4);
-			UnidadUsuario.AtributosActuales.GetRecursoBase ("Defensa mágico").AcumularExp (0.4);
+			// TODO: No hacer que esta clase herede a SkillTresPasos, esos son sólo para targets unidad
+			var ef = new EfectoDaño (CampoBatalla.BattleScreen);
+			ef.Centro = unid.Pos;
+			ef.Radio = 100;
+			ef.PoderDaño = atrPM + atrFuego;
+			ef.DuraciónRestante = TimeSpan.FromSeconds (5);
+			ef.Coef = coef;
+			ef.PoderDefensivo = u => u.AtributosActuales ["Defensa fuego"];
+			ef.Include ();
 			LastReturn = new SkillReturnType (
-				-daño,
+				0,
 				unid.AtributosActuales.HP,
 				unid.Pos);
 			return LastReturn;
-
 		}
 
 		protected override bool IgualdadEstricta
