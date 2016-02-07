@@ -62,9 +62,10 @@ namespace KarTac.Skills
 			var coef = 8 + 2 * TotalExp;
 
 			// TODO: No hacer que esta clase herede a SkillTresPasos, esos son sólo para targets unidad
+			AcumularExp (1);
 			var ef = new EfectoDaño (CampoBatalla.BattleScreen);
 			ef.Centro = unid.Pos;
-			ef.Radio = 30;
+			ef.Radio = 30 + (float)TotalExp * 3;
 			ef.PoderDaño = 1 + atrFuego;
 			ef.DuraciónRestante = TimeSpan.FromSeconds (atrPM);
 			ef.Coef = coef;
