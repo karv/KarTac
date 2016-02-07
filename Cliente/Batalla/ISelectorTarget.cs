@@ -31,7 +31,7 @@ namespace KarTac.Batalla
 		bool Validar ();
 
 		/// <summary>
-		/// Ejecuta el selector y devuelve los seleccionados
+		/// Ejecuta el selector y devuelve los seleccionados disparados en el evento AlResponder.
 		/// </summary>
 		void Selecciona (Unidad unidad);
 

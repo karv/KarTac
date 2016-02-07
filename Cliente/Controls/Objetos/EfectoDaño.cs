@@ -9,7 +9,7 @@ namespace KarTac.Controls.Objetos
 {
 	public class EfectoDaño : ÁreaEfecto
 	{
-		public EfectoDaño (BattleScreen scr)
+		public EfectoDaño (BattleScreen scr) // TODO ¿No debe ser esto un objeto de campo y no un control?
 			: base (scr)
 		{
 			Forma = new Círculo (Point.Zero, 0);

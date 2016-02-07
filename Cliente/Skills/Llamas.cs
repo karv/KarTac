@@ -3,7 +3,6 @@ using KarTac.Batalla.Shape;
 using KarTac.Batalla;
 using KarTac.Recursos;
 using KarTac.Controls.Objetos;
-using Moggle.Controles;
 
 namespace KarTac.Skills
 {

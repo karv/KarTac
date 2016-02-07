@@ -1,9 +1,9 @@
-﻿using Microsoft.Xna.Framework;
-using KarTac.Batalla.Exp;
+﻿using KarTac.Batalla.Exp;
+using KarTac.Batalla;
 
 namespace KarTac.Buff
 {
-	public interface IBuff : IObjetivo
+	public interface IBuff : IObjetivo, ICampoTick
 	{
 		string Nombre { get; }
 
@@ -13,7 +13,7 @@ namespace KarTac.Buff
 		/// <value>The portador.</value>
 		IObjetivo Portador { get; }
 
-		void Update (GameTime gameTime);
+		void Insertar ();
 
 		/// <summary>
 		/// Se termina, cancelando el efecto y liberándose.

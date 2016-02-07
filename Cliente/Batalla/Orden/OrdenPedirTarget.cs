@@ -19,11 +19,11 @@ namespace KarTac.Batalla.Orden
 
 		public event Action AlMostrarLista;
 
+		public event Action AlTerminar;
+
 		public bool FueRespondido { get; private set; }
 
 		#region IOrden implementation
-
-		public event Action AlTerminar;
 
 		public UpdateReturnType Update (TimeSpan time)
 		{
@@ -43,9 +43,7 @@ namespace KarTac.Batalla.Orden
 
 			selector.AlCancelar += delegate
 			{
-				//AlTerminar?.Invoke ();
 				FueRespondido = true;
-				//AlCancelar?.Invoke ();
 			};
 
 			selector.Selecciona (Unidad);

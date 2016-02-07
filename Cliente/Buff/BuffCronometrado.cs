@@ -1,9 +1,13 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using KarTac.Batalla.Exp;
+using KarTac.Batalla;
 
 namespace KarTac.Buff
 {
+	/// <summary>
+	/// Buff que se destruye después de un tiempo determinado.
+	/// </summary>
 	public abstract class BuffCronometrado : IBuff
 	{
 		protected BuffCronometrado (IObjetivo portador)
@@ -12,10 +16,31 @@ namespace KarTac.Buff
 			Restante = TiempoInicial;
 		}
 
+		Campo campo
+		{
+			get
+			{
+				return Portador.GetCampo;
+			}
+		}
+
+		Campo IObjetivo.GetCampo
+		{
+			get
+			{
+				return campo;
+			}
+		}
+
 		/// <summary>
 		/// Tags de experiencia, típicamente un DictionaryTag
 		/// </summary>
 		protected abstract ITagging ExpTags { get; }
+
+		public virtual void Insertar ()
+		{
+			campo.AddObj (this);
+		}
 
 		ITagging IBuff.ExpTags
 		{
@@ -33,7 +58,7 @@ namespace KarTac.Buff
 		/// Duración del buff
 		/// Obs. Se invoca durante el ctor.
 		/// </summary>
-		public abstract TimeSpan TiempoInicial { get; }
+		public abstract TimeSpan TiempoInicial { get; set; }
 
 		protected virtual void OnTiempo ()
 		{
@@ -45,14 +70,22 @@ namespace KarTac.Buff
 			Terminar ();
 		}
 
-		protected abstract void Terminar ();
-
-		public void Update (GameTime gameTime)
+		protected virtual void Terminar ()
 		{
-			if (Restante <= gameTime.ElapsedGameTime)
+			campo.RemObj (this);
+		}
+
+		public void Tick (TimeSpan gameTime)
+		{
+			if (Restante <= gameTime)
 				OnTiempo ();
 			else
-				Restante -= gameTime.ElapsedGameTime;
+				Restante -= gameTime;
+		}
+
+		public void Tick (GameTime gameTime)
+		{
+			Tick (gameTime.ElapsedGameTime);
 		}
 
 		public TimeSpan Restante { get; private set; }

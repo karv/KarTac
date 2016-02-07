@@ -10,7 +10,7 @@ using KarTac.Core.Personajes;
 
 namespace KarTac.Batalla
 {
-	public class Unidad : IObjetivo, IAccionable, IMóvil
+	public class Unidad : IObjetivo, IAccionable, IMóvil, ICampoTick
 	{
 		public Point Pos
 		{
@@ -220,6 +220,34 @@ namespace KarTac.Batalla
 		public void OnSerBlanco (ISkillReturnType skill)
 		{
 			AlSerBlanco?.Invoke (skill);
+		}
+
+		void ICampoTick.Tick (TimeSpan time)
+		{
+			if (!EstáVivo)
+				return;
+			AcumularPetición (time);
+
+			// Sus recursos
+			foreach (var y in AtributosActuales.Enumerar)
+			{
+				y.Tick (time);
+			}
+
+			// Experiencia por equipment
+			foreach (var y in PersonajeBase.Equipamento)
+			{
+				y.BattleUpdate (time);
+			}
+
+		}
+
+		Campo IObjetivo.GetCampo
+		{
+			get
+			{
+				return CampoBatalla;
+			}
 		}
 
 		/// <summary>

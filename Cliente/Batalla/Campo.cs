@@ -31,14 +31,24 @@ namespace KarTac.Batalla
 		/// <value>The unidades.</value>
 		public ICollection<Unidad> Unidades { get; }
 
-		List<IObjeto> objetos = new List<IObjeto> ();
+		List<ICampoTick> objetos = new List<ICampoTick> ();
 
-		public IReadOnlyCollection<IObjeto> Objetos
+		public IReadOnlyCollection<ICampoTick> Objetos
 		{
 			get
 			{
 				return objetos.AsReadOnly ();
 			}
+		}
+
+		public void AddObj (ICampoTick obj)
+		{
+			objetos.Add (obj);
+		}
+
+		public void RemObj (ICampoTick obj)
+		{
+			objetos.Remove (obj);
 		}
 
 		/// <summary>
@@ -125,31 +135,12 @@ namespace KarTac.Batalla
 				RequiereInteracciónInmediata = false;
 				RecibirExp (realDelta);
 
-				foreach (var x in UnidadesVivas)
+				foreach (ICampoTick x in Objetos)
 				{
-					x.AcumularPetición (realDelta);
-
-					// Sus recursos
-					foreach (var y in x.AtributosActuales.Enumerar)
-					{
-						y.Tick (realDelta);
-					}
-
-					// Experiencia por equipment
-					foreach (var y in x.PersonajeBase.Equipamento)
-					{
-						y.BattleUpdate (realDelta);
-					}
-
-					// Empuje
-					Empujes (realDelta);
-
-					// IObjetos
-					foreach (var o in Objetos)
-					{
-						o.Update (realDelta);
-					}
+					x.Tick (realDelta);
 				}
+				// Empuje
+				Empujes (realDelta);
 
 			}
 

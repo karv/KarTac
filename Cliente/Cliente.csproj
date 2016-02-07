@@ -143,6 +143,8 @@
     <Compile Include="Skills\SkillComún.cs" />
     <Compile Include="Skills\SkillTresPasos.cs" />
     <Compile Include="Skills\SkillTresPasosShaped.cs" />
+    <Compile Include="Buff\BuffPielPiedra.cs" />
+    <Compile Include="Batalla\ICampoTick.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -119,6 +119,11 @@ namespace KarTac.Core.Personajes
 		{
 			get
 			{
+				// Los internoos
+				foreach (var x in internalMods)
+				{
+					yield return x;
+				}
 				// Los equips
 				foreach (var x in Personaje.Equipamento)
 				{
@@ -130,11 +135,31 @@ namespace KarTac.Core.Personajes
 			}
 		}
 
+		List<IModificador> internalMods = new List<IModificador> ();
+
+		/// <summary>
+		/// Agrega un modificador interno
+		/// </summary>
+		public IModificador AddModifier (string atrib, float delta)
+		{
+			var ret = new ModificadorAtributo (atrib, delta);
+			internalMods.Add (ret);
+			return ret;
+		}
+
+		/// <summary>
+		/// Elimina un modificador interno.
+		/// </summary>
+		public void RemoveModifier (IModificador mod)
+		{
+			internalMods.Remove (mod);
+		}
+
 		/// <summary>
 		/// Devuelve el valor (ya modificados) de un atributo.
+		/// O establece el valor vase de un atributo.
 		/// No usar set con += o -= etc.
 		/// </summary>
-		/// <param name="key">Key.</param>
 		public float this [string key]
 		{
 			get
